@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
+    [Header("-----Mouse Sensitivity-----")]
     public float sensX;
     public float sensY;
 
