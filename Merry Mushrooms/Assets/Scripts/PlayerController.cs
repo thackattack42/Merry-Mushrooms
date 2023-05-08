@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,14 +16,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
+    [Header("----- Player Dash Properties -----")]
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashTime;
+
+    private float origSpeed;
+    private int isDashing;
+    //[Range(1, 3)][SerializeField] float dashUp;
     private void Start()
     {
         controller = gameObject.AddComponent<CharacterController>();
+        origSpeed = playerSpeed;
     }
 
     void Update()
     {
         Movement();
+        if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
+        {
+            playerDash();
+            
+        }
+        //playerDash();
         Sprint();
     }
 
@@ -57,13 +72,32 @@ public class PlayerController : MonoBehaviour
 
     void Sprint()
     {
-        if(Input.GetButtonDown("Sprint"))
+        if (Input.GetButtonDown("Sprint"))
         {
             playerSpeed *= sprintSpeed;
+            
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             playerSpeed /= sprintSpeed;
         }
     }
+    void playerDash()
+    {
+        isDashing++;
+        StartCoroutine(Dash());
+       
+        
+
+    }
+
+    IEnumerator Dash()
+    {
+        playerSpeed *= dashSpeed;
+        Debug.Log("Player Dashed");
+        yield return new WaitForSeconds(dashTime);
+        isDashing = 0;
+        playerSpeed = origSpeed;
+    }
+   
 }
