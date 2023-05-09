@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
         //controller = gameObject.AddComponent<CharacterController>();
         origSpeed = playerSpeed;
-        //Spawn();
+        Spawn();
     }
 
     void Update()
