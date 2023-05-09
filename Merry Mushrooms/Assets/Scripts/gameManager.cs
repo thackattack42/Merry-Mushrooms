@@ -16,7 +16,9 @@ public class gameManager : MonoBehaviour
     public GameObject activeMenu;
     public GameObject pauseMenu;
     public GameObject loseMenu;
+    public GameObject winMenu;
 
+    int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
 
@@ -26,7 +28,7 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+        //playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
     }
 
@@ -65,6 +67,22 @@ public class gameManager : MonoBehaviour
     {
         PauseState();
         activeMenu = loseMenu;
+        activeMenu.SetActive(true);
+    }
+
+    public void UpdateGameGoal(int amount)
+    {
+        enemiesRemaining += amount;
+
+        if (enemiesRemaining <= 0)
+            StartCoroutine(YouWin());
+    }
+
+    IEnumerator YouWin()
+    {
+        yield return new WaitForSeconds(3);
+        PauseState();
+        activeMenu = winMenu;
         activeMenu.SetActive(true);
     }
 }
