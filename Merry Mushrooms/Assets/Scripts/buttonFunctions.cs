@@ -6,21 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
-    void resume()
+    public void resume()
     {
         gameManager.instance.UnpausedState();
     }
-    void restart()
+    public void restart()
     {
         gameManager.instance.UnpausedState();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    void quit()
+    public void quit()
     {
         Application.Quit(); 
     }
 
-    void respawn()
+    public void respawn()
     {
         
     }
