@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
+    [SerializeField] int HP;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private float origSpeed;
     private int isDashing;
+    private int originalHP;
     private bool isShooting;
     //[Range(1, 3)][SerializeField] float dashUp;
     private void Start()
@@ -36,7 +38,8 @@ public class PlayerController : MonoBehaviour
 
         //controller = gameObject.AddComponent<CharacterController>();
         origSpeed = playerSpeed;
-        //Spawn();
+        originalHP = HP;
+        Spawn();
     }
 
     void Update()
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButton("Shoot") && !isShooting)
             {
-                //StartCoroutine(shoot());
+                StartCoroutine(shoot());
             }
         }
         Sprint();
@@ -103,7 +106,7 @@ public class PlayerController : MonoBehaviour
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
-        //HP
+        HP = originalHP;
     }
     IEnumerator shoot()
     {
@@ -139,6 +142,17 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         isDashing = 0;
         playerSpeed = origSpeed;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        HP -= amount;
+
+        if (HP <= 0)
+        {
+
+            // Kill Player.
+        }
     }
 
 }
