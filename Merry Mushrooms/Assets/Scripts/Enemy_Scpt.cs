@@ -40,7 +40,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     public void takeDamage(int dmg) //this make it that enemy takes damage
     {
         EnemyHP -= dmg;
-        FlashHitColor();
+        StartCoroutine(FlashHitColor());
         if(EnemyHP <= 0)
         {
             Destroy(gameObject);
