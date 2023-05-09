@@ -6,6 +6,9 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 {
     [Header("------ Enemy stats ------")]
     [Range (5,100)][SerializeField] int EnemyHP;
+
+    [Header("------ Componets ------")]
+    [SerializeField] Renderer model;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +24,16 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     public void takeDamage(int dmg)
     {
         EnemyHP -= dmg;
+        FlashHitColor();
         if(EnemyHP <= 0)
         {
             Destroy(gameObject);
         }
+    }
+    IEnumerator FlashHitColor()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = Color.white;
     }
 }
