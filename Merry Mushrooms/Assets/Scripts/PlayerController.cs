@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
+
     private Vector3 playerVelocity;
     private Vector3 move;
     private int jumpedTimes;
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController controller;
     [Header("----- Player Stats -----")]
     [SerializeField] float playerSpeed;
-    [Range(8, 20)] [SerializeField] float jumpHeight;
+    [Range(8, 20)][SerializeField] float jumpHeight;
     [SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
@@ -23,9 +23,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashTime;
 
     [Header("----- Weapon Stats -----")]
-    [Range(2, 300)] [SerializeField] int shootDistance;
-    [Range(0.1f, 3)] [SerializeField] float shootRate;
-    [Range(1, 20)] [SerializeField] int shootDamage;
+    [Range(2, 300)][SerializeField] int shootDistance;
+    [Range(0.1f, 3)][SerializeField] float shootRate;
+    [Range(1, 20)][SerializeField] int shootDamage;
 
     private float origSpeed;
     private int isDashing;
@@ -44,16 +44,16 @@ public class PlayerController : MonoBehaviour
         if (gameManager.instance.activeMenu == null)
         {
 
-        Movement();
-        if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
-        {
-            playerDash();  
-        }
+            Movement();
+            if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
+            {
+                playerDash();
+            }
 
-        if (Input.GetButton("Shoot") && !isShooting)
-        {
-            //StartCoroutine(shoot());
-        }
+            if (Input.GetButton("Shoot") && !isShooting)
+            {
+                //StartCoroutine(shoot());
+            }
         }
         Sprint();
     }
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Sprint"))
         {
             playerSpeed *= sprintSpeed;
-            
+
         }
         else if (Input.GetButtonUp("Sprint"))
         {
@@ -127,8 +127,8 @@ public class PlayerController : MonoBehaviour
     {
         isDashing++;
         StartCoroutine(Dash());
-       
-        
+
+
 
     }
 
@@ -140,5 +140,5 @@ public class PlayerController : MonoBehaviour
         isDashing = 0;
         playerSpeed = origSpeed;
     }
-   
+
 }
