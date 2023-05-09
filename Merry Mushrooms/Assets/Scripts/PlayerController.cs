@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -45,15 +45,15 @@ public class PlayerController : MonoBehaviour
         {
 
         Movement();
-        if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
-        {
+            if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
+            {
             playerDash();  
-        }
+            }
 
-        if (Input.GetButton("Shoot") && !isShooting)
-        {
-            //StartCoroutine(shoot());
-        }
+            if (Input.GetButton("Shoot") && !isShooting)
+            {
+            StartCoroutine(shoot());
+            }
         }
         Sprint();
     }
@@ -107,10 +107,10 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator shoot()
     {
+        //TIMER
         isShooting = true;
 
         RaycastHit hit;
-
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
         {
             IDamage damageable = hit.collider.GetComponent<IDamage>();
@@ -119,9 +119,10 @@ public class PlayerController : MonoBehaviour
             {
                 damageable.takeDamage(shootDamage);
             }
-            yield return new WaitForSeconds(shootRate);
-            isShooting = false;
         }
+        yield return new WaitForSeconds(shootRate);
+
+        isShooting = false;
     }
     void playerDash()
     {
