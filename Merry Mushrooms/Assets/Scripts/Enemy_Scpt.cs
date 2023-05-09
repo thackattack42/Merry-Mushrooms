@@ -16,7 +16,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     [Range(5, 10)] [SerializeField] int shootDist;
     [Range(5, 10)][SerializeField] float ShootRate;
     [SerializeField] GameObject bullet;
-
+    //
     //Other Assets
     Color origColor;
     private bool isShooting;
