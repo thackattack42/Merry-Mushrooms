@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy_Scpt : MonoBehaviour, IDamage
 {
@@ -9,6 +10,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
+    [SerializeField] NavMeshAgent agent;    
 
     [Header("------ Enemy Weapon Stats ------")]
     [Range(5, 10)] [SerializeField] int shootDist;
@@ -28,7 +30,11 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        
+        agent.SetDestination(gameManager.instance.player.transform.position);
+        if (!isShooting)
+        {
+            StartCoroutine(shoot());
+        }
     }
 
     public void takeDamage(int dmg) //this make it that enemy takes damage
