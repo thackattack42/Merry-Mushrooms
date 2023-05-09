@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
+    [SerializeField] int HP;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
         //controller = gameObject.AddComponent<CharacterController>();
         origSpeed = playerSpeed;
-        Spawn();
+        //Spawn();
     }
 
     void Update()
@@ -140,5 +141,16 @@ public class PlayerController : MonoBehaviour
         isDashing = 0;
         playerSpeed = origSpeed;
     }
+
+    //public void TakeDamage(int amount)
+    //{
+    //    HP -= amount;
+
+    //    if (HP <= 0)
+    //    {
+
+    //        // Kill Player.
+    //    }
+    //}
 
 }
