@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
 
     private Vector3 playerVelocity;
@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
         playerSpeed = origSpeed;
     }
 
-    public void TakeDamage(int amount)
+    public void takeDamage(int amount)
     {
         HP -= amount;
 
