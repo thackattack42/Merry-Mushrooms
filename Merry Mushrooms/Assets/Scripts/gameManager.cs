@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject winMenu;
 
+    int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
 
@@ -67,6 +68,14 @@ public class gameManager : MonoBehaviour
         PauseState();
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
+    }
+
+    public void UpdateGameGoal(int amount)
+    {
+        enemiesRemaining += amount;
+
+        if (enemiesRemaining <= 0)
+            StartCoroutine(YouWin());
     }
 
     IEnumerator YouWin()
