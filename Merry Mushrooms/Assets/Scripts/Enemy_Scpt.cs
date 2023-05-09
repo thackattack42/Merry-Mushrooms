@@ -9,10 +9,15 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
+
+    //Other Assets
+    Color origColor;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //gets original color and sets it here
+        origColor = model.material.color;
     }
 
     // Update is called once per frame
@@ -21,7 +26,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         
     }
 
-    public void takeDamage(int dmg)
+    public void takeDamage(int dmg) //this make it that enemy takes damage
     {
         EnemyHP -= dmg;
         FlashHitColor();
@@ -30,10 +35,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
             Destroy(gameObject);
         }
     }
-    IEnumerator FlashHitColor()
+    IEnumerator FlashHitColor() //flash when the enemy is hit
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        model.material.color = origColor;
     }
 }
