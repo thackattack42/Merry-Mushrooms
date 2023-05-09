@@ -70,6 +70,13 @@ public class PlayerController : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    void Spawn()
+    {
+        controller.enabled = false;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
+        //HP
+    }
     void Sprint()
     {
         if (Input.GetButtonDown("Sprint"))
