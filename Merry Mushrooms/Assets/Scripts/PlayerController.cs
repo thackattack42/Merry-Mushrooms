@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private float origSpeed;
     private int isDashing;
+    private int originalHP;
     private bool isShooting;
     //[Range(1, 3)][SerializeField] float dashUp;
     private void Start()
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
         //controller = gameObject.AddComponent<CharacterController>();
         origSpeed = playerSpeed;
+        originalHP = HP;
         Spawn();
     }
 
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
-        //HP
+        HP = originalHP;
     }
     IEnumerator shoot()
     {
@@ -142,15 +144,15 @@ public class PlayerController : MonoBehaviour
         playerSpeed = origSpeed;
     }
 
-    //public void TakeDamage(int amount)
-    //{
-    //    HP -= amount;
+    public void TakeDamage(int amount)
+    {
+        HP -= amount;
 
-    //    if (HP <= 0)
-    //    {
+        if (HP <= 0)
+        {
 
-    //        // Kill Player.
-    //    }
-    //}
+            // Kill Player.
+        }
+    }
 
 }
