@@ -150,8 +150,8 @@ public class PlayerController : MonoBehaviour
 
         if (HP <= 0)
         {
-
             // Kill Player.
+            gameManager.instance.GameOver();
         }
     }
 
