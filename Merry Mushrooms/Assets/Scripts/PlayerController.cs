@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     void Spawn()
     {
         controller.enabled = false;
-        //transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
         //HP
     }
