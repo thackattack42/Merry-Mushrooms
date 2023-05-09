@@ -19,14 +19,21 @@ public class PlayerController : MonoBehaviour
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
+    [Header("----- Weapon Stats -----")]
+    [Range(2, 300)] [SerializeField] int shootDistance;
+    [Range(0.1f, 3)] [SerializeField] float shootRate;
+    [Range(1, 20)] [SerializeField] int shootDamage;
 
     private float origSpeed;
     private int isDashing;
+    private bool isShooting;
     //[Range(1, 3)][SerializeField] float dashUp;
     private void Start()
     {
+
         controller = gameObject.AddComponent<CharacterController>();
         origSpeed = playerSpeed;
+        Spawn();
     }
 
     void Update()
@@ -34,10 +41,13 @@ public class PlayerController : MonoBehaviour
         Movement();
         if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
         {
-            playerDash();
-            
+            playerDash();  
         }
-        //playerDash();
+
+        if (Input.GetButton("Shoot") && !isShooting)
+        {
+            StartCoroutine(shoot());
+        }
         Sprint();
     }
 
@@ -87,6 +97,24 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetButtonUp("Sprint"))
         {
             playerSpeed /= sprintSpeed;
+        }
+    }
+    IEnumerator shoot()
+    {
+        isShooting = true;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+        {
+            IDamage damageable = hit.collider.GetComponent<IDamage>();
+
+            if (damageable != null)
+            {
+                damageable.takeDamage(shootDamage);
+            }
+            yield return new WaitForSeconds(shootRate);
+            isShooting = false;
         }
     }
     void playerDash()
