@@ -5,13 +5,15 @@ using UnityEngine;
 public class FirstPersonCamera : MonoBehaviour
 {
     [Header("-----Mouse Sensitivity-----")]
-    public float sensX;
-    public float sensY;
+    [SerializeField] int sensHor;
+    [SerializeField] int sensVert;
 
-    public Transform orientation;
-    public GameObject obj;
+    [SerializeField] int lockVerMin;
+    [SerializeField] int lockVerMax;
+    
+    [SerializeField] bool invertY;
     float xRotation;
-    float yRotation;
+    
 
     private void Start()
     {
@@ -21,21 +23,19 @@ public class FirstPersonCamera : MonoBehaviour
 
     private void Update()
     {
-       // Get mouse input
-       float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-       float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensVert;
+        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensHor;
 
-        
-        yRotation += mouseX;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90, 90f);
+        if (invertY)
+            xRotation += mouseY;
+        else
+            xRotation -= mouseY;
 
-        //rotate cam and orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        //orientation.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.parent.Rotate(Vector3.up * mouseX);
-        //obj.transform.parent.Rotate(Vector3.up * mouseX);
+        xRotation = Mathf.Clamp(xRotation, lockVerMin, lockVerMax);
 
+        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+
+        transform.parent.Rotate(Vector3.up * mouseX);
     }
 }
