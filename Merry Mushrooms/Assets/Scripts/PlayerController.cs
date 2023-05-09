@@ -5,20 +5,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController controller;
+    
     private Vector3 playerVelocity;
     private Vector3 move;
     private int jumpedTimes;
     private bool groundedPlayer;
+    [SerializeField] CharacterController controller;
     [Header("----- Player Stats -----")]
     [SerializeField] float playerSpeed;
-    [SerializeField] float jumpHeight;
+    [Range(8, 20)] [SerializeField] float jumpHeight;
     [SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
+
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
+
     [Header("----- Weapon Stats -----")]
     [Range(2, 300)] [SerializeField] int shootDistance;
     [Range(0.1f, 3)] [SerializeField] float shootRate;
@@ -31,13 +34,16 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
 
-        controller = gameObject.AddComponent<CharacterController>();
+        //controller = gameObject.AddComponent<CharacterController>();
         origSpeed = playerSpeed;
-        Spawn();
+        //Spawn();
     }
 
     void Update()
     {
+        if (gameManager.instance.activeMenu == null)
+        {
+
         Movement();
         if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
         {
@@ -46,7 +52,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Shoot") && !isShooting)
         {
-            StartCoroutine(shoot());
+            //StartCoroutine(shoot());
+        }
         }
         Sprint();
     }
@@ -63,7 +70,6 @@ public class PlayerController : MonoBehaviour
         move = (transform.right * Input.GetAxis("Horizontal")) +
                (transform.forward * Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * playerSpeed);
-
         //if (move != Vector3.zero)
         //{
         //    gameObject.transform.forward = move;
@@ -80,13 +86,6 @@ public class PlayerController : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    void Spawn()
-    {
-        controller.enabled = false;
-        transform.position = gameManager.instance.playerSpawnPos.transform.position;
-        controller.enabled = true;
-        //HP
-    }
     void Sprint()
     {
         if (Input.GetButtonDown("Sprint"))
@@ -98,6 +97,13 @@ public class PlayerController : MonoBehaviour
         {
             playerSpeed /= sprintSpeed;
         }
+    }
+    void Spawn()
+    {
+        controller.enabled = false;
+        //transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
+        //HP
     }
     IEnumerator shoot()
     {

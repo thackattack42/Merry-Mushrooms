@@ -220,10 +220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b550f17fc4b39c84a97d122d3d8b8cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensHor: 0
-  sensVert: 0
-  lockVerMin: 0
-  lockVerMax: 0
+  sensHor: 300
+  sensVert: 300
+  lockVerMin: -90
+  lockVerMax: 90
   invertY: 0
 --- !u!1 &303006981
 GameObject:
@@ -329,6 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1289296938}
   - component: {fileID: 1289296939}
+  - component: {fileID: 1289296940}
   - component: {fileID: 1289296937}
   - component: {fileID: 1289296936}
   - component: {fileID: 1289296935}
@@ -431,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e68c524ef654442bfd622bbd9f1c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 1289296940}
   playerSpeed: 10
   jumpHeight: 3
   gravityValue: 7
@@ -441,6 +443,24 @@ MonoBehaviour:
   shootDistance: 200
   shootRate: 0.5
   shootDamage: 1
+--- !u!143 &1289296940
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289296933}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4250481511383017933
 PrefabInstance:
   m_ObjectHideFlags: 0
