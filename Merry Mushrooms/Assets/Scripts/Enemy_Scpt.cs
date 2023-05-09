@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Enemy_Scpt : MonoBehaviour, IDamage
 {
-    [Header("------ Enemy stats ------")]
-    [Range (5,100)][SerializeField] int EnemyHP;
+    [Header("------ Enemy Stats ------")]
+    [Range(5, 100)][SerializeField] int EnemyHP;
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
 
+    [Header("------ Enemy Weapon Stats ------")]
+    [Range(5, 10)] [SerializeField] int shootDist;
+    [Range(5, 10)][SerializeField] float ShootRate;
+    [SerializeField] GameObject bullet;
+
     //Other Assets
     Color origColor;
-
+    private bool isShooting;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,5 +45,12 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = origColor;
+    }
+    IEnumerator shoot()
+    {
+        isShooting = true;
+        GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation);
+        yield return new WaitForSeconds(ShootRate);
+        isShooting = false;
     }
 }
