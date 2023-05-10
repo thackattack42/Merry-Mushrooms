@@ -8,7 +8,8 @@ public class BouncingBullets : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int timer;
 
-    //gun stats
+    [SerializeField] Rigidbody rb;
+
     public float timeBetmeenShooting, bounce, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerClick;
     public bool allowButtonHold;
@@ -16,8 +17,31 @@ public class BouncingBullets : MonoBehaviour
     int bulletsRemaining;
     int bulletsShot;
 
-    public void bouncingBullet()
-    {
+    bool shooting;
+    bool readyToShoot;
+    bool reloading;
 
+
+    void Start()
+    {
+        Destroy(gameObject, timer);
+        rb.velocity = transform.forward * speed;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        {
+            IDamage damagable = other.GetComponent<IDamage>();
+
+            if (damagable != null)
+            {
+                damagable.takeDamage(damage);
+            }
+
+            Destroy(gameObject);
+        }
+    }
+    
+    
+
 }
