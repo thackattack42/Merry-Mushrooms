@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
-    [SerializeField] float dashTime;
     [Range(2, 10)][SerializeField] int dashCoolDown;
 
     [Header("----- Weapon Stats -----")]
@@ -30,6 +29,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(0.1f, 3)][SerializeField] float shootRate;
     [Range(1, 20)][SerializeField] int shootDamage;
 
+    private float dashTime = 0.3f;
     private float origSpeed;
     private int isDashing;
     private int originalHP;
