@@ -24,6 +24,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     void Start()
     {
         //gets original color and sets it here
+        gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
     }
 
@@ -43,6 +44,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         StartCoroutine(FlashHitColor());
         if(EnemyHP <= 0)
         {
+            gameManager.instance.UpdateGameGoal(-1);
             Destroy(gameObject);
         }
     }

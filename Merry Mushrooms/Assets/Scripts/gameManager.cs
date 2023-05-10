@@ -41,7 +41,6 @@ public class gameManager : MonoBehaviour
             isPaused = !isPaused;
             activeMenu = pauseMenu;
             activeMenu.SetActive(isPaused);
-            reticle.SetActive(false);
 
             PauseState();
         }
@@ -52,7 +51,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        
+        reticle.SetActive(false);
     }
 
     public void UnpausedState()
