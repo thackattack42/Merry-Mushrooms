@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
+    [Range(2, 10)][SerializeField] int dashCoolDown;
 
     [Header("----- Weapon Stats -----")]
     [Range(2, 300)][SerializeField] int shootDistance;
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour, IDamage
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
             {
                 playerDash();
+                StartCoroutine(WaitForDash());
             }
 
             if (Input.GetButton("Shoot") && !isShooting)
@@ -140,8 +142,19 @@ public class PlayerController : MonoBehaviour, IDamage
         playerSpeed *= dashSpeed;
         Debug.Log("Player Dashed");
         yield return new WaitForSeconds(dashTime);
-        isDashing = 0;
         playerSpeed = origSpeed;
+        //playerSpeed = origSpeed;
+        
+       
+    }
+
+    IEnumerator WaitForDash()
+    {
+       
+        yield return new WaitForSeconds(dashCoolDown);
+        isDashing = 0;
+        
+        
     }
 
     public void takeDamage(int amount)
