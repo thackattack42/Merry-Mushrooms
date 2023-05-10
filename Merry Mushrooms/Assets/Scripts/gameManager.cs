@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,7 +20,11 @@ public class gameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject winMenu;
     public GameObject reticle;
+    public TextMeshProUGUI ammoCount;
+    public TextMeshProUGUI ammoTotal;
 
+    int ammoClip;
+    int ammoReserves;
     int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
@@ -30,6 +36,8 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+        ammoCount.text = ammoClip.ToString();
+        ammoTotal.text = ammoReserves.ToString();
         timeScaleOrig = Time.timeScale;
     }
 
@@ -87,5 +95,22 @@ public class gameManager : MonoBehaviour
         PauseState();
         activeMenu = winMenu;
         activeMenu.SetActive(true);
+    }
+
+    public void UpdateAmmoCount()
+    {
+        if (int.Parse(ammoCount.text) <= 0)
+        {
+            StartCoroutine(Reload());
+            ammoClip += 12;
+            ammoReserves -= ammoClip;
+            ammoCount.text = ammoClip.ToString();
+            ammoTotal.text = ammoReserves.ToString();
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(2);
     }
 }
