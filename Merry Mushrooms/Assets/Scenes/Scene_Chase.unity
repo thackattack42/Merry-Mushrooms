@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 0782b4602fb04ec4f86224c3aa71db3d, type: 2}
---- !u!114 &387643375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1163122749735788318, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-  m_PrefabInstance: {fileID: 563436312}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &563436312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,22 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1163122748536680835, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-      propertyPath: ammoClip
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1163122748536680835, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-      propertyPath: ammoCount
-      value: 
-      objectReference: {fileID: 1238107039}
-    - target: {fileID: 1163122748536680835, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-      propertyPath: ammoTotal
-      value: 
-      objectReference: {fileID: 387643375}
-    - target: {fileID: 1163122748536680835, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-      propertyPath: ammoReserves
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 1163122748868261813, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -245,14 +218,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1163122749720712585, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1163122749735788318, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
 --- !u!1 &619285503
@@ -287,17 +252,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1238107039 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1163122749720712585, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-  m_PrefabInstance: {fileID: 563436312}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1340281387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -516,6 +470,10 @@ PrefabInstance:
     - target: {fileID: 8327772038628251588, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
+      propertyPath: HP
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8327772038628251595, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: m_RootOrder
