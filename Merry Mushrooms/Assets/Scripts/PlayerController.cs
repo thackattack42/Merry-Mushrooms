@@ -33,13 +33,14 @@ public class PlayerController : MonoBehaviour, IDamage
     private int isDashing;
     private int originalHP;
     private bool isShooting;
-    //[Range(1, 3)][SerializeField] float dashUp;
+    
     private void Start()
     {
 
-        //controller = gameObject.AddComponent<CharacterController>();
+        // Sets original variables to players starting stats
         origSpeed = playerSpeed;
         originalHP = HP;
+        // Spawns Player
         Spawn();
     }
 
@@ -139,18 +140,17 @@ public class PlayerController : MonoBehaviour, IDamage
 
     IEnumerator Dash()
     {
+        // Will make player dash
         playerSpeed *= dashSpeed;
         Debug.Log("Player Dashed");
+        // How long the player will dash for
         yield return new WaitForSeconds(dashTime);
         playerSpeed = origSpeed;
-        //playerSpeed = origSpeed;
-        
-       
     }
 
     IEnumerator WaitForDash()
     {
-       
+      // How long the player has to wait before dashing again
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
         
@@ -159,11 +159,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
+        // Will take damage based off the amount 
         HP -= amount;
 
         if (HP <= 0)
         {
-            // Kill Player.
+            // Player is dead and display game over screen.
             gameManager.instance.GameOver();
         }
     }
