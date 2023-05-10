@@ -26,6 +26,8 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI ammoTotal;
     public TextMeshProUGUI healthPoints;
     public Image HPSlider;
+    public TextMeshProUGUI dashCooldownCounter;
+    public Image dashCooldownSlider;
 
     [SerializeField] public int ammoClip;
     [SerializeField] public int ammoReserves;

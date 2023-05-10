@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviour, IDamage
       // How long the player has to wait before dashing again
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
+
     }
 
     IEnumerator WaitForReload()
