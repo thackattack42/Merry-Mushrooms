@@ -115,35 +115,32 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     IEnumerator shoot()
     {
-        gameManager.instance.ammoClip--;
-        gameManager.instance.UpdateAmmoCount();
-        if (gameManager.instance.ammoClip <= 0 ) 
+        if (gameManager.instance.ammoClip > 0)
         {
-            gameManager.instance.UpdateAmmoCount();
-        }
-        isShooting = true;
+            isShooting = true;
 
-        RaycastHit hit;
+            gameManager.instance.ammoClip--;
 
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
-        {
-            IDamage damageable = hit.collider.GetComponent<IDamage>();
+            RaycastHit hit;
 
-            if (damageable != null)
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
             {
-                damageable.takeDamage(shootDamage);
+                IDamage damageable = hit.collider.GetComponent<IDamage>();
+
+                if (damageable != null)
+                {
+                    damageable.takeDamage(shootDamage);
+                }
             }
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
+            gameManager.instance.UpdateAmmoCount();
         }
     }
     void playerDash()
     {
         isDashing++;
         StartCoroutine(Dash());
-
-
-
     }
 
     IEnumerator Dash()
@@ -161,8 +158,6 @@ public class PlayerController : MonoBehaviour, IDamage
       // How long the player has to wait before dashing again
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
-        
-        
     }
 
     public void takeDamage(int amount)
@@ -176,5 +171,4 @@ public class PlayerController : MonoBehaviour, IDamage
             gameManager.instance.GameOver();
         }
     }
-
 }

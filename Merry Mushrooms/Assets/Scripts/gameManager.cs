@@ -23,11 +23,12 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI ammoTotal;
 
-    public int ammoClip;
-    public int ammoReserves;
+    [SerializeField] public int ammoClip;
+    [SerializeField] public int ammoReserves;
     int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
+    int ammoClipOrig;
 
     // Awake is called before Start
     void Awake()
@@ -39,6 +40,7 @@ public class gameManager : MonoBehaviour
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
         timeScaleOrig = Time.timeScale;
+        ammoClipOrig = ammoClip;
     }
 
     // Update is called once per frame
@@ -100,7 +102,7 @@ public class gameManager : MonoBehaviour
     public void UpdateAmmoCount()
     {
         ammoCount.text = ammoClip.ToString();
-        if (int.Parse(ammoCount.text) <= 0)
+        if (ammoClip <= 0)
         {
             StartCoroutine(Reload());
         }
@@ -109,7 +111,7 @@ public class gameManager : MonoBehaviour
     IEnumerator Reload()
     {
         yield return new WaitForSeconds(2);
-        ammoClip += 12;
+        ammoClip += ammoClipOrig;
         ammoReserves -= ammoClip;
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
