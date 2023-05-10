@@ -10,7 +10,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;    
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] Transform shootPos;
 
     [Header("------ Enemy Weapon Stats ------")]
     [Range(5, 10)] [SerializeField] int shootDist;
@@ -57,7 +58,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isShooting = true;
-        GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject bulletClone = Instantiate(bullet, shootPos.position, transform.rotation);
         yield return new WaitForSeconds(ShootRate);
         isShooting = false;
     }
