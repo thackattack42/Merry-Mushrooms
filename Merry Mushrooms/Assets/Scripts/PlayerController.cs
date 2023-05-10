@@ -35,7 +35,8 @@ public class PlayerController : MonoBehaviour, IDamage
     private int originalHP;
     private bool isShooting;
     private int ammoAmount;
-    
+    float dashCooldownTimer;
+
     private void Start()
     {
 
@@ -73,6 +74,12 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         Sprint();
+        if (dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+            gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString() + "s"; 
+            gameManager.instance.dashCooldownSlider.fillAmount = (dashCooldownTimer % 100 + 1) * 0.01f;
+        }
     }
 
     void Movement()
@@ -164,9 +171,16 @@ public class PlayerController : MonoBehaviour, IDamage
 
     IEnumerator WaitForDash()
     {
-      // How long the player has to wait before dashing again
+        // How long the player has to wait before dashing again
+        dashCooldownTimer = 5f;
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
+        if (dashCooldownTimer <= 0)
+        {
+            gameManager.instance.dashCooldownCounter.text = "";
+            gameManager.instance.dashCooldownSlider.fillAmount = 0f;
+        }
+
     }
 
     IEnumerator WaitForReload()
