@@ -37,6 +37,11 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     {
         playerDir = gameManager.instance.transform.position - headPos.position;
 
+        if(agent.remainingDistance < agent.stoppingDistance)
+        {
+            FacePlayer();
+        }
+
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (!isShooting)
         {

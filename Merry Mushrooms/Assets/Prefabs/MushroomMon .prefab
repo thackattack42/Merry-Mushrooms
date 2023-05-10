@@ -317,11 +317,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHP: 10
+  playerFaceSpeed: 0
   model: {fileID: 6691684062825357427}
   agent: {fileID: 6691684062812057950}
   shootPos: {fileID: 2613219387926658430}
+  headPos: {fileID: 6691684062812057937}
   shootDist: 5
-  ShootRate: 5
+  ShootRate: 10
   bullet: {fileID: 5463603646565746171, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
 --- !u!195 &6691684062812057950
 NavMeshAgent:
