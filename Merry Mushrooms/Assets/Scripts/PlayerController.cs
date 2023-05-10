@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour, IDamage
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
-        HP = originalHP;
+        maxHP = HP;
     }
     IEnumerator shoot()
     {
