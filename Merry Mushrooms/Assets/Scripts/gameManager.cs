@@ -102,7 +102,8 @@ public class gameManager : MonoBehaviour
     public void UpdateAmmoCount()
     {
         ammoCount.text = ammoClip.ToString();
-        if (ammoClip <= 0)
+
+        if (ammoClip <= 0 || Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(Reload());
         }
@@ -111,8 +112,8 @@ public class gameManager : MonoBehaviour
     IEnumerator Reload()
     {
         yield return new WaitForSeconds(2);
-        ammoClip += ammoClipOrig;
-        ammoReserves -= ammoClip;
+        ammoReserves -= ammoClipOrig - ammoClip;
+        ammoClip = ammoClipOrig;
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
     }

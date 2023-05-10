@@ -62,7 +62,13 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 StartCoroutine(shoot());
             }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                gameManager.instance.UpdateAmmoCount();
+            }
         }
+
         Sprint();
     }
 
