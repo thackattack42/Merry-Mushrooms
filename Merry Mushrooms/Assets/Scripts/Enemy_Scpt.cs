@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     [Range(5, 100)][SerializeField] public int curEnemyHP;
     [Range(5, 100)][SerializeField] int EnemyHP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
+    [SerializeField] int viewCone;
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
@@ -20,6 +22,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     [Header("------ Enemy Weapon Stats ------")]
     [Range(5, 10)][SerializeField] int shootDist;
     [Range(1, 10)][SerializeField] float ShootRate;
+    [Range(90, 180)][SerializeField] float ShootAngle;
     [SerializeField] GameObject bullet;
     //
     //Other Assets
@@ -27,6 +30,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     private bool isShooting;
     Vector3 playerDir;
     bool playerInRange;
+    float angleToPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,18 +45,18 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         if (playerInRange)
         {
 
-        playerDir = gameManager.instance.transform.position - headPos.position;
+            playerDir = gameManager.instance.transform.position - headPos.position;
 
-        if(agent.remainingDistance < agent.stoppingDistance)
-        {
-            FacePlayer();
-        }
+            if (agent.remainingDistance < agent.stoppingDistance)
+            {
+                FacePlayer();
+            }
 
-        agent.SetDestination(gameManager.instance.player.transform.position);
-        if (!isShooting)
-        {
-            StartCoroutine(shoot());
-        }
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
 
         }
     }
@@ -100,4 +104,35 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
             playerInRange = false;
         }
     }
+    private bool canSeePlayer()
+    {
+        playerDir = gameManager.instance.transform.position - headPos.position;
+        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
+
+        Debug.DrawRay(headPos.position, playerDir);
+        Debug.Log(angleToPlayer);
+
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        {
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
+            {
+                agent.SetDestination(gameManager.instance.player.transform.position);  
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    FacePlayer();
+                }
+
+                if (!isShooting && angleToPlayer <= ShootAngle)
+                {
+                    StartCoroutine(shoot());
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+   
 }
+
