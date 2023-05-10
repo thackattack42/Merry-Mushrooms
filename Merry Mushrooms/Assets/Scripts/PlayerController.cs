@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
-    [SerializeField] public int HP;
+    [SerializeField] public int maxHP;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private float dashTime = 0.3f;
     private float origSpeed;
     private int isDashing;
-    private int originalHP;
+    private int HP;
     private bool isShooting;
     private int ammoAmount;
     float dashCooldownTimer;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
-        originalHP = HP;
+        HP = maxHP;
         // Spawns Player
         Spawn();
     }
@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour, IDamage
         // Will take damage based off the amount 
         HP -= amount;
         gameManager.instance.healthPoints.text = HP.ToString();
-        gameManager.instance.HPSlider.fillAmount = HP * 0.01f;
+        gameManager.instance.HPSlider.fillAmount = (HP / maxHP * 100) * 0.01f; ;
 
         if (HP <= 0)
         {
