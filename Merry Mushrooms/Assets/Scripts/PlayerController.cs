@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float gravityValue;
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
-    [SerializeField] int HP;
+    [SerializeField] public int HP;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
@@ -170,6 +170,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         // Will take damage based off the amount 
         HP -= amount;
+        gameManager.instance.healthPoints.text = HP.ToString();
+        gameManager.instance.HPSlider.fillAmount = HP * 0.01f;
 
         if (HP <= 0)
         {

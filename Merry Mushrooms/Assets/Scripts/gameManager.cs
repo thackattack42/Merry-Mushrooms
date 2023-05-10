@@ -4,6 +4,7 @@ using System.Data;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class gameManager : MonoBehaviour
     public GameObject reticle;
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI ammoTotal;
+    public TextMeshProUGUI healthPoints;
+    public Image HPSlider;
 
     [SerializeField] public int ammoClip;
     [SerializeField] public int ammoReserves;
@@ -41,6 +44,8 @@ public class gameManager : MonoBehaviour
         ammoTotal.text = ammoReserves.ToString();
         timeScaleOrig = Time.timeScale;
         ammoClipOrig = ammoClip;
+        healthPoints.text = playerScript.HP.ToString();
+        HPSlider.fillAmount = playerScript.HP * 0.01f;
     }
 
     // Update is called once per frame
