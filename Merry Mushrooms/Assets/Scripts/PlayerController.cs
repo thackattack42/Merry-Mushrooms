@@ -62,11 +62,14 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 StartCoroutine(shoot());
             }
-
             if (Input.GetKeyDown(KeyCode.R))
             {
+                isShooting = true;
                 gameManager.instance.UpdateAmmoCount();
+                StartCoroutine(WaitForReload());
+                //isShooting = false;
             }
+
         }
 
         Sprint();
@@ -164,6 +167,12 @@ public class PlayerController : MonoBehaviour, IDamage
       // How long the player has to wait before dashing again
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
+    }
+
+    IEnumerator WaitForReload()
+    {
+        yield return new WaitForSeconds(2);
+        isShooting = false;
     }
 
     public void takeDamage(int amount)

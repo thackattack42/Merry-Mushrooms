@@ -10,6 +10,7 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
+
     [Header("-----Player Stuff-----")]
     public GameObject player;
     public PlayerController playerScript;
