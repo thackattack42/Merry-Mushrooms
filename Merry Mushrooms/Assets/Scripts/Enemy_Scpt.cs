@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class Enemy_Scpt : MonoBehaviour, IDamage
 {
     [Header("------ Enemy Stats ------")]
+    [Range(5, 100)][SerializeField] public int maxEnemyHP;
+    [Range(5, 100)][SerializeField] public int curEnemyHP;
     [Range(5, 100)][SerializeField] int EnemyHP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
 
