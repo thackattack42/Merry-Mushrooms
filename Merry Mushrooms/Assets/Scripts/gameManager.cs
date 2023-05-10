@@ -99,18 +99,19 @@ public class gameManager : MonoBehaviour
 
     public void UpdateAmmoCount()
     {
+        ammoCount.text = ammoClip.ToString();
         if (int.Parse(ammoCount.text) <= 0)
         {
             StartCoroutine(Reload());
-            ammoClip += 12;
-            ammoReserves -= ammoClip;
-            ammoCount.text = ammoClip.ToString();
-            ammoTotal.text = ammoReserves.ToString();
         }
     }
 
     IEnumerator Reload()
     {
         yield return new WaitForSeconds(2);
+        ammoClip += 12;
+        ammoReserves -= ammoClip;
+        ammoCount.text = ammoClip.ToString();
+        ammoTotal.text = ammoReserves.ToString();
     }
 }
