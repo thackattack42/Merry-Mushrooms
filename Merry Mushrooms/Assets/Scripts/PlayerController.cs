@@ -141,9 +141,9 @@ public class PlayerController : MonoBehaviour, IDamage
                     damageable.takeDamage(shootDamage);
                 }
             }
+            gameManager.instance.UpdateAmmoCount();
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
-            gameManager.instance.UpdateAmmoCount();
         }
     }
     void playerDash()
