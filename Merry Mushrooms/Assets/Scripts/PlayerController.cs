@@ -113,6 +113,7 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     IEnumerator shoot()
     {
+        //gameManager.instance.ammoClip;
         isShooting = true;
 
         RaycastHit hit;
