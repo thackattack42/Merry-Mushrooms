@@ -7,20 +7,23 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 {
     [Header("------ Enemy Stats ------")]
     [Range(5, 100)][SerializeField] int EnemyHP;
+    [Range(5, 100)][SerializeField] int playerFaceSpeed;
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform shootPos;
+    [SerializeField] Transform headPos;
 
     [Header("------ Enemy Weapon Stats ------")]
-    [Range(5, 10)] [SerializeField] int shootDist;
+    [Range(5, 10)][SerializeField] int shootDist;
     [Range(5, 10)][SerializeField] float ShootRate;
     [SerializeField] GameObject bullet;
     //
     //Other Assets
     Color origColor;
     private bool isShooting;
+    Vector3 playerDir;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        playerDir = gameManager.instance.transform.position - headPos.position;
+
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (!isShooting)
         {
@@ -43,7 +48,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     {
         EnemyHP -= dmg;
         StartCoroutine(FlashHitColor());
-        if(EnemyHP <= 0)
+        if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
             Destroy(gameObject);
@@ -61,5 +66,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         GameObject bulletClone = Instantiate(bullet, shootPos.position, transform.rotation);
         yield return new WaitForSeconds(ShootRate);
         isShooting = false;
+    }
+    public void FacePlayer()
+    {
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
     }
 }
