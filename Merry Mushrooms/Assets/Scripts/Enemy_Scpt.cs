@@ -42,21 +42,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (playerInRange)
+        if (playerInRange && canSeePlayer())
         {
 
-            playerDir = gameManager.instance.transform.position - headPos.position;
-
-            if (agent.remainingDistance < agent.stoppingDistance)
-            {
-                FacePlayer();
-            }
-
-            agent.SetDestination(gameManager.instance.player.transform.position);
-            if (!isShooting)
-            {
-                StartCoroutine(shoot());
-            }
+            
 
         }
     }
@@ -65,6 +54,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     {
         EnemyHP -= dmg;
         StartCoroutine(FlashHitColor());
+        agent.SetDestination(gameManager.instance.player.transform.position);
+        playerInRange = true;
         if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
