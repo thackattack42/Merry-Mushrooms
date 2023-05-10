@@ -22,7 +22,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     [Header("------ Enemy Weapon Stats ------")]
     [Range(5, 10)][SerializeField] int shootDist;
     [Range(1, 10)][SerializeField] float ShootRate;
-    [Range(90, 180)][SerializeField] float ShootAngle;
+    [Range(30, 180)][SerializeField] float ShootAngle;
     [SerializeField] GameObject bullet;
     //
     //Other Assets
@@ -97,7 +97,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     }
     private bool canSeePlayer()
     {
-        playerDir = gameManager.instance.transform.position - headPos.position;
+        playerDir = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
         Debug.DrawRay(headPos.position, playerDir);
