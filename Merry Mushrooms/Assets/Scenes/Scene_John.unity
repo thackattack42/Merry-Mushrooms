@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 111bc899fda443641961ecbf6544b730, type: 2}
 --- !u!1 &416299358
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +312,14 @@ PrefabInstance:
     - target: {fileID: 6143672159845965851, guid: b859bd2b556e4dc4691d566e66bceb32, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143672159845965851, guid: b859bd2b556e4dc4691d566e66bceb32, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143672159845965851, guid: b859bd2b556e4dc4691d566e66bceb32, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b859bd2b556e4dc4691d566e66bceb32, type: 3}
@@ -621,6 +629,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4921570995846447192, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921570995846447192, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7955122192680073816, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -803,6 +819,14 @@ PrefabInstance:
     - target: {fileID: 4921570995846447192, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921570995846447192, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921570995846447192, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7955122192680073816, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
       propertyPath: m_RootOrder
