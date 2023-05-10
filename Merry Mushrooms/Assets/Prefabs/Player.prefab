@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 8327772038628251592}
   - component: {fileID: 8327772038628251593}
   - component: {fileID: 8327772038628251590}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -157,9 +157,8 @@ MonoBehaviour:
   gravityValue: 7
   maxJumps: 2
   sprintSpeed: 2
-  HP: 0
+  maxHP: 0
   dashSpeed: 4
-  dashTime: 0.3
   dashCoolDown: 0
   shootDistance: 200
   shootRate: 0.5
