@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private int isDashing;
     private int originalHP;
     private bool isShooting;
+    private int ammoAmount;
     
     private void Start()
     {
@@ -113,7 +115,12 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     IEnumerator shoot()
     {
-        //gameManager.instance.ammoClip;
+        gameManager.instance.ammoClip--;
+        gameManager.instance.UpdateAmmoCount();
+        if (gameManager.instance.ammoClip <= 0 ) 
+        {
+            gameManager.instance.UpdateAmmoCount();
+        }
         isShooting = true;
 
         RaycastHit hit;
