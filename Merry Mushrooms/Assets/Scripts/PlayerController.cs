@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour, IDamage
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
-                isShooting = true;
+                //isShooting = false;
                 gameManager.instance.UpdateAmmoCount();
                 StartCoroutine(WaitForReload());
                 //isShooting = false;
@@ -141,9 +141,9 @@ public class PlayerController : MonoBehaviour, IDamage
                     damageable.takeDamage(shootDamage);
                 }
             }
+            gameManager.instance.UpdateAmmoCount();
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
-            gameManager.instance.UpdateAmmoCount();
         }
     }
     void playerDash()
@@ -171,6 +171,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     IEnumerator WaitForReload()
     {
+        isShooting = true;
         yield return new WaitForSeconds(2);
         isShooting = false;
     }
