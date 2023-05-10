@@ -434,8 +434,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6691684062812057950, guid: a7d43f3aa0ec8544faf3e80b652b86f3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6691684062812057951, guid: a7d43f3aa0ec8544faf3e80b652b86f3, type: 3}
-      propertyPath: ShootRate
+      propertyPath: playerFaceSpeed
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
