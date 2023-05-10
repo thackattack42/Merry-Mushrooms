@@ -49,6 +49,8 @@ public class gameManager : MonoBehaviour
         ammoClipOrig = ammoClip;
         healthPoints.text = playerScript.HP.ToString();
         HPSlider.fillAmount = playerScript.HP * 0.01f;
+        dashCooldownCounter.text = "";
+        dashCooldownSlider.fillAmount = 0f;
     }
 
     // Update is called once per frame

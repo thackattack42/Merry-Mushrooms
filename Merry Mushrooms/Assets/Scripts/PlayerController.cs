@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Start()
     {
-
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
         originalHP = HP;
@@ -77,8 +76,8 @@ public class PlayerController : MonoBehaviour, IDamage
         if (dashCooldownTimer > 0)
         {
             dashCooldownTimer -= Time.deltaTime;
-            gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString() + "s"; 
-            gameManager.instance.dashCooldownSlider.fillAmount = (dashCooldownTimer % 100 + 1) * 0.01f;
+            gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString("0.0") + "s";
+            gameManager.instance.dashCooldownSlider.fillAmount = (dashCooldownTimer / dashCoolDown * 100) * 0.01f;
         }
     }
 
