@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour, IDamage
         // Will take damage based off the amount 
         HP -= amount;
         gameManager.instance.healthPoints.text = HP.ToString();
-        gameManager.instance.HPSlider.fillAmount = (HP / maxHP * 100) * 0.01f; ;
+        gameManager.instance.HPSlider.fillAmount = (HP / maxHP * 100) * 0.01f;
 
         if (HP <= 0)
         {

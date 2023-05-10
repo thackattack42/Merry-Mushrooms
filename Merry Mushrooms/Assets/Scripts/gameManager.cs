@@ -49,7 +49,7 @@ public class gameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
         ammoClipOrig = ammoClip;
         healthPoints.text = playerScript.maxHP.ToString();
-        HPSlider.fillAmount = playerScript.maxHP * 0.01f;
+        HPSlider.fillAmount = 1f;
         dashCooldownCounter.text = "";
         dashCooldownSlider.fillAmount = 0f;
     }
