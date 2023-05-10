@@ -23,7 +23,7 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI ammoTotal;
 
-    int ammoClip;
+    public int ammoClip;
     int ammoReserves;
     int enemiesRemaining;
     public bool isPaused;
