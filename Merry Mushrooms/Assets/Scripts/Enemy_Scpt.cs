@@ -24,6 +24,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     Color origColor;
     private bool isShooting;
     Vector3 playerDir;
+    bool playerInRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,9 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        if (playerInRange)
+        {
+
         playerDir = gameManager.instance.transform.position - headPos.position;
 
         if(agent.remainingDistance < agent.stoppingDistance)
@@ -46,6 +50,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         if (!isShooting)
         {
             StartCoroutine(shoot());
+        }
+
         }
     }
 
@@ -76,5 +82,20 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
     }
 }
