@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Enemy_Scpt : MonoBehaviour, IDamage
 {
     [Header("------ Enemy Stats ------")]
-    [Range(5, 100)][SerializeField] int enemyMaxHP;
+    [Range(5, 100)][SerializeField] int EnemyHP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
 
     [Header("------ Componets ------")]
@@ -25,14 +25,12 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     private bool isShooting;
     Vector3 playerDir;
     bool playerInRange;
-    int enemyCurrentHP;
     // Start is called before the first frame update
     void Start()
     {
         //gets original color and sets it here
         gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
-        enemyCurrentHP = enemyMaxHP;
     }
 
     // Update is called once per frame
@@ -59,10 +57,9 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
     public void takeDamage(int dmg) //this make it that enemy takes damage
     {
-        enemyCurrentHP -= dmg;
-        gameManager.instance.enemyHPSlider.fillAmount = (enemyCurrentHP / enemyMaxHP * 100) * 0.01f;
+        EnemyHP -= dmg;
         StartCoroutine(FlashHitColor());
-        if (enemyCurrentHP <= 0)
+        if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
             Destroy(gameObject);
