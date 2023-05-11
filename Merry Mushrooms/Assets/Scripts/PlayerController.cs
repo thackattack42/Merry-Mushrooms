@@ -19,10 +19,11 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
     [SerializeField] public int maxHP;
+    [SerializeField] public int HP;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
-    [Range(2, 10)][SerializeField] int dashCoolDown;
+    [Range(2, 10)][SerializeField] public int dashCoolDown;
 
     [Header("----- Weapon Stats -----")]
     [Range(2, 300)][SerializeField] int shootDistance;
@@ -32,14 +33,13 @@ public class PlayerController : MonoBehaviour, IDamage
     private float dashTime = 0.3f;
     private float origSpeed;
     private int isDashing;
-    private int HP;
     private bool isShooting;
     private bool isReloading;
     private bool isSprinting;
     private int ammoAmount;
     private int origAmmoClip;
     private int reloadOnce = 0;
-    float dashCooldownTimer;
+    PlayerHUD pHUD = new PlayerHUD();
 
     private void Start()
     {
@@ -81,12 +81,6 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         Sprint();
-        if (dashCooldownTimer > 0)
-        {
-            dashCooldownTimer -= Time.deltaTime;
-            gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString("0.0") + "s";
-            gameManager.instance.dashCooldownSlider.fillAmount = dashCooldownTimer / dashCoolDown;
-        }
     }
 
     void Movement()
@@ -136,7 +130,7 @@ public class PlayerController : MonoBehaviour, IDamage
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
-        maxHP = HP;
+        takeDamage(-maxHP);
     }
     IEnumerator shoot()
     {
@@ -179,7 +173,6 @@ public class PlayerController : MonoBehaviour, IDamage
         if (isSprinting)
         {
             playerSpeed /= dashSpeed;
-           
         }
         else
             playerSpeed = origSpeed;
@@ -189,15 +182,9 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator WaitForDash()
     {
         // How long the player has to wait before dashing again
-        dashCooldownTimer = 5f;
+        pHUD.dashCooldown(dashCoolDown);
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
-        if (dashCooldownTimer <= 0)
-        {
-            gameManager.instance.dashCooldownCounter.text = "";
-            gameManager.instance.dashCooldownSlider.fillAmount = 0f;
-        }
-
     }
 
     IEnumerator WaitForReload()
@@ -213,11 +200,10 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         // Will take damage based off the amount 
         HP -= amount;
-        gameManager.instance.healthPoints.text = HP.ToString();
-        gameManager.instance.HPSlider.fillAmount = (float)HP / maxHP;
-
+        pHUD.updatePlayerHealth(HP);
         if (HP <= 0)
         {
+            HP = 0;
             // Player is dead and display game over screen.
             gameManager.instance.GameOver();
         }
