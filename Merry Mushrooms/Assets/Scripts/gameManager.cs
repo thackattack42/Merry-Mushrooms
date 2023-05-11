@@ -85,7 +85,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        isPaused = !isPaused;
+        isPaused = false;
 
         activeMenu.SetActive(false);
         activeMenu = null;
