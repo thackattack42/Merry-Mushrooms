@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         else if (Input.GetButtonUp("Sprint"))
         {
-            playerSpeed /= sprintSpeed;
+            playerSpeed = origSpeed;
         }
     }
     public void Spawn()
