@@ -7,9 +7,8 @@ using UnityEngine.AI;
 public class Enemy_Scpt : MonoBehaviour, IDamage
 {
     [Header("------ Enemy Stats ------")]
-    [Range(5, 100)][SerializeField] public int maxEnemyHP;
+   // [Range(5, 100)][SerializeField] public int maxEnemyHP;
     [Range(5, 100)][SerializeField] public int EnemyHP;
-
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     [SerializeField] int viewCone;
 
@@ -38,8 +37,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         //gets original color and sets it here
         gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
-        EnemyHP = maxEnemyHP;
-        gameManager.instance.enemyHPSlider.fillAmount = 1f;
+       // EnemyHP = maxEnemyHP; //changed
+       // gameManager.instance.enemyHPSlider.fillAmount = 1f; //changed
 
     }
 
@@ -60,7 +59,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         StartCoroutine(FlashHitColor());
         agent.SetDestination(gameManager.instance.player.transform.position);
         playerInRange = true;
-        gameManager.instance.enemyHPSlider.fillAmount = (float)EnemyHP / maxEnemyHP;
+       // gameManager.instance.enemyHPSlider.fillAmount = (float)EnemyHP / maxEnemyHP; //changed
         if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);

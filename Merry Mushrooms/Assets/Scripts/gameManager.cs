@@ -48,9 +48,9 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
-        enemyHPSliderBG = enemy.GetComponentInChildren<Image>();
-        enemyHPSlider = enemyHPSliderBG.transform.GetChild(0).GetComponent<Image>();
+        //enemy = GameObject.FindGameObjectWithTag("Enemy");
+       // enemyHPSliderBG = enemy.GetComponentInChildren<Image>();
+       // enemyHPSlider = enemyHPSliderBG.transform.GetChild(0).GetComponent<Image>();
 
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         ammoCount.text = ammoClip.ToString();
