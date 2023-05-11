@@ -54,10 +54,7 @@ public class gameManager : MonoBehaviour
         ammoTotal.text = ammoReserves.ToString();
         timeScaleOrig = Time.timeScale;
         ammoClipOrig = ammoClip;
-        healthPoints.text = playerScript.maxHP.ToString();
-        HPSlider.fillAmount = 1f;
-        dashCooldownCounter.text = "";
-        dashCooldownSlider.fillAmount = 0f;
+
     }
 
     // Update is called once per frame
