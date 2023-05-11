@@ -22,6 +22,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void respawn()
     {
-        
+        gameManager.instance.UnpausedState();
+        gameManager.instance.playerScript.Spawn();
     }
 }

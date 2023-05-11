@@ -14,7 +14,7 @@ public class gameManager : MonoBehaviour
     [Header("-----Player Stuff-----")]
     public GameObject player;
     public PlayerController playerScript;
-    public GameObject playerSpawnPos;
+    [SerializeField] public GameObject playerSpawnPos;
 
     [Header("-----Enemy Stuff-----")]
     public GameObject enemy;
