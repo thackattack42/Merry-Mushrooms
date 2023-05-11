@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
-        HP = maxHP;
         origAmmoClip = gameManager.instance.ammoClip;
         // Spawns Player
         Spawn();
