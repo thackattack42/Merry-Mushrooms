@@ -17,18 +17,15 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.forward * speed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
+        IDamage damagable = other.GetComponent<IDamage>();
+
+        if (damagable != null)
         {
-            IDamage damagable = other.GetComponent<IDamage>();
-
-            if (damagable != null)
-            {
-                damagable.takeDamage(damage);
-            }
-
-            Destroy(gameObject);
+            damagable.takeDamage(damage);
         }
-    }
 
+        Destroy(gameObject);
+    }
 }

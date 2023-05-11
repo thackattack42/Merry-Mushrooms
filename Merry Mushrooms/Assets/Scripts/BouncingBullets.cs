@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncingBullets : MonoBehaviour
+public class BouncingBullets : Bullet
 {
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] int timer;
+    [SerializeField] int bounce;
+    [SerializeField] int maxBounceCount;
 
     [SerializeField] Rigidbody rb;
+        
+    [SerializeField] GameObject explosion;
 
-    public float timeBetmeenShooting, bounce, reloadTime, timeBetweenShots;
+    public float timeBetmeenShooting, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerClick;
     public bool allowButtonHold;
 
@@ -21,27 +25,39 @@ public class BouncingBullets : MonoBehaviour
     bool readyToShoot;
     bool reloading;
 
+    int bounceCount;
 
     void Start()
     {
         Destroy(gameObject, timer);
+
+        bounceCount = 0;
         rb.velocity = transform.forward * speed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
+        if (bounceCount >= maxBounceCount)
         {
-            IDamage damagable = other.GetComponent<IDamage>();
-
-            if (damagable != null)
-            {
-                damagable.takeDamage(damage);
-            }
-
+            // boom
+            Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
-    
-    
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        IDamage damagable = other.GetComponent<IDamage>();
+
+        if (other.tag == "Floor")
+        {
+            rb.AddForce(transform.up * bounce, ForceMode.Impulse);
+            bounceCount += 1;
+        }
+        else
+        {
+            base.OnTriggerEnter(other);
+        }
+    }
 
 }
