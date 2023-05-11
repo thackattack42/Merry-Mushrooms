@@ -287,10 +287,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 4982028791367613506, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
 --- !u!20 &691293881 stripped
@@ -823,6 +819,10 @@ PrefabInstance:
       propertyPath: m_FillOrigin
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1336386656, guid: a7d43f3aa0ec8544faf3e80b652b86f3, type: 3}
+      propertyPath: m_TagString
+      value: Enemy Overlay
+      objectReference: {fileID: 0}
     - target: {fileID: 1336386657, guid: a7d43f3aa0ec8544faf3e80b652b86f3, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -839,6 +839,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 691293881}
+    - target: {fileID: 6691684062811762041, guid: a7d43f3aa0ec8544faf3e80b652b86f3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6691684062811762043, guid: a7d43f3aa0ec8544faf3e80b652b86f3, type: 3}
       propertyPath: m_Name
       value: 'MushroomMon '

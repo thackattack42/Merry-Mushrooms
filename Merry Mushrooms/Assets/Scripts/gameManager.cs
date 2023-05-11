@@ -16,6 +16,9 @@ public class gameManager : MonoBehaviour
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
 
+    [Header("-----Enemy Stuff-----")]
+    public GameObject enemy;
+
     [Header("-----UI Stuff-----")]
     public GameObject activeMenu;
     public GameObject pauseMenu;
@@ -28,8 +31,9 @@ public class gameManager : MonoBehaviour
     public Image HPSlider;
     public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
+    public Image enemyHPSliderBG;
     public Image enemyHPSlider;
-    public Canvas enemyOverlay;
+
 
     [SerializeField] public int ammoClip;
     [SerializeField] public int ammoReserves;
@@ -44,6 +48,10 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemyHPSliderBG = enemy.GetComponentInChildren<Image>();
+        enemyHPSlider = enemyHPSliderBG.transform.GetChild(0).GetComponent<Image>();
+
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();

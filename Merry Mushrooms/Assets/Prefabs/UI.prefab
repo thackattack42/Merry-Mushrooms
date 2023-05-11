@@ -2456,6 +2456,8 @@ MonoBehaviour:
   player: {fileID: 0}
   playerScript: {fileID: 0}
   playerSpawnPos: {fileID: 0}
+  enemy: {fileID: 0}
+  EnemyScript: {fileID: 0}
   activeMenu: {fileID: 0}
   pauseMenu: {fileID: 1163122749380024366}
   loseMenu: {fileID: 1163122748907664609}
@@ -2468,7 +2470,6 @@ MonoBehaviour:
   dashCooldownCounter: {fileID: 416299360}
   dashCooldownSlider: {fileID: 1460879088}
   enemyHPSlider: {fileID: 0}
-  enemyOverlay: {fileID: 0}
   ammoClip: 12
   ammoReserves: 128
   isPaused: 0
