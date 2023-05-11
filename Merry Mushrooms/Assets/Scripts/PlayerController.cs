@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             dashCooldownTimer -= Time.deltaTime;
             gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString("0.0") + "s";
-            gameManager.instance.dashCooldownSlider.fillAmount = (dashCooldownTimer / dashCoolDown * 100) * 0.01f;
+            gameManager.instance.dashCooldownSlider.fillAmount = dashCooldownTimer / dashCoolDown;
         }
     }
 
@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour, IDamage
         // Will take damage based off the amount 
         HP -= amount;
         gameManager.instance.healthPoints.text = HP.ToString();
-        gameManager.instance.HPSlider.fillAmount = (HP / maxHP * 100) * 0.01f;
+        gameManager.instance.HPSlider.fillAmount = (float)HP / maxHP;
 
         if (HP <= 0)
         {

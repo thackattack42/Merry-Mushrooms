@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
     public Image enemyHPSlider;
+    public Canvas enemyOverlay;
 
     [SerializeField] public int ammoClip;
     [SerializeField] public int ammoReserves;
