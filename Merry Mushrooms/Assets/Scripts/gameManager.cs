@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] public GameObject playerSpawnPos;
 
     [Header("-----Enemy Stuff-----")]
-    public GameObject enemy;
+   // public GameObject enemy;
 
     [Header("-----UI Stuff-----")]
     public GameObject activeMenu;
@@ -31,8 +31,8 @@ public class gameManager : MonoBehaviour
     public Image HPSlider;
     public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
-    public Image enemyHPSliderBG;
-    public Image enemyHPSlider;
+    //public Image enemyHPSliderBG;
+    //public Image enemyHPSlider;
 
 
     [SerializeField] public int ammoClip;
