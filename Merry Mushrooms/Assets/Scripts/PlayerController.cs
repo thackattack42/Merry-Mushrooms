@@ -64,10 +64,10 @@ public class PlayerController : MonoBehaviour, IDamage
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
-                if (Input.GetButton("Shoot"))
-                {
-                    isShooting = true;
-                }
+                //if (isShooting)
+                //{
+                //    isShooting = false;
+                //}
                 //isShooting = false;
                 gameManager.instance.UpdateAmmoCount();
                 StartCoroutine(WaitForReload());
