@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private int HP;
     private bool isShooting;
     private bool isReloading;
+    private bool isSprinting;
     private int ammoAmount;
     private int origAmmoClip;
     private int reloadOnce = 0;
@@ -121,11 +122,13 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Sprint"))
         {
             playerSpeed *= sprintSpeed;
+            isSprinting = true;
 
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             playerSpeed = origSpeed;
+            isSprinting = false;
         }
     }
     public void Spawn()
@@ -173,7 +176,14 @@ public class PlayerController : MonoBehaviour, IDamage
         Debug.Log("Player Dashed");
         // How long the player will dash for
         yield return new WaitForSeconds(dashTime);
-        playerSpeed = origSpeed;
+        if (isSprinting)
+        {
+            playerSpeed /= dashSpeed;
+           
+        }
+        else
+            playerSpeed = origSpeed;
+
     }
 
     IEnumerator WaitForDash()
