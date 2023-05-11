@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private int isDashing;
     private int HP;
     private bool isShooting;
+    private bool isReloading;
     private int ammoAmount;
     float dashCooldownTimer;
 
@@ -57,21 +58,19 @@ public class PlayerController : MonoBehaviour, IDamage
                 playerDash();
                 StartCoroutine(WaitForDash());
             }
-
-            if (Input.GetButton("Shoot") && !isShooting)
-            {
-                StartCoroutine(shoot());
-            }
             if (Input.GetKeyDown(KeyCode.R))
             {
-                if (Input.GetButton("Shoot"))
-                {
-                    isShooting = true;
-                }
                 //isShooting = false;
+                isReloading = true;
                 gameManager.instance.UpdateAmmoCount();
                 StartCoroutine(WaitForReload());
+
                 //isShooting = false;
+            }
+
+            if (Input.GetButton("Shoot") && !isShooting && !isReloading)
+            {
+                StartCoroutine(shoot());
             }
 
         }
@@ -191,6 +190,7 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = true;
         yield return new WaitForSeconds(2);
         isShooting = false;
+        isReloading = false;
     }
 
     public void takeDamage(int amount)
