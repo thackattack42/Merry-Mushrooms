@@ -59,7 +59,6 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         StartCoroutine(FlashHitColor());
         agent.SetDestination(gameManager.instance.player.transform.position);
         playerInRange = true;
-       // gameManager.instance.enemyHPSlider.fillAmount = (float)EnemyHP / maxEnemyHP; //changed
         if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
