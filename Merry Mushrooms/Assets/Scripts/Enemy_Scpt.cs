@@ -58,7 +58,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         EnemyHP -= dmg;
         StartCoroutine(FlashHitColor());
         agent.SetDestination(gameManager.instance.player.transform.position);
-        playerInRange = true;
+       // playerInRange = true;
         if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
