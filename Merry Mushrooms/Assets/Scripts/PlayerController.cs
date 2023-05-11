@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private bool isShooting;
     private bool isReloading;
     private int ammoAmount;
+    private int origAmmoClip;
     private int reloadOnce = 0;
     float dashCooldownTimer;
 
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour, IDamage
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
         HP = maxHP;
+        origAmmoClip = gameManager.instance.ammoClip;
         // Spawns Player
         Spawn();
     }
@@ -54,12 +56,12 @@ public class PlayerController : MonoBehaviour, IDamage
         {
 
             Movement();
-            if (Input.GetKeyDown(KeyCode.E) && isDashing == 0)
+            if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 )
             {
                 playerDash();
                 StartCoroutine(WaitForDash());
             }
-            if (Input.GetKeyDown(KeyCode.R) && reloadOnce == 0)
+            if (Input.GetKeyDown(KeyCode.R) && reloadOnce == 0 && gameManager.instance.ammoClip != origAmmoClip)
             {
                 //isShooting = false;
                 reloadOnce = 1;
@@ -140,6 +142,7 @@ public class PlayerController : MonoBehaviour, IDamage
             isShooting = true;
 
             gameManager.instance.ammoClip--;
+            
 
             RaycastHit hit;
 
