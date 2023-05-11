@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private int ammoAmount;
     private int origAmmoClip;
     private int reloadOnce = 0;
-    PlayerHUD pHUD = new PlayerHUD();
 
     private void Start()
     {
@@ -181,7 +180,7 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator WaitForDash()
     {
         // How long the player has to wait before dashing again
-        pHUD.dashCooldown(dashCoolDown);
+        gameManager.instance.playerHUD.dashCooldown(dashCoolDown);
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
     }
@@ -199,7 +198,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         // Will take damage based off the amount 
         HP -= amount;
-        pHUD.updatePlayerHealth(HP);
+        gameManager.instance.playerHUD.updatePlayerHealth(HP);
         if (HP <= 0)
         {
             HP = 0;

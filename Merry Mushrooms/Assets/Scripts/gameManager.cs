@@ -14,6 +14,7 @@ public class gameManager : MonoBehaviour
     [Header("-----Player Stuff-----")]
     public GameObject player;
     public PlayerController playerScript;
+    public PlayerHUD playerHUD;
     [SerializeField] public GameObject playerSpawnPos;
 
     [Header("-----Enemy Stuff-----")]
@@ -47,6 +48,7 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        playerHUD = player.GetComponent<PlayerHUD>();
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         enemyScript = enemy.GetComponent<Enemy_Scpt>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
