@@ -8,6 +8,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 {
     [Header("------ Enemy Stats ------")]
     [Range(5, 100)][SerializeField] public int maxEnemyHP;
+    [Range(5, 100)][SerializeField] public int EnemyHP;
+
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     [SerializeField] int viewCone;
 
@@ -29,7 +31,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool playerInRange;
     float angleToPlayer;
-    int EnemyHP;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,10 +57,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     public void takeDamage(int dmg) //this make it that enemy takes damage
     {
         EnemyHP -= dmg;
-        gameManager.instance.enemyHPSlider.fillAmount = (float)EnemyHP / maxEnemyHP;
         StartCoroutine(FlashHitColor());
         agent.SetDestination(gameManager.instance.player.transform.position);
         playerInRange = true;
+        gameManager.instance.enemyHPSlider.fillAmount = (float)EnemyHP / maxEnemyHP;
         if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
