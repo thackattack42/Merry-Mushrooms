@@ -64,6 +64,10 @@ public class PlayerController : MonoBehaviour, IDamage
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
+                if (Input.GetButton("Shoot"))
+                {
+                    isShooting = true;
+                }
                 //isShooting = false;
                 gameManager.instance.UpdateAmmoCount();
                 StartCoroutine(WaitForReload());
@@ -121,7 +125,7 @@ public class PlayerController : MonoBehaviour, IDamage
             playerSpeed /= sprintSpeed;
         }
     }
-    void Spawn()
+    public void Spawn()
     {
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
