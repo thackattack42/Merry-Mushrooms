@@ -20,7 +20,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
     [Header("------ Enemy Weapon Stats ------")]
     [Range(5, 10)][SerializeField] int shootDist;
-    [Range(1, 10)][SerializeField] float ShootRate;
+    [Range(0.1f, 10)][SerializeField] float ShootRate;
     [Range(30, 180)][SerializeField] float ShootAngle;
     [SerializeField] GameObject bullet;
     //
