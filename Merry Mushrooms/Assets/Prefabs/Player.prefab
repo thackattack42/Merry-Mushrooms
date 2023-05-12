@@ -112,11 +112,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8327772038628251595}
   - component: {fileID: 8327772038628251594}
+  - component: {fileID: 8863840815364814771}
   - component: {fileID: 8327772038628251597}
   - component: {fileID: 8327772038628251592}
   - component: {fileID: 8327772038628251593}
   - component: {fileID: 8327772038628251590}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -152,18 +153,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8327772038628251597}
-  playerSpeed: 10
+  playerSpeed: 5
   jumpHeight: 3
   gravityValue: 7
   maxJumps: 2
   sprintSpeed: 2
+  maxHP: 10
   HP: 0
   dashSpeed: 4
-  dashTime: 0.3
-  dashCoolDown: 0
+  dashCoolDown: 7
   shootDistance: 200
   shootRate: 0.5
   shootDamage: 1
+--- !u!114 &8863840815364814771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327772038628251588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9299ab46e0e57040a036a3498ca2569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &8327772038628251597
 CharacterController:
   m_ObjectHideFlags: 0

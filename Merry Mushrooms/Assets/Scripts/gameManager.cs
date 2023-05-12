@@ -14,7 +14,12 @@ public class gameManager : MonoBehaviour
     [Header("-----Player Stuff-----")]
     public GameObject player;
     public PlayerController playerScript;
-    public GameObject playerSpawnPos;
+    public PlayerHUD playerHUD;
+    [SerializeField] public GameObject playerSpawnPos;
+
+    [Header("-----Enemy Stuff-----")]
+    public GameObject enemy;
+    public Enemy_Scpt enemyScript;
 
     [Header("-----UI Stuff-----")]
     public GameObject activeMenu;
@@ -28,7 +33,7 @@ public class gameManager : MonoBehaviour
     public Image HPSlider;
     public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
-    public Image enemyHPSlider;
+
 
     [SerializeField] public int ammoClip;
     [SerializeField] public int ammoReserves;
@@ -43,15 +48,15 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        playerHUD = player.GetComponent<PlayerHUD>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemyScript = enemy.GetComponent<Enemy_Scpt>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
         timeScaleOrig = Time.timeScale;
         ammoClipOrig = ammoClip;
-        healthPoints.text = playerScript.maxHP.ToString();
-        HPSlider.fillAmount = 1f;
-        dashCooldownCounter.text = "";
-        dashCooldownSlider.fillAmount = 0f;
+
     }
 
     // Update is called once per frame
@@ -80,7 +85,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        isPaused = !isPaused;
+        isPaused = false;
 
         activeMenu.SetActive(false);
         activeMenu = null;

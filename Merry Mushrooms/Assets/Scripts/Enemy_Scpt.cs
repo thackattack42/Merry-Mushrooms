@@ -7,9 +7,8 @@ using UnityEngine.AI;
 public class Enemy_Scpt : MonoBehaviour, IDamage
 {
     [Header("------ Enemy Stats ------")]
-    [Range(5, 100)][SerializeField] public int maxEnemyHP;
-    [Range(5, 100)][SerializeField] public int curEnemyHP;
-    [Range(5, 100)][SerializeField] int EnemyHP;
+   // [Range(5, 100)][SerializeField] public int maxEnemyHP;
+    [Range(5, 100)][SerializeField] public int EnemyHP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     [SerializeField] int viewCone;
 
@@ -21,8 +20,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
     [Header("------ Enemy Weapon Stats ------")]
     [Range(5, 10)][SerializeField] int shootDist;
-    [Range(1, 10)][SerializeField] float ShootRate;
-    [Range(90, 180)][SerializeField] float ShootAngle;
+    [Range(0.1f, 10)][SerializeField] float ShootRate;
+    [Range(30, 180)][SerializeField] float ShootAngle;
     [SerializeField] GameObject bullet;
     //
     //Other Assets
@@ -31,12 +30,16 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool playerInRange;
     float angleToPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         //gets original color and sets it here
         gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
+       // EnemyHP = maxEnemyHP; //changed
+       // gameManager.instance.enemyHPSlider.fillAmount = 1f; //changed
+
     }
 
     // Update is called once per frame
@@ -55,7 +58,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         EnemyHP -= dmg;
         StartCoroutine(FlashHitColor());
         agent.SetDestination(gameManager.instance.player.transform.position);
-        playerInRange = true;
+       // playerInRange = true;
         if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
@@ -97,7 +100,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     }
     private bool canSeePlayer()
     {
-        playerDir = gameManager.instance.transform.position - headPos.position;
+        playerDir = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
         Debug.DrawRay(headPos.position, playerDir);
