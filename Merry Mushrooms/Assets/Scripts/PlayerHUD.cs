@@ -21,17 +21,17 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.HPSlider.fillAmount = 1f;
         gameManager.instance.dashCooldownCounter.text = "";
         gameManager.instance.dashCooldownSlider.fillAmount = 0f;
-        dashIsOnCooldown = false;
+        dashIsOnCooldown = false; //default value is false, but just in case :)
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (dashIsOnCooldown)
+        if (dashIsOnCooldown) //This can probably be optimized, but I'm not smart enough to know how.
         {
             dashCooldownTimer -= Time.deltaTime;
             gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString("0.0") + "s";
-            gameManager.instance.dashCooldownSlider.fillAmount = dashCooldownTimer / gameManager.instance.playerScript.dashCoolDown;
+            gameManager.instance.dashCooldownSlider.fillAmount = dashCooldownTimer / gameManager.instance.playerScript.dashCoolDown; // divides the time left by the set time to get a percentage
 
             if (dashCooldownTimer <= 0)
             {
@@ -43,7 +43,7 @@ public class PlayerHUD : MonoBehaviour
     }
     public void updatePlayerHealth(int currHP)
     {
-        if (currHP < 0)
+        if (currHP < 0) //to make sure the number in the UI doesn't show negative, or it will look weird.
             currHP = 0;
         gameManager.instance.healthPoints.text = currHP.ToString();
         gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
