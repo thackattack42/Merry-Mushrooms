@@ -45,8 +45,8 @@ public class EnemyUI : MonoBehaviour
 
         // I can't think of a better solution for this without adding a GetComponentInChildren
         // in the Enemy Script which *might* break stuff, but IDK, I'm too scared to try!
-        // And no, I've tried calling EnemyUI.updateEnemyHealth in the Enemy Script under takeDamage,
-        // but it only updates one UI (usually the highest enemy in the hierarchy list. :/
+        // Also, I've tried calling EnemyUI.updateEnemyHealth in the Enemy Script under takeDamage,
+        // but it only updates one UI (usually the highest enemy in the hierarchy list). :/
         if (enemyScript.EnemyHP != currHP)
             updateEnemyHealth();
     }
