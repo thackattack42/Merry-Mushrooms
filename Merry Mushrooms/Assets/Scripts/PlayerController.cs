@@ -36,8 +36,10 @@ public class PlayerController : MonoBehaviour, IDamage
     private bool isShooting;
     private bool isReloading;
     private bool isSprinting;
+    private bool isCrouching;
     private int ammoAmount;
     private int origAmmoClip;
+    private float origHeight;
     private int reloadOnce = 0;
 
     private void Start()
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour, IDamage
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
         origAmmoClip = gameManager.instance.ammoClip;
+        controller.height = 2.0f;
+        origHeight = controller.height;
         // Spawns Player
         Spawn();
     }
@@ -55,7 +59,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
 
             Movement();
-            if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 )
+            if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
                 playerDash();
                 StartCoroutine(WaitForDash());
@@ -75,10 +79,10 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 StartCoroutine(shoot());
             }
-
         }
 
         Sprint();
+        Crouch();
     }
 
     void Movement()
@@ -111,13 +115,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Sprint()
     {
-        if (Input.GetButtonDown("Sprint"))
+        if (Input.GetButtonDown("Sprint") && !isCrouching)
         {
             playerSpeed *= sprintSpeed;
             isSprinting = true;
 
         }
-        else if (Input.GetButtonUp("Sprint"))
+        else if (Input.GetButtonUp("Sprint") && !isCrouching)
         {
             playerSpeed = origSpeed;
             isSprinting = false;
@@ -204,6 +208,22 @@ public class PlayerController : MonoBehaviour, IDamage
             HP = 0;
             // Player is dead and display game over screen.
             gameManager.instance.GameOver();
+        }
+    }
+
+    public void Crouch()
+    {
+        if (Input.GetButtonDown("Crouch") && !isSprinting && isDashing == 0)
+        {
+            playerSpeed /= 2;
+            isCrouching = true;
+            controller.height /= 2;
+        }
+        else if (Input.GetButtonUp("Crouch") && !isSprinting && isDashing == 0)
+        {
+            playerSpeed = origSpeed;
+            isCrouching = false;
+            controller.height = origHeight;
         }
     }
 }
