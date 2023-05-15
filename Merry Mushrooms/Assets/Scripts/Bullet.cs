@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         Destroy(gameObject, timer);
         rb.velocity = transform.forward * speed;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1749213199535907716}
   - component: {fileID: 7931252257312753732}
   m_Layer: 7
-  m_Name: BouncingBullet
+  m_Name: ExplodingProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   speed: 5
   timer: 6
   rb: {fileID: 7931252257312753732}
+  bulletType: 1
   damage: 1
   speed: 5
   timer: 6

@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class BouncingBullets : Bullet
 {
+    public enum BulletType // your custom enumeration
+    {
+        Bouncing,
+        ExplodingProjectile,
+        Item3
+    };
+    [SerializeField]
+    private BulletType bulletType = BulletType.Bouncing;
+
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] int timer;
@@ -14,49 +23,70 @@ public class BouncingBullets : Bullet
         
     [SerializeField] GameObject explosion;
 
-    public float timeBetmeenShooting, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerClick;
-    public bool allowButtonHold;
-
-    int bulletsRemaining;
-    int bulletsShot;
-
-    bool shooting;
-    bool readyToShoot;
-    bool reloading;
-
     int bounceCount;
 
-    void Start()
+    protected override void Start()
     {
-        Destroy(gameObject, timer);
-
-        bounceCount = 0;
-        rb.velocity = transform.forward * speed;
+        switch (bulletType)
+        {
+            case BulletType.Bouncing:
+                {
+                    bounceCount = 0;
+                    rb.velocity = transform.forward * speed;
+                }
+                break;
+            default:
+                base.Start();
+                break;
+        }
     }
 
     private void Update()
     {
-        if (bounceCount >= maxBounceCount)
+        switch (bulletType)// switch case allows the ability to change bullet type in the same script
         {
-            // boom
-            Instantiate(explosion, transform.position, transform.rotation);
-            Destroy(gameObject);
+            case BulletType.Bouncing:
+            {
+                if (bounceCount == maxBounceCount)
+                {
+                    // boom
+                    if (explosion != null)
+                        Instantiate(explosion, transform.position, transform.rotation);
+                     Destroy(gameObject);
+                }
+            }
+            break;
+            case BulletType.ExplodingProjectile:
+            {
+
+            }
+            break;
         }
+
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
         IDamage damagable = other.GetComponent<IDamage>();
 
-        if (other.tag == "Floor")
+        switch (bulletType)
         {
-            rb.AddForce(transform.up * bounce, ForceMode.Impulse);
-            bounceCount += 1;
-        }
-        else
-        {
-            base.OnTriggerEnter(other);
+            case BulletType.Bouncing:
+            {
+                if (bulletType == BulletType.Bouncing && other.name == "Terrain")
+                {
+                    rb.AddForce(transform.up * bounce, ForceMode.Impulse);
+                    bounceCount += 1;
+                }
+                else
+                {
+                    base.OnTriggerEnter(other);
+                }
+            }
+            break;
+            default:
+                base.OnTriggerEnter(other);
+                break;
         }
     }
 
