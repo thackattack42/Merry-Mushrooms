@@ -50,8 +50,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-       // if (agent.isActiveAndEnabled)
-      //  {
+        if (agent.isActiveAndEnabled)
+        {
 
             speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
             animr.SetFloat("Speed", speed);
@@ -62,19 +62,26 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
 
             }
-       // }
+        }
     }
 
     public void takeDamage(int dmg) //this make it that enemy takes damage
     {
         EnemyHP -= dmg;
-        StartCoroutine(FlashHitColor());
-        agent.SetDestination(gameManager.instance.player.transform.position);
         // playerInRange = true;
         if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            animr.SetBool("Death", true);
+            agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+        }
+        else
+        {
+            StartCoroutine(FlashHitColor());
+            agent.SetDestination(gameManager.instance.player.transform.position);
+
         }
     }
     IEnumerator FlashHitColor() //flash when the enemy is hit
