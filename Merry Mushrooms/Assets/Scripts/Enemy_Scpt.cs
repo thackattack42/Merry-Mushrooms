@@ -7,16 +7,18 @@ using UnityEngine.AI;
 public class Enemy_Scpt : MonoBehaviour, IDamage
 {
     [Header("------ Enemy Stats ------")]
-   // [Range(5, 100)][SerializeField] public int maxEnemyHP;
+    // [Range(5, 100)][SerializeField] public int maxEnemyHP;
     [Range(5, 100)][SerializeField] public int EnemyHP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     [SerializeField] int viewCone;
+    [SerializeField] float animrTransSpeed;
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
+    [SerializeField] Animator animr;
 
     [Header("------ Enemy Weapon Stats ------")]
     [Range(5, 10)][SerializeField] int shootDist;
@@ -30,8 +32,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool playerInRange;
     float angleToPlayer;
-    public const string IDLE = "Idle";
-    Animation anim;
+    float speed;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,20 +41,27 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         //gets original color and sets it here
         gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
-        anim = GetComponent<Animation>();
-       // EnemyHP = maxEnemyHP; //changed
-       // gameManager.instance.enemyHPSlider.fillAmount = 1f; //changed
+
+        // EnemyHP = maxEnemyHP; //changed
+        // gameManager.instance.enemyHPSlider.fillAmount = 1f; //changed
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerInRange && canSeePlayer())
+        if (agent.isActiveAndEnabled)
         {
 
-            
+            speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
+            animr.SetFloat("Speed", speed);
 
+            if (playerInRange && canSeePlayer())
+            {
+
+
+
+            }
         }
     }
 
@@ -61,7 +70,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         EnemyHP -= dmg;
         StartCoroutine(FlashHitColor());
         agent.SetDestination(gameManager.instance.player.transform.position);
-       // playerInRange = true;
+        // playerInRange = true;
         if (EnemyHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
@@ -114,7 +123,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
-                agent.SetDestination(gameManager.instance.player.transform.position);  
+                agent.SetDestination(gameManager.instance.player.transform.position);
 
                 if (agent.remainingDistance < agent.stoppingDistance)
                 {
@@ -130,10 +139,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         }
         return false;
     }
-    public void IdleAni()
-    {
-        anim.CrossFade(IDLE);
-    }
+
 
 }
 
