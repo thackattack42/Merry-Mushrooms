@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private bool isShooting;
     private bool isReloading;
     private bool isSprinting;
-    private bool isCrouching;
+    public bool isCrouching;
     private int ammoAmount;
     private int origAmmoClip;
     private float origHeight;

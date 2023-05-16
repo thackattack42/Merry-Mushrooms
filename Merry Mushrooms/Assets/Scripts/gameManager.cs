@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     [Header("-----Enemy Stuff-----")]
     public GameObject enemy;
     public Enemy_Scpt enemyScript;
+    public float enemyViewDist;
 
     [Header("-----UI Stuff-----")]
     public GameObject activeMenu;
@@ -40,6 +41,7 @@ public class gameManager : MonoBehaviour
     int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
+    float enemyViewDistOrig;
     int ammoClipOrig;
 
     // Awake is called before Start
@@ -52,11 +54,12 @@ public class gameManager : MonoBehaviour
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         enemyScript = enemy.GetComponent<Enemy_Scpt>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+        enemyViewDistOrig = enemy.GetComponent<SphereCollider>().radius;
+
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
         timeScaleOrig = Time.timeScale;
         ammoClipOrig = ammoClip;
-
     }
 
     // Update is called once per frame
@@ -69,6 +72,15 @@ public class gameManager : MonoBehaviour
             activeMenu.SetActive(isPaused);
 
             PauseState();
+        }
+
+        if (playerScript.isCrouching)
+        {
+            ReduceVision();
+        }
+        else
+        {
+            enemy.GetComponent<SphereCollider>().radius = enemyViewDistOrig;
         }
     }
 
@@ -132,5 +144,10 @@ public class gameManager : MonoBehaviour
         ammoClip = ammoClipOrig;
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
+    }
+
+    void ReduceVision()
+    {
+        enemy.GetComponent<SphereCollider>().radius = enemyViewDistOrig / 2;
     }
 }
