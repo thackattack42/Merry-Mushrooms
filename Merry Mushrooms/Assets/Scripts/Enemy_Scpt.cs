@@ -50,8 +50,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (agent.isActiveAndEnabled)
-        {
+       // if (agent.isActiveAndEnabled)
+      //  {
 
             speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
             animr.SetFloat("Speed", speed);
@@ -62,7 +62,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
 
             }
-        }
+       // }
     }
 
     public void takeDamage(int dmg) //this make it that enemy takes damage
