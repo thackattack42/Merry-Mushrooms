@@ -30,6 +30,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool playerInRange;
     float angleToPlayer;
+    public const string IDLE = "Idle";
+    Animation anim;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         //gets original color and sets it here
         gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
+        anim = GetComponent<Animation>();
        // EnemyHP = maxEnemyHP; //changed
        // gameManager.instance.enemyHPSlider.fillAmount = 1f; //changed
 
@@ -127,6 +130,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         }
         return false;
     }
-   
+    public void IdleAni()
+    {
+        anim.CrossFade(IDLE);
+    }
+
 }
 
