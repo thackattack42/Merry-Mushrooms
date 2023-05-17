@@ -79,8 +79,9 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         }
         else
         {
-            StartCoroutine(FlashHitColor());
+            animr.SetTrigger("Damaged");
             agent.SetDestination(gameManager.instance.player.transform.position);
+            StartCoroutine(FlashHitColor());
 
         }
     }
