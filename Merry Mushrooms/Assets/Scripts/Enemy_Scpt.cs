@@ -47,7 +47,6 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         stoppingDistOrig = agent.stoppingDistance;
         gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
-
     }
 
     // Update is called once per frame
@@ -179,7 +178,17 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         }
     }
 
-    public void ReduceVision()
+    void OnEnable()
+    {
+        EventManager.Crouch += ReduceVision;
+    }
+
+    void OnDisable()
+    {
+        EventManager.Crouch -= ReduceVision;
+    }
+
+    void ReduceVision()
     {
         GetComponent<SphereCollider>().radius /= 2;
     }
