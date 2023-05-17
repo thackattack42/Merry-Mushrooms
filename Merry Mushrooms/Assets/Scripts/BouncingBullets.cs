@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BouncingBullets : Bullet
-{
+{ 
     public enum BulletType // your custom enumeration
     {
         Bouncing,
-        ExplodingProjectile,
-        Item3
+        ExplodingEarthProjectile,
+        FlameThrower,
+        PoisonBullet,
+        WaterBullet,
+        
     };
     [SerializeField]
     private BulletType bulletType = BulletType.Bouncing;
 
+    [Header("-----Bullet Stats-----")]
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] int timer;
@@ -23,7 +27,7 @@ public class BouncingBullets : Bullet
         
     [SerializeField] GameObject explosion;
 
-    int bounceCount;
+    public int bounceCount;
 
     protected override void Start()
     {
@@ -56,9 +60,12 @@ public class BouncingBullets : Bullet
                 }
             }
             break;
-            case BulletType.ExplodingProjectile:
+            case BulletType.ExplodingEarthProjectile:
             {
+                    if ()
+                    {
 
+                    }
             }
             break;
         }
