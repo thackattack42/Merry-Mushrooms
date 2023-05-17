@@ -62,10 +62,10 @@ public class BouncingBullets : Bullet
             break;
             case BulletType.ExplodingEarthProjectile:
             {
-                    if ()
-                    {
+                  //  if ()
+                   // {
 
-                    }
+                   // }
             }
             break;
         }
