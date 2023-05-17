@@ -17,11 +17,6 @@ public class gameManager : MonoBehaviour
     public PlayerHUD playerHUD;
     [SerializeField] public GameObject playerSpawnPos;
 
-    [Header("-----Enemy Stuff-----")]
-    public GameObject enemy;
-    public Enemy_Scpt enemyScript;
-    public float enemyViewDist;
-
     [Header("-----UI Stuff-----")]
     public GameObject activeMenu;
     public GameObject pauseMenu;
@@ -51,10 +46,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerHUD = player.GetComponent<PlayerHUD>();
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
-        enemyScript = enemy.GetComponent<Enemy_Scpt>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-        enemyViewDistOrig = enemy.GetComponent<SphereCollider>().radius;
 
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
@@ -73,15 +65,6 @@ public class gameManager : MonoBehaviour
 
             PauseState();
         }
-
-        //if (playerScript.isCrouching)
-        //{
-        //    ReduceVision();
-        //}
-        //else
-        //{
-        //    enemy.GetComponent<SphereCollider>().radius = enemyViewDistOrig;
-        //}
     }
 
     public void PauseState()
@@ -145,9 +128,4 @@ public class gameManager : MonoBehaviour
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
     }
-
-    //void ReduceVision()
-    //{
-    //    enemy.GetComponent<SphereCollider>().radius = enemyViewDistOrig / 2;
-    //}
 }
