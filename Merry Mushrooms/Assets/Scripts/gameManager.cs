@@ -74,14 +74,14 @@ public class gameManager : MonoBehaviour
             PauseState();
         }
 
-        if (playerScript.isCrouching)
-        {
-            ReduceVision();
-        }
-        else
-        {
-            enemy.GetComponent<SphereCollider>().radius = enemyViewDistOrig;
-        }
+        //if (playerScript.isCrouching)
+        //{
+        //    ReduceVision();
+        //}
+        //else
+        //{
+        //    enemy.GetComponent<SphereCollider>().radius = enemyViewDistOrig;
+        //}
     }
 
     public void PauseState()
@@ -146,8 +146,8 @@ public class gameManager : MonoBehaviour
         ammoTotal.text = ammoReserves.ToString();
     }
 
-    void ReduceVision()
-    {
-        enemy.GetComponent<SphereCollider>().radius = enemyViewDistOrig / 2;
-    }
+    //void ReduceVision()
+    //{
+    //    enemy.GetComponent<SphereCollider>().radius = enemyViewDistOrig / 2;
+    //}
 }

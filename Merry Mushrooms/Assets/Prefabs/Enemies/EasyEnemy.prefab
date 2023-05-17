@@ -668,6 +668,7 @@ GameObject:
   - component: {fileID: 1957688232168680576}
   - component: {fileID: 4676534035439189822}
   - component: {fileID: 5282756320552582948}
+  - component: {fileID: 758312729367613971}
   m_Layer: 6
   m_Name: EasyEnemy
   m_TagString: Enemy
@@ -785,3 +786,24 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 40
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!95 &758312729367613971
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8632582674587166257}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

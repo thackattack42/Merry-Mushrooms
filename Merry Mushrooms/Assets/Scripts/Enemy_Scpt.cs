@@ -179,5 +179,9 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         }
     }
 
+    public void ReduceVision()
+    {
+        GetComponent<SphereCollider>().radius /= 2;
+    }
 }
 
