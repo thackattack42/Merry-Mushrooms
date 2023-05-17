@@ -94,9 +94,14 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isShooting = true;
-        GameObject bulletClone = Instantiate(bullet, shootPos.position, transform.rotation);
+        animr.SetTrigger("Shoot");
+        //GameObject bulletClone = Instantiate(bullet, shootPos.position, transform.rotation);
         yield return new WaitForSeconds(ShootRate);
         isShooting = false;
+    }
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
     }
     public void FacePlayer()
     {

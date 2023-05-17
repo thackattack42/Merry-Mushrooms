@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 210131566c38d64499789fe20d93cd58
+guid: b1deb858159bc2c46acfb9f407b134b3
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       1: 100000
-    second: //RootNode
+    second: Evil Mushroom
   - first:
       1: 100002
-    second: Evil Mushroom
+    second: //RootNode
   - first:
       1: 100004
     second: Rig
@@ -125,10 +125,10 @@ ModelImporter:
     second: RigSpineUp
   - first:
       4: 400000
-    second: //RootNode
+    second: Evil Mushroom
   - first:
       4: 400002
-    second: Evil Mushroom
+    second: //RootNode
   - first:
       4: 400004
     second: Rig
@@ -244,14 +244,11 @@ ModelImporter:
       4: 400078
     second: RigSpineUp
   - first:
-      23: 2300000
-    second: //RootNode
-  - first:
-      33: 3300000
-    second: //RootNode
-  - first:
       43: 4300000
     second: Evil Mushroom
+  - first:
+      74: 7400000
+    second: ShootAttack
   - first:
       95: 9500000
     second: //RootNode
@@ -286,7 +283,43 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: ShootAttack
+      takeName: Take 001
+      internalID: 7400000
+      firstFrame: 0
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.7675675
+        functionName: createBullet
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -330,29 +363,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 78283c15d6df236469bffcc8407f3c09
-  - cadf79921b4cde04989be9907f38a9d2
-  - faed0fb32da81bd4ba84d011fb141765
-  - 1e12c7298eaf9ed4fb6409f628d80e95
-  - 7ee83f74c44c5f04194925adc30913ee
-  - 32d35600fe90349418c1ca0357451202
-  - b284455c57240324fa57bf50fa728e18
-  - 05941e7db86c40f42b6ce491d49010a4
-  - bf963f5defd1bf44595f5ba57ca7a4e2
-  - 0661d81b57503854181cdc0839a54492
-  - 0276770cf35332a42906962f89ce3e50
-  - b1deb858159bc2c46acfb9f407b134b3
-  - d8fe5cd70ed63994b88ff5ad3d70bf81
-  - 9c5f6775d8dea9f408eb2227c190d9c6
-  - 3feb1167ecb787b49a81f830e286dade
-  - 14a0e50a57c9c664b932b98d0cb2f574
-  - 4e7851531ac1f994e86e2cb340d3b6fa
-  - 6f108c46ccb6a4343b633c6f66c0df13
-  - 42dd898c359a2de409f8a4d7ea6d8e92
-  - 6ba0351f49e785046924db78211ee441
-  - 6e4f4ded6b011714e8566678b87cf4a7
-  - af1c01844d8b3db4e8ccc072b1d43c7a
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
