@@ -12,6 +12,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     [SerializeField] int viewCone;
     [SerializeField] float animrTransSpeed;
+    [SerializeField] int roamDist;
+    [SerializeField] int roamPauseTime;
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
@@ -25,7 +27,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     [Range(0.1f, 10)][SerializeField] float ShootRate;
     [Range(30, 180)][SerializeField] float ShootAngle;
     [SerializeField] GameObject bullet;
-    //
+    
     //Other Assets
     Color origColor;
     private bool isShooting;
@@ -33,17 +35,18 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     bool playerInRange;
     float angleToPlayer;
     float speed;
-
+    bool DestChosen;
+    Vector3 startingPos;
+    float stoppingDistOrig;
 
     // Start is called before the first frame update
     void Start()
     {
         //gets original color and sets it here
+        startingPos = transform.position;
+        stoppingDistOrig = agent.stoppingDistance;
         gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
-
-        // EnemyHP = maxEnemyHP; //changed
-        // gameManager.instance.enemyHPSlider.fillAmount = 1f; //changed
 
     }
 
@@ -56,11 +59,13 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
             speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
             animr.SetFloat("Speed", speed);
 
-            if (playerInRange && canSeePlayer())
+            if (playerInRange && !canSeePlayer())
             {
-
-
-
+                StartCoroutine(Roam());
+            }
+            else if (agent.destination != gameManager.instance.player.transform.position)
+            {
+                StartCoroutine(Roam());
             }
         }
     }
@@ -120,6 +125,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     {
         if (other.CompareTag("Player"))
         {
+            agent.stoppingDistance = 0;
             playerInRange = false;
         }
     }
@@ -136,6 +142,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
+                agent.stoppingDistance = stoppingDistOrig;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
                 if (agent.remainingDistance < agent.stoppingDistance)
@@ -150,9 +157,27 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
                 return true;
             }
         }
+        agent.stoppingDistance = 0;
         return false;
     }
+    IEnumerator Roam()
+    {
+        if (!DestChosen && agent.remainingDistance < 0.05f)
+        {
+            DestChosen = true;
+            agent.stoppingDistance = 0;
+            yield return new WaitForSeconds(roamPauseTime);
+            DestChosen = false;
 
+            Vector3 ranPos = Random.insideUnitSphere * roamDist;
+            ranPos += startingPos;
+
+            NavMeshHit hitdest;
+            NavMesh.SamplePosition(ranPos, out hitdest, roamDist, 1);
+
+            agent.SetDestination(hitdest.position);
+        }
+    }
 
 }
 

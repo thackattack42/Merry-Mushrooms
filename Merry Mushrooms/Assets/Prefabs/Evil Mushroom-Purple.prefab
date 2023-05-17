@@ -1268,7 +1268,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 4e964a5808227c6489d7774d5a739867, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1288,13 +1288,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf1f235630940c4785d47dab5d197fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHP: 20
+  EnemyHP: 10
   playerFaceSpeed: 15
   viewCone: 90
+  animrTransSpeed: 3
+  roamDist: 25
+  roamPauseTime: 2
   model: {fileID: 2402034563431921315}
   agent: {fileID: 2402034563426614534}
   shootPos: {fileID: 153696859504749408}
   headPos: {fileID: 2627912241948606249}
+  animr: {fileID: 2402034563435989091}
   shootDist: 5
   ShootRate: 0.5
   ShootAngle: 30
@@ -1346,7 +1350,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2402034563426647023
 GameObject:
