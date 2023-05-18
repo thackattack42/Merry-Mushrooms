@@ -748,6 +748,7 @@ MonoBehaviour:
   activeMenu: {fileID: 0}
   pauseMenu: {fileID: 7877924245675547465}
   loseMenu: {fileID: 7877924246142613382}
+  optionsMenu: {fileID: 9038794437893534590}
   winMenu: {fileID: 7877924245974347432}
   reticle: {fileID: 7877924244579182768}
   ammoCount: {fileID: 7877924245883459310}
@@ -3620,7 +3621,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7877924245492499045}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: apply
         m_Mode: 1
@@ -4502,7 +4503,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7877924245492499045}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: back
         m_Mode: 1

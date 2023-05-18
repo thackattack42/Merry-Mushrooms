@@ -32,14 +32,17 @@ public class buttonFunctions : MonoBehaviour
     }
     public void options()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneAt(0))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
             MainMenuManager.instance.optionScreen.SetActive(true);
             MainMenuManager.instance.mainMenuScreen.SetActive(false);
         }
         else
         {
-            //gameManager.instance.optionScreen.SetActive(true);
+            gameManager.instance.activeMenu.SetActive(false);
+            gameManager.instance.activeMenu = gameManager.instance.optionsMenu;
+            gameManager.instance.activeMenu.SetActive(true);
+
         }
     }
     public void mainMenu()
@@ -50,11 +53,18 @@ public class buttonFunctions : MonoBehaviour
     //Option buttons
     public void back()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneAt(0))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
             MainMenuManager.instance.optionScreen.SetActive(false);
             MainMenuManager.instance.mainMenuScreen.SetActive(true);
         }
+        else
+        {
+            gameManager.instance.activeMenu.SetActive(false);
+            gameManager.instance.activeMenu = gameManager.instance.pauseMenu;
+            gameManager.instance.activeMenu.SetActive(true);
+        }
+
     }
     public void apply()
     {
