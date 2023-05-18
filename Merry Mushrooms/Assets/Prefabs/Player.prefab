@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148988589232}
-  m_Mesh: {fileID: 1781805468462327908, guid: acd76795deeadd846a39bed2115bcc9b, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &1711813856071030117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f8ea7943930fc6e44ae39866fa349d80, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,9 +246,12 @@ MonoBehaviour:
   HP: 0
   dashSpeed: 4
   dashCoolDown: 7
+  staffList: []
   shootDistance: 200
   shootRate: 0.5
   shootDamage: 1
+  staffModel: {fileID: 3469287836642206127}
+  staffMat: {fileID: 1711813856071030117}
   isCrouching: 0
 --- !u!114 &8863840815364814771
 MonoBehaviour:
