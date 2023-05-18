@@ -19,10 +19,21 @@ public class buttonFunctions : MonoBehaviour
     {
         Application.Quit(); 
     }
-
     public void respawn()
     {
         gameManager.instance.UnpausedState();
         gameManager.instance.playerScript.Spawn();
+    }
+    public void startGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void options()
+    {
+
+    }
+    public void mainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
