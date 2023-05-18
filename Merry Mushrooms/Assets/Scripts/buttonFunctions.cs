@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class buttonFunctions : MonoBehaviour
 {
+    
     public void resume()
     {
         gameManager.instance.UnpausedState();
@@ -30,10 +32,32 @@ public class buttonFunctions : MonoBehaviour
     }
     public void options()
     {
-
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneAt(0))
+        {
+            MainMenuManager.instance.optionScreen.SetActive(true);
+            MainMenuManager.instance.mainMenuScreen.SetActive(false);
+        }
+        else
+        {
+            //gameManager.instance.optionScreen.SetActive(true);
+        }
     }
     public void mainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    //Option buttons
+    public void back()
+    {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneAt(0))
+        {
+            MainMenuManager.instance.optionScreen.SetActive(false);
+            MainMenuManager.instance.mainMenuScreen.SetActive(true);
+        }
+    }
+    public void apply()
+    {
+
     }
 }
