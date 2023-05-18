@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour, IDamage
     private int reloadOnce = 0;
     int selectedStaff;
 
+    public delegate void PlayerCrouch();
+    public static event PlayerCrouch Crouch;
+    public static event PlayerCrouch Uncrouch;
+
     private void Start()
     {
         // Sets original variables to players starting stats
@@ -63,7 +67,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (gameManager.instance.activeMenu == null)
         {
-
+            OnPlayerCrouch();
+            OnPlayerUncrouch();
             Movement();
             SwitchStaff();
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
@@ -89,7 +94,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         Sprint();
-        Crouch();
+        CrouchPlayer();
     }
 
     void Movement()
@@ -255,7 +260,7 @@ public class PlayerController : MonoBehaviour, IDamage
         staffModel.mesh = staffList[selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
     }
-    public void Crouch()
+    public void CrouchPlayer()
     {
         if (Input.GetButtonDown("Crouch") && !isSprinting && isDashing == 0)
         {
@@ -268,6 +273,24 @@ public class PlayerController : MonoBehaviour, IDamage
             playerSpeed = origSpeed;
             isCrouching = false;
             controller.height = origHeight;
+        }
+    }
+
+    void OnPlayerCrouch()
+    {
+        if (Input.GetButtonDown("Crouch"))
+        {
+            if (Crouch != null)
+                Crouch();
+        }
+    }
+
+    void OnPlayerUncrouch()
+    {
+        if (Input.GetButtonUp("Crouch"))
+        {
+            if (Uncrouch != null)
+                Uncrouch();
         }
     }
 }

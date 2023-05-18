@@ -38,6 +38,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     bool DestChosen;
     Vector3 startingPos;
     float stoppingDistOrig;
+    float viewDistOrig;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
         stoppingDistOrig = agent.stoppingDistance;
         gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
+        viewDistOrig = GetComponent<SphereCollider>().radius;
     }
 
     // Update is called once per frame
@@ -180,17 +182,24 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
 
     void OnEnable()
     {
-        EventManager.Crouch += ReduceVision;
+        PlayerController.Crouch += ReduceVision;
+        PlayerController.Uncrouch += IncreaseVision;
     }
 
     void OnDisable()
     {
-        EventManager.Crouch -= ReduceVision;
+        PlayerController.Crouch -= ReduceVision;
+        PlayerController.Uncrouch -= IncreaseVision;
     }
 
     void ReduceVision()
     {
         GetComponent<SphereCollider>().radius /= 2;
+    }
+
+    void IncreaseVision()
+    {
+        GetComponent<SphereCollider>().radius = viewDistOrig;
     }
 }
 
