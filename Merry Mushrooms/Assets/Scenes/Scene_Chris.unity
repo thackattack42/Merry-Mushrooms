@@ -323,6 +323,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c07f24e35f07ce74ba43afa35d48adf7, type: 3}
+--- !u!1001 &256821041
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2402034563426614535, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 7599154453083309777, guid: 8f16f27d442a71f4886e9091fe07777a, type: 3}
+    - target: {fileID: 2402034563426647021, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_Name
+      value: Evil Mushroom-Purple (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563426647021, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 275.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 185
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
 --- !u!114 &319418231 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1163122749720712585, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
@@ -842,6 +907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Evil Mushroom-Purple
       objectReference: {fileID: 0}
+    - target: {fileID: 2402034563426647021, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1283,67 +1352,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4243724423293762, guid: c07f24e35f07ce74ba43afa35d48adf7, type: 3}
   m_PrefabInstance: {fileID: 351206198}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1109689183
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2402034563426614535, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 7599154453083309777, guid: cc7d107c2e0080345b043910bb09ae0b, type: 3}
-    - target: {fileID: 2402034563426647021, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_Name
-      value: Evil Mushroom-Purple (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 274.22385
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 189
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
 --- !u!4 &1111172249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4243724423293762, guid: c07f24e35f07ce74ba43afa35d48adf7, type: 3}

@@ -17,14 +17,9 @@ public class BouncingBullets : Bullet
     private BulletType bulletType = BulletType.Bouncing;
 
     [Header("-----Bullet Stats-----")]
-    [SerializeField] int damage;
-    [SerializeField] int speed;
-    [SerializeField] int timer;
     [SerializeField] int bounce;
     [SerializeField] int maxBounceCount;
 
-    [SerializeField] Rigidbody rb;
-        
     [SerializeField] GameObject explosion;
 
     public int bounceCount;
