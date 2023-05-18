@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -26,9 +27,13 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(2, 10)][SerializeField] public int dashCoolDown;
 
     [Header("----- Weapon Stats -----")]
+    public List<Staff_Stats> staffList = new List<Staff_Stats>();
     [Range(2, 300)][SerializeField] int shootDistance;
     [Range(0.1f, 3)][SerializeField] float shootRate;
     [Range(1, 20)][SerializeField] int shootDamage;
+    [SerializeField] MeshFilter staffModel;
+    //[SerializeField] MeshFilter staffTexture;
+    [SerializeField] MeshRenderer staffMat;
 
     private float dashTime = 0.3f;
     private float origSpeed;
@@ -41,6 +46,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private int origAmmoClip;
     private float origHeight;
     private int reloadOnce = 0;
+    int selectedStaff;
 
     private void Start()
     {
@@ -59,6 +65,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
 
             Movement();
+            SwitchStaff();
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
                 playerDash();
@@ -75,7 +82,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 //isShooting = false;
             }
 
-            if (Input.GetButton("Shoot") && !isShooting && !isReloading)
+            if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0)
             {
                 StartCoroutine(shoot());
             }
@@ -211,6 +218,43 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    public void staffPickup(Staff_Stats stats)
+    {
+        staffList.Add(stats);
+
+        shootDamage = stats.shootDamage;
+        shootDistance = stats.shootDistance;
+        shootRate = stats.shootRate;
+
+        staffModel.mesh = stats.model.GetComponent<MeshFilter>().sharedMesh;
+        staffMat.material = stats.model.GetComponent<MeshRenderer>().sharedMaterial;
+
+        selectedStaff = staffList.Count - 1;
+        //staffTexture.mesh = stats.model.GetComponent<Texture>();
+    }
+
+    void SwitchStaff()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < staffList.Count - 1)
+        {
+            selectedStaff++;
+            ChangeStaffStats();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
+        {
+            selectedStaff--;
+            ChangeStaffStats();   
+        }
+    }
+    void ChangeStaffStats()
+    {
+        shootDamage = staffList[selectedStaff].shootDamage;
+        shootDistance = staffList[selectedStaff].shootDistance;
+        shootRate = staffList[selectedStaff].shootRate;
+
+        staffModel.mesh = staffList[selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
+        staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
     public void Crouch()
     {
         if (Input.GetButtonDown("Crouch") && !isSprinting && isDashing == 0)
