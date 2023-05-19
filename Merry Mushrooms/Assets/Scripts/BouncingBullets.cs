@@ -57,10 +57,13 @@ public class BouncingBullets : Bullet
             break;
             case BulletType.ExplodingEarthProjectile:
             {
-                  //  if ()
-                   // {
-
-                   // }
+                    //if ()
+                    //{
+                    //    if (explosion != null)
+                    //        Instantiate(explosion, transform.position, transform.rotation);
+                    //    Destroy(gameObject);
+                    //}
+                        
             }
             break;
         }
