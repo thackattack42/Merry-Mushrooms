@@ -8,7 +8,7 @@ public class StaffPickup : MonoBehaviour
     [SerializeField] Staff_Stats staff;
     MeshFilter model;
     MeshRenderer mat;
-    //Texture texture;
+    Texture texture;
     // Start is called before the first frame update
     void Start()
     {
