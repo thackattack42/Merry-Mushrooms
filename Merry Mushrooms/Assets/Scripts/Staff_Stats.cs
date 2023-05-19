@@ -12,6 +12,6 @@ public class Staff_Stats : ScriptableObject
     [Range(0.1f, 3)] public float shootRate;
     [Range(1, 20)] public int shootDamage;
     public GameObject model;
-    //public Texture texture;
+    public GameObject hitEffect;
     
 }

@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
             }
             gameManager.instance.UpdateAmmoCount();
+            Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
