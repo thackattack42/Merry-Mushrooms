@@ -202,7 +202,9 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
 
     void ReduceVision()
     {
-        GetComponent<SphereCollider>().radius /= 2;
+        if (!canSeePlayer())
+            GetComponent<SphereCollider>().radius /= 2;
+       
     }
 
     void IncreaseVision()
