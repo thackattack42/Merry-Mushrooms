@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy_Scpt : MonoBehaviour, IDamage
+public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
 {
     [Header("------ Enemy Stats ------")]
     // [Range(5, 100)][SerializeField] public int maxEnemyHP;
@@ -201,5 +201,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage
     {
         GetComponent<SphereCollider>().radius = viewDistOrig;
     }
+    public void KnockBack(Vector3 dir)
+    {
+        agent.velocity += dir;
+    }
+        
 }
 
