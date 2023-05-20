@@ -50,6 +50,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     void Start()
     {
         //gets original color and sets it here
+        
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
         gameManager.instance.UpdateGameGoal(1);
@@ -60,6 +61,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
+        //animr.SetTrigger("Spawn");
         if (agent.isActiveAndEnabled)
         {
 
@@ -79,6 +81,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
 
     public void takeDamage(int dmg) //this make it that enemy takes damage
     {
+        if (!canSeePlayer())
+        {
+            dmg *= 2;
+        }
         EnemyHP -= dmg;
         // playerInRange = true;
         if (EnemyHP <= 0)
@@ -96,6 +102,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
             StartCoroutine(FlashHitColor());
 
         }
+        
     }
     IEnumerator FlashHitColor() //flash when the enemy is hit
     {

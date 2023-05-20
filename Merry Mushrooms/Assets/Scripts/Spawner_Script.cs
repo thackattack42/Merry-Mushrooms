@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner_Script : MonoBehaviour
 {
+    //[SerializeField] Animator animr;
     [SerializeField] GameObject[] objectToSpawn;
     [SerializeField] Transform[] spawnPos;
     [SerializeField] float spawnDelay;
@@ -23,6 +24,7 @@ public class Spawner_Script : MonoBehaviour
     {
         if(playerInRange && !isSpawning && numberSpawned < spawnCount)
         {
+            //animr.SetTrigger("Spawn");
             StartCoroutine(Spawn());
         }
     }
