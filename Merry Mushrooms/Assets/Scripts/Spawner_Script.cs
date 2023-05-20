@@ -21,7 +21,10 @@ public class Spawner_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(playerInRange && !isSpawning && numberSpawned < spawnCount)
+        {
+            StartCoroutine(Spawn());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
