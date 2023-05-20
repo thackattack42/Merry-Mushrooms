@@ -31,4 +31,12 @@ public class Spawner_Script : MonoBehaviour
             playerInRange = true;
         }
     }
+    IEnumerator Spawn()
+    {
+        isSpawning = true;
+        Instantiate(objectToSpawn[Random.Range(0, objectToSpawn.Length)], spawnPos[Random.Range(0, spawnPos.Length)].position, transform.rotation);
+        numberSpawned++;
+        yield return new WaitForSeconds(spawnDelay);
+        isSpawning = false;
+    }
 }
