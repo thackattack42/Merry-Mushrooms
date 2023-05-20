@@ -21,13 +21,19 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
     [SerializeField] Animator animr;
+    [SerializeField] AudioSource aud;
 
     [Header("------ Enemy Weapon Stats ------")]
     [Range(5, 10)][SerializeField] int shootDist;
     [Range(0.1f, 10)][SerializeField] float ShootRate;
     [Range(30, 180)][SerializeField] float ShootAngle;
     [SerializeField] GameObject bullet;
-    
+
+    [Header("------ Audio ------")]
+    [SerializeField] AudioClip[] audShoot;
+
+    [Header("------ Audio Vol ------")]
+    [SerializeField] float audShootVol;
     //Other Assets
     Color origColor;
     private bool isShooting;
@@ -107,6 +113,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     }
     public void createBullet()
     {
+        aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
     public void FacePlayer()
@@ -153,6 +160,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
 
                 if (!isShooting && angleToPlayer <= ShootAngle)
                 {
+                    //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
                     StartCoroutine(shoot());
                 }
                 return true;
