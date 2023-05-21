@@ -30,6 +30,7 @@ public class gameManager : MonoBehaviour
     public Image HPSlider;
     public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
+    public GameObject lowHPFlash;
 
 
     [SerializeField] public int ammoClip;

@@ -10,6 +10,7 @@ public class PlayerHUD : MonoBehaviour
     //Hotbar stuff
     float dashCooldownTimer;
     bool dashIsOnCooldown;
+    bool lowHP;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,6 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.HPSlider.fillAmount = 1f;
         gameManager.instance.dashCooldownCounter.text = "";
         gameManager.instance.dashCooldownSlider.fillAmount = 0f;
-        dashIsOnCooldown = false; //default value is false, but just in case :)
     }
 
     // Update is called once per frame
@@ -47,7 +47,26 @@ public class PlayerHUD : MonoBehaviour
             currHP = 0;
         gameManager.instance.healthPoints.text = currHP.ToString();
         gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
+        if (gameManager.instance.HPSlider.fillAmount <= 0.2f && !lowHP)
+        {
+            lowHP = true;
+            StartCoroutine(HPFlash());
+        }
+        else if (gameManager.instance.HPSlider.fillAmount > 0.2f && lowHP)
+        {
+            lowHP = false;
+        }
+    }
+    IEnumerator HPFlash()
+    {
+        bool toggle = false;
+        while (lowHP)
+        {
+            toggle = !toggle;
+            gameManager.instance.lowHPFlash.SetActive(toggle);
+            yield return new WaitForSeconds(0.2f);
 
+        }
     }
     public void dashCooldown(float dashCD)
     {
