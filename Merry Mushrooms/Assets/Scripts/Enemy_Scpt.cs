@@ -120,8 +120,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     }
     public void createBullet()
     {
-        aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
         Instantiate(bullet, shootPos.position, transform.rotation);
+        //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
     }
     public void FacePlayer()
     {
