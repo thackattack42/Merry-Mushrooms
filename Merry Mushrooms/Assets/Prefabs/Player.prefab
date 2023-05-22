@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1400410747}
   - component: {fileID: 1400410750}
   - component: {fileID: 1400410749}
+  - component: {fileID: 1998479975}
   m_Layer: 9
   m_Name: Minimap BG
   m_TagString: Untagged
@@ -25,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400410746}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 30}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1963569564}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 8327772038628251595}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &1400410750
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83,6 +84,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1818360609 &1998479975
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400410746}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: 90, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 0
+  m_Sources: []
 --- !u!1 &1649437610
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,13 +126,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649437610}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 20}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1963569564}
-  m_RootOrder: 1
+  m_Father: {fileID: 8327772038628251595}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &1649437613
 MeshFilter:
@@ -176,6 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1963569564}
   - component: {fileID: 1963569566}
+  - component: {fileID: 2107280112}
   m_Layer: 9
   m_Name: Minimap Camera
   m_TagString: Untagged
@@ -194,9 +213,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1400410747}
-  - {fileID: 1649437611}
+  m_Children: []
   m_Father: {fileID: 8327772038628251595}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -243,6 +260,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1818360609 &2107280112
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963569563}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: 90, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 0
+  m_Sources: []
 --- !u!1 &919132148988589232
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +499,8 @@ Transform:
   m_Children:
   - {fileID: 8327772037738040326}
   - {fileID: 1963569564}
+  - {fileID: 1400410747}
+  - {fileID: 1649437611}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -509,6 +545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9299ab46e0e57040a036a3498ca2569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimapBG: {fileID: 1998479975}
+  minimapCam: {fileID: 2107280112}
 --- !u!143 &8327772038628251597
 CharacterController:
   m_ObjectHideFlags: 0

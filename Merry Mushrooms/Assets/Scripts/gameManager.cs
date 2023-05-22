@@ -32,7 +32,7 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
     public GameObject lowHPFlash;
-
+    public Transform minimapRotationLock;
     
     [SerializeField] public int ammoClip;
     [SerializeField] public int ammoReserves;
