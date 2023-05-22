@@ -346,6 +346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Evil Mushroom-Purple
       objectReference: {fileID: 0}
+    - target: {fileID: 2402034563426647021, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2402034563427002317, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -559,6 +563,18 @@ PrefabInstance:
     - target: {fileID: 1163122748868261817, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877924244831679204, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
+      propertyPath: ammoClip
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877924244831679204, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
+      propertyPath: ammoClipOrig
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877924244831679204, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
+      propertyPath: ammoReserves
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7877924246102652114, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
       propertyPath: m_RootOrder
