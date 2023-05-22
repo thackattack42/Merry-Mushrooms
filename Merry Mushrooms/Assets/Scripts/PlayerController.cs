@@ -180,13 +180,13 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
 
+                Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
                 if (damageable != null)
                 {
                     damageable.takeDamage(shootDamage);
                 }
             }
             gameManager.instance.UpdateAmmoCount();
-            Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
             //Debug.Log(gameManager.instance.ammoReserves);
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
