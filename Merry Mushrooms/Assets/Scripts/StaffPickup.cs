@@ -14,8 +14,10 @@ public class StaffPickup : MonoBehaviour
     {
         model = staff.model.GetComponent<MeshFilter>();
         mat = staff.model.GetComponent<MeshRenderer>();
-       // texture = staff.model.GetComponent<Texture>();
-
+        // texture = staff.model.GetComponent<Texture>();
+        staff.ammoClip = staff.startingAmmo;
+        staff.origAmmo = staff.ammoClip;
+        //gameManager.instance.ammoClipOrig = staff.origAmmo;
     }
 
     private void OnTriggerEnter(Collider other)
