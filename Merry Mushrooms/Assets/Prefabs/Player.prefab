@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1400410746}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -10, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 1}
+  m_LocalScale: {x: 38, y: 38, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8327772038628251595}
@@ -128,7 +128,7 @@ Transform:
   m_GameObject: {fileID: 1649437610}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8327772038628251595}
@@ -267,7 +267,7 @@ RotationConstraint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963569563}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Weight: 1
   m_RotationAtRest: {x: 90, y: 0, z: 0}
   m_RotationOffset: {x: 0, y: 0, z: 0}
@@ -545,8 +545,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9299ab46e0e57040a036a3498ca2569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimapBG: {fileID: 1998479975}
-  minimapCam: {fileID: 2107280112}
+  minimapBGRot: {fileID: 1998479975}
+  minimapCamRot: {fileID: 2107280112}
+  minimapCam: {fileID: 1963569563}
 --- !u!143 &8327772038628251597
 CharacterController:
   m_ObjectHideFlags: 0

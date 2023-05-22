@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class buttonFunctions : MonoBehaviour
 {
-    
     public void resume()
     {
         gameManager.instance.UnpausedState();
@@ -66,8 +65,16 @@ public class buttonFunctions : MonoBehaviour
         }
 
     }
-    public void apply()
+    public void minimapRotTottle(bool toggle)
     {
+        if (toggle)
+        {
+            gameManager.instance.playerHUD.minimapCamRot.enabled = false; //disables the rotation lock
+            gameManager.instance.playerHUD.minimapCam.transform.rotation = gameManager.instance.player.transform.rotation;
+            gameManager.instance.playerHUD.minimapCam.transform.Rotate(90, 0, 0);
+        }
+        else
+            gameManager.instance.playerHUD.minimapCamRot.enabled = true; //enables the rotation lock
 
     }
 }

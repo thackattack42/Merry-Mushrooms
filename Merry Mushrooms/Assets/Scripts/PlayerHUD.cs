@@ -14,8 +14,9 @@ public class PlayerHUD : MonoBehaviour
     bool lowHP;
 
     //minimap stuff
-    public RotationConstraint minimapBG;
-    public RotationConstraint minimapCam;
+    public RotationConstraint minimapBGRot;
+    public RotationConstraint minimapCamRot;
+    public GameObject minimapCam;
     ConstraintSource constraint;
 
     // Start is called before the first frame update
@@ -30,8 +31,8 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.dashCooldownSlider.fillAmount = 0f;
         constraint.sourceTransform = gameManager.instance.minimapRotationLock;
         constraint.weight = 1;
-        minimapBG.AddSource(constraint);
-        minimapCam.AddSource(constraint);
+        minimapBGRot.AddSource(constraint);
+        minimapCamRot.AddSource(constraint);
     }
 
     // Update is called once per frame
@@ -82,13 +83,5 @@ public class PlayerHUD : MonoBehaviour
     {
         dashCooldownTimer = dashCD;
         dashIsOnCooldown = true;
-    }
-
-    public void rotationLock(bool isLocked)
-    {
-        if (isLocked)
-            minimapCam.enabled = true;
-        else
-            minimapCam.enabled = false;
     }
 }
