@@ -51,13 +51,13 @@ MonoBehaviour:
   speed: 5
   timer: 6
   rb: {fileID: 7931252257312753732}
-  damage: 1
-  speed: 5
-  timer: 6
+  bulletType: 1
   bounce: 8
   maxBounceCount: 3
-  rb: {fileID: 7931252257312753732}
+  exlosion: 0
   explosion: {fileID: 0}
+  bounceCount: 0
+  areaExplosion: 0
 --- !u!135 &-7820473689724343783
 SphereCollider:
   m_ObjectHideFlags: 0
