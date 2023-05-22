@@ -19,13 +19,10 @@ public class BouncingBullets : Bullet
     [Header("-----Bullet Stats-----")]
     [SerializeField] int bounce;
     [SerializeField] int maxBounceCount;
-    [SerializeField] int exlosion;
-    
-
     [SerializeField] GameObject explosion;
 
     public int bounceCount;
-    public bool areaExplosion;
+    private bool createExplosion;
 
     protected override void Start()
     {
@@ -39,7 +36,9 @@ public class BouncingBullets : Bullet
                 break;
             case BulletType.ExplodingEarthProjectile:
                 {
-                    explosion.SetActive(true);
+                    Destroy(gameObject, timer);
+
+                    rb.useGravity = false;
                     rb.velocity = transform.forward * speed;
                 }
                 break;
@@ -63,38 +62,41 @@ public class BouncingBullets : Bullet
                      Destroy(gameObject);
                 }
             }
-                break;
+            break;
             case BulletType.ExplodingEarthProjectile:
+            {
+                if (createExplosion)
                 {
-                    if (areaExplosion)
-                    {
-                        damage = damage * 2;
-                        if (explosion != null)
-                            Instantiate(explosion, transform.position, transform.rotation);
-                        Destroy(gameObject);
-                    }
-
+                    if (explosion != null)
+                        Instantiate(explosion, transform.position, transform.rotation);
+                    Destroy(gameObject);
                 }
-                break;
+            }
+            break;
             case BulletType.FlameThrower:
             {
+                if (!explosion)
+                {
 
+                }
             }
-                break;
-
+            break;
         }
 
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
+        if (collisionTriggered)
+            return;
+
         IDamage damagable = other.GetComponent<IDamage>();
 
         switch (bulletType)
         {
             case BulletType.Bouncing:
             {
-                if (bulletType == BulletType.Bouncing && other.name == "Terrain")
+                if (other.name == "Terrain")
                 {
                     rb.AddForce(transform.up * bounce, ForceMode.Impulse);
                     bounceCount += 1;
@@ -105,10 +107,18 @@ public class BouncingBullets : Bullet
                 }
             }
             break;
+            case BulletType.ExplodingEarthProjectile:
+            {
+                if (other.tag == "Player")
+                    createExplosion = true;
+            }
+            break;
             default:
                 base.OnTriggerEnter(other);
                 break;
         }
+
+        collisionTriggered = true;
     }
 
 }

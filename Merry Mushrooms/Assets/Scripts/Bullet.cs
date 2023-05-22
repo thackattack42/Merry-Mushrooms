@@ -10,12 +10,12 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] protected Rigidbody rb;
 
-    bool damageTriggered;
+    protected bool collisionTriggered;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        damageTriggered = false;
+        collisionTriggered = false;
 
         Destroy(gameObject, timer);
         rb.velocity = transform.forward * speed;
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         // Collider triggering multiple times before we are destroyed...
-        if (damageTriggered)
+        if (collisionTriggered)
             return;
 
         IDamage damagable = other.GetComponent<IDamage>();
@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
         if (damagable != null)
         {
             damagable.takeDamage(damage);
-            damageTriggered = true;
+            collisionTriggered = true;
         }
 
         Destroy(gameObject);

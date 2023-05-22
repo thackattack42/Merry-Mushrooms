@@ -49,16 +49,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   speed: 5
-  timer: 6
+  timer: 3
   rb: {fileID: 7931252257312753732}
   bulletType: 1
-  damage: 1
-  speed: 5
-  timer: 6
   bounce: 8
   maxBounceCount: 3
-  rb: {fileID: 7931252257312753732}
-  explosion: {fileID: 0}
+  explosion: {fileID: 1753067432742553012, guid: 97debc9b77a6cef4396d94e1ea20837b, type: 3}
   bounceCount: 0
 --- !u!135 &-7820473689724343783
 SphereCollider:
