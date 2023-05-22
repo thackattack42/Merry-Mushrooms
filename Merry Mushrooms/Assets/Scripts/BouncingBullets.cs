@@ -19,10 +19,13 @@ public class BouncingBullets : Bullet
     [Header("-----Bullet Stats-----")]
     [SerializeField] int bounce;
     [SerializeField] int maxBounceCount;
+    [SerializeField] int exlosion;
+    
 
     [SerializeField] GameObject explosion;
 
     public int bounceCount;
+    public bool areaExplosion;
 
     protected override void Start()
     {
@@ -31,6 +34,12 @@ public class BouncingBullets : Bullet
             case BulletType.Bouncing:
                 {
                     bounceCount = 0;
+                    rb.velocity = transform.forward * speed;
+                }
+                break;
+            case BulletType.ExplodingEarthProjectile:
+                {
+                    explosion.SetActive(true);
                     rb.velocity = transform.forward * speed;
                 }
                 break;
@@ -54,18 +63,25 @@ public class BouncingBullets : Bullet
                      Destroy(gameObject);
                 }
             }
-            break;
+                break;
             case BulletType.ExplodingEarthProjectile:
+                {
+                    if (areaExplosion)
+                    {
+                        damage = damage * 2;
+                        if (explosion != null)
+                            Instantiate(explosion, transform.position, transform.rotation);
+                        Destroy(gameObject);
+                    }
+
+                }
+                break;
+            case BulletType.FlameThrower:
             {
-                    //if ()
-                    //{
-                    //    if (explosion != null)
-                    //        Instantiate(explosion, transform.position, transform.rotation);
-                    //    Destroy(gameObject);
-                    //}
-                        
+
             }
-            break;
+                break;
+
         }
 
     }
