@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
     public PlayerController playerScript;
     public PlayerHUD playerHUD;
     [SerializeField] public GameObject playerSpawnPos;
+   // public StaffPickup staffPick;
 
     [Header("-----UI Stuff-----")]
     public GameObject activeMenu;
@@ -32,18 +33,19 @@ public class gameManager : MonoBehaviour
     public Image dashCooldownSlider;
     public GameObject lowHPFlash;
 
-
+    
     [SerializeField] public int ammoClip;
     [SerializeField] public int ammoReserves;
     int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
     float enemyViewDistOrig;
-    int ammoClipOrig;
+    public int ammoClipOrig;
 
     // Awake is called before Start
     void Awake()
     {
+        
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
@@ -54,11 +56,14 @@ public class gameManager : MonoBehaviour
         ammoTotal.text = ammoReserves.ToString();
         timeScaleOrig = Time.timeScale;
         ammoClipOrig = ammoClip;
+        
+        Debug.Log(ammoClipOrig);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             isPaused = !isPaused;
@@ -114,11 +119,16 @@ public class gameManager : MonoBehaviour
 
     public void UpdateAmmoCount()
     {
+
         ammoCount.text = ammoClip.ToString();
+        ammoTotal.text = ammoReserves.ToString();
+
 
         if (ammoClip <= 0 || Input.GetKeyDown(KeyCode.R))
         {
+            Debug.Log("Reloading");
             StartCoroutine(Reload());
+
         }
     }
 
@@ -129,5 +139,6 @@ public class gameManager : MonoBehaviour
         ammoClip = ammoClipOrig;
         ammoCount.text = ammoClip.ToString();
         ammoTotal.text = ammoReserves.ToString();
+        Debug.Log("Finished Reloading");
     }
 }

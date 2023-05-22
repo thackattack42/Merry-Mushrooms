@@ -120,8 +120,8 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     }
     public void createBullet()
     {
-        aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
         Instantiate(bullet, shootPos.position, transform.rotation);
+        //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
     }
     public void FacePlayer()
     {
@@ -150,7 +150,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
         Debug.DrawRay(headPos.position, playerDir);
-        Debug.Log(angleToPlayer);
+        //Debug.Log(angleToPlayer);
 
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))

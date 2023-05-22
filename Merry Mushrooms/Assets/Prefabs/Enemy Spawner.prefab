@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 496446027071114879}
   - component: {fileID: 3552412278540471662}
   - component: {fileID: 5549779828478751024}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,17 +95,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn:
-  - {fileID: 2402034563426647021, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
-  - {fileID: 8667295360013802714, guid: 57041bf35fcfb2a4b83a5d7b377f821a, type: 3}
-  - {fileID: 2199458785256702277, guid: 5fe6ba703c46b4e46b2c4fb7d1cdd732, type: 3}
   - {fileID: 1826170580222476799, guid: 96d93b059d4326041a505360c17a16ef, type: 3}
+  - {fileID: 7447049125555839038, guid: 3b979c9c5a593024b9f46b44b6faed90, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   spawnPos:
   - {fileID: 6039290028764653104}
   - {fileID: 3703605465118315481}
   - {fileID: 4505862054781056381}
   - {fileID: 4238689913982155017}
   spawnDelay: 2
-  spawnCount: 2
+  spawnCount: 4
 --- !u!135 &5549779828478751024
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5645186205263279963
 GameObject:
