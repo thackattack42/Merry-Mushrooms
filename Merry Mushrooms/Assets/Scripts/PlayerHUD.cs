@@ -8,6 +8,11 @@ public class PlayerHUD : MonoBehaviour
     //Player stuff
     int maxPlayerHP;
 
+    //Audio Stuff
+    [Header("-----Audio Stuff-----")]
+    [SerializeField] AudioClip dashCooldownFinishPing;
+    [Range(0f,1f)][SerializeField] float dashCooldownFinishPingVol;
+
     //Hotbar stuff
     float dashCooldownTimer;
     bool dashIsOnCooldown;
@@ -15,6 +20,7 @@ public class PlayerHUD : MonoBehaviour
     bool isDashing;
 
     //minimap stuff
+    [Header("-----Minimap Stuff-----")]
     public RotationConstraint minimapBGRot;
     public RotationConstraint minimapCamRot;
     public GameObject minimapCam;
