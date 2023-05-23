@@ -92,6 +92,7 @@ public class PlayerHUD : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
 
         }
+        gameManager.instance.lowHPFlash.SetActive(false);
     }
     public void dashCooldown()
     {
