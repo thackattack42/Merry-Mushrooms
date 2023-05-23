@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
 
+    
     private float dashTime = 0.3f;
     private float origSpeed;
     private int isDashing;
@@ -154,6 +155,8 @@ public class PlayerController : MonoBehaviour, IDamage
             gameManager.instance.ammoClipList[selectedStaff]--;
 
             RaycastHit hit;
+            GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
+            Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
 
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
             {
@@ -163,7 +166,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
                     if (fireDamage != null)
                     {
-                        fireDamage.TakeFireDamage(shootDamage * 2);
+                        fireDamage.TakeFireDamage(shootDamage);
                     }
                 }
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
