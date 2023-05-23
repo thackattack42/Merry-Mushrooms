@@ -32,7 +32,7 @@ public class EnemyUI : MonoBehaviour
         //Setup UI
         enemyName.text = enemy.name;
         enemyHPSlider.fillAmount = 1f;
-        enemyMaxHP = enemyScript.EnemyHP;
+        enemyMaxHP = enemyScript.HP;
         currHP = enemyMaxHP;
     }
 
@@ -47,13 +47,13 @@ public class EnemyUI : MonoBehaviour
         // in the Enemy Script which *might* break stuff, but IDK, I'm too scared to try!
         // Also, I've tried calling EnemyUI.updateEnemyHealth in the Enemy Script under takeDamage,
         // but it only updates one UI (usually the highest enemy in the hierarchy list). :/
-        if (enemyScript.EnemyHP != currHP)
+        if (enemyScript.HP != currHP)
             updateEnemyHealth();
     }
 
     public void updateEnemyHealth()
     {
-        currHP = enemyScript.EnemyHP;
+        currHP = enemyScript.HP;
         enemyHPSlider.fillAmount = currHP / enemyMaxHP;
     }
 }
