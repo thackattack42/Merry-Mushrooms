@@ -11,7 +11,6 @@ public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            //Destroy(gameObject);
             animr.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
@@ -30,7 +29,6 @@ public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            //Destroy(gameObject);
             animr.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
