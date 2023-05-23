@@ -29,7 +29,7 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI ammoTotal;
     public TextMeshProUGUI healthPoints;
     public Image HPSlider;
-    public TextMeshProUGUI dashCooldownCounter;
+    //public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
     public GameObject lowHPFlash;
     public Transform minimapRotationLock;
