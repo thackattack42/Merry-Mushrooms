@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
+public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
 {
     [Header("------ Stats ------")]
     // [Range(5, 100)][SerializeField] public int maxEnemyHP;
@@ -17,10 +17,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
+    [SerializeField] public NavMeshAgent agent;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
-    [SerializeField] Animator animr;
+    [SerializeField] public Animator animr;
     [SerializeField] AudioSource aud;
 
     [Header("------ Weapon Stats ------")]
@@ -79,32 +79,32 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-    public void takeDamage(int dmg) //this make it that enemy takes damage
-    {
-        if (!canSeePlayer())
-        {
-            dmg *= 2;
-        }
-        HP -= dmg;
-        // playerInRange = true;
-        if (HP <= 0)
-        {
-            gameManager.instance.UpdateGameGoal(-1);
-            //Destroy(gameObject);
-            animr.SetBool("Death", true);
-            agent.enabled = false;
-            GetComponent<CapsuleCollider>().enabled = false;
-        }
-        else
-        {
-            animr.SetTrigger("Damaged");
-            agent.SetDestination(gameManager.instance.player.transform.position);
-            StartCoroutine(FlashHitColor());
+    //public void takeDamage(int dmg) //this make it that enemy takes damage
+    //{
+    //    if (!canSeePlayer())
+    //    {
+    //        dmg *= 2;
+    //    }
+    //    HP -= dmg;
+    //    // playerInRange = true;
+    //    if (HP <= 0)
+    //    {
+    //        gameManager.instance.UpdateGameGoal(-1);
+    //        //Destroy(gameObject);
+    //        animr.SetBool("Death", true);
+    //        agent.enabled = false;
+    //        GetComponent<CapsuleCollider>().enabled = false;
+    //    }
+    //    else
+    //    {
+    //        animr.SetTrigger("Damaged");
+    //        agent.SetDestination(gameManager.instance.player.transform.position);
+    //        StartCoroutine(FlashHitColor());
 
-        }
+    //    }
         
-    }
-    IEnumerator FlashHitColor() //flash when the enemy is hit
+    //}
+    public IEnumerator FlashHitColor() //flash when the enemy is hit
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);

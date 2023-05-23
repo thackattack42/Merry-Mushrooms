@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     IEnumerator shoot()
     {
-        if (gameManager.instance.ammoClipList[selectedStaff] >  0)
+        if (gameManager.instance.ammoClipList[selectedStaff] > 0)
         {
             isShooting = true;
 
@@ -161,35 +161,42 @@ public class PlayerController : MonoBehaviour, IDamage
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
             {
                 Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
-                if (hit.transform.CompareTag("Ice") && !staffList[selectedStaff].ice)
+
+                if(staffList[selectedStaff].fire)
                 {
                     IFireDamage fireDamage = hit.collider.GetComponent<IFireDamage>();
+
+                    if (fireDamage != null)
+                        fireDamage.TakeFireDamage(shootDamage);
+                }
+
+                if (staffList[selectedStaff].earth)
+                {
                     IEarthDamage earthDamage = hit.collider.GetComponent<IEarthDamage>();
 
-                    if (fireDamage != null && staffList[selectedStaff].fire)
-                    {
-                        fireDamage.TakeFireDamage(shootDamage);
-                    }
-                    else if (earthDamage != null && staffList[selectedStaff].earth)
-                    {
+                    if (earthDamage != null)
                         earthDamage.TakeEarthDamage(shootDamage);
-                    }
                 }
-                else
-                {
-                    IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-                    if (damageable != null)
-                    {
-                        damageable.takeDamage(shootDamage);
-                    }
+                if (staffList[selectedStaff].ice)
+                {
+                    IIceDamage iceDamage = hit.collider.GetComponent<IIceDamage>();
+
+                    if (iceDamage != null)
+                        iceDamage.TakeIceDamage(shootDamage);
                 }
+
+                //IDamage damageable = hit.collider.GetComponent<IDamage>();
+
+                //if (damageable != null)
+                //    damageable.takeDamage(shootDamage);
             }
-            gameManager.instance.UpdateAmmoCount();
-            yield return new WaitForSeconds(shootRate);
-            isShooting = false;
         }
+        gameManager.instance.UpdateAmmoCount();
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
     }
+
     void playerDash()
     {
         isDashing++;
