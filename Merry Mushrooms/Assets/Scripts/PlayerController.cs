@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator WaitForDash()
     {
         // How long the player has to wait before dashing again
-        gameManager.instance.playerHUD.dashCooldown(dashCoolDown);
+        gameManager.instance.playerHUD.dashCooldown();
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
     }

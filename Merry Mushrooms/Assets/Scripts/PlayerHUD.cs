@@ -12,6 +12,7 @@ public class PlayerHUD : MonoBehaviour
     float dashCooldownTimer;
     bool dashIsOnCooldown;
     bool lowHP;
+    bool isDashing;
 
     //minimap stuff
     public RotationConstraint minimapBGRot;
@@ -27,8 +28,8 @@ public class PlayerHUD : MonoBehaviour
         //Set Values to HUD
         gameManager.instance.healthPoints.text = maxPlayerHP.ToString();
         gameManager.instance.HPSlider.fillAmount = 1f;
-        gameManager.instance.dashCooldownCounter.text = "";
-        gameManager.instance.dashCooldownSlider.fillAmount = 0f;
+        //gameManager.instance.dashCooldownCounter.text = "";
+        gameManager.instance.dashCooldownSlider.fillAmount = 1f;
         constraint.sourceTransform = gameManager.instance.minimapRotationLock;
         constraint.weight = 1;
         minimapBGRot.AddSource(constraint);
@@ -38,18 +39,22 @@ public class PlayerHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dashIsOnCooldown) //This can probably be optimized, but I'm not smart enough to know how.
+        if (dashIsOnCooldown)
         {
-            dashCooldownTimer -= Time.deltaTime;
-            gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString("0.0") + "s";
+            dashCooldownTimer += Time.deltaTime;
+            //gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString("0.0") + "s";
             gameManager.instance.dashCooldownSlider.fillAmount = dashCooldownTimer / gameManager.instance.playerScript.dashCoolDown; // divides the time left by the set time to get a percentage
 
-            if (dashCooldownTimer <= 0)
+            if (dashCooldownTimer >= gameManager.instance.playerScript.dashCoolDown)
             {
                 dashIsOnCooldown = false;
-                gameManager.instance.dashCooldownCounter.text = "";
-                gameManager.instance.dashCooldownSlider.fillAmount = 0f;
+                //gameManager.instance.dashCooldownCounter.text = "";
+                gameManager.instance.dashCooldownSlider.fillAmount = 1f;
             }
+        }
+        if (isDashing)
+        {
+            gameManager.instance.dashCooldownSlider.fillAmount -= Time.deltaTime * 5;
         }
     }
     public void updatePlayerHealth(int currHP)
@@ -79,9 +84,17 @@ public class PlayerHUD : MonoBehaviour
 
         }
     }
-    public void dashCooldown(float dashCD)
+    public void dashCooldown()
     {
-        dashCooldownTimer = dashCD;
+        dashCooldownTimer = 0;
+        StartCoroutine(dashCooldownStart());
+    }
+
+    IEnumerator dashCooldownStart()
+    {
+        isDashing = true;
+        yield return new WaitForSeconds(0.3f);
+        isDashing = false;
         dashIsOnCooldown = true;
     }
 }
