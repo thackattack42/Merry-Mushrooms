@@ -6,9 +6,9 @@ using UnityEngine.AI;
 
 public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
 {
-    [Header("------ Enemy Stats ------")]
+    [Header("------ Stats ------")]
     // [Range(5, 100)][SerializeField] public int maxEnemyHP;
-    [Range(5, 100)][SerializeField] public int EnemyHP;
+    [Range(5, 100)][SerializeField] public int HP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     [SerializeField] int viewCone;
     [SerializeField] float animrTransSpeed;
@@ -23,7 +23,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Animator animr;
     [SerializeField] AudioSource aud;
 
-    [Header("------ Enemy Weapon Stats ------")]
+    [Header("------ Weapon Stats ------")]
     [Range(5, 10)][SerializeField] int shootDist;
     [Range(0.1f, 10)][SerializeField] float ShootRate;
     [Range(30, 180)][SerializeField] float ShootAngle;
@@ -85,9 +85,9 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
         {
             dmg *= 2;
         }
-        EnemyHP -= dmg;
+        HP -= dmg;
         // playerInRange = true;
-        if (EnemyHP <= 0)
+        if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
             //Destroy(gameObject);
