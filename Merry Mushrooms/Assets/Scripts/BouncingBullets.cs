@@ -6,11 +6,11 @@ public class BouncingBullets : Bullet
 { 
     public enum BulletType // your custom enumeration
     {
+        Bullet,
         Bouncing,
         ExplodingEarthProjectile,
         FlameThrower,
-        PoisonBullet,
-        WaterBullet,
+        IceBullet,
         
     };
     [SerializeField]
@@ -20,9 +20,12 @@ public class BouncingBullets : Bullet
     [SerializeField] int bounce;
     [SerializeField] int maxBounceCount;
     [SerializeField] GameObject explosion;
+    [SerializeField] GameObject flame;
+
 
     public int bounceCount;
     private bool createExplosion;
+    private bool flameShot;
 
     protected override void Start()
     {
@@ -40,6 +43,18 @@ public class BouncingBullets : Bullet
 
                     rb.useGravity = false;
                     rb.velocity = transform.forward * speed;
+                }
+                break;
+            case BulletType.IceBullet:
+                {
+
+                }
+                break;
+            case BulletType.FlameThrower:
+                {
+                    flameShot = false;
+                    rb.velocity = transform.forward * speed;
+
                 }
                 break;
             default:
@@ -73,11 +88,19 @@ public class BouncingBullets : Bullet
                 }
             }
             break;
+            case BulletType.IceBullet:
+            {
+                    
+
+            }
+            break;
             case BulletType.FlameThrower:
             {
-                if (!explosion)
+                if (flameShot)
                 {
-
+                     if (flame != null)
+                         Instantiate(flame, transform.position, transform.rotation);
+                        Destroy(gameObject);
                 }
             }
             break;
