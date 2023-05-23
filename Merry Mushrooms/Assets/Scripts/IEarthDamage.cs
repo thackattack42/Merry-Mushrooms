@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public interface IDamage
+
+public interface IEarthDamage
 {
-    void takeDamage(int dmg);
+    void TakeEarthDamage(int dmg);
 }

@@ -92,6 +92,8 @@ public class BouncingBullets : Bullet
 
         IDamage damagable = other.GetComponent<IDamage>();
 
+        //IEarthDamage damage = other.GetComponent<IEarthDamage>();
+
         switch (bulletType)
         {
             case BulletType.Bouncing:
