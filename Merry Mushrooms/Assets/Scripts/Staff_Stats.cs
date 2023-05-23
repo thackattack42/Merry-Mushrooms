@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.ShaderKeywordFilter;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 // Be able to right click and create a staff
@@ -18,5 +21,9 @@ public class Staff_Stats : ScriptableObject
     public int origAmmo;
     public GameObject model;
     public GameObject hitEffect;
+    public Transform muzzleFlash;
+    public bool fire;
+    public bool ice;
+    public bool earth;
     
 }
