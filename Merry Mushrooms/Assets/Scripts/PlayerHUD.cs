@@ -49,9 +49,9 @@ public class PlayerHUD : MonoBehaviour
         {
             dashCooldownTimer += Time.deltaTime;
             //gameManager.instance.dashCooldownCounter.text = dashCooldownTimer.ToString("0.0") + "s";
-            gameManager.instance.dashCooldownSlider.fillAmount = dashCooldownTimer / gameManager.instance.playerScript.dashCoolDown; // divides the time left by the set time to get a percentage
+            gameManager.instance.dashCooldownSlider.fillAmount = dashCooldownTimer / (gameManager.instance.playerScript.dashCoolDown - 0.3f); // divides the time left by the set time to get a percentage
 
-            if (dashCooldownTimer >= gameManager.instance.playerScript.dashCoolDown)
+            if (dashCooldownTimer >= gameManager.instance.playerScript.dashCoolDown - 0.3f)
             {
                 dashIsOnCooldown = false;
                 //gameManager.instance.dashCooldownCounter.text = "";
