@@ -134,10 +134,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Staff Ice Pickup
       objectReference: {fileID: 0}
-    - target: {fileID: 3098176644952511447, guid: a98b368146adbf941810842af44053bf, type: 3}
-      propertyPath: m_TagString
-      value: Ice
-      objectReference: {fileID: 0}
     - target: {fileID: 3098176644952511468, guid: a98b368146adbf941810842af44053bf, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -276,7 +272,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &580057026
 PrefabInstance:
@@ -287,7 +283,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1374202084551288438, guid: cd3a61142e8183a4183a958f6017c428, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1374202084551288438, guid: cd3a61142e8183a4183a958f6017c428, type: 3}
       propertyPath: m_LocalPosition.x
@@ -409,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8327772038628251595, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8327772038628251595, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -578,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7877924246102652114, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
@@ -592,10 +588,6 @@ PrefabInstance:
     - target: {fileID: 3098176644952511447, guid: 90ab949354ceac549b1fe65c34bbfe4e, type: 3}
       propertyPath: m_Name
       value: Staff Fire Pickup
-      objectReference: {fileID: 0}
-    - target: {fileID: 3098176644952511447, guid: 90ab949354ceac549b1fe65c34bbfe4e, type: 3}
-      propertyPath: m_TagString
-      value: Fire
       objectReference: {fileID: 0}
     - target: {fileID: 3098176644952511468, guid: 90ab949354ceac549b1fe65c34bbfe4e, type: 3}
       propertyPath: m_RootOrder
@@ -652,7 +644,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 355086249161169965, guid: 33c0c97746271964d9f05eb2526bd3fc, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 355086249161169965, guid: 33c0c97746271964d9f05eb2526bd3fc, type: 3}
       propertyPath: m_LocalScale.x
@@ -732,13 +724,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Staff Earth Pickup
       objectReference: {fileID: 0}
-    - target: {fileID: 1562803131489952075, guid: 2f03c9a908c71a044b682f291082938c, type: 3}
-      propertyPath: m_TagString
-      value: Earth
-      objectReference: {fileID: 0}
     - target: {fileID: 2232626012794125297, guid: 2f03c9a908c71a044b682f291082938c, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2232626012794125297, guid: 2f03c9a908c71a044b682f291082938c, type: 3}
       propertyPath: m_LocalPosition.x

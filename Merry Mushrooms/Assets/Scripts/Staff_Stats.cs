@@ -21,7 +21,8 @@ public class Staff_Stats : ScriptableObject
     public int origAmmo;
     public GameObject model;
     public GameObject hitEffect;
-    public Transform muzzleFlash;
+    public GameObject muzzleFlash;
+    public GameObject muzzleEffect;
     public bool fire;
     public bool ice;
     public bool earth;
