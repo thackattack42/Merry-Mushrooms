@@ -6,6 +6,6 @@ public class IceEnemy_Scrpt : Enemy_Scpt, IFireDamage
 {
     public void TakeFireDamage(int dmg)
     {
-        EnemyHP -= dmg * 2;
+        HP -= dmg * 2;
     }
 }

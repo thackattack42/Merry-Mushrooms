@@ -268,6 +268,7 @@ public class PlayerController : MonoBehaviour, IDamage
         //gameManager.instance.ammoCount.text = staffList[selectedStaff].ammoClip.ToString();
         gameManager.instance.UpdateAmmoCount();
         //staffTexture.mesh = stats.model.GetComponent<Texture>();
+
     }
 
     void SwitchStaff()
