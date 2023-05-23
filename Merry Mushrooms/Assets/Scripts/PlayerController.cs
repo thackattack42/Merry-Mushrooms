@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEditor;
-//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(0.1f, 3)][SerializeField] float shootRate;
     [Range(1, 20)][SerializeField] int shootDamage;
     [SerializeField] MeshFilter staffModel;
-    //[SerializeField] MeshFilter staffTexture;
     [SerializeField] MeshRenderer staffMat;
 
     private float dashTime = 0.3f;
@@ -58,7 +56,6 @@ public class PlayerController : MonoBehaviour, IDamage
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
         origAmmoClip = gameManager.instance.ammoClip;
-        //origAmmoClip = staffList[selectedStaff].ammoClip;
         controller.height = 2.0f;
         origHeight = controller.height;
         Debug.Log(gameManager.instance.ammoClipOrig);
@@ -75,11 +72,6 @@ public class PlayerController : MonoBehaviour, IDamage
             OnPlayerUncrouch();
             Movement();
             SwitchStaff();
-            //if (staffList.Count != 0)
-            //{
-                
-            //    gameManager.instance.UpdateAmmoCount();
-            //}
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
                 playerDash();
@@ -89,19 +81,12 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 if (gameManager.instance.ammoClipList[selectedStaff] != staffList[selectedStaff].origAmmo )
                 {
-
-                
-                //isShooting = false;
-                reloadOnce = 1;
-                isReloading = true;
-                
-                gameManager.instance.UpdateAmmoCount();
-                //gameManager.instance.ammoTotal.text = staffList[selectedStaff].ammoReserves.ToString();
-                StartCoroutine(WaitForReload());
-                gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
-                
-
-                //isShooting = false;
+                    reloadOnce = 1;
+                    isReloading = true;
+                    
+                    gameManager.instance.UpdateAmmoCount();
+                    StartCoroutine(WaitForReload());
+                    gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
                 }
             }
 
@@ -127,10 +112,6 @@ public class PlayerController : MonoBehaviour, IDamage
         move = (transform.right * Input.GetAxis("Horizontal")) +
                (transform.forward * Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * playerSpeed);
-        //if (move != Vector3.zero)
-        //{
-        //    gameObject.transform.forward = move;
-        //}
 
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && jumpedTimes < maxJumps)
@@ -171,13 +152,20 @@ public class PlayerController : MonoBehaviour, IDamage
             isShooting = true;
 
             gameManager.instance.ammoClipList[selectedStaff]--;
-           // gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip--;
-             
 
             RaycastHit hit;
 
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
             {
+                if (hit.transform.CompareTag("Ice") && staffList[selectedStaff].fire)
+                {
+                    IFireDamage fireDamage = hit.collider.GetComponent<IFireDamage>();
+
+                    if (fireDamage != null)
+                    {
+                        fireDamage.TakeFireDamage(shootDamage * 2);
+                    }
+                }
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
 
                 Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
@@ -187,10 +175,8 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
             }
             gameManager.instance.UpdateAmmoCount();
-            //Debug.Log(gameManager.instance.ammoReserves);
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
-            
         }
     }
     void playerDash()
@@ -265,10 +251,7 @@ public class PlayerController : MonoBehaviour, IDamage
         gameManager.instance.ammoClipList.Add(staffList[selectedStaff].ammoClip);
         gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
         gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
-        //gameManager.instance.ammoCount.text = staffList[selectedStaff].ammoClip.ToString();
-        gameManager.instance.UpdateAmmoCount();
         //staffTexture.mesh = stats.model.GetComponent<Texture>();
-
     }
 
     void SwitchStaff()
@@ -298,8 +281,6 @@ public class PlayerController : MonoBehaviour, IDamage
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
         gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
         gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
-        // gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
-        //Debug.Log("Ammo reserves is : " + staffList[selectedStaff].ammoReserves);
         gameManager.instance.UpdateAmmoCount();
     }
     public void CrouchPlayer()
