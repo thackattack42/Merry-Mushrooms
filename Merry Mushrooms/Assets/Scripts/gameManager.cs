@@ -31,6 +31,7 @@ public class gameManager : MonoBehaviour
     public Image HPSlider;
     //public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
+    public Image dashCooldownFinish;
     public GameObject lowHPFlash;
     public Transform minimapRotationLock;
     

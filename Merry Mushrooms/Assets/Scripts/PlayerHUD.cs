@@ -50,6 +50,7 @@ public class PlayerHUD : MonoBehaviour
                 dashIsOnCooldown = false;
                 //gameManager.instance.dashCooldownCounter.text = "";
                 gameManager.instance.dashCooldownSlider.fillAmount = 1f;
+                StartCoroutine(dashCooldownEnd());
             }
         }
         if (isDashing)
@@ -96,5 +97,11 @@ public class PlayerHUD : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         isDashing = false;
         dashIsOnCooldown = true;
+    }
+    IEnumerator dashCooldownEnd()
+    {
+        gameManager.instance.dashCooldownFinish.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.dashCooldownFinish.enabled = false;
     }
 }
