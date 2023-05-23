@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class PlayerHUD : MonoBehaviour
     bool dashIsOnCooldown;
     bool lowHP;
 
+    //minimap stuff
+    public RotationConstraint minimapBGRot;
+    public RotationConstraint minimapCamRot;
+    public GameObject minimapCam;
+    ConstraintSource constraint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +29,10 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.HPSlider.fillAmount = 1f;
         gameManager.instance.dashCooldownCounter.text = "";
         gameManager.instance.dashCooldownSlider.fillAmount = 0f;
+        constraint.sourceTransform = gameManager.instance.minimapRotationLock;
+        constraint.weight = 1;
+        minimapBGRot.AddSource(constraint);
+        minimapCamRot.AddSource(constraint);
     }
 
     // Update is called once per frame

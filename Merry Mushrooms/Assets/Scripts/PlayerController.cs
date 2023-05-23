@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, IDamage
             }
             if (Input.GetKeyDown(KeyCode.R) && reloadOnce == 0 && staffList.Count != 0)
             {
-                if (gameManager.instance.ammoClip != staffList[selectedStaff].origAmmo )
+                if (gameManager.instance.ammoClipList[selectedStaff] != staffList[selectedStaff].origAmmo )
                 {
 
                 
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 gameManager.instance.UpdateAmmoCount();
                 //gameManager.instance.ammoTotal.text = staffList[selectedStaff].ammoReserves.ToString();
                 StartCoroutine(WaitForReload());
-                gameManager.instance.ammoCount.text = gameManager.instance.ammoClip.ToString();
+                gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
                 
 
                 //isShooting = false;
@@ -166,11 +166,11 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     IEnumerator shoot()
     {
-        if (gameManager.instance.ammoClip >  0)
+        if (gameManager.instance.ammoClipList[selectedStaff] >  0)
         {
             isShooting = true;
 
-            gameManager.instance.ammoClip--;
+            gameManager.instance.ammoClipList[selectedStaff]--;
            // gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip--;
              
 
@@ -180,14 +180,14 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
 
+                Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
                 if (damageable != null)
                 {
                     damageable.takeDamage(shootDamage);
                 }
             }
             gameManager.instance.UpdateAmmoCount();
-            Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
-            Debug.Log(gameManager.instance.ammoReserves);
+            //Debug.Log(gameManager.instance.ammoReserves);
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
             
@@ -260,6 +260,11 @@ public class PlayerController : MonoBehaviour, IDamage
         gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
         gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
         gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
+        gameManager.instance.currArrayPos = selectedStaff;
+        gameManager.instance.ammoReservesList.Add(staffList[selectedStaff].ammoReserves);
+        gameManager.instance.ammoClipList.Add(staffList[selectedStaff].ammoClip);
+        gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
+        gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
         //gameManager.instance.ammoCount.text = staffList[selectedStaff].ammoClip.ToString();
         gameManager.instance.UpdateAmmoCount();
         //staffTexture.mesh = stats.model.GetComponent<Texture>();
@@ -271,11 +276,13 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             
             selectedStaff++;
+            gameManager.instance.currArrayPos++;
             ChangeStaffStats();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
         {
             
+            gameManager.instance.currArrayPos--;
             selectedStaff--;
             ChangeStaffStats();   
         }
@@ -289,7 +296,8 @@ public class PlayerController : MonoBehaviour, IDamage
         staffModel.mesh = staffList[selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
         gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
-        gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
+        gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
+        // gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
         //Debug.Log("Ammo reserves is : " + staffList[selectedStaff].ammoReserves);
         gameManager.instance.UpdateAmmoCount();
     }

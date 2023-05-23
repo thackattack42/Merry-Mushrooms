@@ -32,10 +32,13 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
     public GameObject lowHPFlash;
-
+    public Transform minimapRotationLock;
     
     [SerializeField] public int ammoClip;
     [SerializeField] public int ammoReserves;
+    public List<int> ammoReservesList = new List<int>();
+    public List<int> ammoClipList = new List<int>();
+    public int currArrayPos;
     int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
@@ -120,11 +123,12 @@ public class gameManager : MonoBehaviour
     public void UpdateAmmoCount()
     {
 
-        ammoCount.text = ammoClip.ToString();
-        ammoTotal.text = ammoReserves.ToString();
+        ammoCount.text = ammoClipList[currArrayPos].ToString();
+        //ammoTotal.text = ammoReserves.ToString();
+        //ammoTotal.text = ammoReservesList[currArrayPos].ToString();
 
 
-        if (ammoClip <= 0 || Input.GetKeyDown(KeyCode.R))
+        if (ammoClipList[currArrayPos] <= 0 || Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("Reloading");
             StartCoroutine(Reload());
@@ -135,10 +139,10 @@ public class gameManager : MonoBehaviour
     IEnumerator Reload()
     {
         yield return new WaitForSeconds(2);
-        ammoReserves -= ammoClipOrig - ammoClip;
-        ammoClip = ammoClipOrig;
-        ammoCount.text = ammoClip.ToString();
-        ammoTotal.text = ammoReserves.ToString();
+        ammoReservesList[currArrayPos] -= ammoClipOrig - ammoClipList[currArrayPos];
+        ammoClipList[currArrayPos] = ammoClipOrig;
+        ammoCount.text = ammoClipList[currArrayPos].ToString();
+        ammoTotal.text = ammoReservesList[currArrayPos].ToString();
         Debug.Log("Finished Reloading");
     }
 }
