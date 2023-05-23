@@ -160,21 +160,29 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
             {
-                if (hit.transform.CompareTag("Ice") && staffList[selectedStaff].fire)
+                Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
+                if (hit.transform.CompareTag("Ice") && !staffList[selectedStaff].ice)
                 {
                     IFireDamage fireDamage = hit.collider.GetComponent<IFireDamage>();
+                    IEarthDamage earthDamage = hit.collider.GetComponent<IEarthDamage>();
 
-                    if (fireDamage != null)
+                    if (fireDamage != null && staffList[selectedStaff].fire)
                     {
                         fireDamage.TakeFireDamage(shootDamage);
                     }
+                    else if (earthDamage != null && staffList[selectedStaff].earth)
+                    {
+                        earthDamage.TakeEarthDamage(shootDamage);
+                    }
                 }
-                IDamage damageable = hit.collider.GetComponent<IDamage>();
-
-                Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
-                if (damageable != null)
+                else
                 {
-                    damageable.takeDamage(shootDamage);
+                    IDamage damageable = hit.collider.GetComponent<IDamage>();
+
+                    if (damageable != null)
+                    {
+                        damageable.takeDamage(shootDamage);
+                    }
                 }
             }
             gameManager.instance.UpdateAmmoCount();
