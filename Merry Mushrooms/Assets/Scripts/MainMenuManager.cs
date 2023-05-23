@@ -13,6 +13,7 @@ public class MainMenuManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
