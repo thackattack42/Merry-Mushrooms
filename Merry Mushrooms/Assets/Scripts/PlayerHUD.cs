@@ -8,6 +8,11 @@ public class PlayerHUD : MonoBehaviour
     //Player stuff
     int maxPlayerHP;
 
+    //Audio Stuff
+    [Header("-----Audio Stuff-----")]
+    [SerializeField] AudioClip dashCooldownFinishPing;
+    [Range(0f,1f)][SerializeField] float dashCooldownFinishPingVol;
+
     //Hotbar stuff
     float dashCooldownTimer;
     bool dashIsOnCooldown;
@@ -15,6 +20,7 @@ public class PlayerHUD : MonoBehaviour
     bool isDashing;
 
     //minimap stuff
+    [Header("-----Minimap Stuff-----")]
     public RotationConstraint minimapBGRot;
     public RotationConstraint minimapCamRot;
     public GameObject minimapCam;
@@ -57,13 +63,7 @@ public class PlayerHUD : MonoBehaviour
         {
             gameManager.instance.dashCooldownSlider.fillAmount -= Time.deltaTime * 5;
         }
-    }
-    public void updatePlayerHealth(int currHP)
-    {
-        if (currHP < 0) //to make sure the number in the UI doesn't show negative, or it will look weird.
-            currHP = 0;
-        gameManager.instance.healthPoints.text = currHP.ToString();
-        gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
+
         if (gameManager.instance.HPSlider.fillAmount <= 0.2f && !lowHP)
         {
             lowHP = true;
@@ -73,6 +73,14 @@ public class PlayerHUD : MonoBehaviour
         {
             lowHP = false;
         }
+    }
+    public void updatePlayerHealth(int currHP)
+    {
+        if (currHP < 0) //to make sure the number in the UI doesn't show negative, or it will look weird.
+            currHP = 0;
+        gameManager.instance.healthPoints.text = currHP.ToString();
+        gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
+        
     }
     IEnumerator HPFlash()
     {
@@ -84,6 +92,7 @@ public class PlayerHUD : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
 
         }
+        gameManager.instance.lowHPFlash.SetActive(false);
     }
     public void dashCooldown()
     {
@@ -100,6 +109,7 @@ public class PlayerHUD : MonoBehaviour
     }
     IEnumerator dashCooldownEnd()
     {
+        gameManager.instance.dashCooldownFinishPing.PlayOneShot(dashCooldownFinishPing, dashCooldownFinishPingVol);
         gameManager.instance.dashCooldownFinish.enabled = true;
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.dashCooldownFinish.enabled = false;

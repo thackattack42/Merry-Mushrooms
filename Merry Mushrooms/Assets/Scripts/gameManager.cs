@@ -32,6 +32,7 @@ public class gameManager : MonoBehaviour
     //public TextMeshProUGUI dashCooldownCounter;
     public Image dashCooldownSlider;
     public Image dashCooldownFinish;
+    public AudioSource dashCooldownFinishPing;
     public GameObject lowHPFlash;
     public Transform minimapRotationLock;
     
