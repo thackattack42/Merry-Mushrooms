@@ -38,7 +38,7 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     Color origColor;
     private bool isShooting;
     Vector3 playerDir;
-    bool playerInRange;
+    public bool playerInRange;
     float angleToPlayer;
     float speed;
     bool DestChosen;
@@ -47,7 +47,7 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     float viewDistOrig;
 
     // Start is called before the first frame update
-    void Start()
+   public  void Start()
     {
         //gets original color and sets it here
         
@@ -59,7 +59,7 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         //animr.SetTrigger("Spawn");
         if (agent.isActiveAndEnabled)
