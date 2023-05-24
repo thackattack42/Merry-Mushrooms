@@ -54,7 +54,7 @@ public class BouncingBullets : Bullet
                 {
                     flameShot = false;
                     rb.velocity = transform.forward * speed;
-
+                    Destroy(gameObject, timer);
                 }
                 break;
             default:
