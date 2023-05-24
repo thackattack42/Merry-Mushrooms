@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_Scpt : Enemy_Scpt 
+public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
 {
 
-    [Header ("------ Enemy Spawner ------")]
+    [Header("------ Enemy Spawner ------")]
     [SerializeField] GameObject[] enemyToSpawn;
     [SerializeField] Transform[] spawnPoss;
     [SerializeField] float spawnDelayy;
@@ -14,14 +14,19 @@ public class Boss_Scpt : Enemy_Scpt
     bool isSpawningg;
 
 
+
+
+
+    new
     // Start is called before the first frame update
     void Start()
     {
-        
+
         base.Start();
-       
+
     }
 
+    new
     // Update is called once per frame
     void Update()
     {
@@ -30,12 +35,14 @@ public class Boss_Scpt : Enemy_Scpt
         if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
         {
             StartCoroutine(EnemySpawn());
+            phases();
         }
-    }
 
+
+    }
     void phases()
     {
-        if(HP <= 0.5f)
+        if (HP <= 0.5f)
         {
             spawnCountt = 3;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
@@ -48,7 +55,7 @@ public class Boss_Scpt : Enemy_Scpt
             //make AOE attack take damage
             //
         }
-        else if(HP <= 0.2f)
+        else if (HP <= 0.2f)
         {
             spawnCountt = 3;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
@@ -73,5 +80,48 @@ public class Boss_Scpt : Enemy_Scpt
         numberSpawnedd++;
         yield return new WaitForSeconds(spawnDelayy);
         isSpawningg = false;
+    }
+    public void TakeEarthDamage(int dmg)
+    {
+        HP -= dmg * 2;
+
+        if (HP <= 0)
+        {
+            gameManager.instance.UpdateGameGoal(-1);
+            animr.SetBool("Death", true);
+            agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+        }
+        else
+        {
+            animr.SetTrigger("Damaged");
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            StartCoroutine(FlashHitColor());
+        }
+    }
+
+
+    public void TakeIceDamage(int dmg)
+    {
+        HP -= dmg / 2;
+
+        if (HP <= 0)
+        {
+            gameManager.instance.UpdateGameGoal(-1);
+            animr.SetBool("Death", true);
+            agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+        }
+        else
+        {
+            animr.SetTrigger("Damaged");
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            StartCoroutine(FlashHitColor());
+        }
+    }
+
+    public void TakeFireDamage(int dmg)
+    {
+        HP += dmg;
     }
 }
