@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
+public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
 {
     [Header("------ Stats ------")]
     // [Range(5, 100)][SerializeField] public int maxEnemyHP;
@@ -17,10 +17,10 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
 
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
+    [SerializeField] public NavMeshAgent agent;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
-    [SerializeField] Animator animr;
+    [SerializeField] public Animator animr;
     [SerializeField] AudioSource aud;
 
     [Header("------ Weapon Stats ------")]
@@ -38,7 +38,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     Color origColor;
     private bool isShooting;
     Vector3 playerDir;
-    bool playerInRange;
+    public bool playerInRange;
     float angleToPlayer;
     float speed;
     bool DestChosen;
@@ -47,7 +47,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     float viewDistOrig;
 
     // Start is called before the first frame update
-    void Start()
+   public  void Start()
     {
         //gets original color and sets it here
         
@@ -59,7 +59,7 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         //animr.SetTrigger("Spawn");
         if (agent.isActiveAndEnabled)
@@ -79,32 +79,32 @@ public class Enemy_Scpt : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-    public void takeDamage(int dmg) //this make it that enemy takes damage
-    {
-        if (!canSeePlayer())
-        {
-            dmg *= 2;
-        }
-        HP -= dmg;
-        // playerInRange = true;
-        if (HP <= 0)
-        {
-            gameManager.instance.UpdateGameGoal(-1);
-            //Destroy(gameObject);
-            animr.SetBool("Death", true);
-            agent.enabled = false;
-            GetComponent<CapsuleCollider>().enabled = false;
-        }
-        else
-        {
-            animr.SetTrigger("Damaged");
-            agent.SetDestination(gameManager.instance.player.transform.position);
-            StartCoroutine(FlashHitColor());
+    //public void takeDamage(int dmg) //this make it that enemy takes damage
+    //{
+    //    if (!canSeePlayer())
+    //    {
+    //        dmg *= 2;
+    //    }
+    //    HP -= dmg;
+    //    // playerInRange = true;
+    //    if (HP <= 0)
+    //    {
+    //        gameManager.instance.UpdateGameGoal(-1);
+    //        //Destroy(gameObject);
+    //        animr.SetBool("Death", true);
+    //        agent.enabled = false;
+    //        GetComponent<CapsuleCollider>().enabled = false;
+    //    }
+    //    else
+    //    {
+    //        animr.SetTrigger("Damaged");
+    //        agent.SetDestination(gameManager.instance.player.transform.position);
+    //        StartCoroutine(FlashHitColor());
 
-        }
+    //    }
         
-    }
-    IEnumerator FlashHitColor() //flash when the enemy is hit
+    //}
+    public IEnumerator FlashHitColor() //flash when the enemy is hit
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);

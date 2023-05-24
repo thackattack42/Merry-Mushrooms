@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
+public class EarthEnemy_Scpt : Enemy_Scpt, IIceDamage, IFireDamage, IEarthDamage
 {
-    public void TakeFireDamage(int dmg)
+    public void TakeIceDamage(int dmg)
     {
         HP -= dmg * 2;
 
@@ -23,9 +23,11 @@ public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
         }
     }
 
-    public void TakeEarthDamage (int dmg)
+
+    public void TakeFireDamage(int dmg)
     {
         HP -= dmg - 1;
+
         if (HP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
@@ -41,7 +43,7 @@ public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
         }
     }
 
-    public void TakeIceDamage(int dmg)
+    public void TakeEarthDamage(int dmg)
     {
         HP += dmg;
     }
