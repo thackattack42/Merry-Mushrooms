@@ -47,10 +47,10 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     float viewDistOrig;
 
     // Start is called before the first frame update
-   public  void Start()
+    public void Start()
     {
         //gets original color and sets it here
-        
+
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
         gameManager.instance.UpdateGameGoal(1);
@@ -68,13 +68,28 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
             speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
             animr.SetFloat("Speed", speed);
 
-            if (playerInRange && !canSeePlayer())
+            if (!CompareTag("Boss Enemy"))
             {
-                StartCoroutine(Roam());
+                if (playerInRange && !canSeePlayer())
+                {
+                    StartCoroutine(Roam());
+                }
+                else if (agent.destination != gameManager.instance.player.transform.position)
+                {
+                    StartCoroutine(Roam());
+                }
+
             }
-            else if (agent.destination != gameManager.instance.player.transform.position)
+            else
             {
-                StartCoroutine(Roam());
+                if (playerInRange && !canSeePlayer())
+                {
+                    //StartCoroutine(Roam());
+                }
+                else if (agent.destination != gameManager.instance.player.transform.position)
+                {
+                    //StartCoroutine(Roam());
+                }
             }
         }
     }
@@ -102,7 +117,7 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     //        StartCoroutine(FlashHitColor());
 
     //    }
-        
+
     //}
     public IEnumerator FlashHitColor() //flash when the enemy is hit
     {
@@ -144,7 +159,7 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
             playerInRange = false;
         }
     }
-    private bool canSeePlayer()
+    public bool canSeePlayer()
     {
         playerDir = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
@@ -211,7 +226,7 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     {
         if (!canSeePlayer())
             GetComponent<SphereCollider>().radius /= 2;
-       
+
     }
 
     void IncreaseVision()
@@ -222,6 +237,6 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     {
         agent.velocity += dir;
     }
-        
+
 }
 

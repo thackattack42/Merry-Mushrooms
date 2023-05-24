@@ -1087,7 +1087,7 @@ GameObject:
   - component: {fileID: 4478660910970074931}
   m_Layer: 6
   m_Name: Evil Mushroom-Red-Boss
-  m_TagString: Enemy
+  m_TagString: Boss Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1178,6 +1178,7 @@ MonoBehaviour:
   bullet: {fileID: 5463603646565746171, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
   audShoot: []
   audShootVol: 2
+  playerInRange: 0
   enemyToSpawn:
   - {fileID: 8667295360013802714, guid: 57041bf35fcfb2a4b83a5d7b377f821a, type: 3}
   - {fileID: 2199458785256702277, guid: 5fe6ba703c46b4e46b2c4fb7d1cdd732, type: 3}
