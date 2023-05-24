@@ -24,7 +24,6 @@ public class Spawner_Script : MonoBehaviour
     {
         if(playerInRange && !isSpawning && numberSpawned < spawnCount)
         {
-            //animr.SetTrigger("Spawn");
             StartCoroutine(Spawn());
         }
     }
