@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
+
 public class BossSkillAoeDmg : MonoBehaviour
 {
+    [SerializeField] StatusEffectData data;
     public float moveSpeed = 2f;
-    public float DotAmount;
-    public float tickSpeed;
-    public float statusLasts;
-
-    public GameObject effectParticles;
-
 
     public SphereCollider sphereCol;
 
@@ -28,9 +25,11 @@ public class BossSkillAoeDmg : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        var effectable = other.GetComponent<IEffectable>();
+
+        if (effectable != null)
         {
-            return;
+            effectable.ApplyEffect(data);
         }
 
         Destroy(this.gameObject);
