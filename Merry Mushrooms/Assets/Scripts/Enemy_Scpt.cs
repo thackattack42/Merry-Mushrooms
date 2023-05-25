@@ -218,9 +218,9 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     #region Enemy's Death
     public IEnumerator EnemyDespawn()
     {
-        StopAllCoroutines();
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
+        StopAllCoroutines();
     }
     #endregion
     #endregion
