@@ -14,15 +14,15 @@ public class Staff_Stats : ScriptableObject
     [Range(2, 300)] public int shootDistance;
     [Range(0.1f, 3)] public float shootRate;
     [Range(1, 20)] public int shootDamage;
+
     [Header("-----Ammo Stuff-----")]
-    public int startingAmmo;
-    public int ammoReserves;
-    public int ammoClip;
-    public int origAmmo;
     public GameObject model;
     public GameObject hitEffect;
     public GameObject muzzleFlash;
     public GameObject muzzleEffect;
+    public int ammoReserves;
+    public int ammoClip;
+    public int origAmmo;
     public bool fire;
     public bool ice;
     public bool earth;
