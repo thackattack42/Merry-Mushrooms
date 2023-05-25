@@ -20,7 +20,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
     {
 
         base.Start();
-
+        gameManager.instance.UpdateGameGoal(1);
     }
 
     new

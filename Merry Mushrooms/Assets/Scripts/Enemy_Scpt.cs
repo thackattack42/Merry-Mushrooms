@@ -56,7 +56,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
 
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
-        gameManager.instance.UpdateGameGoal(1);
+        //gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
         viewDistOrig = GetComponent<SphereCollider>().radius;
     }
