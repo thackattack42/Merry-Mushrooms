@@ -220,7 +220,6 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
-        StopAllCoroutines();
     }
     #endregion
     #endregion
