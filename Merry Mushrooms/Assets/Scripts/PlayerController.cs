@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IEffectable
 {
 
     private Vector3 playerVelocity;
@@ -14,7 +13,6 @@ public class PlayerController : MonoBehaviour, IDamage
     private int jumpedTimes;
     private bool groundedPlayer;
     [SerializeField] CharacterController controller;
-
     [Header("----- Player Stats -----")]
     [SerializeField] float playerSpeed;
     [Range(8, 20)][SerializeField] float jumpHeight;
@@ -40,35 +38,45 @@ public class PlayerController : MonoBehaviour, IDamage
     private float dashTime = 0.3f;
     private float origSpeed;
     private int isDashing;
-    public bool isShooting;
-    public bool isReloading;
+    private bool isShooting;
+    private bool isReloading;
     private bool isSprinting;
     public bool isCrouching;
-    //private int ammoAmount;
-    //private int origAmmoClip;
+    private int ammoAmount;
+    private int origAmmoClip;
     private float origHeight;
-    //private int reloadOnce = 0;
-    public int selectedStaff;
+    private int reloadOnce = 0;
+    int selectedStaff;
 
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
 
+    private Dictionary<string, StatusEffectData> statusEffects;
+    private float period = 0.0f;
+
+    public PlayerController()
+    {
+        this.statusEffects = null;
+    }
+
     private void Start()
     {
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
-        //origAmmoClip = gameManager.instance.ammoClip;
+        origAmmoClip = gameManager.instance.ammoClip;
         controller.height = 2.0f;
         origHeight = controller.height;
-        //Debug.Log(gameManager.instance.ammoClipOrig);
+        Debug.Log(gameManager.instance.ammoClipOrig);
+
+        statusEffects = new Dictionary<string, StatusEffectData>();
+
         // Spawns Player
         Spawn();
     }
 
     void Update()
     {
-        
         if (gameManager.instance.activeMenu == null)
         {
             OnPlayerCrouch();
@@ -80,16 +88,31 @@ public class PlayerController : MonoBehaviour, IDamage
                 playerDash();
                 StartCoroutine(WaitForDash()); 
             }
-            if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0)
+            if (Input.GetKeyDown(KeyCode.R) && reloadOnce == 0 && staffList.Count != 0)
             {
-                    StartCoroutine(gameManager.instance.Reload());
-                    //gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
+                if (gameManager.instance.ammoClipList[selectedStaff] != staffList[selectedStaff].origAmmo )
+                {
+                    reloadOnce = 1;
+                    isReloading = true;
+                    
+                    gameManager.instance.UpdateAmmoCount();
+                    StartCoroutine(WaitForReload());
+                    gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
+                }
             }
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0)
             {
                 StartCoroutine(shoot());
             }
+
+            // Call anything in here we want to update per second (not per frame)
+            if (period > 1.0f)
+            {
+                period = 0.0f;
+                UpdateStatusEffects();
+            }
+            period += UnityEngine.Time.deltaTime;
         }
 
         Sprint();
@@ -143,10 +166,11 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     IEnumerator shoot()
     {
-        if (staffList[selectedStaff].ammoClip > 0)
+        if (gameManager.instance.ammoClipList[selectedStaff] > 0)
         {
             isShooting = true;
-            staffList[selectedStaff].ammoClip--;
+
+            gameManager.instance.ammoClipList[selectedStaff]--;
 
             RaycastHit hit;
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
@@ -221,14 +245,14 @@ public class PlayerController : MonoBehaviour, IDamage
         isDashing = 0;
     }
 
-    //IEnumerator WaitForReload()
-    //{
-    //    isShooting = true;
-    //    yield return new WaitForSeconds(2);
-    //    isShooting = false;
-    //    isReloading = false;
-    //    reloadOnce = 0;
-    //}
+    IEnumerator WaitForReload()
+    {
+        isShooting = true;
+        yield return new WaitForSeconds(2);
+        isShooting = false;
+        isReloading = false;
+        reloadOnce = 0;
+    }
 
     public void takeDamage(int amount)
     {
@@ -255,15 +279,14 @@ public class PlayerController : MonoBehaviour, IDamage
         staffMat.material = stats.model.GetComponent<MeshRenderer>().sharedMaterial;
 
         selectedStaff = staffList.Count - 1;
-        gameManager.instance.UpdateAmmoCount();
-        //gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
-        //gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
-        //gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
-        //gameManager.instance.currArrayPos = selectedStaff;
-        //gameManager.instance.ammoReservesList.Add(staffList[selectedStaff].ammoReserves);
-        //gameManager.instance.ammoClipList.Add(staffList[selectedStaff].ammoClip);
-        //gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
-        //gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
+        gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
+        gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
+        gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
+        gameManager.instance.currArrayPos = selectedStaff;
+        gameManager.instance.ammoReservesList.Add(staffList[selectedStaff].ammoReserves);
+        gameManager.instance.ammoClipList.Add(staffList[selectedStaff].ammoClip);
+        gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
+        gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
         //staffTexture.mesh = stats.model.GetComponent<Texture>();
     }
 
@@ -273,13 +296,13 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             
             selectedStaff++;
-            //gameManager.instance.currArrayPos++;
+            gameManager.instance.currArrayPos++;
             ChangeStaffStats();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
         {
             
-            //gameManager.instance.currArrayPos--;
+            gameManager.instance.currArrayPos--;
             selectedStaff--;
             ChangeStaffStats();   
         }
@@ -289,11 +312,11 @@ public class PlayerController : MonoBehaviour, IDamage
         shootDamage = staffList[selectedStaff].shootDamage;
         shootDistance = staffList[selectedStaff].shootDistance;
         shootRate = staffList[selectedStaff].shootRate;
-        //gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
+        gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
         staffModel.mesh = staffList[selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
-        //gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
-        //gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
+        gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
+        gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
         gameManager.instance.UpdateAmmoCount();
     }
     public void CrouchPlayer()
@@ -327,6 +350,91 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             if (Uncrouch != null)
                 Uncrouch();
+        }
+    }
+
+    public void ApplyEffect(StatusEffectData data)
+    {
+        // Check if status effect is new and apply modifier
+        if (!statusEffects.ContainsKey(data.name))
+        {
+            switch (data.type)
+            {
+                case StatusEffectType.Fire:
+                    HP -= data.modifier;
+                    break;
+
+                // TODO: Handle additional status effects
+
+                default:
+                    // Do nothing
+                    break;
+            }
+
+            // TODO: This code is duplicated in multiple places, move to a generic function?
+            gameManager.instance.playerHUD.updatePlayerHealth(HP);
+            if (HP <= 0)
+            {
+                HP = 0;
+                // Player is dead and display game over screen.
+                gameManager.instance.GameOver();
+            }
+        }
+
+        // Add/renew status effect
+        statusEffects.Add(data.name, data);
+    }
+
+    // This is expected to be called every second (not frame)
+    public void UpdateStatusEffects()
+    {
+        List<string> keysToRemove = new List<string>();
+
+        foreach (var iter in statusEffects)
+        {
+            StatusEffectData data = iter.Value;
+
+            // Apply status effect
+            if (data.duration > 0)
+            {
+                switch (data.type)
+                {
+                    case StatusEffectType.Fire:
+                        HP -= data.modifierPerSecond;
+                        break;
+
+                    // TODO: Handle additional status effects
+
+                    default:
+                        // Do nothing
+                        break;
+                }
+
+                // Tick down duration by 1 second
+                data.duration -= 1;
+
+                gameManager.instance.playerHUD.updatePlayerHealth(HP);
+                if (HP <= 0)
+                {
+                    HP = 0;
+                    // Player is dead and display game over screen.
+                    gameManager.instance.GameOver();
+                }
+            }
+            else
+            {
+                // Add status effect key for removal
+                keysToRemove.Add(data.name);
+            }
+        }
+
+        // Remove status effects
+        if (keysToRemove.Count > 0)
+        {
+            foreach (var key in keysToRemove)
+            {
+                statusEffects.Remove(key);
+            }
         }
     }
 }
