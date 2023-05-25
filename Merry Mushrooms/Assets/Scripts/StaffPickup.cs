@@ -15,7 +15,8 @@ public class StaffPickup : MonoBehaviour
         model = staff.model.GetComponent<MeshFilter>();
         mat = staff.model.GetComponent<MeshRenderer>();
         // texture = staff.model.GetComponent<Texture>();
-        staff.origAmmo = staff.ammoClip;
+        staff.ammoClip = staff.origAmmo;
+        staff.ammoReserves = staff.origAmmoReserves;
         //gameManager.instance.ammoClipOrig = staff.origAmmo;
     }
 

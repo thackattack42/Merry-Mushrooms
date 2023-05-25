@@ -20,9 +20,10 @@ public class Staff_Stats : ScriptableObject
     public GameObject hitEffect;
     public GameObject muzzleFlash;
     public GameObject muzzleEffect;
-    public int ammoReserves;
     public int ammoClip;
+    public int ammoReserves;
     public int origAmmo;
+    public int origAmmoReserves;
     public bool fire;
     public bool ice;
     public bool earth;
