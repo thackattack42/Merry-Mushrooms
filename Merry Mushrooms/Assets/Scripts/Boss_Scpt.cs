@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEffectable
 {
-
+    #region Fields
     [Header("------ Enemy Spawner ------")]
     [SerializeField] GameObject[] enemyToSpawn;
     [SerializeField] Transform[] spawnPoss;
@@ -12,11 +12,8 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
     int spawnCountt;
     int numberSpawnedd;
     bool isSpawningg;
-
-    
-
-
-
+    #endregion
+    #region Start and Stop
     new
     // Start is called before the first frame update
     void Start()
@@ -49,6 +46,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
             if (playerInRange)
             {
                 //make AOE attack
+                //ApplyEffect()
             }
         }
         else if (HP <= 250)
@@ -62,14 +60,17 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
             {
                 
                 //make AOE attack
-                //defence enabled
-                //heal enemies in area
+                //ApplyEffect()
+                //defence enabled//not needed
+                //heal enemies in area//not needed
             }
             
         }
 
 
     }
+    #endregion
+    #region Spawner
     IEnumerator EnemySpawn()
     {
         isSpawningg = true;
@@ -78,6 +79,8 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
         yield return new WaitForSeconds(spawnDelayy);
         isSpawningg = false;
     }
+    #endregion
+    #region Damage Functions
     public void TakeEarthDamage(int dmg)
     {
         HP -= dmg * 2;
@@ -121,8 +124,11 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
     {
         HP += dmg;
     }
+    #endregion
+    #region Effects
     public void ApplyEffect(StatusEffectData data)
     {
 
     }
+    #endregion
 }
