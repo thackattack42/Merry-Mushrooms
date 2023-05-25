@@ -28,7 +28,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
     void Update()
     {
         base.Update();
-        if (HP == 100)
+        if (HP == 250)
         {
             spawnCountt = 2;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
@@ -36,7 +36,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
                 StartCoroutine(EnemySpawn());
             }
         }
-        else if (HP <= 50)
+        else if (HP <= 175)
         {
             spawnCountt = 5;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
@@ -49,7 +49,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
                 //ApplyEffect()
             }
         }
-        else if (HP <= 25)
+        else if (HP <= 100)
         {
             spawnCountt = 9;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
