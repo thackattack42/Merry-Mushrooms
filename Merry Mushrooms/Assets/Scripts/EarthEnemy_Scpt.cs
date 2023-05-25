@@ -10,7 +10,6 @@ public class EarthEnemy_Scpt : Enemy_Scpt, IIceDamage, IFireDamage, IEarthDamage
 
         if (HP <= 0)
         {
-            gameManager.instance.UpdateGameGoal(-1);
             animr.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
@@ -32,7 +31,6 @@ public class EarthEnemy_Scpt : Enemy_Scpt, IIceDamage, IFireDamage, IEarthDamage
 
         if (HP <= 0)
         {
-            gameManager.instance.UpdateGameGoal(-1);
             animr.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
