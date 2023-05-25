@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     public bool isCrouching;
     private float origHeight;
     public int selectedStaff;
+    bool stepIsPlaying;
 
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
@@ -429,5 +430,19 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         yield return new WaitForSeconds(2);
         gameManager.instance.UpdateAmmoCount();
         isReloading = false;
+    }
+    IEnumerator playSteps()
+    {
+        stepIsPlaying = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        if (!isSprinting)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        stepIsPlaying = false;
     }
 }
