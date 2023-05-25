@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
+public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEffectable
 {
-
+    #region Fields
     [Header("------ Enemy Spawner ------")]
     [SerializeField] GameObject[] enemyToSpawn;
     [SerializeField] Transform[] spawnPoss;
@@ -12,11 +12,8 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
     int spawnCountt;
     int numberSpawnedd;
     bool isSpawningg;
-
-
-
-
-
+    #endregion
+    #region Start and Stop
     new
     // Start is called before the first frame update
     void Start()
@@ -31,7 +28,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
     void Update()
     {
         base.Update();
-        if (HP == 1000)
+        if (HP == 750)
         {
             spawnCountt = 2;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
@@ -49,6 +46,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
             if (playerInRange)
             {
                 //make AOE attack
+                //ApplyEffect()
             }
         }
         else if (HP <= 250)
@@ -62,47 +60,18 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
             {
                 
                 //make AOE attack
-                //defence enabled
-                //heal enemies in area
+                //ApplyEffect()
+                //defence enabled//not needed
+                //heal enemies in area//not needed
             }
             
         }
 
 
     }
-    void phases()
-    {
-        if (HP <= 0.5f)
-        {
-            spawnCountt = 3;
-            if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
-            {
-                StartCoroutine(EnemySpawn());
-            }
-            //spawn 3 E
-            //if(player in range){
-            //
-            //make AOE attack take damage
-            //
-        }
-        else if (HP <= 0.2f)
-        {
-            spawnCountt = 3;
-            if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
-            {
-                StartCoroutine(EnemySpawn());
-            }
-            //spawn 4 E
-            //
-            //if(player in range){
-            //
-            //start another aoe}
-            //if(!player in range){
-            // start heal aoe then if hit stop heal aoe
-            //
-        }
-
-    }
+    #endregion
+    #region Functions
+    #region Spawner
     IEnumerator EnemySpawn()
     {
         isSpawningg = true;
@@ -111,6 +80,8 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
         yield return new WaitForSeconds(spawnDelayy);
         isSpawningg = false;
     }
+    #endregion
+    #region Damage Functions
     public void TakeEarthDamage(int dmg)
     {
         HP -= dmg * 2;
@@ -154,4 +125,12 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
     {
         HP += dmg;
     }
+    #endregion
+    #region Effects
+    public void ApplyEffect(StatusEffectData data)
+    {
+
+    }
+    #endregion
+    #endregion
 }

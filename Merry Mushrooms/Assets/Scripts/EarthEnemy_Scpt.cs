@@ -14,6 +14,8 @@ public class EarthEnemy_Scpt : Enemy_Scpt, IIceDamage, IFireDamage, IEarthDamage
             animr.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
+            StartCoroutine(EnemyDespawn());
+            Destroy(gameObject);
         }
         else
         {
@@ -34,6 +36,7 @@ public class EarthEnemy_Scpt : Enemy_Scpt, IIceDamage, IFireDamage, IEarthDamage
             animr.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
+            StartCoroutine(EnemyDespawn());
         }
         else
         {

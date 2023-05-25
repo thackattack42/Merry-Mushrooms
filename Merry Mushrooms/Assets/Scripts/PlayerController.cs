@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     private Vector3 move;
     private int jumpedTimes;
     private bool groundedPlayer;
+    [Header("----- Componets -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] AudioSource aud;
     [Header("----- Player Stats -----")]
     [SerializeField] float playerSpeed;
     [Range(8, 20)][SerializeField] float jumpHeight;
@@ -34,19 +36,23 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
 
-    
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField] AudioClip[] audDamage;
+    [SerializeField] AudioClip[] audSteps;
+    [SerializeField] float audJumpVol;
+    [SerializeField] float audDamageVol;
+    [SerializeField] float audStepsVol;
     private float dashTime = 0.3f;
     private float origSpeed;
     private int isDashing;
     private bool isShooting;
-    private bool isReloading;
+    public bool isReloading;
     private bool isSprinting;
     public bool isCrouching;
-    private int ammoAmount;
-    private int origAmmoClip;
     private float origHeight;
-    private int reloadOnce = 0;
-    int selectedStaff;
+    public int selectedStaff;
+    bool stepIsPlaying;
 
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
@@ -64,10 +70,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     {
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
-        origAmmoClip = gameManager.instance.ammoClip;
         controller.height = 2.0f;
         origHeight = controller.height;
-        Debug.Log(gameManager.instance.ammoClipOrig);
 
         statusEffects = new Dictionary<string, StatusEffectData>();
 
@@ -86,19 +90,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
                 playerDash();
-                StartCoroutine(WaitForDash()); 
+                StartCoroutine(WaitForDash());
             }
-            if (Input.GetKeyDown(KeyCode.R) && reloadOnce == 0 && staffList.Count != 0)
+            if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0)
             {
-                if (gameManager.instance.ammoClipList[selectedStaff] != staffList[selectedStaff].origAmmo )
-                {
-                    reloadOnce = 1;
-                    isReloading = true;
-                    
-                    gameManager.instance.UpdateAmmoCount();
-                    StartCoroutine(WaitForReload());
-                    gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
-                }
+                StartCoroutine(Reload());
             }
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0)
@@ -122,10 +118,17 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     void Movement()
     {
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (groundedPlayer)
         {
-            playerVelocity.y = 0f;
-            jumpedTimes = 0;
+            if (playerVelocity.y < 0)
+            {
+                playerVelocity.y = 0f;
+                jumpedTimes = 0;
+            }
+            if (!stepIsPlaying && move.normalized.magnitude > 0.5f)
+            {
+                StartCoroutine(playSteps());
+            }
         }
 
         move = (transform.right * Input.GetAxis("Horizontal")) +
@@ -135,6 +138,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && jumpedTimes < maxJumps)
         {
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             jumpedTimes++;
             playerVelocity.y = jumpHeight;
         }
@@ -166,11 +170,12 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     }
     IEnumerator shoot()
     {
-        if (gameManager.instance.ammoClipList[selectedStaff] > 0)
+        if (staffList[selectedStaff].ammoClip > 0)
         {
             isShooting = true;
 
-            gameManager.instance.ammoClipList[selectedStaff]--;
+            staffList[selectedStaff].ammoClip--;
+            aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
 
             RaycastHit hit;
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
@@ -180,7 +185,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             {
                 Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
 
-                if(staffList[selectedStaff].fire)
+                if (staffList[selectedStaff].fire)
                 {
                     IFireDamage fireDamage = hit.collider.GetComponent<IFireDamage>();
 
@@ -204,10 +209,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
                         iceDamage.TakeIceDamage(shootDamage);
                 }
 
-                //IDamage damageable = hit.collider.GetComponent<IDamage>();
+                IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-                //if (damageable != null)
-                //    damageable.takeDamage(shootDamage);
+                if (damageable != null)
+                    damageable.takeDamage(shootDamage);
             }
         }
         gameManager.instance.UpdateAmmoCount();
@@ -245,19 +250,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         isDashing = 0;
     }
 
-    IEnumerator WaitForReload()
-    {
-        isShooting = true;
-        yield return new WaitForSeconds(2);
-        isShooting = false;
-        isReloading = false;
-        reloadOnce = 0;
-    }
-
     public void takeDamage(int amount)
     {
         // Will take damage based off the amount 
         HP -= amount;
+        aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
         gameManager.instance.playerHUD.updatePlayerHealth(HP);
         if (HP <= 0)
         {
@@ -279,30 +276,18 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         staffMat.material = stats.model.GetComponent<MeshRenderer>().sharedMaterial;
 
         selectedStaff = staffList.Count - 1;
-        gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
-        gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
-        gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
-        gameManager.instance.currArrayPos = selectedStaff;
-        gameManager.instance.ammoReservesList.Add(staffList[selectedStaff].ammoReserves);
-        gameManager.instance.ammoClipList.Add(staffList[selectedStaff].ammoClip);
-        gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
-        gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
-        //staffTexture.mesh = stats.model.GetComponent<Texture>();
+        gameManager.instance.UpdateAmmoCount();
     }
 
     void SwitchStaff()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < staffList.Count - 1)
         {
-            
             selectedStaff++;
-            gameManager.instance.currArrayPos++;
             ChangeStaffStats();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
         {
-            
-            gameManager.instance.currArrayPos--;
             selectedStaff--;
             ChangeStaffStats();   
         }
@@ -312,11 +297,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         shootDamage = staffList[selectedStaff].shootDamage;
         shootDistance = staffList[selectedStaff].shootDistance;
         shootRate = staffList[selectedStaff].shootRate;
-        gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
         staffModel.mesh = staffList[selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
-        gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
-        gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
         gameManager.instance.UpdateAmmoCount();
     }
     public void CrouchPlayer()
@@ -436,5 +418,39 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
                 statusEffects.Remove(key);
             }
         }
+    }
+
+    IEnumerator Reload()
+    {
+        isReloading = true;
+
+        if (staffList[selectedStaff].ammoReserves < staffList[selectedStaff].origAmmo)
+        {
+            staffList[selectedStaff].ammoClip = staffList[selectedStaff].ammoReserves;
+            staffList[selectedStaff].ammoReserves = 0;
+        }
+        else
+        {
+            staffList[selectedStaff].ammoReserves -= (staffList[selectedStaff].origAmmo - staffList[selectedStaff].ammoClip);
+            staffList[selectedStaff].ammoClip = staffList[selectedStaff].origAmmo;
+        }
+
+        yield return new WaitForSeconds(2);
+        gameManager.instance.UpdateAmmoCount();
+        isReloading = false;
+    }
+    IEnumerator playSteps()
+    {
+        stepIsPlaying = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        if (!isSprinting)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        stepIsPlaying = false;
     }
 }

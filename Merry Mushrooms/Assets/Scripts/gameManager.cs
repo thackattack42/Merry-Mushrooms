@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using TMPro;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -37,15 +38,10 @@ public class gameManager : MonoBehaviour
     public GameObject lowHPFlash;
     public Transform minimapRotationLock;
     
-    //[SerializeField] public int ammoClip;
-    //[SerializeField] public int ammoReserves;
-    //public List<int> ammoReservesList = new List<int>();
-    //public List<int> ammoClipList = new List<int>();
-    //public int currArrayPos;
+    
     int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
-    //public int ammoClipOrig;
 
     // Awake is called before Start
     void Awake()
@@ -56,13 +52,7 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerHUD = player.GetComponent<PlayerHUD>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-
-        //ammoCount.text = playerScript.staffList[playerScript.selectedStaff].ammoClip.ToString();
-        //ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
         timeScaleOrig = Time.timeScale;
-        //ammoClipOrig = playerScript.staffList[playerScript.selectedStaff].ammoClip;
-        
-        //Debug.Log(ammoClipOrig);
     }
 
     // Update is called once per frame
@@ -75,16 +65,6 @@ public class gameManager : MonoBehaviour
             activeMenu.SetActive(isPaused);
             PauseState();
         }
-
-        //if (Input.GetKeyDown(KeyCode.R) || playerScript.staffList[playerScript.selectedStaff].ammoClip <= 0)
-        //{
-        //    if (ammoClipList[playerScript.selectedStaff] != playerScript.staffList[playerScript.selectedStaff].origAmmo)
-        //    {
-        //        StartCoroutine(Reload());
-        //        UpdateAmmoCount();
-        //        ammoCount.text = ammoClipList[playerScript.selectedStaff].ToString();
-        //    }
-        //}
     }
 
     public void PauseState()
@@ -132,55 +112,7 @@ public class gameManager : MonoBehaviour
 
     public void UpdateAmmoCount()
     {
-        //ammoReservesList[currArrayPos] -= ammoClipOrig - ammoClipList[currArrayPos];
-        //ammoClipOrig = playerScript.staffList[playerScript.selectedStaff].ammoClip;
         ammoCount.text = playerScript.staffList[playerScript.selectedStaff].ammoClip.ToString();
         ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
-        
-        //if (playerScript.isReloading)
-        //{
-        //    ammoClipList[currArrayPos] = ammoClipOrig;
-        //    ammoCount.text = ammoClipList[currArrayPos].ToString();
-        //    ammoTotal.text = ammoReservesList[currArrayPos].ToString();
-        //}
-        //ammoTotal.text = ammoReserves.ToString();
-        //ammoTotal.text = ammoReservesList[currArrayPos].ToString();
-
-
-        //if (ammoClipList[currArrayPos] <= 0 || Input.GetKeyDown(KeyCode.R))
-        //{
-        //    Debug.Log("Reloading");
-        //    StartCoroutine(Reload());
-
-        //}
     }
-
-    public IEnumerator Reload()
-    {
-        playerScript.isReloading = true;
-
-        Debug.Log("Reloading");
-        playerScript.staffList[playerScript.selectedStaff].ammoClip = playerScript.staffList[playerScript.selectedStaff].origAmmo;
-        playerScript.staffList[playerScript.selectedStaff].ammoReserves = (playerScript.staffList[playerScript.selectedStaff].origAmmo - playerScript.staffList[playerScript.selectedStaff].ammoClip);
-        ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
-        ammoCount.text = playerScript.staffList[playerScript.selectedStaff].origAmmo.ToString();
-        UpdateAmmoCount();
-        yield return new WaitForSeconds(2);
-
-        playerScript.isReloading = false;
-        Debug.Log("Finished Reloading");
-
-        //ammoReservesList[currArrayPos] -= ammoClipOrig - ammoClipList[currArrayPos];
-        //ammoClipList[currArrayPos] = ammoClipOrig;
-        //ammoCount.text = ammoClipList[currArrayPos].ToString();
-        //ammoTotal.text = ammoReservesList[currArrayPos].ToString();
-    }
-    //IEnumerator WaitForReload()
-    //{
-    //    isShooting = false;
-    //    yield return new WaitForSeconds(2);
-    //    isShooting = false;
-    //    isReloading = false;
-    //    reloadOnce = 0;
-    //}
 }

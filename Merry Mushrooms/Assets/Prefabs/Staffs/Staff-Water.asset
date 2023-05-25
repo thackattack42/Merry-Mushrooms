@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: Staff-Water
   m_EditorClassIdentifier: 
   shootDistance: 40
-  shootRate: 2
+  shootRate: 0.5
   shootDamage: 2
-  startingAmmo: 45
-  ammoReserves: 460
-  ammoClip: 45
-  origAmmo: 45
   model: {fileID: 3098176644952511447, guid: a98b368146adbf941810842af44053bf, type: 3}
   hitEffect: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
   muzzleFlash: {fileID: 0}
   muzzleEffect: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
+  shootSound: {fileID: 8300000, guid: 681616feff254fc47954e81052486e70, type: 3}
+  shootVol: 2
+  ammoClip: 5
+  ammoReserves: 50
+  origAmmo: 5
+  origAmmoReserves: 50
   fire: 0
   ice: 1
   earth: 0
