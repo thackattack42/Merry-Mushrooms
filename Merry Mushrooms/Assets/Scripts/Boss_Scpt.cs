@@ -70,6 +70,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
 
     }
     #endregion
+    #region Functions
     #region Spawner
     IEnumerator EnemySpawn()
     {
@@ -130,5 +131,6 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
     {
 
     }
+    #endregion
     #endregion
 }

@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     private Vector3 move;
     private int jumpedTimes;
     private bool groundedPlayer;
+    [Header("----- Componets -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] AudioSource aud;
     [Header("----- Player Stats -----")]
     [SerializeField] float playerSpeed;
     [Range(8, 20)][SerializeField] float jumpHeight;
@@ -34,7 +36,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
 
-
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField] AudioClip[] audDamage;
+    [SerializeField] AudioClip[] audSteps;
+    [SerializeField] float audJumpVol;
+    [SerializeField] float audDamageVol;
+    [SerializeField] float audStepsVol;
     private float dashTime = 0.3f;
     private float origSpeed;
     private int isDashing;
@@ -122,6 +130,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && jumpedTimes < maxJumps)
         {
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             jumpedTimes++;
             playerVelocity.y = jumpHeight;
         }
@@ -236,6 +245,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     {
         // Will take damage based off the amount 
         HP -= amount;
+        aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
         gameManager.instance.playerHUD.updatePlayerHealth(HP);
         if (HP <= 0)
         {
