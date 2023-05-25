@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
+public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEffectable
 {
 
     [Header("------ Enemy Spawner ------")]
@@ -13,7 +13,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
     int numberSpawnedd;
     bool isSpawningg;
 
-    //change
+    
 
 
 
@@ -70,39 +70,6 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
 
 
     }
-    void phases()
-    {
-        if (HP <= 0.5f)
-        {
-            spawnCountt = 3;
-            if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
-            {
-                StartCoroutine(EnemySpawn());
-            }
-            //spawn 3 E
-            //if(player in range){
-            //
-            //make AOE attack take damage
-            //
-        }
-        else if (HP <= 0.2f)
-        {
-            spawnCountt = 3;
-            if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
-            {
-                StartCoroutine(EnemySpawn());
-            }
-            //spawn 4 E
-            //
-            //if(player in range){
-            //
-            //start another aoe}
-            //if(!player in range){
-            // start heal aoe then if hit stop heal aoe
-            //
-        }
-
-    }
     IEnumerator EnemySpawn()
     {
         isSpawningg = true;
@@ -153,5 +120,9 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
     public void TakeFireDamage(int dmg)
     {
         HP += dmg;
+    }
+    public void ApplyEffect(StatusEffectData data)
+    {
+
     }
 }

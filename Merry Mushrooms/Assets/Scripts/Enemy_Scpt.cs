@@ -4,8 +4,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
+public class Enemy_Scpt : MonoBehaviour, IPhysics
 {
+    #region fields
     [Header("------ Stats ------")]
     // [Range(5, 100)][SerializeField] public int maxEnemyHP;
     [Range(5, 1000)][SerializeField] public int HP;
@@ -46,10 +47,12 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     float stoppingDistOrig;
     float viewDistOrig;
 
+    #endregion
+    #region Start and Update
     // Start is called before the first frame update
     public void Start()
     {
-        //gets original color and sets it here
+        
 
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
@@ -61,10 +64,8 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     // Update is called once per frame
     public void Update()
     {
-        //animr.SetTrigger("Spawn");
         if (agent.isActiveAndEnabled)
         {
-
             speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
             animr.SetFloat("Speed", speed);
 
@@ -82,54 +83,26 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
             }
             else
             {
-                if (playerInRange && !canSeePlayer())
-                {
-                    //StartCoroutine(Roam());
-                }
-                else if (agent.destination != gameManager.instance.player.transform.position)
-                {
-                    //StartCoroutine(Roam());
-                }
+                if (playerInRange && !canSeePlayer()) { }
+                else if (agent.destination != gameManager.instance.player.transform.position) { }
             }
         }
     }
-
-    //public void takeDamage(int dmg) //this make it that enemy takes damage
-    //{
-    //    if (!canSeePlayer())
-    //    {
-    //        dmg *= 2;
-    //    }
-    //    HP -= dmg;
-    //    // playerInRange = true;
-    //    if (HP <= 0)
-    //    {
-    //        gameManager.instance.UpdateGameGoal(-1);
-    //        //Destroy(gameObject);
-    //        animr.SetBool("Death", true);
-    //        agent.enabled = false;
-    //        GetComponent<CapsuleCollider>().enabled = false;
-    //    }
-    //    else
-    //    {
-    //        animr.SetTrigger("Damaged");
-    //        agent.SetDestination(gameManager.instance.player.transform.position);
-    //        StartCoroutine(FlashHitColor());
-
-    //    }
-
-    //}
+    #endregion
+    #region Functions
+    #region If Hit Color Flash
     public IEnumerator FlashHitColor() //flash when the enemy is hit
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = origColor;
     }
+    #endregion
+    #region Shooting Functions
     IEnumerator shoot()
     {
         isShooting = true;
         animr.SetTrigger("Shoot");
-        //GameObject bulletClone = Instantiate(bullet, shootPos.position, transform.rotation);
         yield return new WaitForSeconds(ShootRate);
         isShooting = false;
     }
@@ -138,12 +111,8 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
         Instantiate(bullet, shootPos.position, transform.rotation);
         //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
     }
-    public void FacePlayer()
-    {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
-    }
-
+    #endregion
+    #region Collider Enter/Exit
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -159,13 +128,19 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
             playerInRange = false;
         }
     }
+    #endregion
+    #region Enemy's Vision
+    public void FacePlayer()
+    {
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+    }
     public bool canSeePlayer()
     {
         playerDir = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
         Debug.DrawRay(headPos.position, playerDir);
-        //Debug.Log(angleToPlayer);
 
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))
@@ -191,6 +166,8 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
         agent.stoppingDistance = 0;
         return false;
     }
+    #endregion
+    #region Movement Actions
     IEnumerator Roam()
     {
         if (!DestChosen && agent.remainingDistance < 0.05f)
@@ -209,13 +186,13 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
             agent.SetDestination(hitdest.position);
         }
     }
-
+    #endregion
+    #region Crouch Vision functions
     void OnEnable()
     {
         PlayerController.Crouch += ReduceVision;
         PlayerController.Uncrouch += IncreaseVision;
     }
-
     void OnDisable()
     {
         PlayerController.Crouch -= ReduceVision;
@@ -226,23 +203,25 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
     {
         if (!canSeePlayer())
             GetComponent<SphereCollider>().radius /= 2;
-
     }
-
     void IncreaseVision()
     {
         GetComponent<SphereCollider>().radius = viewDistOrig;
     }
+    #endregion
+    #region Physics Functions
     public void KnockBack(Vector3 dir)
     {
         agent.velocity += dir;
     }
-
+    #endregion
+    #region Enemy's Death
     public IEnumerator EnemyDespawn()
     {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
-
+    #endregion
+    #endregion
 }
 
