@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             }
             if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0)
             {
-                StartCoroutine(gameManager.instance.Reload());
+                StartCoroutine(Reload());
             }
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0)
@@ -230,15 +230,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         gameManager.instance.playerHUD.dashCooldown();
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
-    }
-
-    IEnumerator WaitForReload()
-    {
-        isShooting = true;
-        yield return new WaitForSeconds(2);
-        isShooting = false;
-        isReloading = false;
-        //reloadOnce = 0;
     }
 
     public void takeDamage(int amount)
@@ -408,5 +399,25 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
                 statusEffects.Remove(key);
             }
         }
+    }
+
+    IEnumerator Reload()
+    {
+        isReloading = true;
+
+        if (staffList[selectedStaff].ammoReserves < staffList[selectedStaff].origAmmo)
+        {
+            staffList[selectedStaff].ammoClip = staffList[selectedStaff].ammoReserves;
+            staffList[selectedStaff].ammoReserves = 0;
+        }
+        else
+        {
+            staffList[selectedStaff].ammoReserves -= (staffList[selectedStaff].origAmmo - staffList[selectedStaff].ammoClip);
+            staffList[selectedStaff].ammoClip = staffList[selectedStaff].origAmmo;
+        }
+
+        yield return new WaitForSeconds(2);
+        gameManager.instance.UpdateAmmoCount();
+        isReloading = false;
     }
 }

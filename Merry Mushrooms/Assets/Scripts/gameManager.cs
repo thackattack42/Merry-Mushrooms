@@ -115,22 +115,4 @@ public class gameManager : MonoBehaviour
         ammoCount.text = playerScript.staffList[playerScript.selectedStaff].ammoClip.ToString();
         ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
     }
-
-    public IEnumerator Reload()
-    {
-        playerScript.isReloading = true;
-
-        playerScript.staffList[playerScript.selectedStaff].ammoReserves -= (playerScript.staffList[playerScript.selectedStaff].origAmmo - playerScript.staffList[playerScript.selectedStaff].ammoClip);
-        
-        if (playerScript.staffList[playerScript.selectedStaff].ammoReserves < 0)
-        {
-            playerScript.staffList[playerScript.selectedStaff].ammoReserves = 0;
-        }
-        else
-            playerScript.staffList[playerScript.selectedStaff].ammoClip = playerScript.staffList[playerScript.selectedStaff].origAmmo;
-
-        yield return new WaitForSeconds(2);
-        UpdateAmmoCount();
-        playerScript.isReloading = false;
-    }
 }
