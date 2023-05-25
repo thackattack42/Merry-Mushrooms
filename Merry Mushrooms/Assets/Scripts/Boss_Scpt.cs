@@ -31,11 +31,41 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
     void Update()
     {
         base.Update();
-        spawnCountt = 2;
-        if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
+        if (HP == 1000)
         {
-            StartCoroutine(EnemySpawn());
-            phases();
+            spawnCountt = 2;
+            if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
+            {
+                StartCoroutine(EnemySpawn());
+            }
+        }
+        else if (HP <= 500)
+        {
+            spawnCountt = 5;
+            if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
+            {
+                StartCoroutine(EnemySpawn());
+            }
+            if (playerInRange)
+            {
+                //make AOE attack
+            }
+        }
+        else if (HP <= 250)
+        {
+            spawnCountt = 9;
+            if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
+            {
+                StartCoroutine(EnemySpawn());
+            }
+            if (playerInRange)
+            {
+                
+                //make AOE attack
+                //defence enabled
+                //heal enemies in area
+            }
+            
         }
 
 
