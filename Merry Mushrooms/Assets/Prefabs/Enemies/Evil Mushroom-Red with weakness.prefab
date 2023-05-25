@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4966a88a12021464285f622b87ddf68f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  HP: 25
   playerFaceSpeed: 15
   viewCone: 90
   animrTransSpeed: 3
@@ -715,6 +715,7 @@ MonoBehaviour:
   bullet: {fileID: 5463603646565746171, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
   audShoot: []
   audShootVol: 2
+  playerInRange: 0
 --- !u!95 &5561200739298762678
 Animator:
   serializedVersion: 5
