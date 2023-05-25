@@ -15,14 +15,13 @@ MonoBehaviour:
   shootDistance: 60
   shootRate: 0.5
   shootDamage: 2
-  startingAmmo: 10
-  ammoReserves: 400
-  ammoClip: 10
-  origAmmo: 10
   model: {fileID: 1562803131489952075, guid: 2f03c9a908c71a044b682f291082938c, type: 3}
   hitEffect: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
   muzzleFlash: {fileID: 0}
   muzzleEffect: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
+  ammoReserves: 250
+  ammoClip: 8
+  origAmmo: 10
   fire: 0
   ice: 0
   earth: 1
