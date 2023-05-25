@@ -132,10 +132,21 @@ public class gameManager : MonoBehaviour
 
     public void UpdateAmmoCount()
     {
-        //ammoReservesList[currArrayPos] -= ammoClipOrig - ammoClipList[currArrayPos];
-        //ammoClipOrig = playerScript.staffList[playerScript.selectedStaff].ammoClip;
         ammoCount.text = playerScript.staffList[playerScript.selectedStaff].ammoClip.ToString();
         ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
+
+
+
+
+
+
+
+
+
+        //ammoReservesList[currArrayPos] -= ammoClipOrig - ammoClipList[currArrayPos];
+        //ammoClipOrig = playerScript.staffList[playerScript.selectedStaff].ammoClip;
+        //ammoCount.text = playerScript.staffList[playerScript.selectedStaff].ammoClip.ToString();
+        //ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
         
         //if (playerScript.isReloading)
         //{
@@ -159,16 +170,33 @@ public class gameManager : MonoBehaviour
     {
         playerScript.isReloading = true;
 
-        Debug.Log("Reloading");
+        playerScript.staffList[playerScript.selectedStaff].ammoReserves -= (playerScript.staffList[playerScript.selectedStaff].origAmmo - playerScript.staffList[playerScript.selectedStaff].ammoClip);
         playerScript.staffList[playerScript.selectedStaff].ammoClip = playerScript.staffList[playerScript.selectedStaff].origAmmo;
-        playerScript.staffList[playerScript.selectedStaff].ammoReserves = (playerScript.staffList[playerScript.selectedStaff].origAmmo - playerScript.staffList[playerScript.selectedStaff].ammoClip);
-        ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
-        ammoCount.text = playerScript.staffList[playerScript.selectedStaff].origAmmo.ToString();
-        UpdateAmmoCount();
-        yield return new WaitForSeconds(2);
 
+        yield return new WaitForSeconds(2);
+        UpdateAmmoCount();
         playerScript.isReloading = false;
-        Debug.Log("Finished Reloading");
+
+
+
+
+
+
+
+
+
+        //playerScript.isReloading = true;
+
+        //Debug.Log("Reloading");
+        //playerScript.staffList[playerScript.selectedStaff].ammoClip = playerScript.staffList[playerScript.selectedStaff].origAmmo;
+        //playerScript.staffList[playerScript.selectedStaff].ammoReserves = (playerScript.staffList[playerScript.selectedStaff].origAmmo - playerScript.staffList[playerScript.selectedStaff].ammoClip);
+        //ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
+        //ammoCount.text = playerScript.staffList[playerScript.selectedStaff].origAmmo.ToString();
+        //UpdateAmmoCount();
+        //yield return new WaitForSeconds(2);
+
+        //playerScript.isReloading = false;
+        //Debug.Log("Finished Reloading");
 
         //ammoReservesList[currArrayPos] -= ammoClipOrig - ammoClipList[currArrayPos];
         //ammoClipList[currArrayPos] = ammoClipOrig;

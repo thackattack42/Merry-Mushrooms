@@ -34,19 +34,19 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
 
-    
+
     private float dashTime = 0.3f;
     private float origSpeed;
     private int isDashing;
     private bool isShooting;
-    private bool isReloading;
+    public bool isReloading;
     private bool isSprinting;
     public bool isCrouching;
     private int ammoAmount;
     private int origAmmoClip;
     private float origHeight;
-    private int reloadOnce = 0;
-    int selectedStaff;
+    //private int reloadOnce = 0;
+    public int selectedStaff;
 
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
@@ -64,10 +64,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     {
         // Sets original variables to players starting stats
         origSpeed = playerSpeed;
-        origAmmoClip = gameManager.instance.ammoClip;
+        //origAmmoClip = gameManager.instance.ammoClip;
         controller.height = 2.0f;
         origHeight = controller.height;
-        Debug.Log(gameManager.instance.ammoClipOrig);
+        //Debug.Log(gameManager.instance.ammoClipOrig);
 
         statusEffects = new Dictionary<string, StatusEffectData>();
 
@@ -86,19 +86,29 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
                 playerDash();
-                StartCoroutine(WaitForDash()); 
+                StartCoroutine(WaitForDash());
             }
-            if (Input.GetKeyDown(KeyCode.R) && reloadOnce == 0 && staffList.Count != 0)
+            if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0)
             {
-                if (gameManager.instance.ammoClipList[selectedStaff] != staffList[selectedStaff].origAmmo )
-                {
-                    reloadOnce = 1;
-                    isReloading = true;
-                    
-                    gameManager.instance.UpdateAmmoCount();
-                    StartCoroutine(WaitForReload());
-                    gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
-                }
+                StartCoroutine(gameManager.instance.Reload());
+
+
+
+
+
+
+
+
+
+                //if (gameManager.instance.ammoClipList[selectedStaff] != staffList[selectedStaff].origAmmo )
+                //{
+                //    reloadOnce = 1;
+                //    isReloading = true;
+
+                //    gameManager.instance.UpdateAmmoCount();
+                //    StartCoroutine(WaitForReload());
+                //    gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
+                //}
             }
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0)
@@ -166,11 +176,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     }
     IEnumerator shoot()
     {
-        if (gameManager.instance.ammoClipList[selectedStaff] > 0)
+        if (staffList[selectedStaff].ammoClip > 0)
         {
             isShooting = true;
 
-            gameManager.instance.ammoClipList[selectedStaff]--;
+            staffList[selectedStaff].ammoClip--;
 
             RaycastHit hit;
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
@@ -180,7 +190,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             {
                 Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
 
-                if(staffList[selectedStaff].fire)
+                if (staffList[selectedStaff].fire)
                 {
                     IFireDamage fireDamage = hit.collider.GetComponent<IFireDamage>();
 
@@ -204,10 +214,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
                         iceDamage.TakeIceDamage(shootDamage);
                 }
 
-                //IDamage damageable = hit.collider.GetComponent<IDamage>();
+                IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-                //if (damageable != null)
-                //    damageable.takeDamage(shootDamage);
+                if (damageable != null)
+                    damageable.takeDamage(shootDamage);
             }
         }
         gameManager.instance.UpdateAmmoCount();
@@ -251,7 +261,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         yield return new WaitForSeconds(2);
         isShooting = false;
         isReloading = false;
-        reloadOnce = 0;
+        //reloadOnce = 0;
     }
 
     public void takeDamage(int amount)
@@ -279,14 +289,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         staffMat.material = stats.model.GetComponent<MeshRenderer>().sharedMaterial;
 
         selectedStaff = staffList.Count - 1;
-        gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
-        gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
-        gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
-        gameManager.instance.currArrayPos = selectedStaff;
-        gameManager.instance.ammoReservesList.Add(staffList[selectedStaff].ammoReserves);
-        gameManager.instance.ammoClipList.Add(staffList[selectedStaff].ammoClip);
-        gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
-        gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
+        //gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
+        //gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
+        //gameManager.instance.ammoReserves = staffList[selectedStaff].ammoReserves;
+        //gameManager.instance.currArrayPos = selectedStaff;
+        //gameManager.instance.ammoReservesList.Add(staffList[selectedStaff].ammoReserves);
+        //gameManager.instance.ammoClipList.Add(staffList[selectedStaff].ammoClip);
+        //gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
+        //gameManager.instance.ammoCount.text = gameManager.instance.ammoClipList[selectedStaff].ToString();
         //staffTexture.mesh = stats.model.GetComponent<Texture>();
     }
 
@@ -296,13 +306,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         {
             
             selectedStaff++;
-            gameManager.instance.currArrayPos++;
+            //gameManager.instance.currArrayPos++;
             ChangeStaffStats();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
         {
             
-            gameManager.instance.currArrayPos--;
+            //gameManager.instance.currArrayPos--;
             selectedStaff--;
             ChangeStaffStats();   
         }
@@ -312,11 +322,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         shootDamage = staffList[selectedStaff].shootDamage;
         shootDistance = staffList[selectedStaff].shootDistance;
         shootRate = staffList[selectedStaff].shootRate;
-        gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
+        //gameManager.instance.ammoClipOrig = staffList[selectedStaff].origAmmo;
         staffModel.mesh = staffList[selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
-        gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
-        gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
+        //gameManager.instance.ammoClip = staffList[selectedStaff].ammoClip;
+        //gameManager.instance.ammoTotal.text = gameManager.instance.ammoReservesList[selectedStaff].ToString();
         gameManager.instance.UpdateAmmoCount();
     }
     public void CrouchPlayer()
