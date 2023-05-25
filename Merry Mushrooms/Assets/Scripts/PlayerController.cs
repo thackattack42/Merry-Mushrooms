@@ -168,6 +168,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             isShooting = true;
 
             staffList[selectedStaff].ammoClip--;
+            aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
 
             RaycastHit hit;
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
