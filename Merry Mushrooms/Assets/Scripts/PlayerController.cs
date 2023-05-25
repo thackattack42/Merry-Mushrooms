@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IEffectable
 {
 
     private Vector3 playerVelocity;
@@ -52,6 +52,14 @@ public class PlayerController : MonoBehaviour, IDamage
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
 
+    private Dictionary<string, StatusEffectData> statusEffects;
+    private float period = 0.0f;
+
+    public PlayerController()
+    {
+        this.statusEffects = null;
+    }
+
     private void Start()
     {
         // Sets original variables to players starting stats
@@ -60,13 +68,15 @@ public class PlayerController : MonoBehaviour, IDamage
         controller.height = 2.0f;
         origHeight = controller.height;
         Debug.Log(gameManager.instance.ammoClipOrig);
+
+        statusEffects = new Dictionary<string, StatusEffectData>();
+
         // Spawns Player
         Spawn();
     }
 
     void Update()
     {
-        
         if (gameManager.instance.activeMenu == null)
         {
             OnPlayerCrouch();
@@ -95,6 +105,14 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 StartCoroutine(shoot());
             }
+
+            // Call anything in here we want to update per second (not per frame)
+            if (period > 1.0f)
+            {
+                period = 0.0f;
+                UpdateStatusEffects();
+            }
+            period += UnityEngine.Time.deltaTime;
         }
 
         Sprint();
@@ -332,6 +350,91 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             if (Uncrouch != null)
                 Uncrouch();
+        }
+    }
+
+    public void ApplyEffect(StatusEffectData data)
+    {
+        // Check if status effect is new and apply modifier
+        if (!statusEffects.ContainsKey(data.name))
+        {
+            switch (data.type)
+            {
+                case StatusEffectType.Fire:
+                    HP -= data.modifier;
+                    break;
+
+                // TODO: Handle additional status effects
+
+                default:
+                    // Do nothing
+                    break;
+            }
+
+            // TODO: This code is duplicated in multiple places, move to a generic function?
+            gameManager.instance.playerHUD.updatePlayerHealth(HP);
+            if (HP <= 0)
+            {
+                HP = 0;
+                // Player is dead and display game over screen.
+                gameManager.instance.GameOver();
+            }
+        }
+
+        // Add/renew status effect
+        statusEffects.Add(data.name, data);
+    }
+
+    // This is expected to be called every second (not frame)
+    public void UpdateStatusEffects()
+    {
+        List<string> keysToRemove = new List<string>();
+
+        foreach (var iter in statusEffects)
+        {
+            StatusEffectData data = iter.Value;
+
+            // Apply status effect
+            if (data.duration > 0)
+            {
+                switch (data.type)
+                {
+                    case StatusEffectType.Fire:
+                        HP -= data.modifierPerSecond;
+                        break;
+
+                    // TODO: Handle additional status effects
+
+                    default:
+                        // Do nothing
+                        break;
+                }
+
+                // Tick down duration by 1 second
+                data.duration -= 1;
+
+                gameManager.instance.playerHUD.updatePlayerHealth(HP);
+                if (HP <= 0)
+                {
+                    HP = 0;
+                    // Player is dead and display game over screen.
+                    gameManager.instance.GameOver();
+                }
+            }
+            else
+            {
+                // Add status effect key for removal
+                keysToRemove.Add(data.name);
+            }
+        }
+
+        // Remove status effects
+        if (keysToRemove.Count > 0)
+        {
+            foreach (var key in keysToRemove)
+            {
+                statusEffects.Remove(key);
+            }
         }
     }
 }

@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Status Effect")]
-
-public class StatusEffectData : ScriptableObject
+public enum StatusEffectType
 {
-    public string Name;
-    public float DotAmount;
-    public float movementEffects;
-    public float statusTime;
+    Fire,
+    Slow,
+    Stone
+}
 
-    public GameObject EffectParticles;
+public struct StatusEffectData
+{
+    public string name;
+    public int modifier;
+    public int modifierPerSecond;
+    public float duration; // in seconds
+
+    public StatusEffectType type;
+
+    public GameObject effectParticles;
 }

@@ -2,25 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
-
 public class BossSkillAoeDmg : MonoBehaviour
 {
     [SerializeField] StatusEffectData data;
-    public float moveSpeed = 2f;
 
-    public SphereCollider sphereCol;
-
-    public void Awake()
+    public void Start()
     {
-        sphereCol = GetComponent<SphereCollider>();
-        sphereCol.isTrigger = true;
-        sphereCol.radius = 1f;
     }
 
     void Update()
     {
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        // This would move it away from boss
+        //transform.position += transform.forward * moveSpeed * Time.deltaTime;
     }
 
     public void OnTriggerEnter(Collider other)
