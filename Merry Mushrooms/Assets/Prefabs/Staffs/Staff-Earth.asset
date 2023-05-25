@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5916e12e294a590459a1cf367ba17057, type: 3}
   m_Name: Staff-Earth
   m_EditorClassIdentifier: 
-  shootDistance: 60
+  shootDistance: 40
   shootRate: 0.5
   shootDamage: 2
   model: {fileID: 1562803131489952075, guid: 2f03c9a908c71a044b682f291082938c, type: 3}
@@ -21,10 +21,10 @@ MonoBehaviour:
   muzzleEffect: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
   shootSound: {fileID: 8300000, guid: db6506d685e320a40bd4099b81ba240c, type: 3}
   shootVol: 2
-  ammoClip: 0
-  ammoReserves: 0
+  ammoClip: 10
+  ammoReserves: 200
   origAmmo: 10
-  origAmmoReserves: 400
+  origAmmoReserves: 200
   fire: 0
   ice: 0
   earth: 1
