@@ -37,6 +37,7 @@ public class gameManager : MonoBehaviour
     public AudioSource dashCooldownFinishPing;
     public GameObject lowHPFlash;
     public Transform minimapRotationLock;
+    public Image dmgFlash;
     
     
     int enemiesRemaining;

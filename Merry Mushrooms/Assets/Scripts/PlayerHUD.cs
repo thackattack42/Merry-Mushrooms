@@ -78,9 +78,16 @@ public class PlayerHUD : MonoBehaviour
     {
         if (currHP < 0) //to make sure the number in the UI doesn't show negative, or it will look weird.
             currHP = 0;
+        StartCoroutine (damageFlash());
         gameManager.instance.healthPoints.text = currHP.ToString();
         gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
         
+    }
+    IEnumerator damageFlash()
+    {
+        gameManager.instance.dmgFlash.enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        gameManager.instance.dmgFlash.enabled = false;
     }
     IEnumerator HPFlash()
     {
