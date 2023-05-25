@@ -28,7 +28,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
     void Update()
     {
         base.Update();
-        if (HP == 1000)
+        if (HP == 750)
         {
             spawnCountt = 2;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
