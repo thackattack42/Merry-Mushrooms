@@ -30,7 +30,7 @@ public class EnemyUI : MonoBehaviour
         enemyScript = enemy.GetComponent<Enemy_Scpt>();
 
         //Setup UI
-        enemyName.text = enemy.name;
+        //enemyName.text = enemy.name;
         enemyHPSlider.fillAmount = 1f;
         enemyMaxHP = enemyScript.HP;
         currHP = enemyMaxHP;
