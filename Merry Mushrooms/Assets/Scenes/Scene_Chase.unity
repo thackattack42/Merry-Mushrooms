@@ -444,7 +444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5561200739291475000, guid: 6a494e7e4aea3a24391bc474f312897e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5561200739291508760, guid: 6a494e7e4aea3a24391bc474f312897e, type: 3}
       propertyPath: m_RootOrder
@@ -1017,6 +1017,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Evil Mushroom-Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 6246918472149290069, guid: 0b2e6160393794548b5f14d4120ac4dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6246918472149322430, guid: 0b2e6160393794548b5f14d4120ac4dd, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1131,6 +1135,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5924203325895404191, guid: a0617bd520864d14688c3092376d6bdb, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5924203325895404191, guid: a0617bd520864d14688c3092376d6bdb, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5924203325895404191, guid: a0617bd520864d14688c3092376d6bdb, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9056604
+      objectReference: {fileID: 0}
     - target: {fileID: 7264477801070448947, guid: a0617bd520864d14688c3092376d6bdb, type: 3}
       propertyPath: m_RootOrder
       value: 3
