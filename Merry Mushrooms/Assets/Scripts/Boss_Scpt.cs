@@ -28,15 +28,13 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
     void Update()
     {
         base.Update();
-        if (HP == 250)
+        spawnCountt = 2;
+        if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
         {
-            spawnCountt = 2;
-            if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
-            {
-                StartCoroutine(EnemySpawn());
-            }
+            StartCoroutine(EnemySpawn());
         }
-        else if (HP <= 175)
+
+        else if (HP <= 50)
         {
             spawnCountt = 5;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
@@ -49,7 +47,7 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
                 //ApplyEffect()
             }
         }
-        else if (HP <= 100)
+        else if (HP <= 25)
         {
             spawnCountt = 9;
             if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
@@ -58,16 +56,13 @@ public class Boss_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEff
             }
             if (playerInRange)
             {
-                
+
                 //make AOE attack
                 //ApplyEffect()
                 //defence enabled//not needed
                 //heal enemies in area//not needed
             }
-            
         }
-
-
     }
     #endregion
     #region Functions
