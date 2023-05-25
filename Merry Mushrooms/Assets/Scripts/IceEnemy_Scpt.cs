@@ -32,7 +32,6 @@ public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(EnemyDespawn());
-            Destroy(gameObject);
         }
         else
         {
