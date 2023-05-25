@@ -238,5 +238,11 @@ public class Enemy_Scpt : MonoBehaviour, /*IDamage,*/ IPhysics
         agent.velocity += dir;
     }
 
+    public IEnumerator EnemyDespawn()
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
+    }
+
 }
 
