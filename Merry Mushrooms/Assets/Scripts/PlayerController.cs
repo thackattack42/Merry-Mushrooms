@@ -118,10 +118,17 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     void Movement()
     {
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (groundedPlayer)
         {
-            playerVelocity.y = 0f;
-            jumpedTimes = 0;
+            if (playerVelocity.y < 0)
+            {
+                playerVelocity.y = 0f;
+                jumpedTimes = 0;
+            }
+            if (!stepIsPlaying && move.normalized.magnitude > 0.5f)
+            {
+                StartCoroutine(playSteps());
+            }
         }
 
         move = (transform.right * Input.GetAxis("Horizontal")) +
