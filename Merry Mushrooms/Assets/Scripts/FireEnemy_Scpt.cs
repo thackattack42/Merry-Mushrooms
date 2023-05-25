@@ -14,7 +14,6 @@ public class FireEnemy_Scpt : Enemy_Scpt, IEarthDamage, IIceDamage, IFireDamage
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(EnemyDespawn());
-            StopAllCoroutines();
         }
         else
         {
@@ -35,7 +34,6 @@ public class FireEnemy_Scpt : Enemy_Scpt, IEarthDamage, IIceDamage, IFireDamage
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(EnemyDespawn());
-            StopAllCoroutines();
         }
         else
         {
