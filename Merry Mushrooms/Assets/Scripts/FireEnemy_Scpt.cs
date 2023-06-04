@@ -25,7 +25,7 @@ public class FireEnemy_Scpt : Enemy_Scpt, IEarthDamage, IIceDamage, IFireDamage
 
 
     public void TakeIceDamage(int dmg)
-    {
+        {
         HP -= dmg / 2;
 
         if (HP <= 0)

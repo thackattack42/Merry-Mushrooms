@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     public List<Staff_Stats> staffList = new List<Staff_Stats>();
     [Range(2, 300)][SerializeField] int shootDistance;
     [Range(0.1f, 3)][SerializeField] float shootRate;
-    [Range(1, 20)][SerializeField] int shootDamage;
+    [Range(1, 20)][SerializeField] public int shootDamage;
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
     // Bullet for Player
