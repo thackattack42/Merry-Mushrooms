@@ -193,13 +193,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             //{
             //    Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
 
-            //if (staffList[selectedStaff].fire)
-            //{
-            //    IFireDamage fireDamage = //hit.collider.GetComponent<IFireDamage>();
-
-            //    if (fireDamage != null)
-            //        fireDamage.TakeFireDamage(shootDamage);
-            //}
+            if (staffList[selectedStaff].fire)
+            {
+                //IFireDamage fireDamage = //hit.collider.GetComponent<IFireDamage>();
+                //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(shootDamage);
+                //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(shootDamage);
+              
+            }
 
             //if (staffList[selectedStaff].earth)
             //{
