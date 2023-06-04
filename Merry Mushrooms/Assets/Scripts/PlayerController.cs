@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [Range(1, 20)][SerializeField] int shootDamage;
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
+    // Bullet for Player
+    [SerializeField] GameObject playerBullet;
+    [SerializeField] GameObject bulletPoint;
+    [SerializeField] float speedOfBullet = 600;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audJump;
@@ -177,6 +181,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             staffList[selectedStaff].ammoClip--;
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
 
+            GameObject bulletToShoot = Instantiate(playerBullet, bulletPoint.transform.position, transform.rotation);
+            bulletToShoot.GetComponent<Rigidbody>().AddForce(transform.forward * speedOfBullet);
+            Destroy(bulletToShoot, 1);
             RaycastHit hit;
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
             Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
