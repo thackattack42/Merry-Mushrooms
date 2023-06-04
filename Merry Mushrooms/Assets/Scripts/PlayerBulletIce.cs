@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerBulletIce : MonoBehaviour
 {
+    // For damging Ice Enemies
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ice"))

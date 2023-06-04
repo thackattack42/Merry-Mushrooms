@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     private bool isSprinting;
     public bool isCrouching;
     private float origHeight;
+    private Vector3 destination;
     public int selectedStaff;
     bool stepIsPlaying;
 
@@ -181,11 +182,21 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             staffList[selectedStaff].ammoClip--;
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
 
+
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                destination = hit.point;
+            }
+            else
+            {
+                destination = ray.GetPoint(staffList[selectedStaff].shootDistance);
+            }
             // Creates bullet object and shoots it forward
             GameObject bulletToShoot = Instantiate(playerBullet, bulletPoint.transform.position, transform.rotation);
-            bulletToShoot.GetComponent<Rigidbody>().AddForce(transform.forward * speedOfBullet);
+            bulletToShoot.GetComponent<Rigidbody>().velocity = (destination - bulletPoint.transform.position).normalized * speedOfBullet;
             Destroy(bulletToShoot, 1);
-            //RaycastHit hit;
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
             Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
 
@@ -193,13 +204,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             //{
             //    Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
 
-            if (staffList[selectedStaff].fire)
-            {
-                //IFireDamage fireDamage = //hit.collider.GetComponent<IFireDamage>();
-                //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(shootDamage);
-                //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(shootDamage);
+            //if (staffList[selectedStaff].fire)
+            //{
+            //    //IFireDamage fireDamage = //hit.collider.GetComponent<IFireDamage>();
+            //    //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(shootDamage);
+            //    //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(shootDamage);
               
-            }
+            //}
 
             //if (staffList[selectedStaff].earth)
             //{

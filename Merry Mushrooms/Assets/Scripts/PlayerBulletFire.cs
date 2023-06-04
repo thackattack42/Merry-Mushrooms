@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBulletFire : MonoBehaviour
 {
-    //[SerializeField] GameObject pBullet;
+    // For damging Fire Enemies
 
     public void OnCollisionEnter(Collision collision)
     {

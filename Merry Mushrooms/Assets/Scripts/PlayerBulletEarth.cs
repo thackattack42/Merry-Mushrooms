@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerBulletEarth : MonoBehaviour
 {
+    // For damging Earth Enemies
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Earth"))
