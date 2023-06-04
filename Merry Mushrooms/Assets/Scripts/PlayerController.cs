@@ -181,46 +181,47 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             staffList[selectedStaff].ammoClip--;
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
 
+            // Creates bullet object and shoots it forward
             GameObject bulletToShoot = Instantiate(playerBullet, bulletPoint.transform.position, transform.rotation);
             bulletToShoot.GetComponent<Rigidbody>().AddForce(transform.forward * speedOfBullet);
             Destroy(bulletToShoot, 1);
-            RaycastHit hit;
+            //RaycastHit hit;
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
             Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
 
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
-            {
-                Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
+            //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+            //{
+            //    Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
 
-                if (staffList[selectedStaff].fire)
-                {
-                    IFireDamage fireDamage = hit.collider.GetComponent<IFireDamage>();
+            //if (staffList[selectedStaff].fire)
+            //{
+            //    IFireDamage fireDamage = //hit.collider.GetComponent<IFireDamage>();
 
-                    if (fireDamage != null)
-                        fireDamage.TakeFireDamage(shootDamage);
-                }
+            //    if (fireDamage != null)
+            //        fireDamage.TakeFireDamage(shootDamage);
+            //}
 
-                if (staffList[selectedStaff].earth)
-                {
-                    IEarthDamage earthDamage = hit.collider.GetComponent<IEarthDamage>();
+            //if (staffList[selectedStaff].earth)
+            //{
+            //    IEarthDamage earthDamage = hit.collider.GetComponent<IEarthDamage>();
 
-                    if (earthDamage != null)
-                        earthDamage.TakeEarthDamage(shootDamage);
-                }
+            //    if (earthDamage != null)
+            //        earthDamage.TakeEarthDamage(shootDamage);
+            //}
 
-                if (staffList[selectedStaff].ice)
-                {
-                    IIceDamage iceDamage = hit.collider.GetComponent<IIceDamage>();
+            //if (staffList[selectedStaff].ice)
+            //{
+            //    IIceDamage iceDamage = hit.collider.GetComponent<IIceDamage>();
 
-                    if (iceDamage != null)
-                        iceDamage.TakeIceDamage(shootDamage);
-                }
+            //    if (iceDamage != null)
+            //        iceDamage.TakeIceDamage(shootDamage);
+            //}
 
-                IDamage damageable = hit.collider.GetComponent<IDamage>();
+            //    IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-                if (damageable != null)
-                    damageable.takeDamage(shootDamage);
-            }
+            //    if (damageable != null)
+            //        damageable.takeDamage(shootDamage);
+            //}
         }
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(shootRate);
