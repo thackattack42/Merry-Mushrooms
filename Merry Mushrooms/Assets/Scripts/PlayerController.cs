@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
-        takeDamage(-maxHP);
+        //takeDamage(-maxHP);
     }
     IEnumerator shoot()
     {
