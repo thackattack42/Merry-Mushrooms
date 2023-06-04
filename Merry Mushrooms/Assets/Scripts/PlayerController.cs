@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         origSpeed = playerSpeed;
         controller.height = 2.0f;
         origHeight = controller.height;
+        HP = maxHP;
 
         statusEffects = new Dictionary<string, StatusEffectData>();
 
