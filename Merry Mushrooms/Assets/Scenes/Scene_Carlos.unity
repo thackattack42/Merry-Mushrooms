@@ -285,10 +285,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Evil Mushroom-Blue with weakness
       objectReference: {fileID: 0}
-    - target: {fileID: 6246918472149290069, guid: 0b2e6160393794548b5f14d4120ac4dd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6246918472149717109, guid: 0b2e6160393794548b5f14d4120ac4dd, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -399,10 +395,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 681703126322852358, guid: f711e17a497b2d64eac4d14d77cde4d0, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1725979806335149843, guid: f711e17a497b2d64eac4d14d77cde4d0, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -451,14 +443,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Evil Mushroom-Green with weakness
       objectReference: {fileID: 0}
-    - target: {fileID: 1725979806335318835, guid: f711e17a497b2d64eac4d14d77cde4d0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1725979806335318835, guid: f711e17a497b2d64eac4d14d77cde4d0, type: 3}
-      propertyPath: m_TagString
-      value: Earth
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f711e17a497b2d64eac4d14d77cde4d0, type: 3}
 --- !u!1001 &1036386478
@@ -468,21 +452,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 268423750, guid: d021e34254e59f5419d84c474828eff9, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 268423750, guid: d021e34254e59f5419d84c474828eff9, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8327772038628251588, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
-      propertyPath: speedOfBullet
-      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 8327772038628251595, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: m_RootOrder
