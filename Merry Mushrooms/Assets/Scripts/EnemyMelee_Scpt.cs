@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy_Scpt : MonoBehaviour, IPhysics
+public class EnemyMelee_Scpt : MonoBehaviour
 {
     #region fields
     [Header("------ Stats ------")]
-    // [Range(5, 100)][SerializeField] public int maxEnemyHP;
     [Range(5, 1000)][SerializeField] public int HP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     public int viewCone;
@@ -19,25 +17,25 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
     [SerializeField] public NavMeshAgent agent;
-    [SerializeField] Transform shootPos;
-    public  Transform headPos;
+    [SerializeField] Transform AttackPos;
+    public Transform headPos;
     [SerializeField] public Animator animr;
     [SerializeField] AudioSource aud;
 
     [Header("------ Weapon Stats ------")]
-    [Range(5, 10)][SerializeField] int shootDist;
-    [Range(0.1f, 10)][SerializeField] float ShootRate;
-    [Range(30, 180)][SerializeField] float ShootAngle;
-    [SerializeField] GameObject bullet;
+    [Range(0.1f, 10)][SerializeField] float AttackRate;
+    [Range(30, 180)][SerializeField] float AttackAngle;
+    BoxCollider MeleeObj;
+    //[SerializeField] GameObject bullet;
 
     [Header("------ Audio ------")]
-    [SerializeField] AudioClip[] audShoot;
+    //[SerializeField] AudioClip[] audShoot;
 
     [Header("------ Audio Vol ------")]
-    [SerializeField] float audShootVol;
+   // [SerializeField] float audShootVol;
     //Other Assets
     Color origColor;
-    private bool isShooting;
+    private bool isAttacking;
     public Vector3 playerDir;
     public bool playerInRange;
     public float angleToPlayer;
@@ -46,13 +44,13 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     Vector3 startingPos;
     public float stoppingDistOrig;
     float viewDistOrig;
-
     #endregion
+
     #region Start and Update
     // Start is called before the first frame update
     public void Start()
     {
-        
+
 
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
@@ -89,6 +87,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         }
     }
     #endregion
+
     #region Functions
     #region If Hit Color Flash
     public IEnumerator FlashHitColor() //flash when the enemy is hit
@@ -99,16 +98,18 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     }
     #endregion
     #region Shooting Functions
-    IEnumerator shoot()
+    IEnumerator Attack()
     {
-        isShooting = true;
-        animr.SetTrigger("Shoot");
-        yield return new WaitForSeconds(ShootRate);
-        isShooting = false;
+        isAttacking = true;
+        animr.SetTrigger("MeleeAttack");
+        MeleeObj.isTrigger = true;
+        yield return new WaitForSeconds(AttackRate);
+        MeleeObj.isTrigger = false;
+        isAttacking = false;
     }
-    public void createBullet()
+    public void Attacking()
     {
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        //Instantiate(bullet, shootPos.position, transform.rotation);
         //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
     }
     #endregion
@@ -117,7 +118,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;  
+            playerInRange = true;
         }
     }
 
@@ -166,10 +167,10 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
                     FacePlayer();
                 }
 
-                if (!isShooting && angleToPlayer <= ShootAngle)
+                if (!isAttacking && angleToPlayer <= AttackAngle)
                 {
                     //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
-                    StartCoroutine(shoot());
+                    StartCoroutine(Attack());
                 }
                 return true;
             }
@@ -234,5 +235,12 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     }
     #endregion
     #endregion
+
+
+
 }
+
+
+
+
 
