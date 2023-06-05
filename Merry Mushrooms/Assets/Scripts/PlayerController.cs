@@ -36,9 +36,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
 
     [Header("----- Staff Stats -----")]
     public List<Staff_Stats> staffList = new List<Staff_Stats>();
-    [Range(2, 300)][SerializeField] int shootDistance;
-    [Range(0.1f, 3)][SerializeField] float shootRate;
-    [Range(1, 20)][SerializeField] public int shootDamage;
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
     // Bullet for Player
@@ -54,6 +51,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [SerializeField] MeshRenderer bowMat;
     [SerializeField] MeshFilter bowModel;
 
+    [Header("----- Shoot Stats -----")]
+    [Range(2, 300)][SerializeField] int shootDistance;
+    [Range(0.1f, 3)][SerializeField] float shootRate;
+    [Range(1, 20)][SerializeField] public int shootDamage;
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audJump;
     [SerializeField] AudioClip[] audDamage;
