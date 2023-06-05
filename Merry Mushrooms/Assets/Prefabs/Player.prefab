@@ -705,7 +705,9 @@ MonoBehaviour:
   maxJumps: 2
   sprintSpeed: 2
   maxHP: 10
+  maxMP: 0
   HP: 0
+  MP: 0
   level: 0
   currExp: 0
   expToNextLevel: 0
@@ -713,20 +715,20 @@ MonoBehaviour:
   dashSpeed: 4
   dashCoolDown: 7
   staffList: []
-  BowList: []
-  shootDistance: 200
-  shootRate: 3
-  shootDamage: 1
   staffModel: {fileID: 3469287836642206127}
   staffMat: {fileID: 1711813856071030117}
-  bowMat: {fileID: 476571864147875218}
-  bowModel: {fileID: 2412215107198787928}
   playerBullet: {fileID: 2872036455639188616, guid: 9450518a5e37eef4cad2fe4a1a0e545d, type: 3}
   bulletPoint: {fileID: 984233064}
   speedOfBullet: 10
+  BowList: []
   playerArrow: {fileID: 2834199721020510925, guid: d28d4e4700f2d7d4b8edfb0752db8660, type: 3}
   arrowPoint: {fileID: 1949705862}
   speedOfArrow: 15
+  bowMat: {fileID: 476571864147875218}
+  bowModel: {fileID: 2412215107198787928}
+  shootDistance: 200
+  shootRate: 3
+  shootDamage: 1
   audJump:
   - {fileID: 8300000, guid: 914310711046919498a67dc443fce46d, type: 3}
   - {fileID: 8300000, guid: 24964d3f44feaf54da19fd8a0760dd07, type: 3}
@@ -755,6 +757,8 @@ MonoBehaviour:
   isCrouching: 0
   selectedStaff: 0
   selectedBow: 0
+  StaffEquipped: 0
+  BowEquipped: 0
 --- !u!114 &8863840815364814771
 MonoBehaviour:
   m_ObjectHideFlags: 0

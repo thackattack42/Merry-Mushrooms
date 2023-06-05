@@ -7,6 +7,7 @@ public class PlayerHUD : MonoBehaviour
 {
     //Player stuff
     int maxPlayerHP;
+    int maxPlayerMP;
     int funGil;
 
     //Audio Stuff
@@ -32,10 +33,13 @@ public class PlayerHUD : MonoBehaviour
     {
         //Get Values
         maxPlayerHP = gameManager.instance.playerScript.maxHP;
+        maxPlayerMP = gameManager.instance.playerScript.maxMP;
         funGil = 0;
         //Set Values to HUD
         gameManager.instance.healthPoints.text = maxPlayerHP.ToString();
         gameManager.instance.HPSlider.fillAmount = 1f;
+        gameManager.instance.manaPoints.text = maxPlayerMP.ToString();
+        gameManager.instance.MPSlider.fillAmount = 1f;
         gameManager.instance.funGil.text = funGil.ToString();
         //gameManager.instance.dashCooldownCounter.text = "";
         gameManager.instance.dashCooldownSlider.fillAmount = 1f;
@@ -85,6 +89,14 @@ public class PlayerHUD : MonoBehaviour
             StartCoroutine(damageFlash());
         gameManager.instance.healthPoints.text = currHP.ToString();
         gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
+        
+    }
+    public void updatePlayerMana(int currMP)
+    {
+        if (currMP < 0) 
+            currMP = 0;
+        gameManager.instance.manaPoints.text = currMP.ToString();
+        gameManager.instance.MPSlider.fillAmount = (float)currMP / maxPlayerMP;
         
     }
     public void addFunGil(int amount)
