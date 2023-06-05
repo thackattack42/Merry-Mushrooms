@@ -46,6 +46,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     Vector3 startingPos;
     public float stoppingDistOrig;
     float viewDistOrig;
+    public GameObject FunGilDrop;
 
     #endregion
     #region Start and Update
@@ -229,6 +230,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     #region Enemy's Death
     public IEnumerator EnemyDespawn()
     {
+        Instantiate(FunGilDrop, transform.position, transform.rotation);
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
