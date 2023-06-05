@@ -1,25 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+[CreateAssetMenu]
+public class Item : ScriptableObject
 {
-    string iName;
-    public Item()
-    {
-        iName = "";
-    }
-    public Item(string name)
-    {
-        iName = name;
-    }
-    public string GetName()
-    {
-        return iName;
-    }
-    public void SetName(string name)
-    {
-        iName = name;
-    }
+    ItemType type;
+    public bool stackable = true;
+    public Image img;
     
+}
+
+public enum ItemType
+{
+    Armor, 
+    Weapon, 
+    Consumable
 }
