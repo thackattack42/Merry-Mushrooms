@@ -191,10 +191,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EM-Green-Weak-Archer
       objectReference: {fileID: 0}
-    - target: {fileID: 6246918472149290069, guid: 3fe7405fc18cdcd4fb451bf548039527, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6246918472149717109, guid: 3fe7405fc18cdcd4fb451bf548039527, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -402,10 +398,6 @@ PrefabInstance:
     - target: {fileID: 6246918472149290069, guid: ac85628f02f87dc48a73b4f77d7edcc1, type: 3}
       propertyPath: m_Name
       value: EM-Blue-Weak-Archer
-      objectReference: {fileID: 0}
-    - target: {fileID: 6246918472149290069, guid: ac85628f02f87dc48a73b4f77d7edcc1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6246918472149717109, guid: ac85628f02f87dc48a73b4f77d7edcc1, type: 3}
       propertyPath: m_RootOrder
@@ -753,24 +745,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
---- !u!1 &1641100403159118144 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3157273356674643292, guid: fe419461d3b477f4697669bbd929c0bb, type: 3}
-  m_PrefabInstance: {fileID: 4401916229265720348}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &3036084923677271137
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1641100403159118144}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.1057439
-  m_Center: {x: 0.00000022351742, y: -0.22919038, z: 0.00000018253922}
 --- !u!1001 &3098176643722191756
 PrefabInstance:
   m_ObjectHideFlags: 0
