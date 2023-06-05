@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [Range(2, 3)][SerializeField] int sprintSpeed;
     [SerializeField] public int maxHP;
     [SerializeField] public int HP;
+    [SerializeField] public int level;
+    [SerializeField] public int currExp;
+    [SerializeField] public int expToNextLevel;
+    [SerializeField] public int skillPoints;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
@@ -475,5 +479,16 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             yield return new WaitForSeconds(0.5f);
         }
         stepIsPlaying = false;
+    }
+
+    public void AddEXP(int amount)
+    {
+        currExp += amount;
+        if (currExp >= expToNextLevel)
+        {
+            level++;
+            skillPoints++;
+            currExp -= expToNextLevel;
+        }
     }
 }
