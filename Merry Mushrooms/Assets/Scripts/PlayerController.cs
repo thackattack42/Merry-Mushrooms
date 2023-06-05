@@ -22,7 +22,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [Range(1, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
     [SerializeField] public int maxHP;
+    [SerializeField] public int maxMP;
     [SerializeField] public int HP;
+    [SerializeField] public int MP;
     [SerializeField] public int level;
     [SerializeField] public int currExp;
     [SerializeField] public int expToNextLevel;
