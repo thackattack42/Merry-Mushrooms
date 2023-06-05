@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         Sprint();
         CrouchPlayer();
     }
-
+    #region PlayerMovement
     void Movement()
     {
         groundedPlayer = controller.isGrounded;
@@ -184,6 +184,21 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
+    IEnumerator Dash()
+    {
+        // Will make player dash
+        playerSpeed *= dashSpeed;
+        Debug.Log("Player Dashed");
+        // How long the player will dash for
+        yield return new WaitForSeconds(dashTime);
+        if (isSprinting)
+        {
+            playerSpeed /= dashSpeed;
+        }
+        else
+            playerSpeed = origSpeed;
+
+    }
 
     void Sprint()
     {
@@ -199,13 +214,55 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             isSprinting = false;
         }
     }
-    public void Spawn()
+    public void CrouchPlayer()
     {
-        controller.enabled = false;
-        transform.position = gameManager.instance.playerSpawnPos.transform.position;
-        controller.enabled = true;
-        //takeDamage(-maxHP);
+        if (Input.GetButtonDown("Crouch") && !isSprinting && isDashing == 0)
+        {
+            playerSpeed /= 2;
+            isCrouching = true;
+            controller.height /= 2;
+        }
+        else if (Input.GetButtonUp("Crouch") && !isSprinting && isDashing == 0)
+        {
+            playerSpeed = origSpeed;
+            isCrouching = false;
+            controller.height = origHeight;
+        }
     }
+    void OnPlayerCrouch()
+    {
+        if (Input.GetButtonDown("Crouch"))
+        {
+            if (Crouch != null)
+                Crouch();
+        }
+    }
+    void OnPlayerUncrouch()
+    {
+        if (Input.GetButtonUp("Crouch"))
+        {
+            if (Uncrouch != null)
+                Uncrouch();
+        }
+    }
+    IEnumerator playSteps()
+    {
+        stepIsPlaying = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        if (!isSprinting)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        stepIsPlaying = false;
+    }
+
+    #endregion
+
+    #region Staff
     IEnumerator shoot()
     {
         if (staffList[selectedStaff].ammoClip > 0)
@@ -245,66 +302,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
-    IEnumerator BowShoot()
-    {
-        if (BowList[selectedBow].ammoClip > 0)
-        {
-            isShooting = true;
-
-           
-            BowList[selectedBow].ammoClip--;
-            
-            aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
-
-
-
-            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                destination = hit.point;
-            }
-            else
-            {
-                
-                destination = ray.GetPoint(BowList[selectedStaff].bowShootDistance);
-            }
-            // Creates bullet object and shoots it towards the center ray of the camera
-            GameObject bulletToShoot = Instantiate(playerArrow, arrowPoint.transform.position, transform.rotation);
-            bulletToShoot.GetComponent<Rigidbody>().velocity = (destination - arrowPoint.transform.position).normalized * speedOfArrow;
-            Destroy(bulletToShoot, 1);
-
-            ////Muzzle Flash
-            //GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
-            ////Instantiate(BowList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
-
-
-        }
-        gameManager.instance.UpdateAmmoCount();
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
-    }
 
     void playerDash()
     {
         isDashing++;
         StartCoroutine(Dash());
-    }
-
-    IEnumerator Dash()
-    {
-        // Will make player dash
-        playerSpeed *= dashSpeed;
-        Debug.Log("Player Dashed");
-        // How long the player will dash for
-        yield return new WaitForSeconds(dashTime);
-        if (isSprinting)
-        {
-            playerSpeed /= dashSpeed;
-        }
-        else
-            playerSpeed = origSpeed;
-
     }
 
     IEnumerator WaitForDash()
@@ -313,20 +315,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         gameManager.instance.playerHUD.dashCooldown();
         yield return new WaitForSeconds(dashCoolDown);
         isDashing = 0;
-    }
-
-    public void takeDamage(int amount)
-    {
-        // Will take damage based off the amount 
-        HP -= amount;
-        aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
-        gameManager.instance.playerHUD.updatePlayerHealth(HP);
-        if (HP <= 0)
-        {
-            HP = 0;
-            // Player is dead and display game over screen.
-            gameManager.instance.GameOver();
-        }
     }
 
     public void staffPickup(Staff_Stats stats)
@@ -367,6 +355,48 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
         gameManager.instance.UpdateAmmoCount();
     }
+    #endregion
+
+    #region Bow
+    IEnumerator BowShoot()
+    {
+        if (BowList[selectedBow].ammoClip > 0)
+        {
+            isShooting = true;
+
+           
+            BowList[selectedBow].ammoClip--;
+            
+            aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
+
+
+
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                destination = hit.point;
+            }
+            else
+            {
+                
+                destination = ray.GetPoint(BowList[selectedStaff].bowShootDistance);
+            }
+            // Creates bullet object and shoots it towards the center ray of the camera
+            GameObject bulletToShoot = Instantiate(playerArrow, arrowPoint.transform.position, transform.rotation);
+            bulletToShoot.GetComponent<Rigidbody>().velocity = (destination - arrowPoint.transform.position).normalized * speedOfArrow;
+            Destroy(bulletToShoot, 1);
+
+            ////Muzzle Flash
+            //GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
+            ////Instantiate(BowList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
+
+
+        }
+        gameManager.instance.UpdateAmmoCount();
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
     public void BowPickup(BowStats stats)
     {
         BowList.Add(stats);
@@ -381,38 +411,29 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         selectedBow = BowList.Count - 1;
         gameManager.instance.UpdateAmmoCount();
     }
-    public void CrouchPlayer()
+
+    #endregion
+
+    public void takeDamage(int amount)
     {
-        if (Input.GetButtonDown("Crouch") && !isSprinting && isDashing == 0)
+        // Will take damage based off the amount 
+        HP -= amount;
+        aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
+        gameManager.instance.playerHUD.updatePlayerHealth(HP);
+        if (HP <= 0)
         {
-            playerSpeed /= 2;
-            isCrouching = true;
-            controller.height /= 2;
-        }
-        else if (Input.GetButtonUp("Crouch") && !isSprinting && isDashing == 0)
-        {
-            playerSpeed = origSpeed;
-            isCrouching = false;
-            controller.height = origHeight;
+            HP = 0;
+            // Player is dead and display game over screen.
+            gameManager.instance.GameOver();
         }
     }
 
-    void OnPlayerCrouch()
+    public void Spawn()
     {
-        if (Input.GetButtonDown("Crouch"))
-        {
-            if (Crouch != null)
-                Crouch();
-        }
-    }
-
-    void OnPlayerUncrouch()
-    {
-        if (Input.GetButtonUp("Crouch"))
-        {
-            if (Uncrouch != null)
-                Uncrouch();
-        }
+        controller.enabled = false;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
+        //takeDamage(-maxHP);
     }
 
     public void ApplyEffect(StatusEffectData data)
@@ -537,20 +558,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         yield return new WaitForSeconds(2);
         gameManager.instance.UpdateAmmoCount();
         isReloading = false;
-    }
-    IEnumerator playSteps()
-    {
-        stepIsPlaying = true;
-        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
-        if (!isSprinting)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-        stepIsPlaying = false;
     }
 
     public void AddEXP(int amount)
