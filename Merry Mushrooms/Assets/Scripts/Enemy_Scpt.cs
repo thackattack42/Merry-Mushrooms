@@ -8,7 +8,6 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
 {
     #region fields
     [Header("------ Stats ------")]
-    // [Range(5, 100)][SerializeField] public int maxEnemyHP;
     [Range(5, 1000)][SerializeField] public int HP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     public int viewCone;
@@ -19,16 +18,9 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
     [SerializeField] public NavMeshAgent agent;
-    [SerializeField] Transform shootPos;
     public  Transform headPos;
     [SerializeField] public Animator animr;
     [SerializeField] AudioSource aud;
-
-    [Header("------ Weapon Stats ------")]
-    [Range(5, 10)][SerializeField] int shootDist;
-    [Range(0.1f, 10)][SerializeField] float ShootRate;
-    [Range(30, 180)][SerializeField] float ShootAngle;
-    [SerializeField] GameObject bullet;
 
     [Header("------ Audio ------")]
     [SerializeField] AudioClip[] audShoot;
@@ -37,7 +29,6 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     [SerializeField] float audShootVol;
     //Other Assets
     Color origColor;
-    private bool isShooting;
     public Vector3 playerDir;
     public bool playerInRange;
     public float angleToPlayer;
@@ -99,20 +90,6 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         model.material.color = origColor;
     }
     #endregion
-    #region Shooting Functions
-    IEnumerator shoot()
-    {
-        isShooting = true;
-        animr.SetTrigger("Shoot");
-        yield return new WaitForSeconds(ShootRate);
-        isShooting = false;
-    }
-    public void createBullet()
-    {
-        Instantiate(bullet, shootPos.position, transform.rotation);
-        //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
-    }
-    #endregion
     #region Collider Enter/Exit
     public void OnTriggerEnter(Collider other)
     {
@@ -147,7 +124,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
     }
-    public bool canSeePlayer()
+    public virtual bool canSeePlayer()
     {
         playerDir = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
@@ -165,12 +142,6 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
                 if (agent.remainingDistance < agent.stoppingDistance)
                 {
                     FacePlayer();
-                }
-
-                if (!isShooting && angleToPlayer <= ShootAngle)
-                {
-                    //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
-                    StartCoroutine(shoot());
                 }
                 return true;
             }
