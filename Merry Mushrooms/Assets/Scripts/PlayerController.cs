@@ -32,23 +32,25 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [SerializeField] float dashSpeed;
     [Range(2, 10)][SerializeField] public int dashCoolDown;
 
-    [Header("----- Weapon Stats -----")]
+    [Header("----- Staff Stats -----")]
     public List<Staff_Stats> staffList = new List<Staff_Stats>();
-    public List<BowStats> BowList = new List<BowStats>();
     [Range(2, 300)][SerializeField] int shootDistance;
     [Range(0.1f, 3)][SerializeField] float shootRate;
     [Range(1, 20)][SerializeField] public int shootDamage;
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
-    [SerializeField] MeshRenderer bowMat;
-    [SerializeField] MeshFilter bowModel;
     // Bullet for Player
     [SerializeField] GameObject playerBullet;
     [SerializeField] GameObject bulletPoint;
     [SerializeField] float speedOfBullet = 600;
+
+    [Header("----- Bow Stats -----")]
+    public List<BowStats> BowList = new List<BowStats>();
     [SerializeField] GameObject playerArrow;
     [SerializeField] GameObject arrowPoint;
     [SerializeField] float speedOfArrow = 600;
+    [SerializeField] MeshRenderer bowMat;
+    [SerializeField] MeshFilter bowModel;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audJump;
@@ -111,7 +113,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
                 playerDash();
                 StartCoroutine(WaitForDash());
             }
-            if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0)
+            if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0 && StaffEquipped)
+            {
+                StartCoroutine(Reload());
+            }
+            if (Input.GetKeyDown(KeyCode.R) || BowList.Count != 0 && BowList[selectedBow].ammoClip <= 0 && BowEquipped)
             {
                 StartCoroutine(Reload());
             }
