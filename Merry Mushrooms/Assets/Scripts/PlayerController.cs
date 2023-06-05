@@ -495,6 +495,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     {
         isReloading = true;
 
+        if (StaffEquipped)
+        {
         if (staffList[selectedStaff].ammoReserves < staffList[selectedStaff].origAmmo)
         {
             staffList[selectedStaff].ammoClip = staffList[selectedStaff].ammoReserves;
@@ -504,6 +506,23 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         {
             staffList[selectedStaff].ammoReserves -= (staffList[selectedStaff].origAmmo - staffList[selectedStaff].ammoClip);
             staffList[selectedStaff].ammoClip = staffList[selectedStaff].origAmmo;
+        }
+
+        
+        }
+        if (BowEquipped)
+        {
+        if (BowList[selectedBow].ammoReserves < BowList[selectedBow].origAmmo)
+        {
+           BowList[selectedBow].ammoClip = BowList[selectedBow].ammoReserves;
+           BowList[selectedBow].ammoReserves = 0;
+        }
+        else
+        {
+                    BowList[selectedBow].ammoReserves -= (BowList[selectedBow].origAmmo - BowList[selectedBow].ammoClip);
+                    BowList[selectedBow].ammoClip = BowList[selectedBow].origAmmo;
+        }
+
         }
 
         yield return new WaitForSeconds(2);
