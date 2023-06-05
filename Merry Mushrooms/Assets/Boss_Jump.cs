@@ -36,30 +36,30 @@ public class Boss_Jump : StateMachineBehaviour
 
         //aoeAttack.AOEAttack();
 
-        if (timer <= 0)
-        {
-            if (boss.numMinions < boss.maxMinions)
-            {
-                rand = Random.Range(0, 3);
+        //if (timer <= 0)
+        //{
+        //    if (boss.numMinions < boss.maxMinions)
+        //    {
+        //        rand = Random.Range(0, 3);
 
-                if (rand == 0)
-                    animator.SetTrigger("Idle");
-                else if (rand == 1)
-                    animator.SetTrigger("Shoot");
-                else
-                    animator.SetTrigger("Summon Minions");
-            }
-            else
-            {
-                rand = Random.Range(0, 2);
-                if (rand == 0)
-                    animator.SetTrigger("Idle");
-                else
-                    animator.SetTrigger("Shoot");
-            }
-        }
-        else
-            timer -= Time.deltaTime;
+        //        if (rand == 0)
+        //            animator.SetTrigger("Idle");
+        //        else if (rand == 1)
+        //            animator.SetTrigger("Shoot");
+        //        else
+        //            animator.SetTrigger("Summon Minions");
+        //    }
+        //    else
+        //    {
+        //        rand = Random.Range(0, 2);
+        //        if (rand == 0)
+        //            animator.SetTrigger("Idle");
+        //        else
+        //            animator.SetTrigger("Shoot");
+        //    }
+        //}
+        //else
+        //    timer -= Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

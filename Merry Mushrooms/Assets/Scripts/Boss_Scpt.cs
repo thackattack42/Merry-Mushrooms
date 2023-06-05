@@ -102,7 +102,6 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
-        //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
     }
 
     #region Spawner

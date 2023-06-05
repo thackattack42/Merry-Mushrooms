@@ -803,7 +803,10 @@ MonoBehaviour:
   bullet: {fileID: 5463603646565746171, guid: c9b12a9667af10747bd2d0d5098e5922, type: 3}
   audShoot: []
   audShootVol: 2
+  playerDir: {x: 0, y: 0, z: 0}
   playerInRange: 0
+  angleToPlayer: 0
+  stoppingDistOrig: 0
 --- !u!95 &6246918472158789595
 Animator:
   serializedVersion: 5
