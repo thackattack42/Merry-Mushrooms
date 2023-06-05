@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
+public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IDamage
 {
     public void TakeFireDamage(int dmg)
     {
@@ -25,7 +25,7 @@ public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
 
     public void TakeEarthDamage (int dmg)
     {
-        HP -= dmg - 1;
+        HP -= dmg;
         if (HP <= 0)
         {
             animr.SetBool("Death", true);
@@ -44,5 +44,24 @@ public class IceEnemy_Scpt : Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage
     public void TakeIceDamage(int dmg)
     {
         HP += dmg;
+    }
+
+    public void takeDamage(int dmg)
+    {
+        HP = HP - dmg;
+
+        if (HP <= 0)
+        {
+            animr.SetBool("Death", true);
+            agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+            StartCoroutine(EnemyDespawn());
+        }
+        else
+        {
+            animr.SetTrigger("Damaged");
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            StartCoroutine(FlashHitColor());
+        }
     }
 }
