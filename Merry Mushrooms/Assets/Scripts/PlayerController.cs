@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             staffList[selectedStaff].ammoClip--;
             
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
-            aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
+           
 
 
 
