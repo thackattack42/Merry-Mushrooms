@@ -34,15 +34,21 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
 
     [Header("----- Weapon Stats -----")]
     public List<Staff_Stats> staffList = new List<Staff_Stats>();
+    public List<BowStats> BowList = new List<BowStats>();
     [Range(2, 300)][SerializeField] int shootDistance;
     [Range(0.1f, 3)][SerializeField] float shootRate;
     [Range(1, 20)][SerializeField] public int shootDamage;
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
+    [SerializeField] MeshRenderer bowMat;
+    [SerializeField] MeshFilter bowModel;
     // Bullet for Player
     [SerializeField] GameObject playerBullet;
     [SerializeField] GameObject bulletPoint;
     [SerializeField] float speedOfBullet = 600;
+    [SerializeField] GameObject playerArrow;
+    [SerializeField] GameObject arrowPoint;
+    [SerializeField] float speedOfArrow = 600;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audJump;
@@ -61,7 +67,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     private float origHeight;
     private Vector3 destination;
     public int selectedStaff;
+    public int selectedBow;
     bool stepIsPlaying;
+    public  bool StaffEquipped;
+    public  bool BowEquipped;
 
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
@@ -109,7 +118,17 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0)
             {
+               
+
                 StartCoroutine(shoot());
+             
+            }
+            if (Input.GetButton("Shoot") && !isShooting && !isReloading && BowList.Count > 0)
+            {
+
+
+                StartCoroutine(BowShoot());
+
             }
 
             // Call anything in here we want to update per second (not per frame)
@@ -185,7 +204,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             isShooting = true;
 
             staffList[selectedStaff].ammoClip--;
+            
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
+           
 
 
 
@@ -198,6 +219,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             else
             {
                 destination = ray.GetPoint(staffList[selectedStaff].shootDistance);
+                destination = ray.GetPoint(BowList[selectedStaff].bowShootDistance);
             }
             // Creates bullet object and shoots it towards the center ray of the camera
             GameObject bulletToShoot = Instantiate(playerBullet, bulletPoint.transform.position, transform.rotation);
@@ -209,6 +231,45 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
 
             
+        }
+        gameManager.instance.UpdateAmmoCount();
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
+    IEnumerator BowShoot()
+    {
+        if (BowList[selectedBow].ammoClip > 0)
+        {
+            isShooting = true;
+
+           
+            BowList[selectedBow].ammoClip--;
+            
+            aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
+
+
+
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                destination = hit.point;
+            }
+            else
+            {
+                
+                destination = ray.GetPoint(BowList[selectedStaff].bowShootDistance);
+            }
+            // Creates bullet object and shoots it towards the center ray of the camera
+            GameObject bulletToShoot = Instantiate(playerArrow, arrowPoint.transform.position, transform.rotation);
+            bulletToShoot.GetComponent<Rigidbody>().velocity = (destination - arrowPoint.transform.position).normalized * speedOfArrow;
+            Destroy(bulletToShoot, 1);
+
+            ////Muzzle Flash
+            //GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
+            ////Instantiate(BowList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
+
+
         }
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(shootRate);
@@ -269,10 +330,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
 
         staffModel.mesh = stats.model.GetComponent<MeshFilter>().sharedMesh;
         staffMat.material = stats.model.GetComponent<MeshRenderer>().sharedMaterial;
-
+        StaffEquipped = true;
         selectedStaff = staffList.Count - 1;
         gameManager.instance.UpdateAmmoCount();
     }
+    
 
     void SwitchStaff()
     {
@@ -294,6 +356,20 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         shootRate = staffList[selectedStaff].shootRate;
         staffModel.mesh = staffList[selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
+        gameManager.instance.UpdateAmmoCount();
+    }
+    public void BowPickup(BowStats stats)
+    {
+        BowList.Add(stats);
+
+        shootDamage = stats.bowShootDamage;
+        shootDistance = stats.bowShootDistance;
+        //shootRate = stats.bow;
+
+        bowModel.mesh = stats.model.GetComponent<MeshFilter>().sharedMesh;
+        bowMat.material = stats.model.GetComponent<MeshRenderer>().sharedMaterial;
+        BowEquipped = true;
+        selectedBow = BowList.Count - 1;
         gameManager.instance.UpdateAmmoCount();
     }
     public void CrouchPlayer()
@@ -419,6 +495,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     {
         isReloading = true;
 
+        if (StaffEquipped)
+        {
         if (staffList[selectedStaff].ammoReserves < staffList[selectedStaff].origAmmo)
         {
             staffList[selectedStaff].ammoClip = staffList[selectedStaff].ammoReserves;
@@ -428,6 +506,23 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         {
             staffList[selectedStaff].ammoReserves -= (staffList[selectedStaff].origAmmo - staffList[selectedStaff].ammoClip);
             staffList[selectedStaff].ammoClip = staffList[selectedStaff].origAmmo;
+        }
+
+        
+        }
+        if (BowEquipped)
+        {
+        if (BowList[selectedBow].ammoReserves < BowList[selectedBow].origAmmo)
+        {
+           BowList[selectedBow].ammoClip = BowList[selectedBow].ammoReserves;
+           BowList[selectedBow].ammoReserves = 0;
+        }
+        else
+        {
+                    BowList[selectedBow].ammoReserves -= (BowList[selectedBow].origAmmo - BowList[selectedBow].ammoClip);
+                    BowList[selectedBow].ammoClip = BowList[selectedBow].origAmmo;
+        }
+
         }
 
         yield return new WaitForSeconds(2);
