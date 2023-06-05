@@ -130,7 +130,17 @@ public class gameManager : MonoBehaviour
 
     public void UpdateAmmoCount()
     {
+
+        if (playerScript.StaffEquipped == true)
+        {
         ammoCount.text = playerScript.staffList[playerScript.selectedStaff].ammoClip.ToString();
         ammoTotal.text = playerScript.staffList[playerScript.selectedStaff].ammoReserves.ToString();
+        }
+        if (playerScript.BowEquipped == true)
+        {
+            ammoCount.text = playerScript.BowList[playerScript.selectedBow].ammoClip.ToString();
+            ammoTotal.text = playerScript.BowList[playerScript.selectedBow].ammoReserves.ToString();
+        }
+        
     }
 }
