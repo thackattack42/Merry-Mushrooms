@@ -1445,9 +1445,9 @@ Transform:
   m_Children:
   - {fileID: 691820062}
   - {fileID: 1617700556}
+  - {fileID: 1006878539}
   - {fileID: 1048763297}
   - {fileID: 1466500516}
-  - {fileID: 1006878539}
   m_Father: {fileID: 872133477}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1841,7 +1841,7 @@ GameObject:
   - component: {fileID: 1006878541}
   - component: {fileID: 1006878540}
   m_Layer: 5
-  m_Name: Credits
+  m_Name: Options
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1861,7 +1861,7 @@ RectTransform:
   m_Children:
   - {fileID: 751261474}
   m_Father: {fileID: 738068118}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1975,7 +1975,7 @@ GameObject:
   - component: {fileID: 1048763299}
   - component: {fileID: 1048763298}
   m_Layer: 5
-  m_Name: Options
+  m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1995,7 +1995,7 @@ RectTransform:
   m_Children:
   - {fileID: 1303414063}
   m_Father: {fileID: 738068118}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2048,7 +2048,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 187570657}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
-        m_MethodName: options
+        m_MethodName: credits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3024,7 +3024,7 @@ RectTransform:
   m_Children:
   - {fileID: 1844809772}
   m_Father: {fileID: 738068118}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
