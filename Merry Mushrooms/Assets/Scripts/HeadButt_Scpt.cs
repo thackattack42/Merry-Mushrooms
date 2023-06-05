@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeWeapon_Scpt : MonoBehaviour
+public class HeadButt_Scpt : MonoBehaviour
 {
     [SerializeField] int dmg;
     void OnTriggerEnter(Collider other)

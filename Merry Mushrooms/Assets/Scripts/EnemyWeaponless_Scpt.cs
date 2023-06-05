@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMelee_Scpt : MonoBehaviour
+public class EnemyWeaponless_Scpt : MonoBehaviour
 {
     #region fields
     [Header("------ Stats ------")]
@@ -25,14 +25,14 @@ public class EnemyMelee_Scpt : MonoBehaviour
     [Header("------ Weapon Stats ------")]
     [Range(0.1f, 10)][SerializeField] float AttackRate;
     [Range(30, 180)][SerializeField] float AttackAngle;
-    [SerializeField] BoxCollider MeleeObj;
+    [SerializeField] CapsuleCollider HeadButtObj;
     //[SerializeField] GameObject bullet;
 
     [Header("------ Audio ------")]
     //[SerializeField] AudioClip[] audShoot;
 
     [Header("------ Audio Vol ------")]
-   // [SerializeField] float audShootVol;
+    // [SerializeField] float audShootVol;
     //Other Assets
     Color origColor;
     private bool isAttacking;
@@ -96,17 +96,17 @@ public class EnemyMelee_Scpt : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
-        animr.SetTrigger("MeleeAttack");
+        animr.SetTrigger("HeadButtAttack");
         yield return new WaitForSeconds(AttackRate);
         isAttacking = false;
     }
-    public void AttackingOn()
+    public void HeadOn()
     {
-        MeleeObj.enabled = true;
+        HeadButtObj.enabled = true;
     }
-    public void AttackingOff()
+    public void HeadOff()
     {
-        MeleeObj.enabled = false;
+        HeadButtObj.enabled = false;
     }
     #endregion
     #region Collider Enter/Exit
@@ -117,17 +117,6 @@ public class EnemyMelee_Scpt : MonoBehaviour
             playerInRange = true;
         }
     }
-
-    //public void OnCollisionEnter(Collision other)
-    //{
-    //    if (other.gameObject.CompareTag("PlayerBulletTag"))
-    //    {
-
-    //        //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(2);
-    //        GetComponent<FireEnemy_Scpt>().TakeIceDamage(2);
-    //       // GetComponent<EarthEnemy_Scpt>().TakeFireDamage(2);
-    //    }
-    //}
     public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -231,12 +220,4 @@ public class EnemyMelee_Scpt : MonoBehaviour
     }
     #endregion
     #endregion
-
-
-
 }
-
-
-
-
-
