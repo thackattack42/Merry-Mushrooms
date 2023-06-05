@@ -58,7 +58,7 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
-        loadingScreen.SetActive(true);
+        //loadingScreen.SetActive(true);
     }
 
     // Update is called once per frame
