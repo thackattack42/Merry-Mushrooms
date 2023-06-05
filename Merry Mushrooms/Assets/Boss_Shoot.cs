@@ -20,31 +20,31 @@ public class Boss_Shoot : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (timer <= 0)
-        {
-            if (boss.numMinions < boss.maxMinions)
-            {
-                rand = Random.Range(0, 3);
+        //if (timer <= 0)
+        //{
+        //    if (boss.numMinions < boss.maxMinions)
+        //    {
+        //        rand = Random.Range(0, 3);
 
-                if (rand == 0)
-                    animator.SetTrigger("Jump Attack");
-                else if (rand == 1)
-                    animator.SetTrigger("Idle");
-                else
-                    animator.SetTrigger("Summon Minions");
+        //        if (rand == 0)
+        //            animator.SetTrigger("Jump Attack");
+        //        else if (rand == 1)
+        //            animator.SetTrigger("Idle");
+        //        else
+        //            animator.SetTrigger("Summon Minions");
 
-            }
-            else
-            {
-                rand = Random.Range(0, 2);
-                if (rand == 0)
-                    animator.SetTrigger("Jump Attack");
-                else
-                    animator.SetTrigger("Idle");
-            }
-        }
-        else
-            timer -= Time.deltaTime;
+        //    }
+        //    else
+        //    {
+        //        rand = Random.Range(0, 2);
+        //        if (rand == 0)
+        //            animator.SetTrigger("Jump Attack");
+        //        else
+        //            animator.SetTrigger("Idle");
+        //    }
+        //}
+        //else
+        //    timer -= Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

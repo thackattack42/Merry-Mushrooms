@@ -29,10 +29,9 @@ public class Boss_Idle : StateMachineBehaviour
                 if (rand == 0)
                     animator.SetTrigger("Jump Attack");
                 else if (rand == 1)
-                    animator.SetTrigger("Shoot Projectile");
+                    animator.SetTrigger("Shoot");
                 else
                     animator.SetTrigger("Summon Minions");
-
             }
             else
             {
@@ -40,7 +39,7 @@ public class Boss_Idle : StateMachineBehaviour
                 if (rand == 0)
                     animator.SetTrigger("Jump Attack");
                 else
-                    animator.SetTrigger("Shoot Projectile");
+                    animator.SetTrigger("Shoot");
             }
         }
         else
@@ -50,6 +49,6 @@ public class Boss_Idle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Idle");
+        //animator.ResetTrigger("Idle");
     }
 }
