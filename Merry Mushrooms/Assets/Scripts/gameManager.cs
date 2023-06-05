@@ -17,6 +17,7 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     public PlayerHUD playerHUD;
+    public Inventory inventory;
     [SerializeField] public GameObject playerSpawnPos;
    // public StaffPickup staffPick;
 
