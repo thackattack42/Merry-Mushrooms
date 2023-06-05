@@ -25,7 +25,7 @@ public class EnemyMelee_Scpt : MonoBehaviour
     [Header("------ Weapon Stats ------")]
     [Range(0.1f, 10)][SerializeField] float AttackRate;
     [Range(30, 180)][SerializeField] float AttackAngle;
-    BoxCollider MeleeObj;
+    [SerializeField] BoxCollider MeleeObj;
     //[SerializeField] GameObject bullet;
 
     [Header("------ Audio ------")]
@@ -102,15 +102,16 @@ public class EnemyMelee_Scpt : MonoBehaviour
     {
         isAttacking = true;
         animr.SetTrigger("MeleeAttack");
-        MeleeObj.isTrigger = true;
         yield return new WaitForSeconds(AttackRate);
-        MeleeObj.isTrigger = false;
         isAttacking = false;
     }
-    public void Attacking()
+    public void AttackingOn()
     {
-        //Instantiate(bullet, shootPos.position, transform.rotation);
-        //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
+        MeleeObj.enabled = true;
+    }
+    public void AttackingOff()
+    {
+        MeleeObj.enabled = false;
     }
     #endregion
     #region Collider Enter/Exit

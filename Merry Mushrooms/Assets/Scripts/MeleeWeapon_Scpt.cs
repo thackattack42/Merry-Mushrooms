@@ -15,7 +15,7 @@ public class MeleeWeapon_Scpt : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         IDamage damagable = other.GetComponent<IDamage>();
 
