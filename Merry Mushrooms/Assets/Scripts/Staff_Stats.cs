@@ -29,5 +29,6 @@ public class Staff_Stats : ScriptableObject
     public bool fire;
     public bool ice;
     public bool earth;
+    public bool baseStaff;
     
 }

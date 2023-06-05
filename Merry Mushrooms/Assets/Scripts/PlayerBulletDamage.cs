@@ -28,11 +28,18 @@ public class PlayerBulletDamage : MonoBehaviour
             if (fireDamge != null)
                 fireDamge.TakeFireDamage(gameManager.instance.playerScript.shootDamage);
         }
+        if (gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].baseStaff)
+        {
+            IDamage damageable = collision.gameObject.GetComponent<IDamage>();
+
+            if (damageable != null)
+                damageable.takeDamage(gameManager.instance.playerScript.shootDamage);
+        }
 
         //IDamage damageable = collision.gameObject.GetComponent<IDamage>();
 
         //if (damageable != null)
         //    damageable.takeDamage(gameManager.instance.playerScript.shootDamage);
-    
+
     }
 }
