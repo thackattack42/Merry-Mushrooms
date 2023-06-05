@@ -4,7 +4,7 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEffectable*/
+public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//, IEffectable
 {
     #region Fields
     //[Header("------ Enemy Spawner ------")]
@@ -45,7 +45,7 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     // Update is called once per frame
     void Update()
     {
-        if (currHP < (maxHP / 2))
+        if (currHP <= (maxHP / 2))
         {
             anim.SetTrigger("Phase 2");
         }
@@ -115,49 +115,49 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     //}
     #endregion
     #region Damage Functions
-    //public void TakeEarthDamage(int dmg)
-    //{
-    //    HP -= dmg * 2;
+    public void TakeEarthDamage(int dmg)
+    {
+        currHP -= dmg * 2;
 
-    //    if (HP <= 0)
-    //    {
-    //        gameManager.instance.UpdateGameGoal(-1);
-    //        animr.SetBool("Death", true);
-    //        agent.enabled = false;
-    //        GetComponent<CapsuleCollider>().enabled = false;
-    //    }
-    //    else
-    //    {
-    //        animr.SetTrigger("Damaged");
-    //        agent.SetDestination(gameManager.instance.player.transform.position);
-    //        StartCoroutine(FlashHitColor());
-    //    }
-    //}
+        if (currHP <= 0)
+        {
+            gameManager.instance.UpdateGameGoal(-1);
+            //animr.SetBool("Death", true);
+            agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+        }
+        else
+        {
+            //animr.SetTrigger("Damaged");
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            //StartCoroutine(FlashHitColor());
+        }
+    }
 
 
-    //public void TakeIceDamage(int dmg)
-    //{
-    //    HP -= dmg / 2;
+    public void TakeIceDamage(int dmg)
+    {
+        currHP -= dmg / 2;
 
-    //    if (HP <= 0)
-    //    {
-    //        gameManager.instance.UpdateGameGoal(-1);
-    //        animr.SetBool("Death", true);
-    //        agent.enabled = false;
-    //        GetComponent<CapsuleCollider>().enabled = false;
-    //    }
-    //    else
-    //    {
-    //        animr.SetTrigger("Damaged");
-    //        agent.SetDestination(gameManager.instance.player.transform.position);
-    //        StartCoroutine(FlashHitColor());
-    //    }
-    //}
+        if (currHP <= 0)
+        {
+            gameManager.instance.UpdateGameGoal(-1);
+            //animr.SetBool("Death", true);
+            agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+        }
+        else
+        {
+            //animr.SetTrigger("Damaged");
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            //StartCoroutine(FlashHitColor());
+        }
+    }
 
-    //public void TakeFireDamage(int dmg)
-    //{
-    //    HP += dmg;
-    //}
+    public void TakeFireDamage(int dmg)
+    {
+        currHP += dmg;
+    }
     #endregion
     #region Effects
     //public void ApplyEffect(StatusEffectData data)

@@ -15,6 +15,10 @@ public class Boss_Idle : StateMachineBehaviour
     {
         timer = Random.Range(minTime, maxTime);
         boss = animator.GetComponent<Boss_Scpt>();
+
+        animator.ResetTrigger("Shoot");
+        animator.ResetTrigger("Summon Minions");
+        animator.ResetTrigger("Jump Attack");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
