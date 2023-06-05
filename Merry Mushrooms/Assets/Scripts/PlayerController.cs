@@ -208,39 +208,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
             Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
 
-            //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
-            //{
-            //    Instantiate(staffList[selectedStaff].hitEffect, hit.point, staffList[selectedStaff].hitEffect.transform.rotation);
-
-            //if (staffList[selectedStaff].fire)
-            //{
-            //    //IFireDamage fireDamage = //hit.collider.GetComponent<IFireDamage>();
-            //    //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(shootDamage);
-            //    //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(shootDamage);
-              
-            //}
-
-            //if (staffList[selectedStaff].earth)
-            //{
-            //    IEarthDamage earthDamage = hit.collider.GetComponent<IEarthDamage>();
-
-            //    if (earthDamage != null)
-            //        earthDamage.TakeEarthDamage(shootDamage);
-            //}
-
-            //if (staffList[selectedStaff].ice)
-            //{
-            //    IIceDamage iceDamage = hit.collider.GetComponent<IIceDamage>();
-
-            //    if (iceDamage != null)
-            //        iceDamage.TakeIceDamage(shootDamage);
-            //}
-
-            //    IDamage damageable = hit.collider.GetComponent<IDamage>();
-
-            //    if (damageable != null)
-            //        damageable.takeDamage(shootDamage);
-            //}
+            
         }
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(shootRate);
