@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, IIceDamage, IEffectable*/
 {
@@ -17,7 +18,15 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     [SerializeField] int maxHP;
     [SerializeField] int currHP;
     [SerializeField] int projectileDamage;
+    [SerializeField] int punchDamage;
     [SerializeField] int AOEDamage;
+    [SerializeField] public int numMinions;
+    [SerializeField] public int maxMinions;
+
+    [Header("----- Boss Components -----")]
+    [SerializeField] Animator anim;
+    [SerializeField] Transform punchPos;
+    NavMeshAgent agent;
     #endregion
     #region Start and Stop
     //new
@@ -25,6 +34,7 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     void Start()
     {
         currHP = maxHP;
+        anim = GetComponent<Animator>();
         //base.Start();
         //gameManager.instance.UpdateGameGoal(1);
     }
@@ -33,6 +43,10 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     // Update is called once per frame
     void Update()
     {
+        if (currHP < (maxHP / 2))
+        {
+            anim.SetTrigger("Phase 2");
+        }
         //base.Update();
         //spawnCountt = 2;
         //if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
@@ -72,8 +86,17 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     }
     #endregion
     #region Functions
+    public void Punch()
+    {
+        punchPos.GetComponent<SphereCollider>().enabled = true;
+        //Collider[] collider = Physics.OverlapCapsule(new Vector3(punchPos.position.x, punchPos.position.y, punchPos.position.z), gameManager.instance.player.transform.position, agent.stoppingDistance);
+    }
 
-    
+    public void StopPunch()
+    {
+        punchPos.GetComponent<SphereCollider>().enabled = false;
+    }
+
     #region Spawner
     //IEnumerator EnemySpawn()
     //{
