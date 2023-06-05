@@ -27,6 +27,8 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     [SerializeField] Animator anim;
     [SerializeField] Transform punchPos;
     NavMeshAgent agent;
+    [SerializeField] Transform shootPos;
+    [SerializeField] GameObject bullet;
     #endregion
     #region Start and Stop
     //new
@@ -95,6 +97,12 @@ public class Boss_Scpt : MonoBehaviour/*Enemy_Scpt, IFireDamage, IEarthDamage, I
     public void StopPunch()
     {
         punchPos.GetComponent<SphereCollider>().enabled = false;
+    }
+
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
     }
 
     #region Spawner

@@ -1476,7 +1476,7 @@ Animator:
   m_GameObject: {fileID: 4913001248367543597}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 210131566c38d64499789fe20d93cd58, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4e964a5808227c6489d7774d5a739867, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3c8dbbe8886bd714da01dac2f85c7323, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2897,6 +2897,8 @@ MonoBehaviour:
   maxMinions: 3
   anim: {fileID: 4913001248358069923}
   punchPos: {fileID: 236860930}
+  shootPos: {fileID: 7447207025561392544}
+  bullet: {fileID: 5463603646565746171, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
 --- !u!136 &6301739059130622090
 CapsuleCollider:
   m_ObjectHideFlags: 0
