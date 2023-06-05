@@ -27,7 +27,7 @@ public class Boss_SummonMinion : StateMachineBehaviour
             if (rand == 0)
                 animator.SetTrigger("Jump Attack");
             else if (rand == 1)
-                animator.SetTrigger("Shoot Projectile");
+                animator.SetTrigger("Shoot");
             else
                 animator.SetTrigger("Idle");
         }
