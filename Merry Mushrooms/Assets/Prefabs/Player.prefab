@@ -600,7 +600,7 @@ MonoBehaviour:
   staffMat: {fileID: 1711813856071030117}
   playerBullet: {fileID: 2872036455639188616, guid: 9450518a5e37eef4cad2fe4a1a0e545d, type: 3}
   bulletPoint: {fileID: 984233064}
-  speedOfBullet: 30
+  speedOfBullet: 10
   audJump:
   - {fileID: 8300000, guid: 914310711046919498a67dc443fce46d, type: 3}
   - {fileID: 8300000, guid: 24964d3f44feaf54da19fd8a0760dd07, type: 3}
@@ -723,7 +723,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
