@@ -7,6 +7,7 @@ public class PlayerHUD : MonoBehaviour
 {
     //Player stuff
     int maxPlayerHP;
+    int funGil;
 
     //Audio Stuff
     [Header("-----Audio Stuff-----")]
@@ -31,9 +32,11 @@ public class PlayerHUD : MonoBehaviour
     {
         //Get Values
         maxPlayerHP = gameManager.instance.playerScript.maxHP;
+        funGil = 0;
         //Set Values to HUD
         gameManager.instance.healthPoints.text = maxPlayerHP.ToString();
         gameManager.instance.HPSlider.fillAmount = 1f;
+        gameManager.instance.funGil.text = funGil.ToString();
         //gameManager.instance.dashCooldownCounter.text = "";
         gameManager.instance.dashCooldownSlider.fillAmount = 1f;
         constraint.sourceTransform = gameManager.instance.minimapRotationLock;
@@ -83,6 +86,11 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.healthPoints.text = currHP.ToString();
         gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
         
+    }
+    public void addFunGil(int amount)
+    {
+        funGil += amount;
+        gameManager.instance.funGil.text = funGil.ToString();
     }
     IEnumerator damageFlash()
     {
