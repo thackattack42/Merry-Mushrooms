@@ -38,11 +38,13 @@ public class gameManager : MonoBehaviour
     public GameObject lowHPFlash;
     public Transform minimapRotationLock;
     public Image dmgFlash;
+    public GameObject loadingScreen;
     
     
     int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
+    float loadTimer;
 
     // Awake is called before Start
     void Awake()
@@ -54,17 +56,31 @@ public class gameManager : MonoBehaviour
         playerHUD = player.GetComponent<PlayerHUD>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
+        Time.timeScale = 0;
+        loadTimer = 3;
+        //loadingScreen.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && activeMenu == null)
+        if (loadingScreen.activeSelf == true)
         {
-            isPaused = !isPaused;
-            activeMenu = pauseMenu;
-            activeMenu.SetActive(isPaused);
-            PauseState();
+            loadTimer -= Time.deltaTime;
+            if (loadTimer <= 0)
+            {
+                loadingScreen.SetActive(false);
+            }
+        }
+        else
+        {
+            if (Input.GetButtonDown("Cancel") && activeMenu == null)
+            {
+                isPaused = !isPaused;
+                activeMenu = pauseMenu;
+                activeMenu.SetActive(isPaused);
+                PauseState();
+            }
         }
     }
 

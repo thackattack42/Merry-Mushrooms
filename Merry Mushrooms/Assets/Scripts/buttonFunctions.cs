@@ -44,13 +44,18 @@ public class buttonFunctions : MonoBehaviour
 
         }
     }
+    public void credits()
+    {
+        MainMenuManager.instance.creditsScreen.SetActive(true);
+        MainMenuManager.instance.mainMenuScreen.SetActive(false);
+    }
     public void mainMenu()
     {
         SceneManager.LoadScene(0);
     }
 
     //Option buttons
-    public void back()
+    public void optionsBack()
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
@@ -76,5 +81,12 @@ public class buttonFunctions : MonoBehaviour
         else
             gameManager.instance.playerHUD.minimapCamRot.enabled = true; //enables the rotation lock
 
+    }
+
+    //Credits Buttons
+    public void creditsBack()
+    {
+        MainMenuManager.instance.creditsScreen.SetActive(false);
+        MainMenuManager.instance.mainMenuScreen.SetActive(true);
     }
 }
