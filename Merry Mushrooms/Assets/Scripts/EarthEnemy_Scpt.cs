@@ -49,8 +49,8 @@ public class EarthEnemy_Scpt : Enemy_Scpt, IIceDamage, IFireDamage, IEarthDamage
     }
     public void takeDamage(int dmg)
     {
-        HP = HP - dmg;
-        
+        HP -= dmg;
+
         if (HP <= 0)
         {
             animr.SetBool("Death", true);

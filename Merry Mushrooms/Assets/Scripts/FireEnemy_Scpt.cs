@@ -49,7 +49,7 @@ public class FireEnemy_Scpt : Enemy_Scpt, IEarthDamage, IIceDamage, IFireDamage,
     }
     public void takeDamage(int dmg)
     {
-        HP = HP - dmg;
+        HP -= dmg;
 
         if (HP <= 0)
         {
