@@ -886,17 +886,19 @@ MonoBehaviour:
   pushBackResolve: 0
   dashSpeed: 4
   dashCoolDown: 7
-  staffList: []
+  staffList:
+  - {fileID: 11400000, guid: 5155ef93875f94c46a6cdc96aecbfde7, type: 2}
   staffModel: {fileID: 3469287836642206127}
   staffMat: {fileID: 1711813856071030117}
   playerBullet: {fileID: 2872036455639188616, guid: 9450518a5e37eef4cad2fe4a1a0e545d, type: 3}
   bulletPoint: {fileID: 984233064}
   speedOfBullet: 10
   shootDistance: 200
-  shootRate: 1
+  shootRate: 0.2
   shootDamage: 1
   selectedStaff: 0
-  BowList: []
+  BowList:
+  - {fileID: 11400000, guid: c59afd4c68069704b8c57ca6615e60d1, type: 2}
   playerArrow: {fileID: 2834199721020510925, guid: d28d4e4700f2d7d4b8edfb0752db8660, type: 3}
   arrowPoint: {fileID: 1949705862}
   speedOfArrow: 30
@@ -906,7 +908,8 @@ MonoBehaviour:
   bowShootDamage: 2
   bowPullTime: 6
   selectedBow: 0
-  SwordList: []
+  SwordList:
+  - {fileID: 11400000, guid: e3cd5ec850c321f44af9e30452bb2c34, type: 2}
   swordMat: {fileID: 3411679213566919573}
   swordModel: {fileID: 8963343311217000300}
   selectedSword: 0

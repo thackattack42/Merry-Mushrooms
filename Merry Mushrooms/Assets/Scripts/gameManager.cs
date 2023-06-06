@@ -70,12 +70,25 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
+
+
+        StartCoroutine(StartSelection());
         //Sword = GameObject.FindGameObjectWithTag("Sword");
         //Bow = GameObject.FindGameObjectWithTag("Bow");
         //Staff = GameObject.FindGameObjectWithTag("Staff");
         //weaponSelectMenu.SetActive(true);
         //activeMenu = weaponSelectMenu;
         //loadingScreen.SetActive(true);
+    }
+    
+    IEnumerator StartSelection()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isPaused = !isPaused;
+        activeMenu = weaponSelectMenu;
+        activeMenu.SetActive(isPaused);
+        PauseState();
+
     }
 
     // Update is called once per frame
