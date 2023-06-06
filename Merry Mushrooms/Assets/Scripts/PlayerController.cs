@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         controller.height = 2.0f;
         origHeight = controller.height;
         HP = maxHP;
-
+        
         statusEffects = new Dictionary<string, StatusEffectData>();
 
         // Spawns Player
