@@ -27,6 +27,7 @@ public class gameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject optionsMenu;
     public GameObject winMenu;
+    public GameObject weaponSelectMenu;
     public GameObject reticle;
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI ammoTotal;
@@ -46,8 +47,12 @@ public class gameManager : MonoBehaviour
     public Image dmgFlash;
     public GameObject loadingScreen;
     public GameObject Inventory;
+    public InventoryManager invManager;
     bool InvToggle;
-
+    [Header("-----Player Pickups-----")]
+    public GameObject Sword;
+    public GameObject Bow;
+    public GameObject Staff;
 
     int enemiesRemaining;
     public bool isPaused;
@@ -65,6 +70,11 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
+        //Sword = GameObject.FindGameObjectWithTag("Sword");
+        //Bow = GameObject.FindGameObjectWithTag("Bow");
+        //Staff = GameObject.FindGameObjectWithTag("Staff");
+        //weaponSelectMenu.SetActive(true);
+        //activeMenu = weaponSelectMenu;
         //loadingScreen.SetActive(true);
     }
 
@@ -94,8 +104,11 @@ public class gameManager : MonoBehaviour
                 Inventory.SetActive(InvToggle);
                 if (InvToggle)
                     SimiPauseState();
-                else 
+                else
+                {
                     SimiUnpausedState();
+                    invManager.updated = false;
+                }
             }
         }
     }

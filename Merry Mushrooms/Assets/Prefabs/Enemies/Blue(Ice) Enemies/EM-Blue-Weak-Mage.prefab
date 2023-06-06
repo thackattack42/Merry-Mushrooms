@@ -1365,6 +1365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4887033869841736903}
   - component: {fileID: 5802890021772942659}
+  - component: {fileID: -161209887514638569}
   - component: {fileID: 4887033869849512809}
   - component: {fileID: 4887033869842136588}
   - component: {fileID: 5802890021772942656}
@@ -1445,6 +1446,18 @@ MonoBehaviour:
   ShootAngle: 30
   shootPos: {fileID: 6964127046538717290}
   bullet: {fileID: 5463603646565746171, guid: c9b12a9667af10747bd2d0d5098e5922, type: 3}
+--- !u!114 &-161209887514638569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887033869842233575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 774f9b00eb0f7224895fd41de3f6e8e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4887033869849512809
 Animator:
   serializedVersion: 5

@@ -8,6 +8,7 @@ public class InventoryManager : MonoBehaviour
     public int maxItemStack;
     public InventorySlot[] InventorySlots;
     public GameObject invItemPrefab;
+    public bool updated;
 
 
     [SerializeField] MeshFilter staffModel;
@@ -17,9 +18,14 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] MeshRenderer swordMat;
     [SerializeField] MeshFilter swordModel;
 
-    private void Start()
+    private void Update()
     {
-        UpdateWeaponInInv();
+        if (gameManager.instance.Inventory.activeSelf && !updated)
+        {
+            updated = true;
+            UpdateWeaponInInv();
+        }
+        
     }
     public bool AddItem(Item item)
     {
@@ -59,22 +65,22 @@ public class InventoryManager : MonoBehaviour
         invIitem.InitializeItem(item);
     }
 
-    void UpdateWeaponInInv()
+    public void UpdateWeaponInInv()
     {
         if (gameManager.instance.playerScript.StaffEquipped)
         {
-            staffModel = gameManager.instance.playerScript.GetStaffModel();
-            staffMat = gameManager.instance.playerScript.GetStaffMat();
+            staffModel.mesh = gameManager.instance.playerScript.GetStaffModel().sharedMesh;
+            staffMat.material = gameManager.instance.playerScript.GetStaffMat().sharedMaterial;
         }
         else if (gameManager.instance.playerScript.BowEquipped)
         {
-            bowModel = gameManager.instance.playerScript.GetBowModel();
-            bowMat = gameManager.instance.playerScript.GetBowMat();
+            bowModel.mesh = gameManager.instance.playerScript.GetBowModel().sharedMesh;
+            bowMat.material = gameManager.instance.playerScript.GetBowMat().sharedMaterial;
         }
         else if (gameManager.instance.playerScript.SwordEquipped)
         {
-            swordModel = gameManager.instance.playerScript.GetSwordModel();
-            swordMat = gameManager.instance.playerScript.GetSwordMat();
+            swordModel.mesh = gameManager.instance.playerScript.GetSwordModel().sharedMesh;
+            swordMat.material = gameManager.instance.playerScript.GetSwordMat().sharedMaterial;
         }
         
     }

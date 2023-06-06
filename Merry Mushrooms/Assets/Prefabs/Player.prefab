@@ -875,7 +875,7 @@ MonoBehaviour:
   gravityValue: 7
   maxJumps: 2
   sprintSpeed: 2
-  maxHP: 10
+  maxHP: 100
   maxMP: 0
   HP: 0
   MP: 0
@@ -892,18 +892,24 @@ MonoBehaviour:
   playerBullet: {fileID: 2872036455639188616, guid: 9450518a5e37eef4cad2fe4a1a0e545d, type: 3}
   bulletPoint: {fileID: 984233064}
   speedOfBullet: 10
+  shootDistance: 200
+  shootRate: 1
+  shootDamage: 1
+  selectedStaff: 0
   BowList: []
   playerArrow: {fileID: 2834199721020510925, guid: d28d4e4700f2d7d4b8edfb0752db8660, type: 3}
   arrowPoint: {fileID: 1949705862}
-  speedOfArrow: 15
+  speedOfArrow: 30
   bowMat: {fileID: 476571864147875218}
   bowModel: {fileID: 2412215107198787928}
+  bowShootRate: 1
+  bowShootDamage: 2
+  bowPullTime: 6
+  selectedBow: 0
   SwordList: []
   swordMat: {fileID: 3411679213566919573}
   swordModel: {fileID: 8963343311217000300}
-  shootDistance: 200
-  shootRate: 3
-  shootDamage: 1
+  selectedSword: 0
   audJump:
   - {fileID: 8300000, guid: 914310711046919498a67dc443fce46d, type: 3}
   - {fileID: 8300000, guid: 24964d3f44feaf54da19fd8a0760dd07, type: 3}
@@ -928,11 +934,9 @@ MonoBehaviour:
   audJumpVol: 0.5
   audDamageVol: 0.5
   audStepsVol: 0.5
+  playerWeapon: 0
   isReloading: 0
   isCrouching: 0
-  selectedStaff: 0
-  selectedBow: 0
-  selectedSword: 0
   StaffEquipped: 0
   BowEquipped: 0
   SwordEquipped: 0
