@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
     [Range(2, 10)][SerializeField] public int dashCoolDown;
+    private float dashTime = 0.3f;
 
     [Header("----- Staff Stats -----")]
     public List<Staff_Stats> staffList = new List<Staff_Stats>();
@@ -47,6 +48,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] GameObject playerBullet;
     [SerializeField] GameObject bulletPoint;
     [SerializeField] float speedOfBullet = 600;
+    [Header("----- Staff Shoot Stats -----")]
+    [Range(2, 300)][SerializeField] int shootDistance;
+    [Range(0.1f, 3)][SerializeField] float shootRate;
+    [Range(1, 20)][SerializeField] public int shootDamage;
+    public int selectedStaff;
 
     [Header("----- Bow Stats -----")]
     public List<BowStats> BowList = new List<BowStats>();
@@ -55,28 +61,20 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] float speedOfArrow = 600;
     [SerializeField] MeshRenderer bowMat;
     [SerializeField] MeshFilter bowModel;
-
+    [Header("----- Bow Shoot Stats -----")]
+    //[Range(2, 300)][SerializeField] int bowShootDistance;
+    [Range(0.1f, 3)][SerializeField] float bowShootRate;
+    [Range(1, 20)][SerializeField] public int bowShootDamage;
+    [SerializeField] public int bowPullTime;
+    public int selectedBow;
 
     [Header("----- Sword Stats -----")]
     public List<SwordStats> SwordList = new List<SwordStats>();
     [SerializeField] MeshRenderer swordMat;
     [SerializeField] MeshFilter swordModel;
-
-    [Header("----- Staff Shoot Stats -----")]
-    [Range(2, 300)][SerializeField] int shootDistance;
-    [Range(0.1f, 3)][SerializeField] float shootRate;
-    [Range(1, 20)][SerializeField] public int shootDamage;
-    [Header("----- Bow Shoot Stats -----")]
-    //[Range(2, 300)][SerializeField] int bowShootDistance;
-    [Range(0.1f, 3)][SerializeField] float bowShootRate;
-    //[Range(1, 20)][SerializeField] public int bowShootDamage;
-
-
-    //[Header("----- Attack Stats -----")]
-    //[Range(0.1f, 10)][SerializeField] float AttackRate;
-    //[SerializeField] BoxCollider PMeleeObj;
-    //private bool isAttacking;
-
+    public int selectedSword;
+    
+   
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audJump;
@@ -86,7 +84,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] float audDamageVol;
     [SerializeField] float audStepsVol;
 
-    private float dashTime = 0.3f;
+    
     private float origSpeed;
     private float origHeight;
     private bool isShooting;
@@ -96,9 +94,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     private Vector3 destination;
     private Vector3 pushBack;
     private int isDashing;
-    public int selectedStaff;
-    public int selectedBow;
-    public int selectedSword;
+    
+   
+    
     bool stepIsPlaying;
     public bool StaffEquipped;
     public bool BowEquipped;
@@ -399,6 +397,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     #region Bow
     IEnumerator BowShoot()
     {
+        if(Input.GetButtonDown("Shoot"))
+        {
+            int origDamge = 0;
+            origDamge = shootDamage; 
+            shootDamage += 5;
+        }
+       
         if (BowList[selectedBow].ammoClip > 0)
         {
             isShooting = true;
@@ -435,6 +440,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(bowShootRate);
         isShooting = false;
+
     }
     void SwitchBow()
     {
