@@ -6,7 +6,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage, IEffectable
+public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 {
 
     private Vector3 playerVelocity;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [SerializeField] public int currExp;
     [SerializeField] public int expToNextLevel;
     [SerializeField] public int skillPoints;
+    [SerializeField] float pushBackResolve;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     public bool StaffEquipped;
     public bool BowEquipped;
     public bool SwordEquipped;
-
+    private Vector3 pushBack;
     //[Header("----- Animator -----")]
     //[SerializeField] public Animator animr;
     //[SerializeField] float animrTransSpeed;
@@ -209,6 +210,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
     }
     IEnumerator Dash()
     {
@@ -478,6 +481,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
         //takeDamage(-maxHP);
     }
 
+    public void KnockBack(Vector3 dir)
+    {
+        pushBack += dir;
+    }
     public void ApplyEffect(StatusEffectData data)
     {
         // Check if status effect is new and apply modifier
