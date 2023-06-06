@@ -62,10 +62,15 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] MeshRenderer swordMat;
     [SerializeField] MeshFilter swordModel;
 
-    [Header("----- Shoot Stats -----")]
+    [Header("----- Staff Shoot Stats -----")]
     [Range(2, 300)][SerializeField] int shootDistance;
     [Range(0.1f, 3)][SerializeField] float shootRate;
     [Range(1, 20)][SerializeField] public int shootDamage;
+    [Header("----- Bow Shoot Stats -----")]
+    //[Range(2, 300)][SerializeField] int bowShootDistance;
+    [Range(0.1f, 3)][SerializeField] float bowShootRate;
+    //[Range(1, 20)][SerializeField] public int bowShootDamage;
+
 
     //[Header("----- Attack Stats -----")]
     //[Range(0.1f, 10)][SerializeField] float AttackRate;
@@ -80,15 +85,17 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] float audJumpVol;
     [SerializeField] float audDamageVol;
     [SerializeField] float audStepsVol;
+
     private float dashTime = 0.3f;
     private float origSpeed;
-    private int isDashing;
+    private float origHeight;
     private bool isShooting;
     public bool isReloading;
     private bool isSprinting;
     public bool isCrouching;
-    private float origHeight;
     private Vector3 destination;
+    private Vector3 pushBack;
+    private int isDashing;
     public int selectedStaff;
     public int selectedBow;
     public int selectedSword;
@@ -96,11 +103,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool StaffEquipped;
     public bool BowEquipped;
     public bool SwordEquipped;
-    private Vector3 pushBack;
-    //[Header("----- Animator -----")]
-    //[SerializeField] public Animator animr;
-    //[SerializeField] float animrTransSpeed;
-
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
@@ -337,7 +339,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             else
             {
                 destination = ray.GetPoint(staffList[selectedStaff].shootDistance);
-                destination = ray.GetPoint(BowList[selectedStaff].bowShootDistance);
             }
             // Creates bullet object and shoots it towards the center ray of the camera
             GameObject bulletToShoot = Instantiate(playerBullet, bulletPoint.transform.position, transform.rotation);
@@ -432,7 +433,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
         }
         gameManager.instance.UpdateAmmoCount();
-        yield return new WaitForSeconds(shootRate);
+        yield return new WaitForSeconds(bowShootRate);
         isShooting = false;
     }
     void SwitchBow()
