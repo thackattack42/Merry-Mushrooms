@@ -1645,7 +1645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &833525412
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8998,6 +8998,9 @@ MonoBehaviour:
   dmgFlash: {fileID: 1650296044415360650}
   loadingScreen: {fileID: 5243417770992706468}
   Inventory: {fileID: 2653707180426779251}
+  Sword: {fileID: 0}
+  Bow: {fileID: 0}
+  Staff: {fileID: 0}
   isPaused: 0
 --- !u!114 &7877924245492499045
 MonoBehaviour:
