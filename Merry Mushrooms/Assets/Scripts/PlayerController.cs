@@ -113,6 +113,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         this.statusEffects = null;
     }
 
+
+    enum weapon
+    {
+        Sword,
+        Bow,
+        Staff
+    }
+
     private void Start()
     {
         // Sets original variables to players starting stats
@@ -397,12 +405,12 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     #region Bow
     IEnumerator BowShoot()
     {
-        if(Input.GetButtonDown("Shoot"))
-        {
-            int origDamge = 0;
-            origDamge = shootDamage; 
-            shootDamage += 5;
-        }
+        //if(Input.GetButtonDown("Shoot"))
+        //{
+        //    int origDamge = 0;
+        //    origDamge = shootDamage; 
+        //    shootDamage += 5;
+        //}
        
         if (BowList[selectedBow].ammoClip > 0)
         {
