@@ -132,4 +132,17 @@ public class buttonFunctions : MonoBehaviour
         MainMenuManager.instance.creditsScreen.SetActive(false);
         MainMenuManager.instance.mainMenuScreen.SetActive(true);
     }
+
+    public void SetPlayerBow()
+    {
+        gameManager.instance.playerScript.playerWeapon = PlayerController.weapon.Bow;
+    }
+    public void SetPlayerSword()
+    {
+        gameManager.instance.playerScript.playerWeapon = PlayerController.weapon.Sword;
+    }
+    public void SetPlayerStaff()
+    {
+        gameManager.instance.playerScript.playerWeapon = PlayerController.weapon.Staff;
+    }
 }
