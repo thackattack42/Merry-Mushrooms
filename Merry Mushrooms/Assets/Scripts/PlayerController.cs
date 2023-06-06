@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,9 +13,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     private Vector3 move;
     private int jumpedTimes;
     private bool groundedPlayer;
+
     [Header("----- Componets -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] AudioSource aud;
+
     [Header("----- Player Stats -----")]
     [SerializeField] float playerSpeed;
     [Range(8, 20)][SerializeField] float jumpHeight;
@@ -51,10 +54,23 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     [SerializeField] MeshRenderer bowMat;
     [SerializeField] MeshFilter bowModel;
 
+
+    [Header("----- Sword Stats -----")]
+    public List<SwordStats> SwordList = new List<SwordStats>();
+    [SerializeField] MeshRenderer swordMat;
+    [SerializeField] MeshFilter swordModel;
+
     [Header("----- Shoot Stats -----")]
     [Range(2, 300)][SerializeField] int shootDistance;
     [Range(0.1f, 3)][SerializeField] float shootRate;
     [Range(1, 20)][SerializeField] public int shootDamage;
+
+    //[Header("----- Attack Stats -----")]
+    //[Range(0.1f, 10)][SerializeField] float AttackRate;
+    //[SerializeField] BoxCollider PMeleeObj;
+    //private bool isAttacking;
+
+
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audJump;
     [SerializeField] AudioClip[] audDamage;
@@ -73,9 +89,15 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
     private Vector3 destination;
     public int selectedStaff;
     public int selectedBow;
+    public int selectedSword;
     bool stepIsPlaying;
-    public  bool StaffEquipped;
-    public  bool BowEquipped;
+    public bool StaffEquipped;
+    public bool BowEquipped;
+    public bool SwordEquipped;
+
+    //[Header("----- Animator -----")]
+    //[SerializeField] public Animator animr;
+    //[SerializeField] float animrTransSpeed;
 
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
@@ -139,6 +161,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
                 StartCoroutine(BowShoot());
 
             }
+            //if(Input.GetButton("Shoot") && !isAttacking)
+            //{
+            //    StartCoroutine(MeleeSlash());
+            //}
 
             // Call anything in here we want to update per second (not per frame)
             if (period > 1.0f)
@@ -414,6 +440,22 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
 
     #endregion
 
+    #region Sword
+    public void swordPickup(SwordStats stat)
+    {
+        SwordList.Add(stat);
+
+        shootDamage = stat.swingtDamage;
+
+        //shootRate = stats.bow;
+
+        swordModel.sharedMesh = stat.model.GetComponent<MeshFilter>().sharedMesh;
+        swordMat.sharedMaterial = stat.model.GetComponent<MeshRenderer>().sharedMaterial;
+        SwordEquipped = true;
+        selectedSword = SwordList.Count - 1;
+        //gameManager.instance.UpdateAmmoCount();
+    }
+    #endregion
     public void takeDamage(int amount)
     {
         // Will take damage based off the amount 
@@ -570,4 +612,24 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable
             currExp -= expToNextLevel;
         }
     }
+
+   
+
+    //#region Attacking Functions
+    //IEnumerator MeleeSlash()
+    //{
+    //    isAttacking = true;
+    //    animr.SetTrigger("Attacking");
+    //    yield return new WaitForSeconds(AttackRate);
+    //    isAttacking = false;
+    //}
+    //public void AttackingOn()
+    //{
+    //    PMeleeObj.enabled = true;
+    //}
+    //public void AttackingOff()
+    //{
+    //    PMeleeObj.enabled = false;
+    //}
+    //#endregion
 }

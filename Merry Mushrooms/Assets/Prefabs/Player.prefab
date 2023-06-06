@@ -537,6 +537,105 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3991436285849876297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89852087641916762}
+  - component: {fileID: 8963343311217000300}
+  - component: {fileID: 3411679213566919573}
+  - component: {fileID: 8426172299868289217}
+  m_Layer: 0
+  m_Name: sword02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &89852087641916762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  m_LocalRotation: {x: 0.75019073, y: -0, z: -0, w: 0.66122156}
+  m_LocalPosition: {x: 0.624, y: -0.35300004, z: 0.839}
+  m_LocalScale: {x: 0.7740149, y: 1.1338845, z: 1.1746393}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8327772037738040326}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 97.21399, y: 0, z: 0}
+--- !u!33 &8963343311217000300
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  m_Mesh: {fileID: 4300000, guid: 3bd1b773913e1a3428b48ca4b9f9248f, type: 3}
+--- !u!23 &3411679213566919573
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4fb8ea9da059dc04cb8494617b53562b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!111 &8426172299868289217
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &8327772037738040327
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +671,7 @@ Transform:
   - {fileID: 543450652658593290}
   - {fileID: 1645559103757823741}
   - {fileID: 1949705863}
+  - {fileID: 89852087641916762}
   m_Father: {fileID: 8327772038628251595}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -726,6 +826,9 @@ MonoBehaviour:
   speedOfArrow: 15
   bowMat: {fileID: 476571864147875218}
   bowModel: {fileID: 2412215107198787928}
+  SwordList: []
+  swordMat: {fileID: 0}
+  swordModel: {fileID: 0}
   shootDistance: 200
   shootRate: 3
   shootDamage: 1
@@ -757,8 +860,10 @@ MonoBehaviour:
   isCrouching: 0
   selectedStaff: 0
   selectedBow: 0
+  selectedSword: 0
   StaffEquipped: 0
   BowEquipped: 0
+  SwordEquipped: 0
 --- !u!114 &8863840815364814771
 MonoBehaviour:
   m_ObjectHideFlags: 0
