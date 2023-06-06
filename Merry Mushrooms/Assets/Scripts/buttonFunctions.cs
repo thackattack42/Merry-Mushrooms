@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class buttonFunctions : MonoBehaviour
 {
+    public AudioSource SFXTestSource;
+    [SerializeField] public AudioClip SFXTest;
+
     public void resume()
     {
         gameManager.instance.UnpausedState();
@@ -84,15 +88,21 @@ public class buttonFunctions : MonoBehaviour
     }
     public void SFXVol(float val)
     {
-        gameManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
+            MainMenuManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
+        else
+            gameManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
     }
     public void SFXVolTest()
     {
-        gameManager.instance.dashCooldownFinishPing.PlayOneShot(gameManager.instance.playerHUD.dashCooldownFinishPing, 1);
+        SFXTestSource.PlayOneShot(SFXTest);
     }
     public void MusicVol(float val)
     {
-        gameManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
+            MainMenuManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
+        else
+            gameManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
     }
 
     //Credits Buttons
