@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 916d1a41b3b040740a121593fe6c8ca8, type: 3}
-  m_Name: SwordStat
+  m_Name: SwordStat-Fire
   m_EditorClassIdentifier: 
-  swingtRate: 1
-  swingtDamage: 1
-  model: {fileID: 8467577517631737621, guid: ffb59774611c1694f994374b6828cb62, type: 3}
-  swingSound: {fileID: 8300000, guid: a58e438b7cfa445498120af0e6169082, type: 3}
+  swingtRate: 0.91
+  swingtDamage: 3
+  model: {fileID: 8467577517631737621, guid: 59510bd011110754895d93b06c0d363c, type: 3}
+  swingSound: {fileID: 0}
   swingVol: 1
-  fire: 0
+  fire: 1
   ice: 0
   earth: 0
-  baseStaff: 1
+  baseStaff: 0

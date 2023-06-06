@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -133,7 +134,19 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             OnPlayerCrouch();
             OnPlayerUncrouch();
             Movement();
+            if(staffList.Count > 0) 
+            { 
             SwitchStaff();
+            }
+            if (SwordList.Count > 0)
+            {
+            SwitchSword();
+            }
+            if (BowList.Count > 0)
+            {
+             SwitchBow();
+            }
+            
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
                 playerDash();
@@ -162,11 +175,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 StartCoroutine(BowShoot());
 
             }
-            //if(Input.GetButton("Shoot") && !isAttacking)
-            //{
-            //    StartCoroutine(MeleeSlash());
-            //}
-
+            
             // Call anything in here we want to update per second (not per frame)
             if (period > 1.0f)
             {
@@ -227,6 +236,20 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         else
             playerSpeed = origSpeed;
 
+    }
+
+    void playerDash()
+    {
+        isDashing++;
+        StartCoroutine(Dash());
+    }
+
+    IEnumerator WaitForDash()
+    {
+        // How long the player has to wait before dashing again
+        gameManager.instance.playerHUD.dashCooldown();
+        yield return new WaitForSeconds(dashCoolDown);
+        isDashing = 0;
     }
 
     void Sprint()
@@ -332,20 +355,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         isShooting = false;
     }
 
-    void playerDash()
-    {
-        isDashing++;
-        StartCoroutine(Dash());
-    }
-
-    IEnumerator WaitForDash()
-    {
-        // How long the player has to wait before dashing again
-        gameManager.instance.playerHUD.dashCooldown();
-        yield return new WaitForSeconds(dashCoolDown);
-        isDashing = 0;
-    }
-
     public void staffPickup(Staff_Stats stats)
     {
         staffList.Add(stats);
@@ -426,6 +435,27 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
+    void SwitchBow()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedBow < BowList.Count - 1)
+        {
+            selectedBow++;
+            ChangeBowStats();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedBow > 0)
+        {
+            selectedBow--;
+            ChangeBowStats();
+        }
+    }
+    void ChangeBowStats()
+    {
+        shootDamage = BowList[selectedBow].bowShootDamage;
+        shootDistance = BowList[selectedBow].bowShootDistance;
+        bowModel.mesh = BowList[selectedBow].model.GetComponent<MeshFilter>().sharedMesh;
+        bowMat.material = BowList[selectedBow].model.GetComponent<MeshRenderer>().sharedMaterial;
+        //gameManager.instance.UpdateAmmoCount();
+    }
     public void BowPickup(BowStats stats)
     {
         BowList.Add(stats);
@@ -438,7 +468,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         bowMat.material = stats.model.GetComponent<MeshRenderer>().sharedMaterial;
         BowEquipped = true;
         selectedBow = BowList.Count - 1;
-        gameManager.instance.UpdateAmmoCount();
+        //gameManager.instance.UpdateAmmoCount();
     }
 
     #endregion
@@ -458,10 +488,36 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         selectedSword = SwordList.Count - 1;
         //gameManager.instance.UpdateAmmoCount();
     }
+
+    void SwitchSword()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedSword < SwordList.Count - 1)
+        {
+            selectedSword++;
+            ChangeSwordStats();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedSword > 0)
+        {
+            selectedSword--;
+            ChangeSwordStats();
+        }
+    }
+
+    void ChangeSwordStats()
+    {
+        //shootDamage = staffList[selectedStaff].shootDamage;
+        //shootDistance = staffList[selectedStaff].shootDistance;
+        //shootRate = staffList[selectedStaff].shootRate;
+        swordModel.mesh = SwordList[selectedSword].model.GetComponent<MeshFilter>().sharedMesh;
+        swordMat.material = SwordList[selectedSword].model.GetComponent<MeshRenderer>().sharedMaterial;
+        //gameManager.instance.UpdateAmmoCount();
+    }
     #endregion
+
+    #region PlayerFeatures
     public void takeDamage(int amount)
     {
-        // Will take damage based off the amount 
+        // Player will take damage based off the amount 
         HP -= amount;
         aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
         gameManager.instance.playerHUD.updatePlayerHealth(HP);
@@ -619,7 +675,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             currExp -= expToNextLevel;
         }
     }
-
+#endregion
     public MeshFilter GetStaffModel()
     {
         return staffModel;

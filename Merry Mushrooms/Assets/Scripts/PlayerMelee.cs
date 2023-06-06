@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMelee : MonoBehaviour
@@ -39,23 +40,41 @@ public class PlayerMelee : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        IDamage damagable = other.gameObject.GetComponent<IDamage>();
-
-        if (damagable != null)
+        if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
         {
-            damagable.takeDamage(dmg);
+            IEarthDamage earthDamage = other.gameObject.GetComponent<IEarthDamage>();
+
+            if (earthDamage != null)
+                earthDamage.TakeEarthDamage(dmg);
         }
+        if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ice)
+        {
+            IIceDamage iceDamage = other.gameObject.GetComponent<IIceDamage>();
+
+            if (iceDamage != null)
+                iceDamage.TakeIceDamage(dmg);
+        }
+        if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].fire)
+        {
+            IFireDamage fireDamage = other.gameObject.GetComponent<IFireDamage>();
+
+            if (fireDamage != null)
+                fireDamage.TakeFireDamage(dmg);
+        }
+        if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].baseStaff)
+        {
+            IDamage damagable = other.gameObject.GetComponent<IDamage>();
+
+            if (damagable != null)
+            {
+                damagable.takeDamage(dmg);
+            }
+        }
+        
     }
     #region Attacking Functions
-
-    //public void AttackingOn()
-    //{
-    //    MeleeObj.enabled = true;
-    //}
-    //public void AttackingOff()
-    //{
-    //    MeleeObj.enabled = false;
-    //}
+     
+    
     #endregion
 
 }
