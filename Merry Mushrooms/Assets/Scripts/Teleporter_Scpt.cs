@@ -5,7 +5,6 @@ using UnityEngine;
 public class Teleporter_Scpt : MonoBehaviour
 {
     [SerializeField] GameObject PlayerObj;
-    [SerializeField] Transform Tele;
     [SerializeField] GameObject TeleporterObj;
     bool isPlayerInRange;
 
@@ -15,7 +14,6 @@ public class Teleporter_Scpt : MonoBehaviour
         {
 
             StartCoroutine(Spawn());
-            isPlayerInRange = false;
         }
     }
     public void OnTriggerEnter(Collider other)
@@ -28,8 +26,9 @@ public class Teleporter_Scpt : MonoBehaviour
     IEnumerator Spawn()
     {
         
-        yield return new WaitForSeconds(0.1f);
-        PlayerObj.transform.position = Tele.position;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1);
+        PlayerObj.transform.position = TeleporterObj.transform.position;
+        yield return new WaitForSeconds(1);
+        isPlayerInRange = false;
     }
 }
