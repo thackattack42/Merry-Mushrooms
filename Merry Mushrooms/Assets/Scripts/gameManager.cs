@@ -7,6 +7,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class gameManager : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class gameManager : MonoBehaviour
     public AudioSource dashCooldownFinishPing;
     public GameObject lowHPFlash;
     public Transform minimapRotationLock;
+    public AudioMixer SFXSlider;
+    public AudioMixer MusicSlider;
     public Image dmgFlash;
     public GameObject loadingScreen;
     

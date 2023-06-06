@@ -82,6 +82,18 @@ public class buttonFunctions : MonoBehaviour
             gameManager.instance.playerHUD.minimapCamRot.enabled = true; //enables the rotation lock
 
     }
+    public void SFXVol(float val)
+    {
+        gameManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
+    }
+    public void SFXVolTest()
+    {
+        gameManager.instance.dashCooldownFinishPing.PlayOneShot(gameManager.instance.playerHUD.dashCooldownFinishPing, 1);
+    }
+    public void MusicVol(float val)
+    {
+        gameManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
+    }
 
     //Credits Buttons
     public void creditsBack()
