@@ -167,11 +167,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 StartCoroutine(BowShoot());
 
             }
-            //if(Input.GetButton("Shoot") && !isAttacking)
-            //{
-            //    StartCoroutine(MeleeSlash());
-            //}
-
+            
             // Call anything in here we want to update per second (not per frame)
             if (period > 1.0f)
             {
@@ -488,9 +484,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //gameManager.instance.UpdateAmmoCount();
     }
     #endregion
+
+    #region PlayerFeatures
     public void takeDamage(int amount)
     {
-        // Will take damage based off the amount 
+        // Player will take damage based off the amount 
         HP -= amount;
         aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
         gameManager.instance.playerHUD.updatePlayerHealth(HP);
@@ -648,7 +646,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             currExp -= expToNextLevel;
         }
     }
-
+#endregion
     public MeshFilter GetStaffModel()
     {
         return staffModel;

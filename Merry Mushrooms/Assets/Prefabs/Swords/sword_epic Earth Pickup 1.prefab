@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6331205266960395841
+--- !u!1 &8467577517631737621
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,61 +8,61 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7027775398668098642}
-  - component: {fileID: 7027775398668098647}
-  - component: {fileID: 2079724880556222052}
-  - component: {fileID: 5755639536240794269}
-  - component: {fileID: 7027775398668098645}
+  - component: {fileID: 4889142535438531846}
+  - component: {fileID: 4504373152723224368}
+  - component: {fileID: 7808342241540230537}
+  - component: {fileID: 7907818396556999625}
+  - component: {fileID: 5618942414617370787}
   m_Layer: 0
-  m_Name: sword02 Earth Pickup
+  m_Name: sword_epic Earth Pickup 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7027775398668098642
+--- !u!4 &4889142535438531846
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6331205266960395841}
-  m_LocalRotation: {x: 0.6711699, y: -0, z: -0, w: 0.7413036}
-  m_LocalPosition: {x: -7.28, y: 0.51, z: 0.43}
+  m_GameObject: {fileID: 8467577517631737621}
+  m_LocalRotation: {x: 0.70310706, y: -0, z: -0, w: 0.71108407}
+  m_LocalPosition: {x: 0.01999998, y: -0.18299997, z: 0.026000023}
   m_LocalScale: {x: 0.7740149, y: 1.1338844, z: 1.1746393}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 84.315, y: 0, z: 0}
---- !u!114 &7027775398668098647
+  m_LocalEulerAnglesHint: {x: -243.64, y: 60.643, z: 64.667}
+--- !u!33 &4504373152723224368
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8467577517631737621}
+  m_Mesh: {fileID: 4300000, guid: 90c25ff0db82bf64cbc6b8e405018824, type: 3}
+--- !u!114 &7808342241540230537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6331205266960395841}
+  m_GameObject: {fileID: 8467577517631737621}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f2955c570df684ea152581b35f120e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 11400000, guid: fb3fa2d236efa71448c6498f3da6328b, type: 2}
---- !u!33 &2079724880556222052
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6331205266960395841}
-  m_Mesh: {fileID: 4300000, guid: 3bd1b773913e1a3428b48ca4b9f9248f, type: 3}
---- !u!23 &5755639536240794269
+--- !u!23 &7907818396556999625
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6331205266960395841}
+  m_GameObject: {fileID: 8467577517631737621}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -76,7 +76,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4fb8ea9da059dc04cb8494617b53562b, type: 2}
+  - {fileID: 2100000, guid: e950a7aefb5a59c41a0d63a81d21c366, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,16 +98,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7027775398668098645
+--- !u!135 &5618942414617370787
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6331205266960395841}
+  m_GameObject: {fileID: 8467577517631737621}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.559574
-  m_Center: {x: 0.00000001117587, y: -0.0028689585, z: -0.15584424}
+  m_Radius: 0.8770708
+  m_Center: {x: 0.00000001862645, y: 0.000000081956415, z: -0.3174942}
