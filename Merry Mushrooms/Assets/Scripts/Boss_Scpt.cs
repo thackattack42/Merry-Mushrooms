@@ -28,7 +28,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//,
     [Header("----- Boss Components -----")]
     [SerializeField] Animator anim;
     [SerializeField] Transform punchPos;
-    NavMeshAgent agent;
+    [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform shootPos;
     [SerializeField] public Transform headPos;
     [SerializeField] GameObject bullet;
@@ -48,7 +48,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//,
     {
         currHP = maxHP;
         anim = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
         stoppingDistOrig = agent.stoppingDistance;
         //base.Start();
         //gameManager.instance.UpdateGameGoal(1);

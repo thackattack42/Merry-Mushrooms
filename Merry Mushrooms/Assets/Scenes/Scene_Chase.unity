@@ -19055,6 +19055,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EM(Boss)-Red-Weak
       objectReference: {fileID: 0}
+    - target: {fileID: 8851954296222105778, guid: a32c0505e93adea4eaadac9c3eeb714a, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 4913001248367444934}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a32c0505e93adea4eaadac9c3eeb714a, type: 3}
 --- !u!1001 &3169725753719613372
@@ -19549,6 +19553,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!195 &4913001248367444934 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 7840747658457476789, guid: a32c0505e93adea4eaadac9c3eeb714a, type: 3}
+  m_PrefabInstance: {fileID: 2945797186038492531}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5435073363986874096
 PrefabInstance:
   m_ObjectHideFlags: 0

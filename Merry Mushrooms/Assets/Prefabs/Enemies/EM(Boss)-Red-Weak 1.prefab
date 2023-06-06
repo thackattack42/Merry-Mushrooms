@@ -1672,8 +1672,8 @@ MonoBehaviour:
   AOEDamage: 0
   numMinions: 0
   maxMinions: 3
-  playerFaceSpeed: 15
-  viewCone: 90
+  playerFaceSpeed: 30
+  viewCone: 180
   anim: {fileID: 7840747658448051152}
   punchPos: {fileID: 2945797186072697713}
   shootPos: {fileID: 5744439987781908691}
@@ -1729,7 +1729,7 @@ SphereCollider:
   m_GameObject: {fileID: 7840747658457442398}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
