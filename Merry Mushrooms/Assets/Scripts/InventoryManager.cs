@@ -1,12 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] public int maxItemStack;
+    public int maxItemStack;
     public InventorySlot[] InventorySlots;
     public GameObject invItemPrefab;
+
+
+    [SerializeField] MeshFilter staffModel;
+    [SerializeField] MeshRenderer staffMat;
+    [SerializeField] MeshRenderer bowMat;
+    [SerializeField] MeshFilter bowModel;
+    [SerializeField] MeshRenderer swordMat;
+    [SerializeField] MeshFilter swordModel;
+
+    private void Start()
+    {
+        UpdateWeaponInInv();
+    }
     public bool AddItem(Item item)
     {
         //find existing item if stackable
@@ -43,5 +57,25 @@ public class InventoryManager : MonoBehaviour
         GameObject newItem = Instantiate(invItemPrefab, slot.transform);
         InventoryDraggableItem invIitem = newItem.GetComponent<InventoryDraggableItem>();
         invIitem.InitializeItem(item);
+    }
+
+    void UpdateWeaponInInv()
+    {
+        if (gameManager.instance.playerScript.StaffEquipped)
+        {
+            staffModel = gameManager.instance.playerScript.GetStaffModel();
+            staffMat = gameManager.instance.playerScript.GetStaffMat();
+        }
+        else if (gameManager.instance.playerScript.BowEquipped)
+        {
+            bowModel = gameManager.instance.playerScript.GetBowModel();
+            bowMat = gameManager.instance.playerScript.GetBowMat();
+        }
+        else if (gameManager.instance.playerScript.SwordEquipped)
+        {
+            swordModel = gameManager.instance.playerScript.GetSwordModel();
+            swordMat = gameManager.instance.playerScript.GetSwordMat();
+        }
+        
     }
 }
