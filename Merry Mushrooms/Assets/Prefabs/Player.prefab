@@ -877,7 +877,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashCooldownFinishPing: {fileID: 8300000, guid: 826ac13366a44c8459091fbcfa5f0c1d, type: 3}
-  dashCooldownFinishPingVol: 0.2
   minimapBGRot: {fileID: 1998479975}
   minimapCamRot: {fileID: 2107280112}
   minimapCam: {fileID: 1963569563}
@@ -972,7 +971,7 @@ AudioSource:
   m_GameObject: {fileID: 8327772038628251588}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 154978e52ec9f0445a1882bdf10e4a88, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -7,9 +7,9 @@ public class Boss_AOE : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] int pushAmount;
 
-    public void AOEAttack()
+    private void Start()
     {
-        
+        Destroy(gameObject, 0.15f);
     }
 
     private void OnTriggerEnter(Collider other)

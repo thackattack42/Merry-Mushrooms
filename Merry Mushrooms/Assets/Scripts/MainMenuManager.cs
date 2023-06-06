@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject mainMenuScreen;
     public GameObject loadingScreen;
     public GameObject creditsScreen;
+    public AudioMixer SFXSlider;
+    public AudioMixer MusicSlider;
 
     float loadTimer;
 
