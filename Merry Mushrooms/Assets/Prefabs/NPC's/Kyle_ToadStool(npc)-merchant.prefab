@@ -355,8 +355,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is a very long Text Example. You can edit me in Canvas > Chat Bubble
-    > Text under the Text Input paramater. Make sure to not put too much text!
+  m_text: ' Hello Player
+
+    Would like to buy my wares?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -997,6 +998,7 @@ GameObject:
   - component: {fileID: 1757883146015145205}
   - component: {fileID: 3387605448286580293}
   - component: {fileID: 5337009811467441350}
+  - component: {fileID: 1439889839}
   m_Layer: 0
   m_Name: Kyle_ToadStool(npc)-merchant
   m_TagString: Untagged
@@ -1084,3 +1086,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1439889839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123275503138519528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e641a5969418b4b48b5c26b714d03225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChatBubble: {fileID: 0}
+  QuestBubble: {fileID: 0}
+  QuestReturnBubble: {fileID: 0}
+  ShopBubble: {fileID: 0}
