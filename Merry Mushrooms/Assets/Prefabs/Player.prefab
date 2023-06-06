@@ -549,7 +549,12 @@ GameObject:
   - component: {fileID: 8963343311217000300}
   - component: {fileID: 3411679213566919573}
   - component: {fileID: 8426172299868289217}
-  m_Layer: 0
+  - component: {fileID: 8963343311217000305}
+  - component: {fileID: 8963343311217000302}
+  - component: {fileID: 8963343311217000303}
+  - component: {fileID: 8963343311217000301}
+  - component: {fileID: 8963343311217000304}
+  m_Layer: 3
   m_Name: sword02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +569,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3991436285849876297}
   m_LocalRotation: {x: 0.75019073, y: -0, z: -0, w: 0.66122156}
-  m_LocalPosition: {x: 0.624, y: -0.35300004, z: 0.839}
+  m_LocalPosition: {x: 0.624, y: -0.619, z: 1.12}
   m_LocalScale: {x: 0.7740149, y: 1.1338845, z: 1.1746393}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -578,7 +583,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3991436285849876297}
-  m_Mesh: {fileID: 4300000, guid: 3bd1b773913e1a3428b48ca4b9f9248f, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &3411679213566919573
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -630,12 +635,91 @@ Animation:
   m_GameObject: {fileID: 3991436285849876297}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 878738bff44aadb4f856c391194614e4, type: 2}
   m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!54 &8963343311217000305
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &8963343311217000302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.31, y: 0.18, z: 1.92}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &8963343311217000303
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5abb1fc8fa090754db916259fb9acdb9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8963343311217000301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075f7f3e8588aab4ea3ccaa51aaea1c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 2
+--- !u!114 &8963343311217000304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3991436285849876297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3403d5bb3d1de47458ad544874c7d386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeleeObj: {fileID: 8963343311217000302}
+  dmg: 2
+  animrTransSpeed: 30
+  animr: {fileID: 8963343311217000303}
 --- !u!1 &8327772037738040327
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,8 +911,8 @@ MonoBehaviour:
   bowMat: {fileID: 476571864147875218}
   bowModel: {fileID: 2412215107198787928}
   SwordList: []
-  swordMat: {fileID: 0}
-  swordModel: {fileID: 0}
+  swordMat: {fileID: 3411679213566919573}
+  swordModel: {fileID: 8963343311217000300}
   shootDistance: 200
   shootRate: 3
   shootDamage: 1
