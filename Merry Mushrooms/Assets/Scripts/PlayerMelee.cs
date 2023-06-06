@@ -20,14 +20,15 @@ public class PlayerMelee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            if (Input.GetButtonDown("Shoot"))
+        if (Input.GetButtonDown("Shoot"))
         {
 
             animr.SetBool("Attacking", true);
         }
         else if (Input.GetButtonUp("Shoot"))
         {
-            animr.SetBool("Attacking", false);  
+
+           animr.SetBool("Attacking", false);  
         }
     }
 
