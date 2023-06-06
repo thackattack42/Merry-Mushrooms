@@ -84,7 +84,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] float audDamageVol;
     [SerializeField] float audStepsVol;
 
-    
+    public weapon playerWeapon;
+
     private float origSpeed;
     private float origHeight;
     private bool isShooting;
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     }
 
 
-    enum weapon
+    public enum weapon
     {
         Sword,
         Bow,
