@@ -138,7 +138,15 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             { 
             SwitchStaff();
             }
+            if (SwordList.Count > 0)
+            {
             SwitchSword();
+            }
+            if (BowList.Count > 0)
+            {
+             SwitchBow();
+            }
+            
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
                 playerDash();
@@ -427,6 +435,27 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
+    void SwitchBow()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedBow < BowList.Count - 1)
+        {
+            selectedBow++;
+            ChangeBowStats();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedBow > 0)
+        {
+            selectedBow--;
+            ChangeBowStats();
+        }
+    }
+    void ChangeBowStats()
+    {
+        shootDamage = BowList[selectedBow].bowShootDamage;
+        shootDistance = BowList[selectedBow].bowShootDistance;
+        bowModel.mesh = BowList[selectedBow].model.GetComponent<MeshFilter>().sharedMesh;
+        bowMat.material = BowList[selectedBow].model.GetComponent<MeshRenderer>().sharedMaterial;
+        //gameManager.instance.UpdateAmmoCount();
+    }
     public void BowPickup(BowStats stats)
     {
         BowList.Add(stats);
@@ -439,7 +468,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         bowMat.material = stats.model.GetComponent<MeshRenderer>().sharedMaterial;
         BowEquipped = true;
         selectedBow = BowList.Count - 1;
-        gameManager.instance.UpdateAmmoCount();
+        //gameManager.instance.UpdateAmmoCount();
     }
 
     #endregion
