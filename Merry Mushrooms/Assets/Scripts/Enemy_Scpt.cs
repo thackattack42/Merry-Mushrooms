@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[DefaultExecutionOrder(1)]
 public class Enemy_Scpt : MonoBehaviour, IPhysics
 {
     #region fields
@@ -18,7 +21,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     [Header("------ Componets ------")]
     [SerializeField] Renderer model;
     [SerializeField] public NavMeshAgent agent;
-    public  Transform headPos;
+    public Transform headPos;
     [SerializeField] public Animator animr;
     [SerializeField] AudioSource aud;
 
@@ -41,14 +44,15 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
 
     #endregion
     #region Start and Update
+    void Awake()
+    {
+        enemyManager.Instance.enemies.Add(this);
+    }
     // Start is called before the first frame update
     public void Start()
     {
-        
-
         startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
-        //gameManager.instance.UpdateGameGoal(1);
         origColor = model.material.color;
         viewDistOrig = GetComponent<SphereCollider>().radius;
     }
@@ -61,23 +65,19 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
             speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
             animr.SetFloat("Speed", speed);
 
-            if (!CompareTag("Boss Enemy"))
+            if (playerInRange && !canSeePlayer())
             {
-                if (playerInRange && !canSeePlayer())
-                {
-                    StartCoroutine(Roam());
-                }
-                else if (agent.destination != gameManager.instance.player.transform.position)
-                {
-                    StartCoroutine(Roam());
-                }
-
+                StartCoroutine(Roam());
             }
-            else
+            else if (agent.destination != gameManager.instance.player.transform.position)
             {
-                if (playerInRange && !canSeePlayer()) { }
-                else if (agent.destination != gameManager.instance.player.transform.position) { }
+                StartCoroutine(Roam());
             }
+            //else
+            //{
+            //    if (playerInRange && !canSeePlayer()) { }
+            //    else if (agent.destination != gameManager.instance.player.transform.position) { }
+            //}
         }
     }
     #endregion
@@ -95,7 +95,8 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;  
+            playerInRange = true;
+            
         }
     }
 
@@ -137,7 +138,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
                 agent.stoppingDistance = stoppingDistOrig;
-                agent.SetDestination(gameManager.instance.player.transform.position);
+                MoveTo(gameManager.instance.player.transform.position);
 
                 if (agent.remainingDistance < agent.stoppingDistance)
                 {
@@ -148,6 +149,11 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         }
         agent.stoppingDistance = 0;
         return false;
+    }
+
+    public void MoveTo(Vector3 pos)
+    {
+        agent.SetDestination(pos);
     }
     #endregion
     #region Movement Actions
@@ -201,6 +207,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     #region Enemy's Death
     public IEnumerator EnemyDespawn()
     {
+        gameManager.instance.playerScript.AddEXP(20);
         Instantiate(FunGilDrop, transform.position, transform.rotation);
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
