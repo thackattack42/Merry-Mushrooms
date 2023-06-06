@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Boss_Idle : StateMachineBehaviour
+public class Boss_Phase2 : StateMachineBehaviour
 {
     Boss_Scpt boss;
+    NavMeshAgent agent;
     public int rand;
     public float timer;
     public float minTime;
@@ -15,18 +17,28 @@ public class Boss_Idle : StateMachineBehaviour
     {
         timer = Random.Range(minTime, maxTime);
         boss = animator.GetComponent<Boss_Scpt>();
+        agent = animator.GetComponent<NavMeshAgent>();
+        agent.stoppingDistance = 10;
 
         animator.ResetTrigger("Shoot");
         animator.ResetTrigger("Summon Minions");
         animator.ResetTrigger("Jump Attack");
+        animator.ResetTrigger("Idle");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        agent.SetDestination(gameManager.instance.player.transform.position);
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            animator.SetTrigger("Idle");
+        }
+
         if (timer <= 0)
         {
-            if (boss.numMinions < boss.maxMinions)
+            if (boss.numMinions <= 0)
             {
                 rand = Random.Range(0, 3);
 
@@ -53,6 +65,6 @@ public class Boss_Idle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //animator.ResetTrigger("Idle");
+
     }
 }

@@ -7,9 +7,9 @@ using UnityEngine.AI;
 public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//, IEffectable
 {
     #region Fields
-    //[Header("------ Enemy Spawner ------")]
-    //[SerializeField] GameObject[] enemyToSpawn;
-    //[SerializeField] Transform[] spawnPoss;
+    [Header("------ Enemy Spawner ------")]
+    [SerializeField] public GameObject[] enemyToSpawn;
+    [SerializeField] public Transform[] spawnPos;
     //[SerializeField] float spawnDelayy;
     //int spawnCountt;
     //int numberSpawnedd;
@@ -22,13 +22,24 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//,
     [SerializeField] int AOEDamage;
     [SerializeField] public int numMinions;
     [SerializeField] public int maxMinions;
+    [Range(5, 100)][SerializeField] int playerFaceSpeed;
+    public int viewCone;
 
     [Header("----- Boss Components -----")]
     [SerializeField] Animator anim;
     [SerializeField] Transform punchPos;
     NavMeshAgent agent;
     [SerializeField] Transform shootPos;
+    [SerializeField] public Transform headPos;
     [SerializeField] GameObject bullet;
+    [SerializeField] public GameObject aoeAttack;
+
+    [Header("----- Misc -----")]
+    public bool isSpawning;
+    public Vector3 playerDir;
+    public float stoppingDistOrig;
+    public float angleToPlayer;
+
     #endregion
     #region Start and Stop
     //new
@@ -37,53 +48,23 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//,
     {
         currHP = maxHP;
         anim = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        stoppingDistOrig = agent.stoppingDistance;
         //base.Start();
         //gameManager.instance.UpdateGameGoal(1);
     }
 
-    new
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+    private void Update()
     {
         if (currHP <= (maxHP / 2))
         {
             anim.SetTrigger("Phase 2");
         }
-        //base.Update();
-        //spawnCountt = 2;
-        //if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
-        //{
-        //    StartCoroutine(EnemySpawn());
-        //}
 
-        //else if (HP <= 50)
+        //if (agent.remainingDistance < agent.stoppingDistance)
         //{
-        //    spawnCountt = 5;
-        //    if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
-        //    {
-        //        StartCoroutine(EnemySpawn());
-        //    }
-        //    if (playerInRange)
-        //    {
-        //        //make AOE attack
-        //        //ApplyEffect()
-        //    }
-        //}
-        //else if (HP <= 25)
-        //{
-        //    spawnCountt = 9;
-        //    if (playerInRange && !isSpawningg && numberSpawnedd < spawnCountt)
-        //    {
-        //        StartCoroutine(EnemySpawn());
-        //    }
-        //    if (playerInRange)
-        //    {
-
-        //        //make AOE attack
-        //        //ApplyEffect()
-        //        //defence enabled//not needed
-        //        //heal enemies in area//not needed
-        //    }
+        //    FacePlayer();
         //}
     }
     #endregion
@@ -99,21 +80,66 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//,
         punchPos.GetComponent<SphereCollider>().enabled = false;
     }
 
+    public void AOEAttack()
+    {
+        Instantiate(aoeAttack, transform.position, aoeAttack.transform.rotation);
+    }
+
+    public void SpawnMinions()
+    {
+        while (numMinions < maxMinions) 
+        {
+            Instantiate(enemyToSpawn[Random.Range(0, enemyToSpawn.Length)], spawnPos[Random.Range(0, spawnPos.Length)].position, transform.rotation);
+            numMinions++;
+        }
+    }
+
+    public void FacePlayer()
+    {
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+    }
+
+    public virtual bool canSeePlayer()
+    {
+        playerDir = gameManager.instance.player.transform.position - headPos.position;
+        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
+
+        Debug.DrawRay(headPos.position, playerDir);
+
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        {
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
+            {
+                //agent.stoppingDistance = stoppingDistOrig;
+                //agent.SetDestination(gameManager.instance.player.transform.position);
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    FacePlayer();
+                }
+                return true;
+            }
+        }
+        agent.stoppingDistance = 0;
+        return false;
+    }
+
+    //IEnumerator SummonMinions()
+    //{
+    //    isSpawning = true;
+    //    Instantiate(enemyToSpawn[Random.Range(0, enemyToSpawn.Length)], spawnPos[Random.Range(0, spawnPos.Length)].position, transform.rotation);
+    //    numMinions++;
+    //    yield return new WaitForSeconds(0.1f);
+    //    isSpawning = false;
+    //}
+
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
-    #region Spawner
-    //IEnumerator EnemySpawn()
-    //{
-    //    isSpawningg = true;
-    //    Instantiate(enemyToSpawn[Random.Range(0, enemyToSpawn.Length)], spawnPoss[Random.Range(0, spawnPoss.Length)].position, transform.rotation);
-    //    numberSpawnedd++;
-    //    yield return new WaitForSeconds(spawnDelayy);
-    //    isSpawningg = false;
-    //}
-    #endregion
     #region Damage Functions
     public void TakeEarthDamage(int dmg)
     {
