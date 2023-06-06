@@ -27,6 +27,7 @@ public class gameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject optionsMenu;
     public GameObject winMenu;
+    public GameObject weaponSelectMenu;
     public GameObject reticle;
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI ammoTotal;
@@ -65,6 +66,8 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
+        //weaponSelectMenu.SetActive(true);
+        //activeMenu = weaponSelectMenu;
         //loadingScreen.SetActive(true);
     }
 
