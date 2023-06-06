@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -133,7 +134,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             OnPlayerCrouch();
             OnPlayerUncrouch();
             Movement();
+            if(staffList.Count > 0) 
+            { 
             SwitchStaff();
+            }
+            SwitchSword();
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
                 playerDash();
@@ -227,6 +232,20 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         else
             playerSpeed = origSpeed;
 
+    }
+
+    void playerDash()
+    {
+        isDashing++;
+        StartCoroutine(Dash());
+    }
+
+    IEnumerator WaitForDash()
+    {
+        // How long the player has to wait before dashing again
+        gameManager.instance.playerHUD.dashCooldown();
+        yield return new WaitForSeconds(dashCoolDown);
+        isDashing = 0;
     }
 
     void Sprint()
@@ -330,20 +349,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
-    }
-
-    void playerDash()
-    {
-        isDashing++;
-        StartCoroutine(Dash());
-    }
-
-    IEnumerator WaitForDash()
-    {
-        // How long the player has to wait before dashing again
-        gameManager.instance.playerHUD.dashCooldown();
-        yield return new WaitForSeconds(dashCoolDown);
-        isDashing = 0;
     }
 
     public void staffPickup(Staff_Stats stats)
@@ -456,6 +461,30 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         swordMat.sharedMaterial = stat.model.GetComponent<MeshRenderer>().sharedMaterial;
         SwordEquipped = true;
         selectedSword = SwordList.Count - 1;
+        //gameManager.instance.UpdateAmmoCount();
+    }
+
+    void SwitchSword()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedSword < SwordList.Count - 1)
+        {
+            selectedSword++;
+            ChangeSwordStats();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedSword > 0)
+        {
+            selectedSword--;
+            ChangeSwordStats();
+        }
+    }
+
+    void ChangeSwordStats()
+    {
+        //shootDamage = staffList[selectedStaff].shootDamage;
+        //shootDistance = staffList[selectedStaff].shootDistance;
+        //shootRate = staffList[selectedStaff].shootRate;
+        swordModel.mesh = SwordList[selectedSword].model.GetComponent<MeshFilter>().sharedMesh;
+        swordMat.material = SwordList[selectedSword].model.GetComponent<MeshRenderer>().sharedMaterial;
         //gameManager.instance.UpdateAmmoCount();
     }
     #endregion
