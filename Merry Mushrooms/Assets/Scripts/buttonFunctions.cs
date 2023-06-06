@@ -5,40 +5,50 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class buttonFunctions : MonoBehaviour
 {
     public AudioSource SFXTestSource;
+    public AudioSource UIAudio;
+    public AudioClip MenuButtonClick;
+    public AudioClip MenuSelection;
     [SerializeField] public AudioClip SFXTest;
 
     public void resume()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         gameManager.instance.UnpausedState();
     }
     public void restart()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         gameManager.instance.UnpausedState();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void quit()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         Application.Quit(); 
     }
     public void respawn()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         gameManager.instance.UnpausedState();
         gameManager.instance.playerScript.Spawn();
     }
     public void startGame()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         SceneManager.LoadScene(1);
     }
     public void options()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
-            MainMenuManager.instance.optionScreen.SetActive(true);
             MainMenuManager.instance.mainMenuScreen.SetActive(false);
+            MainMenuManager.instance.optionScreen.SetActive(true);
         }
         else
         {
@@ -50,17 +60,26 @@ public class buttonFunctions : MonoBehaviour
     }
     public void credits()
     {
-        MainMenuManager.instance.creditsScreen.SetActive(true);
+        UIAudio.PlayOneShot(MenuButtonClick);
         MainMenuManager.instance.mainMenuScreen.SetActive(false);
+        MainMenuManager.instance.creditsScreen.SetActive(true);
     }
     public void mainMenu()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         SceneManager.LoadScene(0);
+    }
+    public void PlaySelection()
+    {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || 
+            Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            UIAudio.PlayOneShot(MenuSelection);
     }
 
     //Option buttons
     public void optionsBack()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
             MainMenuManager.instance.optionScreen.SetActive(false);
@@ -76,6 +95,7 @@ public class buttonFunctions : MonoBehaviour
     }
     public void minimapRotTottle(bool toggle)
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         if (toggle)
         {
             gameManager.instance.playerHUD.minimapCamRot.enabled = false; //disables the rotation lock
@@ -108,6 +128,7 @@ public class buttonFunctions : MonoBehaviour
     //Credits Buttons
     public void creditsBack()
     {
+        UIAudio.PlayOneShot(MenuButtonClick);
         MainMenuManager.instance.creditsScreen.SetActive(false);
         MainMenuManager.instance.mainMenuScreen.SetActive(true);
     }

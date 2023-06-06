@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         controller.height = 2.0f;
         origHeight = controller.height;
         HP = maxHP;
-
+        
         statusEffects = new Dictionary<string, StatusEffectData>();
 
         // Spawns Player
@@ -620,6 +620,30 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         }
     }
 
+    public MeshFilter GetStaffModel()
+    {
+        return staffModel;
+    }
+    public MeshRenderer GetStaffMat()
+    {
+        return staffMat;
+    }
+    public MeshFilter GetBowModel()
+    {
+        return bowModel;
+    }
+    public MeshRenderer GetBowMat()
+    {
+        return bowMat;
+    }
+    public MeshFilter GetSwordModel()
+    {
+        return swordModel;
+    }
+    public MeshRenderer GetSwordMat()
+    {
+        return swordMat;
+    }
    
 
     //#region Attacking Functions

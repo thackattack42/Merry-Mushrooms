@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class MainMenuManager : MonoBehaviour
         Time.timeScale = 1;
         loadTimer = 3;
         loadingScreen.SetActive(true);
+        
     }
 
     // Update is called once per frame

@@ -18,7 +18,6 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     public PlayerHUD playerHUD;
-    //public Inventory inventory;
     [SerializeField] public GameObject playerSpawnPos;
    // public StaffPickup staffPick;
 
@@ -46,8 +45,10 @@ public class gameManager : MonoBehaviour
     public AudioMixer MusicSlider;
     public Image dmgFlash;
     public GameObject loadingScreen;
-    
-    
+    public GameObject Inventory;
+    bool InvToggle;
+
+
     int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
@@ -87,6 +88,15 @@ public class gameManager : MonoBehaviour
                 activeMenu.SetActive(isPaused);
                 PauseState();
             }
+            if (Input.GetButtonDown("Tab"))
+            {
+                InvToggle = !InvToggle;
+                Inventory.SetActive(InvToggle);
+                if (InvToggle)
+                    SimiPauseState();
+                else 
+                    SimiUnpausedState();
+            }
         }
     }
 
@@ -97,7 +107,12 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         reticle.SetActive(false);
     }
-
+    public void SimiPauseState()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        reticle.SetActive(false);
+    }
     public void UnpausedState()
     {
         Time.timeScale = timeScaleOrig;
@@ -107,6 +122,12 @@ public class gameManager : MonoBehaviour
 
         activeMenu.SetActive(false);
         activeMenu = null;
+        reticle.SetActive(true);
+    }
+    public void SimiUnpausedState()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         reticle.SetActive(true);
     }
 

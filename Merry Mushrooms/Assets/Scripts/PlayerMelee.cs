@@ -12,22 +12,28 @@ public class PlayerMelee : MonoBehaviour
     public float animrTransSpeed;
     [SerializeField] Animator animr;
     // Start is called before the first frame update
-    //void Start()
-    //{
-    //    animator = GetComponent<Animator>();
-    //}
+    void Start()
+    {
+        GetComponent<BoxCollider>().enabled = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
-            if (Input.GetButtonDown("Shoot"))
+
+        if (gameManager.instance.playerScript.SwordEquipped)
+        {
+            GetComponent<BoxCollider>().enabled = true;
+        }
+        if (Input.GetButtonDown("Shoot"))
         {
 
             animr.SetBool("Attacking", true);
         }
         else if (Input.GetButtonUp("Shoot"))
         {
-            animr.SetBool("Attacking", false);  
+
+           animr.SetBool("Attacking", false);  
         }
     }
 
@@ -42,14 +48,14 @@ public class PlayerMelee : MonoBehaviour
     }
     #region Attacking Functions
 
-    public void AttackingOn()
-    {
-        MeleeObj.enabled = true;
-    }
-    public void AttackingOff()
-    {
-        MeleeObj.enabled = false;
-    }
+    //public void AttackingOn()
+    //{
+    //    MeleeObj.enabled = true;
+    //}
+    //public void AttackingOff()
+    //{
+    //    MeleeObj.enabled = false;
+    //}
     #endregion
 
 }

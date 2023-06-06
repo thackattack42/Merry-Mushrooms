@@ -8,9 +8,9 @@ using UnityEngine.UI;
 [CreateAssetMenu]
 public class Item : ScriptableObject
 {
-    ItemType type;
+    public ItemType type;
     public bool stackable = true;
-    public Image img;
+    public Sprite sprite;
     
 }
 

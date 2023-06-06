@@ -16,7 +16,7 @@ public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
     public void InitializeItem(Item newItem)
     {
         item = newItem;
-        img = newItem.img;
+        img.sprite = newItem.sprite;
         UpdateStack();
     }
 
