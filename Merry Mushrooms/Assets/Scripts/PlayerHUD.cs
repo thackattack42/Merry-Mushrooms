@@ -12,8 +12,8 @@ public class PlayerHUD : MonoBehaviour
 
     //Audio Stuff
     [Header("-----Audio Stuff-----")]
-    [SerializeField] AudioClip dashCooldownFinishPing;
-    [Range(0f,1f)][SerializeField] float dashCooldownFinishPingVol;
+    [SerializeField] public AudioClip dashCooldownFinishPing;
+    //[Range(0f,1f)][SerializeField] public float dashCooldownFinishPingVol;
 
     //Hotbar stuff
     float dashCooldownTimer;
@@ -137,7 +137,7 @@ public class PlayerHUD : MonoBehaviour
     }
     IEnumerator dashCooldownEnd()
     {
-        gameManager.instance.dashCooldownFinishPing.PlayOneShot(dashCooldownFinishPing, dashCooldownFinishPingVol);
+        gameManager.instance.dashCooldownFinishPing.PlayOneShot(dashCooldownFinishPing);
         gameManager.instance.dashCooldownFinish.enabled = true;
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.dashCooldownFinish.enabled = false;
