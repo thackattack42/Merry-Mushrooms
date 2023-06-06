@@ -47,6 +47,7 @@ public class gameManager : MonoBehaviour
     public Image dmgFlash;
     public GameObject loadingScreen;
     public GameObject Inventory;
+    public InventoryManager invManager;
     bool InvToggle;
     [Header("-----Player Pickups-----")]
     public GameObject Sword;
@@ -103,8 +104,11 @@ public class gameManager : MonoBehaviour
                 Inventory.SetActive(InvToggle);
                 if (InvToggle)
                     SimiPauseState();
-                else 
+                else
+                {
                     SimiUnpausedState();
+                    invManager.updated = false;
+                }
             }
         }
     }

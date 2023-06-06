@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
     public int maxItemStack;
     public InventorySlot[] InventorySlots;
     public GameObject invItemPrefab;
-    //bool updated;
+    public bool updated;
 
 
     [SerializeField] MeshFilter staffModel;
@@ -20,9 +20,9 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.instance.Inventory.activeSelf)
+        if (gameManager.instance.Inventory.activeSelf && !updated)
         {
-            //updated = true;
+            updated = true;
             UpdateWeaponInInv();
         }
         
