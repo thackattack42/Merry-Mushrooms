@@ -48,7 +48,10 @@ public class gameManager : MonoBehaviour
     public GameObject loadingScreen;
     public GameObject Inventory;
     bool InvToggle;
-
+    [Header("-----Player Pickups-----")]
+    public GameObject Sword;
+    public GameObject Bow;
+    public GameObject Staff;
 
     int enemiesRemaining;
     public bool isPaused;
@@ -66,6 +69,9 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
+        //Sword = GameObject.FindGameObjectWithTag("Sword");
+        //Bow = GameObject.FindGameObjectWithTag("Bow");
+        //Staff = GameObject.FindGameObjectWithTag("Staff");
         //weaponSelectMenu.SetActive(true);
         //activeMenu = weaponSelectMenu;
         //loadingScreen.SetActive(true);

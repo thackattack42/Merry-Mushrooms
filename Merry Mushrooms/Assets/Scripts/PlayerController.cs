@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     [Header("----- Staff Stats -----")]
     public List<Staff_Stats> staffList = new List<Staff_Stats>();
-    [SerializeField] MeshFilter staffModel;
-    [SerializeField] MeshRenderer staffMat;
+    [SerializeField] public MeshFilter staffModel;
+    [SerializeField] public MeshRenderer staffMat;
     // Bullet for Player
     [SerializeField] GameObject playerBullet;
     [SerializeField] GameObject bulletPoint;
@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] GameObject playerArrow;
     [SerializeField] GameObject arrowPoint;
     [SerializeField] float speedOfArrow = 600;
-    [SerializeField] MeshRenderer bowMat;
-    [SerializeField] MeshFilter bowModel;
+    [SerializeField] public MeshRenderer bowMat;
+    [SerializeField] public MeshFilter bowModel;
     [Header("----- Bow Shoot Stats -----")]
     //[Range(2, 300)][SerializeField] int bowShootDistance;
     [Range(0.1f, 3)][SerializeField] float bowShootRate;
@@ -70,8 +70,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     [Header("----- Sword Stats -----")]
     public List<SwordStats> SwordList = new List<SwordStats>();
-    [SerializeField] MeshRenderer swordMat;
-    [SerializeField] MeshFilter swordModel;
+    [SerializeField] public MeshRenderer swordMat;
+    [SerializeField] public MeshFilter swordModel;
     public int selectedSword;
     
    
@@ -170,14 +170,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 StartCoroutine(Reload());
             }
 
-            if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0)
+            if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0 && StaffEquipped)
             {
                
 
                 StartCoroutine(shoot());
              
             }
-            if (Input.GetButton("Shoot") && !isShooting && !isReloading && BowList.Count > 0)
+            if (Input.GetButton("Shoot") && !isShooting && !isReloading && BowList.Count > 0 && BowEquipped)
             {
 
 

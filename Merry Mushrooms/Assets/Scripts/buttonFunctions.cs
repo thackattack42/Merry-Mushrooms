@@ -135,14 +135,32 @@ public class buttonFunctions : MonoBehaviour
 
     public void SetPlayerBow()
     {
+        
         gameManager.instance.playerScript.playerWeapon = PlayerController.weapon.Bow;
+        //gameManager.instance.playerScript.bowMat
+        gameManager.instance.playerScript.bowModel.mesh = gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].model.GetComponent<MeshFilter>().sharedMesh;
+        gameManager.instance.playerScript.bowMat.material = gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].model.GetComponent<MeshRenderer>().sharedMaterial;
+        gameManager.instance.playerScript.BowEquipped = true;
+        //gameManager.instance.Bow.SetActive(true);   
+        gameManager.instance.UnpausedState();
     }
     public void SetPlayerSword()
     {
+       
         gameManager.instance.playerScript.playerWeapon = PlayerController.weapon.Sword;
+        //gameManager.instance.Sword.SetActive(true);
+        gameManager.instance.playerScript.swordModel.mesh = gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].model.GetComponent<MeshFilter>().sharedMesh;
+        gameManager.instance.playerScript.swordMat.material = gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].model.GetComponent<MeshRenderer>().sharedMaterial;
+        gameManager.instance.playerScript.SwordEquipped = true;
+        gameManager.instance.UnpausedState();
     }
     public void SetPlayerStaff()
     {
         gameManager.instance.playerScript.playerWeapon = PlayerController.weapon.Staff;
+        //gameManager.instance.Staff.SetActive(true);
+        gameManager.instance.playerScript.staffModel.mesh = gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
+        gameManager.instance.playerScript.staffMat.material = gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
+        gameManager.instance.playerScript.StaffEquipped = true;
+        gameManager.instance.UnpausedState();
     }
 }
