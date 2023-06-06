@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     [Header("----- Componets -----")]
     [SerializeField] CharacterController controller;
-    [SerializeField] AudioSource aud;
+    [SerializeField] public AudioSource aud;
 
     [Header("----- Player Stats -----")]
     [SerializeField] float playerSpeed;

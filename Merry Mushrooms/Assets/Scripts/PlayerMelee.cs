@@ -25,16 +25,16 @@ public class PlayerMelee : MonoBehaviour
         if (gameManager.instance.playerScript.SwordEquipped)
         {
             GetComponent<BoxCollider>().enabled = true;
-        }
         if (Input.GetButtonDown("Shoot"))
         {
-
+           gameManager.instance.playerScript.aud.PlayOneShot(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingSound, gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingVol);
             animr.SetBool("Attacking", true);
         }
         else if (Input.GetButtonUp("Shoot"))
         {
 
            animr.SetBool("Attacking", false);  
+        }
         }
     }
 
