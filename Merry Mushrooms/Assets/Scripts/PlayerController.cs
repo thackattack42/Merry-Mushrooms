@@ -70,8 +70,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     [Header("----- Sword Stats -----")]
     public List<SwordStats> SwordList = new List<SwordStats>();
+    public List<ShieldStat> ShieldList = new List<ShieldStat>();
     [SerializeField] public MeshRenderer swordMat;
     [SerializeField] public MeshFilter swordModel;
+    [SerializeField] public MeshRenderer shieldMat;
+    [SerializeField] public MeshFilter shieldModel;
     public int selectedSword;
     
    
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool StaffEquipped;
     public bool BowEquipped;
     public bool SwordEquipped;
+    public bool ShieldEquipped;
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
