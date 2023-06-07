@@ -16,6 +16,7 @@ public class ManaPickup_Script : MonoBehaviour
             {
                 //aud.PlayOneShot(audPickup[Random.Range(0, audPickup.Length)], audPickupVol);
                 gameManager.instance.playerScript.MP = gameManager.instance.playerScript.maxMP;
+                gameManager.instance.playerHUD.updatePlayerMana();
                 //gameManager.instance.playerHUD.updatePlayerHealth(gameManager.instance.playerScript.MP);
                 Destroy(gameObject);
             }
