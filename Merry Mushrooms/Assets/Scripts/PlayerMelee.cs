@@ -23,21 +23,21 @@ public class PlayerMelee : MonoBehaviour
     void Update()
     {
 
-        if (gameManager.instance.playerScript.SwordEquipped)
-        {
+        //if (gameManager.instance.playerScript.SwordEquipped)
+        //{
             GetComponent<BoxCollider>().enabled = true;
-        if (Input.GetButtonDown("Shoot") && !playerSwung)
-        {
-                animr.SetBool("Attacking", true);
-                
-        }
-        else if (Input.GetButtonUp("Shoot"))
-        {
+            if (Input.GetButtonDown("Shoot") && !playerSwung)
+            {
+                    animr.SetBool("Attacking", true);
+                    
+            }
+            else if (Input.GetButtonUp("Shoot"))
+            {
 
-           playerSwung = false; ;
-           animr.SetBool("Attacking", false);  
-        }
-        }
+               playerSwung = false; ;
+               animr.SetBool("Attacking", false);  
+            }
+        //}
     }
 
     public void playAudio()
