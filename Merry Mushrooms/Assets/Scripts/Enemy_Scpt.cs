@@ -90,7 +90,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            
+
         }
     }
     public void OnTriggerExit(Collider other)
@@ -151,7 +151,11 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
             NavMeshHit hitdest;
             NavMesh.SamplePosition(ranPos, out hitdest, roamDist, 1);
 
-            agent.SetDestination(hitdest.position);
+            if (agent.isActiveAndEnabled)
+            {
+                agent.SetDestination(hitdest.position);
+
+            }
         }
     }
     #endregion
@@ -189,6 +193,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         gameManager.instance.playerScript.AddEXP(20);
         Instantiate(FunGilDrop, transform.position, transform.rotation);
         yield return new WaitForSeconds(3);
+
         Destroy(gameObject);
     }
     #endregion
