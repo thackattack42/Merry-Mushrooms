@@ -199,6 +199,5 @@ public class gameManager : MonoBehaviour
             ammoCount.text = playerScript.BowList[playerScript.selectedBow].ammoClip.ToString();
             ammoTotal.text = playerScript.BowList[playerScript.selectedBow].ammoReserves.ToString();
         }
-        
     }
 }

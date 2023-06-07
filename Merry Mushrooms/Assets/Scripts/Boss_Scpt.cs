@@ -27,6 +27,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
 
     [Header("----- Boss Components -----")]
     [SerializeField] Animator anim;
+    [SerializeField] Renderer model;
     [SerializeField] Transform punchPos;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform shootPos;
@@ -41,6 +42,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     public float stoppingDistOrig;
     public float angleToPlayer;
     [SerializeField] public GameObject teleporter;
+    Color origColor;
 
 
     #endregion
@@ -52,6 +54,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         currHP = maxHP;
         anim = GetComponent<Animator>();
         stoppingDistOrig = agent.stoppingDistance;
+        origColor = model.material.color;
         //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
         //base.Start();
         gameManager.instance.UpdateGameGoal(1);
@@ -186,7 +189,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             //animr.SetTrigger("Damaged");
             agent.SetDestination(gameManager.instance.player.transform.position);
-            //StartCoroutine(FlashHitColor());
+            StartCoroutine(FlashHitColor());
         }
     }
     public void TakeEarthDamage(int dmg)
@@ -205,7 +208,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             //animr.SetTrigger("Damaged");
             agent.SetDestination(gameManager.instance.player.transform.position);
-            //StartCoroutine(FlashHitColor());
+            StartCoroutine(FlashHitColor());
         }
     }
 
@@ -226,13 +229,20 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             //animr.SetTrigger("Damaged");
             agent.SetDestination(gameManager.instance.player.transform.position);
-            //StartCoroutine(FlashHitColor());
+            StartCoroutine(FlashHitColor());
         }
     }
 
     public void TakeFireDamage(int dmg)
     {
         currHP += dmg;
+    }
+
+    public IEnumerator FlashHitColor() //flash when the enemy is hit
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = origColor;
     }
     #endregion
     #region Effects
