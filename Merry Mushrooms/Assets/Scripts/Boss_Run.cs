@@ -19,7 +19,7 @@ public class Boss_Run : StateMachineBehaviour
        
         
         //agent.SetDestination(gameManager.instance.player.transform.position);
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance && agent.isActiveAndEnabled)
         {
             animator.SetTrigger("Punch");
         }

@@ -29,11 +29,18 @@ public class Boss_Phase2 : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(gameManager.instance.player.transform.position);
-
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.isActiveAndEnabled)
         {
-            animator.SetTrigger("Idle");
+            agent.SetDestination(gameManager.instance.player.transform.position);
+
+        }
+
+        if (agent.isActiveAndEnabled)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                animator.SetTrigger("Idle");
+            }
         }
 
         if (timer <= 0)

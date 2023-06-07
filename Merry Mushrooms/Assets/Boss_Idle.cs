@@ -27,9 +27,12 @@ public class Boss_Idle : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (agent.remainingDistance >= agent.stoppingDistance)
+        if (agent.isActiveAndEnabled)
         {
-            animator.SetTrigger("Run");
+            if (agent.remainingDistance >= agent.stoppingDistance)
+            {
+                animator.SetTrigger("Run");
+            }
         }
 
         if (timer <= 0)
