@@ -6,6 +6,8 @@ public class ShieldBlock : MonoBehaviour
 {
     Animator anim;
     float origSpeed;
+    int amountClicked;
+
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -13,8 +15,9 @@ public class ShieldBlock : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && amountClicked == 0)
         {
+            amountClicked++;
             origSpeed = anim.speed;
             anim.SetBool("Play", true);
             StartCoroutine(pauseShield());
@@ -24,6 +27,7 @@ public class ShieldBlock : MonoBehaviour
         {
             anim.SetBool("Play", false);
             anim.speed = origSpeed;
+            amountClicked = 0;
         }
     }
 
