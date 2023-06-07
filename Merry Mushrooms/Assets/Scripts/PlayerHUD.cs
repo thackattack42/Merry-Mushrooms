@@ -38,8 +38,7 @@ public class PlayerHUD : MonoBehaviour
         //Set Values to HUD
         gameManager.instance.healthPoints.text = maxPlayerHP.ToString();
         gameManager.instance.HPSlider.fillAmount = 1f;
-        gameManager.instance.manaPoints.text = maxPlayerMP.ToString();
-        gameManager.instance.MPSlider.fillAmount = 1f;
+        updatePlayerMana();
         gameManager.instance.funGil.text = funGil.ToString();
         //gameManager.instance.dashCooldownCounter.text = "";
         gameManager.instance.dashCooldownSlider.fillAmount = 1f;
@@ -91,8 +90,9 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
         
     }
-    public void updatePlayerMana(int currMP)
+    public void updatePlayerMana()
     {
+        float currMP = gameManager.instance.playerScript.MP;
         if (currMP < 0) 
             currMP = 0;
         gameManager.instance.manaPoints.text = currMP.ToString();
