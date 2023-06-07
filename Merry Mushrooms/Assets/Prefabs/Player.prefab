@@ -497,7 +497,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149044108762}
-  m_Mesh: {fileID: 127070130028343623, guid: 1936cb69ddb2ed94b80717b88483f8a2, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &1711813856055393295
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -584,7 +584,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7720738, y: 0.76630604, z: 0.056876063}
+  m_Size: {x: 0.89, y: 1.13, z: 0.056876063}
   m_Center: {x: 0.0026465654, y: -0.022885531, z: 0.008136815}
 --- !u!1 &2134112374734812231
 GameObject:
@@ -1043,8 +1043,12 @@ MonoBehaviour:
   selectedBow: 0
   SwordList:
   - {fileID: 11400000, guid: e3cd5ec850c321f44af9e30452bb2c34, type: 2}
+  ShieldList:
+  - {fileID: 11400000, guid: 732564acbbd68844393e76e00130a65a, type: 2}
   swordMat: {fileID: 3411679213566919573}
   swordModel: {fileID: 8963343311217000300}
+  shieldMat: {fileID: 3430280932223705056, guid: 72dba009649737448bcdcc9f60cc1ca6, type: 3}
+  shieldModel: {fileID: 3469287836561508549}
   selectedSword: 0
   audJump:
   - {fileID: 8300000, guid: 914310711046919498a67dc443fce46d, type: 3}
@@ -1076,6 +1080,7 @@ MonoBehaviour:
   StaffEquipped: 0
   BowEquipped: 0
   SwordEquipped: 0
+  ShieldEquipped: 0
 --- !u!114 &8863840815364814771
 MonoBehaviour:
   m_ObjectHideFlags: 0
