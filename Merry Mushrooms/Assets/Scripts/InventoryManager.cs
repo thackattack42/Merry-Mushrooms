@@ -11,6 +11,7 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] InventorySlots;
     public GameObject invItemPrefab;
     public TextMeshProUGUI SkillPointCounter;
+    public TextMeshProUGUI PlayerLevelCounter;
     public bool updated;
 
 
@@ -90,5 +91,9 @@ public class InventoryManager : MonoBehaviour
     public void UpdateSkillPoints()
     {
         SkillPointCounter.text = gameManager.instance.playerScript.skillPoints.ToString();
+    }
+    public void UpdatePlayerLevel()
+    {
+        PlayerLevelCounter.text = gameManager.instance.playerScript.level.ToString();
     }
 }

@@ -165,14 +165,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 playerDash();
                 StartCoroutine(WaitForDash());
             }
-            if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0 && StaffEquipped)
-            {
-                StartCoroutine(Reload());
-            }
-            if (Input.GetKeyDown(KeyCode.R) || BowList.Count != 0 && BowList[selectedBow].ammoClip <= 0 && BowEquipped)
-            {
-                StartCoroutine(Reload());
-            }
+            //if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0 && StaffEquipped)
+            //{
+            //    StartCoroutine(Reload());
+            //}
+            //if (Input.GetKeyDown(KeyCode.R) || BowList.Count != 0 && BowList[selectedBow].ammoClip <= 0 && BowEquipped)
+            //{
+            //    StartCoroutine(Reload());
+            //}
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0 && StaffEquipped)
             {
@@ -330,8 +330,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     #region Staff
     IEnumerator shoot()
     {
-        if (staffList[selectedStaff].ammoClip > 0)
-        {
+        //if (staffList[selectedStaff].ammoClip > 0)
+        //{
             isShooting = true;
 
             staffList[selectedStaff].ammoClip--;
@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
 
             
-        }
+        //}
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
@@ -417,8 +417,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //    shootDamage += 5;
         //}
        
-        if (BowList[selectedBow].ammoClip > 0)
-        {
+        //if (BowList[selectedBow].ammoClip > 0)
+        //{
             isShooting = true;
 
            
@@ -449,7 +449,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             ////Instantiate(BowList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
 
 
-        }
+        //}
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(bowShootRate);
         isShooting = false;
@@ -691,6 +691,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         if (currExp >= expToNextLevel)
         {
             level++;
+            gameManager.instance.invManager.UpdatePlayerLevel();
             skillPoints++;
             gameManager.instance.invManager.UpdateSkillPoints();
             currExp -= expToNextLevel;
