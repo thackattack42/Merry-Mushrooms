@@ -117,12 +117,13 @@ public class gameManager : MonoBehaviour
             if (Input.GetButtonDown("Tab"))
             {
                 InvToggle = !InvToggle;
+                activeMenu = Inventory;
                 Inventory.SetActive(InvToggle);
                 if (InvToggle)
-                    SimiPauseState();
+                    PauseState();
                 else
                 {
-                    SimiUnpausedState();
+                    UnpausedState();
                     invManager.updated = false;
                 }
             }
