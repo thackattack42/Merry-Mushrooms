@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     public int maxItemStack;
     public InventorySlot[] InventorySlots;
     public GameObject invItemPrefab;
+    public TextMeshProUGUI SkillPointCounter;
     public bool updated;
 
 
@@ -83,5 +86,9 @@ public class InventoryManager : MonoBehaviour
             swordMat.material = gameManager.instance.playerScript.GetSwordMat().sharedMaterial;
         }
         
+    }
+    public void UpdateSkillPoints()
+    {
+        SkillPointCounter.text = gameManager.instance.playerScript.skillPoints.ToString();
     }
 }

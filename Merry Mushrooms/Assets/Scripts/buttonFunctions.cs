@@ -186,18 +186,21 @@ public class buttonFunctions : MonoBehaviour
         {
             gameManager.instance.playerScript.SwordList.Add(fireSword);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             fireButton.SetActive(false);
         }
         else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Staff && gameManager.instance.playerScript.skillPoints > 0)
         {
             gameManager.instance.playerScript.staffList.Add(fireStaff);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             fireButton.SetActive(false);
         }
         else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Bow && gameManager.instance.playerScript.skillPoints > 0)
         {
             gameManager.instance.playerScript.BowList.Add(fireBow);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             fireButton.SetActive(false);
         }
     }
@@ -209,12 +212,14 @@ public class buttonFunctions : MonoBehaviour
         {
             gameManager.instance.playerScript.SwordList.Add(iceSword);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             iceButton.SetActive(false);
         }
         else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Staff && gameManager.instance.playerScript.skillPoints > 0)
         {
             gameManager.instance.playerScript.staffList.Add(iceStaff);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             iceButton.SetActive(false);
 
         }
@@ -222,6 +227,7 @@ public class buttonFunctions : MonoBehaviour
         {
             gameManager.instance.playerScript.BowList.Add(iceBow);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             iceButton.SetActive(false);
 
         }
@@ -235,18 +241,21 @@ public class buttonFunctions : MonoBehaviour
         {
             gameManager.instance.playerScript.SwordList.Add(earthSword);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             earthButton.SetActive(false);
         }
         else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Staff && gameManager.instance.playerScript.skillPoints > 0)
         {
             gameManager.instance.playerScript.staffList.Add(earthStaff);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             earthButton.SetActive(false);
         }
         else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Bow && gameManager.instance.playerScript.skillPoints > 0)
         {
             gameManager.instance.playerScript.BowList.Add(earthBow);
             gameManager.instance.playerScript.skillPoints--;
+            gameManager.instance.invManager.UpdateSkillPoints();
             earthButton.SetActive(false);
         }
     }

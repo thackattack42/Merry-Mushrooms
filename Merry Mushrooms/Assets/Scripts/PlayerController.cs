@@ -692,6 +692,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         {
             level++;
             skillPoints++;
+            gameManager.instance.invManager.UpdateSkillPoints();
             currExp -= expToNextLevel;
         }
     }
