@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Button = UnityEngine.UIElements.Button;
 
 public class buttonFunctions : MonoBehaviour
 {
@@ -13,6 +14,19 @@ public class buttonFunctions : MonoBehaviour
     public AudioSource UIAudio;
     public AudioClip MenuButtonClick;
     public AudioClip MenuSelection;
+    [SerializeField] GameObject skillTree;
+    [SerializeField] public GameObject fireButton;
+    [SerializeField] public GameObject iceButton;
+    [SerializeField] public GameObject earthButton;
+    [SerializeField] public SwordStats fireSword;
+    [SerializeField] public SwordStats iceSword;
+    [SerializeField] public SwordStats earthSword;
+    [SerializeField] public Staff_Stats fireStaff;
+    [SerializeField] public Staff_Stats iceStaff;
+    [SerializeField] public Staff_Stats earthStaff;
+    [SerializeField] public BowStats fireBow;
+    [SerializeField] public BowStats iceBow;
+    [SerializeField] public BowStats earthBow;
     [SerializeField] public AudioClip SFXTest;
 
     public void resume()
@@ -135,18 +149,16 @@ public class buttonFunctions : MonoBehaviour
 
     public void SetPlayerBow()
     {
-        
         gameManager.instance.playerScript.playerWeapon = PlayerController.weapon.Bow;
         //gameManager.instance.playerScript.bowMat
         gameManager.instance.playerScript.bowModel.mesh = gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].model.GetComponent<MeshFilter>().sharedMesh;
         gameManager.instance.playerScript.bowMat.material = gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].model.GetComponent<MeshRenderer>().sharedMaterial;
         gameManager.instance.playerScript.BowEquipped = true;
-        //gameManager.instance.Bow.SetActive(true);   
+        //gameManager.instance.Bow.SetActive(true);
         gameManager.instance.UnpausedState();
     }
     public void SetPlayerSword()
     {
-       
         gameManager.instance.playerScript.playerWeapon = PlayerController.weapon.Sword;
         //gameManager.instance.Sword.SetActive(true);
         gameManager.instance.playerScript.swordModel.mesh = gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].model.GetComponent<MeshFilter>().sharedMesh;
@@ -162,5 +174,77 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.playerScript.staffMat.material = gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
         gameManager.instance.playerScript.StaffEquipped = true;
         gameManager.instance.UnpausedState();
+    }
+
+    public void FireSkill()
+    {
+        fireButton = GameObject.FindGameObjectWithTag("Fire Button");
+        if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Sword && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.SwordList.Add(fireSword);
+            gameManager.instance.playerScript.skillPoints--;
+            fireButton.SetActive(false);
+        }
+        else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Staff && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.staffList.Add(fireStaff);
+            gameManager.instance.playerScript.skillPoints--;
+            fireButton.SetActive(false);
+        }
+        else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Bow && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.BowList.Add(fireBow);
+            gameManager.instance.playerScript.skillPoints--;
+            fireButton.SetActive(false);
+        }
+    }
+
+    public void IceSkill()
+    {
+        iceButton = GameObject.FindGameObjectWithTag("Ice Button");
+        if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Sword && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.SwordList.Add(iceSword);
+            gameManager.instance.playerScript.skillPoints--;
+            iceButton.SetActive(false);
+        }
+        else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Staff && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.staffList.Add(iceStaff);
+            gameManager.instance.playerScript.skillPoints--;
+            iceButton.SetActive(false);
+
+        }
+        else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Bow && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.BowList.Add(iceBow);
+            gameManager.instance.playerScript.skillPoints--;
+            iceButton.SetActive(false);
+
+        }
+    }
+
+    public void EarthSkill()
+    {
+        earthButton = GameObject.FindGameObjectWithTag("Earth Button");
+
+        if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Sword && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.SwordList.Add(earthSword);
+            gameManager.instance.playerScript.skillPoints--;
+            earthButton.SetActive(false);
+        }
+        else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Staff && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.staffList.Add(earthStaff);
+            gameManager.instance.playerScript.skillPoints--;
+            earthButton.SetActive(false);
+        }
+        else if (gameManager.instance.playerScript.playerWeapon == PlayerController.weapon.Bow && gameManager.instance.playerScript.skillPoints > 0)
+        {
+            gameManager.instance.playerScript.BowList.Add(earthBow);
+            gameManager.instance.playerScript.skillPoints--;
+            earthButton.SetActive(false);
+        }
     }
 }
