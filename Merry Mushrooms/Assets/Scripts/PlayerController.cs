@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool StaffEquipped;
     public bool BowEquipped;
     public bool SwordEquipped;
+    public bool ShieldEquipped;
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;

@@ -166,6 +166,7 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.playerScript.shieldModel.mesh = gameManager.instance.playerScript.ShieldList[0].model.GetComponent<MeshFilter>().sharedMesh;
         gameManager.instance.playerScript.shieldMat.material = gameManager.instance.playerScript.ShieldList[0].model.GetComponent<MeshRenderer>().sharedMaterial;
         gameManager.instance.playerScript.SwordEquipped = true;
+        gameManager.instance.playerScript.ShieldEquipped = true;
         gameManager.instance.UnpausedState();
     }
     public void SetPlayerStaff()

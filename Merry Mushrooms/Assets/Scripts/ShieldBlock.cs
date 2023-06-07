@@ -11,11 +11,14 @@ public class ShieldBlock : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
-       
+        GetComponent<BoxCollider>().enabled = false;
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && amountClicked == 0)
+        if(gameManager.instance.playerScript.ShieldEquipped)
+        {
+            GetComponent<BoxCollider>().enabled = true;
+            if (Input.GetMouseButtonDown(1) && amountClicked == 0)
         {
             amountClicked++;
             origSpeed = anim.speed;
@@ -31,6 +34,7 @@ public class ShieldBlock : MonoBehaviour
             anim.SetBool("unPlay", true);
             anim.speed = origSpeed;
             amountClicked = 0;
+        }
         }
     }
 
