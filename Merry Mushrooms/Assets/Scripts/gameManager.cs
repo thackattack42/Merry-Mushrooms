@@ -54,7 +54,9 @@ public class gameManager : MonoBehaviour
     public GameObject Bow;
     public GameObject Staff;
 
-    int enemiesRemaining;
+
+    [SerializeField] GameObject teleporter;
+    public int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
     float loadTimer;
@@ -67,6 +69,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerHUD = player.GetComponent<PlayerHUD>();
+        teleporter = GameObject.FindGameObjectWithTag("Teleporter");
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
@@ -169,12 +172,15 @@ public class gameManager : MonoBehaviour
         enemiesRemaining += amount;
 
         if (enemiesRemaining <= 0)
-            StartCoroutine(YouWin());
+        {
+            teleporter.SetActive(true);
+        }
     }
 
-    IEnumerator YouWin()
+    public IEnumerator YouWin()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
+        //teleporter.SetActive(true);
         PauseState();
         activeMenu = winMenu;
         activeMenu.SetActive(true);

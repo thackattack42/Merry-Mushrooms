@@ -20,7 +20,8 @@ public class Teleporter_Scpt : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = true; 
+            isPlayerInRange = true;
+            StartCoroutine(gameManager.instance.YouWin());
         }
     }
     IEnumerator Spawn()
