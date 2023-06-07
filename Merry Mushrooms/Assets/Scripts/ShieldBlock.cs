@@ -15,16 +15,16 @@ public class ShieldBlock : MonoBehaviour
     }
     void Update()
     {
-        //if(gameManager.instance.playerScript.ShieldEquipped)
-        //{
+        if (gameManager.instance.playerScript.ShieldEquipped)
+        {
             GetComponent<BoxCollider>().enabled = true;
             if (Input.GetMouseButtonDown(1) && amountClicked == 0)
             {
-            amountClicked++;
-            origSpeed = anim.speed;
-            anim.SetBool("unPlay", false);
-            anim.SetBool("Play", true);
-            StartCoroutine(pauseShield());
+                amountClicked++;
+                origSpeed = anim.speed;
+                anim.SetBool("unPlay", false);
+                anim.SetBool("Play", true);
+                StartCoroutine(pauseShield());
 
             }
             else if (Input.GetMouseButtonUp(1) && amountClicked > 0)
@@ -35,7 +35,7 @@ public class ShieldBlock : MonoBehaviour
                 anim.speed = origSpeed;
                 amountClicked = 0;
             }
-        //}
+        }
     }
 
 
