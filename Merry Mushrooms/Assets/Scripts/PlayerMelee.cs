@@ -12,6 +12,7 @@ public class PlayerMelee : MonoBehaviour
    // Animator animator;
     public float animrTransSpeed;
     [SerializeField] Animator animr;
+    bool playerSwung;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,19 +26,24 @@ public class PlayerMelee : MonoBehaviour
         if (gameManager.instance.playerScript.SwordEquipped)
         {
             GetComponent<BoxCollider>().enabled = true;
-        if (Input.GetButtonDown("Shoot"))
+        if (Input.GetButtonDown("Shoot") && !playerSwung)
         {
-           gameManager.instance.playerScript.aud.PlayOneShot(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingSound, gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingVol);
-            animr.SetBool("Attacking", true);
+                animr.SetBool("Attacking", true);
+                
         }
         else if (Input.GetButtonUp("Shoot"))
         {
 
+           playerSwung = false; ;
            animr.SetBool("Attacking", false);  
         }
         }
     }
 
+    public void playAudio()
+    {
+            gameManager.instance.playerScript.aud.PlayOneShot(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingSound, gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingVol);
+    }
     void OnCollisionEnter(Collision other)
     {
         if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
