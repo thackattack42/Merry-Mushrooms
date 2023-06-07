@@ -35,6 +35,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     [SerializeField] public GameObject aoeAttack;
 
     [Header("----- Misc -----")]
+    public bool playerInRange;
     public bool isSpawning;
     public Vector3 playerDir;
     public float stoppingDistOrig;
@@ -63,7 +64,14 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             anim.SetTrigger("Phase 2");
         }
-
+        if (playerInRange && !canSeePlayer())
+        {
+            //StartCoroutine(Roam());
+        }
+        else if (agent.destination != gameManager.instance.player.transform.position)
+        {
+            //StartCoroutine(Roam());
+        }
         //if (agent.remainingDistance < agent.stoppingDistance)
         //{
         //    FacePlayer();
@@ -71,6 +79,24 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     }
     #endregion
     #region Functions
+    #region Collider Enter/Exit
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //agent.stoppingDistance = 0;
+            playerInRange = false;
+        }
+    }
+    #endregion
     public void Punch()
     {
         punchPos.GetComponent<SphereCollider>().enabled = true;
@@ -99,7 +125,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     public void FacePlayer()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
-        transform.rotation = rot;//Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
     }
 
     public virtual bool canSeePlayer()

@@ -93,17 +93,6 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
             
         }
     }
-
-    //public void OnCollisionEnter(Collision other)
-    //{
-    //    if (other.gameObject.CompareTag("PlayerBulletTag"))
-    //    {
-
-    //        //GetComponent<IceEnemy_Scpt>().TakeEarthDamage(2);
-    //        GetComponent<FireEnemy_Scpt>().TakeIceDamage(2);
-    //       // GetComponent<EarthEnemy_Scpt>().TakeFireDamage(2);
-    //    }
-    //}
     public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

@@ -16,7 +16,9 @@ public class Boss_Run : StateMachineBehaviour
     // onstateupdate is called on each update frame between onstateenter and onstateexit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateinfo, int layerindex)
     {
-       agent.SetDestination(gameManager.instance.player.transform.position);
+       
+        
+        //agent.SetDestination(gameManager.instance.player.transform.position);
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             animator.SetTrigger("Punch");
