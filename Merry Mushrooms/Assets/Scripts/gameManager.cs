@@ -50,12 +50,12 @@ public class gameManager : MonoBehaviour
     public InventoryManager invManager;
     bool InvToggle;
     [Header("-----Player Pickups-----")]
-    public GameObject Sword;
-    public GameObject Bow;
-    public GameObject Staff;
+    //public GameObject Sword;
+    //public GameObject Bow;
+    //public GameObject Staff;
 
 
-    [SerializeField] GameObject teleporter;
+    //[SerializeField] GameObject teleporter;
     public int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
@@ -69,7 +69,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerHUD = player.GetComponent<PlayerHUD>();
-        teleporter = GameObject.FindGameObjectWithTag("Teleporter");
+        //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;

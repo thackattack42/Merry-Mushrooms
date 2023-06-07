@@ -10647,10 +10647,6 @@ MonoBehaviour:
   loadingScreen: {fileID: 5243417770992706468}
   Inventory: {fileID: 2653707180426779251}
   invManager: {fileID: 8580178822132824866}
-  Sword: {fileID: 0}
-  Bow: {fileID: 0}
-  Staff: {fileID: 0}
-  teleporter: {fileID: 0}
   enemiesRemaining: 0
   isPaused: 0
 --- !u!114 &7877924245492499045
@@ -10669,10 +10665,10 @@ MonoBehaviour:
   UIAudio: {fileID: 374508148}
   MenuButtonClick: {fileID: 8300000, guid: 8a1e7931d74f374438ee2767a8c36790, type: 3}
   MenuSelection: {fileID: 8300000, guid: 535baa01b9535e046a6df80ed4f1c9e8, type: 3}
-  skillTree: {fileID: 0}
-  fireButton: {fileID: 0}
-  iceButton: {fileID: 0}
-  earthButton: {fileID: 0}
+  skillTree: {fileID: 1651784877}
+  fireButton: {fileID: 1407545194}
+  iceButton: {fileID: 834693132}
+  earthButton: {fileID: 226728757}
   fireSword: {fileID: 11400000, guid: d4951ac9a6713464bae6bb0b8563a6df, type: 2}
   iceSword: {fileID: 11400000, guid: 8f25261b7386db74fad4869ccd26e0f0, type: 2}
   earthSword: {fileID: 11400000, guid: fb3fa2d236efa71448c6498f3da6328b, type: 2}
