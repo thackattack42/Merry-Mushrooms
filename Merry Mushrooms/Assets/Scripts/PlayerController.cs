@@ -330,8 +330,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     #region Staff
     IEnumerator shoot()
     {
-        if (staffList[selectedStaff].ammoClip > 0)
-        {
+        //if (staffList[selectedStaff].ammoClip > 0)
+        //{
             isShooting = true;
 
             staffList[selectedStaff].ammoClip--;
@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
 
             
-        }
+        //}
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
