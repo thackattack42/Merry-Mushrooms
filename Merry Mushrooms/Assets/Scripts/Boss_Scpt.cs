@@ -114,8 +114,8 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
-                //agent.stoppingDistance = stoppingDistOrig;
-                //agent.SetDestination(gameManager.instance.player.transform.position);
+                agent.stoppingDistance = stoppingDistOrig;
+                agent.SetDestination(gameManager.instance.player.transform.position);
 
                 if (agent.remainingDistance < agent.stoppingDistance)
                 {
