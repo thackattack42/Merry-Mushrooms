@@ -147,8 +147,8 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
 
         if (currHP <= 0)
         {
+            anim.SetBool("Death", true);
             gameManager.instance.UpdateGameGoal(-1);
-            //animr.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
         }
@@ -166,7 +166,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (currHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            //animr.SetBool("Death", true);
+            anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
         }
@@ -186,7 +186,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (currHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            //animr.SetBool("Death", true);
+            anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
         }
