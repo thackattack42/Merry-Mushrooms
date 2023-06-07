@@ -70,8 +70,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     [Header("----- Sword Stats -----")]
     public List<SwordStats> SwordList = new List<SwordStats>();
+    public List<ShieldStat> ShieldList = new List<ShieldStat>();
     [SerializeField] public MeshRenderer swordMat;
     [SerializeField] public MeshFilter swordModel;
+    [SerializeField] public MeshRenderer shieldMat;
+    [SerializeField] public MeshFilter shieldModel;
     public int selectedSword;
     
    
