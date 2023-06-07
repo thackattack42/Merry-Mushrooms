@@ -5,8 +5,6 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[DefaultExecutionOrder(1)]
 public class Enemy_Scpt : MonoBehaviour, IPhysics
 {
     #region fields
@@ -44,10 +42,6 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
 
     #endregion
     #region Start and Update
-    void Awake()
-    {
-        enemyManager.Instance.enemies.Add(this);
-    }
     // Start is called before the first frame update
     public void Start()
     {
@@ -138,7 +132,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
                 agent.stoppingDistance = stoppingDistOrig;
-                MoveTo(gameManager.instance.player.transform.position);
+                agent.SetDestination(gameManager.instance.player.transform.position);
 
                 if (agent.remainingDistance < agent.stoppingDistance)
                 {
@@ -151,10 +145,6 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         return false;
     }
 
-    public void MoveTo(Vector3 pos)
-    {
-        agent.SetDestination(pos);
-    }
     #endregion
     #region Movement Actions
     public IEnumerator Roam()
