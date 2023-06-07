@@ -19,21 +19,25 @@ public class ShieldBlock : MonoBehaviour
         {
             amountClicked++;
             origSpeed = anim.speed;
+            anim.SetBool("unPlay", false);
             anim.SetBool("Play", true);
             StartCoroutine(pauseShield());
-           
+
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonUp(1) && amountClicked > 0)
         {
+            StopAllCoroutines();
             anim.SetBool("Play", false);
+            anim.SetBool("unPlay", true);
             anim.speed = origSpeed;
             amountClicked = 0;
         }
     }
 
+
     IEnumerator pauseShield()
     {
-        yield return new WaitForSeconds(0.60f);
+        yield return new WaitForSeconds(0.66f);
         Debug.Log("Did thing");
         anim.speed = 0;
     }
