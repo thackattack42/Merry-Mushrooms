@@ -8,6 +8,10 @@ public class Teleporter_Scpt : MonoBehaviour
     [SerializeField] GameObject TeleporterObj;
     bool isPlayerInRange;
 
+    private void Start()
+    {
+        PlayerObj = GameObject.FindGameObjectWithTag("Player");
+    }
     private void Update()
     {
         if (isPlayerInRange)

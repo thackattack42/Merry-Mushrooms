@@ -39,6 +39,8 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     public Vector3 playerDir;
     public float stoppingDistOrig;
     public float angleToPlayer;
+    [SerializeField] public GameObject teleporter;
+
 
     #endregion
     #region Start and Stop
@@ -49,6 +51,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         currHP = maxHP;
         anim = GetComponent<Animator>();
         stoppingDistOrig = agent.stoppingDistance;
+        //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
         //base.Start();
         gameManager.instance.UpdateGameGoal(1);
     }
@@ -149,6 +152,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             anim.SetBool("Death", true);
             gameManager.instance.UpdateGameGoal(-1);
+            Instantiate(teleporter, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
         }
@@ -166,6 +170,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (currHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
+            Instantiate(teleporter, transform.position, transform.rotation);
             anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
@@ -186,6 +191,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (currHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
+            Instantiate(teleporter, transform.position, transform.rotation);
             anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;

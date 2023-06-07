@@ -171,10 +171,10 @@ public class gameManager : MonoBehaviour
     {
         enemiesRemaining += amount;
 
-        if (enemiesRemaining <= 0)
-        {
-            teleporter.SetActive(true);
-        }
+        //if (enemiesRemaining <= 0)
+        //{
+        //    teleporter.SetActive(true);
+        //}
     }
 
     public IEnumerator YouWin()
