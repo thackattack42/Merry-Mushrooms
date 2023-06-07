@@ -691,6 +691,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         if (currExp >= expToNextLevel)
         {
             level++;
+            gameManager.instance.invManager.UpdatePlayerLevel();
             skillPoints++;
             gameManager.instance.invManager.UpdateSkillPoints();
             currExp -= expToNextLevel;
