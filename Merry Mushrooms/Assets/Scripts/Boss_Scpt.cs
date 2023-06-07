@@ -4,7 +4,7 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//, IEffectable
+public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, IDamage//, IEffectable
 {
     #region Fields
     [Header("------ Enemy Spawner ------")]
@@ -50,7 +50,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//,
         anim = GetComponent<Animator>();
         stoppingDistOrig = agent.stoppingDistance;
         //base.Start();
-        //gameManager.instance.UpdateGameGoal(1);
+        gameManager.instance.UpdateGameGoal(1);
     }
 
         // Update is called once per frame
@@ -140,6 +140,25 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage//,
     }
 
     #region Damage Functions
+
+    public void takeDamage(int amount)
+    {
+        currHP -= amount;
+
+        if (currHP <= 0)
+        {
+            gameManager.instance.UpdateGameGoal(-1);
+            //animr.SetBool("Death", true);
+            agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+        }
+        else
+        {
+            //animr.SetTrigger("Damaged");
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            //StartCoroutine(FlashHitColor());
+        }
+    }
     public void TakeEarthDamage(int dmg)
     {
         currHP -= dmg * 2;
