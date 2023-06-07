@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool isReloading;
     private bool isSprinting;
     public bool isCrouching;
+    public bool shieldUp;
     private Vector3 destination;
     private Vector3 pushBack;
     private int isDashing;
@@ -133,7 +134,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         controller.height = 2.0f;
         origHeight = controller.height;
         HP = maxHP;
-        
+        shieldUp = false;
         statusEffects = new Dictionary<string, StatusEffectData>();
 
         // Spawns Player

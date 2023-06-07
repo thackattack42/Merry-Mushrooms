@@ -7,7 +7,7 @@ public class ShieldBlock : MonoBehaviour
     Animator anim;
     float origSpeed;
     int amountClicked;
-
+   
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -25,7 +25,7 @@ public class ShieldBlock : MonoBehaviour
             anim.SetBool("unPlay", false);
             anim.SetBool("Play", true);
             StartCoroutine(pauseShield());
-
+                gameManager.instance.playerScript.shieldUp = true;
         }
         else if (Input.GetMouseButtonUp(1) && amountClicked > 0)
         {
@@ -34,6 +34,7 @@ public class ShieldBlock : MonoBehaviour
             anim.SetBool("unPlay", true);
             anim.speed = origSpeed;
             amountClicked = 0;
+                gameManager.instance.playerScript.shieldUp = false;
         }
         }
     }

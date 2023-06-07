@@ -26,6 +26,9 @@ public class PlayerMelee : MonoBehaviour
         if (gameManager.instance.playerScript.SwordEquipped)
         {
             GetComponent<BoxCollider>().enabled = true;
+            if(!gameManager.instance.playerScript.shieldUp)
+            {
+
         if (Input.GetButtonDown("Shoot") && !playerSwung)
         {
                 animr.SetBool("Attacking", true);
@@ -37,6 +40,7 @@ public class PlayerMelee : MonoBehaviour
            playerSwung = false; ;
            animr.SetBool("Attacking", false);  
         }
+            }
         }
     }
 
