@@ -186,7 +186,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             anim.SetBool("Death", true);
             gameManager.instance.UpdateGameGoal(-1);
-            Instantiate(teleporter, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
+            Instantiate(teleporter, transform.position, transform.rotation);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
         }
