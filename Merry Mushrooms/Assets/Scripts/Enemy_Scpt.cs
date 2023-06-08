@@ -120,6 +120,16 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
+                ////float randOffsetX, randOffsetZ;
+
+                ////randOffsetX = Random.Range(-20f, 20f);
+                ////randOffsetZ = Random.Range(-20f, 20f);
+
+                //agent.stoppingDistance = stoppingDistOrig;
+                //agent.SetDestination(new Vector3(gameManager.instance.player.transform.position.x + 20,
+                //                                 gameManager.instance.player.transform.position.y,
+                //                                 gameManager.instance.player.transform.position.z + 20));
+
                 agent.stoppingDistance = stoppingDistOrig;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
