@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeleeObj: {fileID: 8963343311217000302}
-  dmg: 2
+  dmg: 1
   animrTransSpeed: 30
   animr: {fileID: 8963343311217000303}
 --- !u!1 &8327772037738040327
@@ -1025,9 +1025,9 @@ MonoBehaviour:
   staffMat: {fileID: 1711813856071030117}
   playerBullet: {fileID: 2872036455639188616, guid: 9450518a5e37eef4cad2fe4a1a0e545d, type: 3}
   bulletPoint: {fileID: 984233064}
-  speedOfBullet: 10
-  shootDistance: 200
-  shootRate: 0.5
+  speedOfBullet: 20
+  shootDistance: 100
+  shootRate: 0.3
   shootDamage: 1
   selectedStaff: 0
   BowList:
