@@ -1081,6 +1081,7 @@ MonoBehaviour:
   BowEquipped: 0
   SwordEquipped: 0
   ShieldEquipped: 0
+  holdingShield: 0
 --- !u!114 &8863840815364814771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,7 +1144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -4565884009001823619, guid: 426181e876708ce4f89d364220bce66e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
