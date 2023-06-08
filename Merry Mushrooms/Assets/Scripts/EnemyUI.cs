@@ -14,7 +14,7 @@ public class EnemyUI : MonoBehaviour
     public GameObject enemy;
     public Enemy_Scpt enemyScript;
     public Image enemyHPSlider;
-    public TextMeshProUGUI enemyName;
+    //public TextMeshProUGUI enemyName;
 
     //other useful stuff
     int enemyMaxHP;
