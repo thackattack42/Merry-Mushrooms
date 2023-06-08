@@ -12,7 +12,7 @@ public class PlayerSwordSwing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Shoot"))
+        if (Input.GetButton("Shoot") && !gameManager.instance.playerScript.holdingShield)
         {
             animr.SetBool("Attacking", true);
 
