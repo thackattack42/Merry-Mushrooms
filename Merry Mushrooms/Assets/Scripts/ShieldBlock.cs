@@ -7,6 +7,7 @@ public class ShieldBlock : MonoBehaviour
     Animator anim;
     float origSpeed;
     int amountClicked;
+    
 
     void Start()
     {
