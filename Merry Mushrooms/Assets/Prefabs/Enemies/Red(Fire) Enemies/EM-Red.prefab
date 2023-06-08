@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302904306}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1826170580222189023}
@@ -1553,17 +1553,16 @@ MonoBehaviour:
   roamPauseTime: 2
   model: {fileID: 1826170580227755185}
   agent: {fileID: 1826170580222576404}
-  shootPos: {fileID: 4188466093082333554}
   headPos: {fileID: 2052050987116414267}
   animr: {fileID: 1826170580232008305}
   aud: {fileID: 896892953}
-  shootDist: 5
-  ShootRate: 0.5
-  ShootAngle: 30
-  bullet: {fileID: 5463603646565746171, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
   audShoot: []
   audShootVol: 2
+  playerDir: {x: 0, y: 0, z: 0}
   playerInRange: 0
+  angleToPlayer: 0
+  stoppingDistOrig: 0
+  FunGilDrop: {fileID: 0}
 --- !u!195 &1826170580222576404
 NavMeshAgent:
   m_ObjectHideFlags: 0
