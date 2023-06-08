@@ -17,9 +17,12 @@ public class ShieldBlock : MonoBehaviour
     {
         if (gameManager.instance.playerScript.ShieldEquipped)
         {
-            GetComponent<BoxCollider>().enabled = true;
+            //GetComponent<BoxCollider>().enabled = true;
+            
+            ActivateShield();
             if (Input.GetMouseButtonDown(1) && amountClicked == 0)
             {
+                
                 amountClicked++;
                 origSpeed = anim.speed;
                 anim.SetBool("unPlay", false);
@@ -30,6 +33,8 @@ public class ShieldBlock : MonoBehaviour
             else if (Input.GetMouseButtonUp(1) && amountClicked > 0)
             {
                 StopAllCoroutines();
+                
+                amountClicked++;
                 anim.SetBool("Play", false);
                 anim.SetBool("unPlay", true);
                 anim.speed = origSpeed;
@@ -38,6 +43,24 @@ public class ShieldBlock : MonoBehaviour
         }
     }
 
+
+    private void ActivateShield()
+    {
+        if(Input.GetMouseButtonDown(1))
+        {
+            GetComponent<BoxCollider>().enabled = true ;
+        }
+        else if(Input.GetMouseButtonUp(1))
+        {
+            GetComponent<BoxCollider>().enabled = false ;
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Shiled did thing");
+    }
 
     IEnumerator pauseShield()
     {
