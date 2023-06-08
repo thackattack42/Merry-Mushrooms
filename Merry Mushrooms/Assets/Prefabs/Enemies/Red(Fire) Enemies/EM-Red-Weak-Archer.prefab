@@ -57,7 +57,6 @@ MonoBehaviour:
   enemy: {fileID: 0}
   enemyScript: {fileID: 0}
   enemyHPSlider: {fileID: 4535675149689904735}
-  enemyName: {fileID: 1473537864882648677}
 --- !u!223 &8899862496856714497
 Canvas:
   m_ObjectHideFlags: 0
@@ -1658,14 +1657,14 @@ NavMeshAgent:
   m_GameObject: {fileID: 6046197215090857698}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 10
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 600
   m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
