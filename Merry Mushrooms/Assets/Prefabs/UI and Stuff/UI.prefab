@@ -10718,7 +10718,6 @@ MonoBehaviour:
   - {fileID: 1444477097552813954}
   invItemPrefab: {fileID: 9049081778941996409, guid: 89f24f63822f85f4dbad670112f51d88, type: 3}
   SkillPointCounter: {fileID: 808187316}
-  PlayerLevelCounter: {fileID: 0}
   updated: 0
   staffModel: {fileID: 7505202782436878831}
   staffMat: {fileID: 8719786541496988933}
@@ -11181,6 +11180,10 @@ MonoBehaviour:
   loadingScreen: {fileID: 5243417770992706468}
   Inventory: {fileID: 2653707180426779251}
   invManager: {fileID: 8580178822132824866}
+  PlayerLevelCounter: {fileID: 3883441257021421528}
+  PlayerExpPercent: {fileID: 1914584098}
+  PlayerExpNumber: {fileID: 280937811}
+  ExpBarSlider: {fileID: 8520627264093847162}
   enemiesRemaining: 0
   isPaused: 0
 --- !u!114 &7877924245492499045
