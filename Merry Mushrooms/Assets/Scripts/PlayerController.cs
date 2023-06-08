@@ -688,13 +688,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public void AddEXP(int amount)
     {
         currExp += amount;
+        gameManager.instance.playerHUD.UpdatePlayerEXP();
         if (currExp >= expToNextLevel)
         {
             level++;
-            gameManager.instance.invManager.UpdatePlayerLevel();
             skillPoints++;
             gameManager.instance.invManager.UpdateSkillPoints();
             currExp -= expToNextLevel;
+            gameManager.instance.playerHUD.UpdatePlayerLevel();
         }
     }
 #endregion

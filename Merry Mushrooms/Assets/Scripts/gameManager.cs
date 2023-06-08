@@ -48,6 +48,10 @@ public class gameManager : MonoBehaviour
     public GameObject loadingScreen;
     public GameObject Inventory;
     public InventoryManager invManager;
+    public TextMeshProUGUI PlayerLevelCounter;
+    public TextMeshProUGUI PlayerExpPercent;
+    public TextMeshProUGUI PlayerExpNumber;
+    public Image ExpBarSlider;
     bool InvToggle;
     [Header("-----Player Pickups-----")]
     //public GameObject Sword;

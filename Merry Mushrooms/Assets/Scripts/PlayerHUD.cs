@@ -46,6 +46,8 @@ public class PlayerHUD : MonoBehaviour
         constraint.weight = 1;
         minimapBGRot.AddSource(constraint);
         minimapCamRot.AddSource(constraint);
+        UpdatePlayerLevel();
+        UpdatePlayerEXP();
     }
 
     // Update is called once per frame
@@ -141,5 +143,17 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.dashCooldownFinish.enabled = true;
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.dashCooldownFinish.enabled = false;
+    }
+    public void UpdatePlayerLevel()
+    {
+        gameManager.instance.PlayerLevelCounter.text = gameManager.instance.playerScript.level.ToString();
+        UpdatePlayerEXP();
+    }
+    public void UpdatePlayerEXP()
+    {
+        float expPercent = ((float)gameManager.instance.playerScript.currExp / gameManager.instance.playerScript.expToNextLevel) * 100;
+        gameManager.instance.PlayerExpNumber.text = gameManager.instance.playerScript.currExp.ToString() + " / " + gameManager.instance.playerScript.expToNextLevel.ToString();
+        gameManager.instance.PlayerExpPercent.text = expPercent.ToString("0") + "%";
+        gameManager.instance.ExpBarSlider.fillAmount = expPercent / 100;
     }
 }
