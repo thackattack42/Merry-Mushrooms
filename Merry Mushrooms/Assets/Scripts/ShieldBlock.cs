@@ -23,7 +23,7 @@ public class ShieldBlock : MonoBehaviour
             ActivateShield();
             if (Input.GetMouseButtonDown(1) && amountClicked == 0)
             {
-                
+                gameManager.instance.playerScript.holdingShield = true;
                 amountClicked++;
                 origSpeed = anim.speed;
                 anim.SetBool("unPlay", false);
@@ -34,7 +34,7 @@ public class ShieldBlock : MonoBehaviour
             else if (Input.GetMouseButtonUp(1) && amountClicked > 0)
             {
                 StopAllCoroutines();
-                
+                gameManager.instance.playerScript.holdingShield = false;
                 amountClicked++;
                 anim.SetBool("Play", false);
                 anim.SetBool("unPlay", true);
@@ -60,7 +60,7 @@ public class ShieldBlock : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Shiled did thing");
+        Debug.Log("Shield did thing");
     }
 
     IEnumerator pauseShield()

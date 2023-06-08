@@ -27,7 +27,7 @@ public class PlayerMelee : MonoBehaviour
         {
             GetComponent<BoxCollider>().enabled = true;
             
-            if (Input.GetButtonDown("Shoot") && !playerSwung)
+            if (Input.GetButtonDown("Shoot") && !playerSwung && !gameManager.instance.playerScript.holdingShield)
             {
                 animr.SetBool("Attacking", true);
 
