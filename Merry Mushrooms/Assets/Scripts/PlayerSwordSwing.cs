@@ -12,11 +12,15 @@ public class PlayerSwordSwing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Shoot"))
+        if (Input.GetButtonDown("Shoot") && !gameManager.instance.playerScript.holdingShield)
         {
-            animr.SetBool("Attacking", true);
-
+            animr.SetTrigger("Attacking");
             
+
+        } 
+        else
+        {
+            animr.ResetTrigger("Attacking");
         }
 
         //else if (Input.GetButtonUp("Shoot"))
@@ -28,6 +32,6 @@ public class PlayerSwordSwing : MonoBehaviour
 
     public void TurnOffSwing()
     {
-        animr.SetBool("Attacking", false);
+        animr.ResetTrigger("Attacking");
     }
 }
