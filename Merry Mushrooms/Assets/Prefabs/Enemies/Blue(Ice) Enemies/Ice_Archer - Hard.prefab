@@ -600,12 +600,12 @@ GameObject:
   - component: {fileID: 2696159976987778477}
   - component: {fileID: 3902276670440229415}
   m_Layer: 6
-  m_Name: 'EM-Blue-Weak-Archer '
+  m_Name: Ice_Archer - Hard
   m_TagString: Ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5651947996100569126
 Transform:
   m_ObjectHideFlags: 0
@@ -615,7 +615,7 @@ Transform:
   m_GameObject: {fileID: 5651947996100277254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.787964, y: 0, z: -1.7277803}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5651947996100569124}
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a39c074fd8df54ea02ccdaba432001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  HP: 25
   playerFaceSpeed: 15
   viewCone: 90
   animrTransSpeed: 3
@@ -669,8 +669,8 @@ MonoBehaviour:
   angleToPlayer: 0
   stoppingDistOrig: 0
   FunGilDrop: {fileID: 7266967030504875833, guid: 1db1e58dfd299ea429c83c9481f69227, type: 3}
-  shootDist: 5
-  ShootRate: 0.5
+  shootDist: 7
+  ShootRate: 0.1
   ShootAngle: 30
   shootPos: {fileID: 7861164051959080075}
   bullet: {fileID: 5463603646565746171, guid: c9b12a9667af10747bd2d0d5098e5922, type: 3}
@@ -716,7 +716,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5651947996100277254}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 10
   m_Acceleration: 100
   avoidancePriority: 50
@@ -739,7 +739,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 0.5
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
