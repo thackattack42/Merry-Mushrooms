@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool BowEquipped;
     public bool SwordEquipped;
     public bool ShieldEquipped;
+    public bool holdingShield;
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
@@ -133,7 +134,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         controller.height = 2.0f;
         origHeight = controller.height;
         HP = maxHP;
-        
+        holdingShield = false;
         statusEffects = new Dictionary<string, StatusEffectData>();
 
         // Spawns Player
