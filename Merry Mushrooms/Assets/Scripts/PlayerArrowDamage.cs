@@ -36,7 +36,7 @@ public class PlayerArrowDamage : MonoBehaviour
                 damageable.takeDamage(gameManager.instance.playerScript.bowShootDamage);
         }
 
-        Destroy(gameObject);
+        Destroy(gameObject);    
         //IDamage damageable = collision.gameObject.GetComponent<IDamage>();
 
         //if (damageable != null)
