@@ -9,7 +9,8 @@ public class Enemy___Melee : Enemy_Scpt
     [Range(30, 180)][SerializeField] float AttackAngle;
     [SerializeField] BoxCollider MeleeObj;
     private bool isAttacking;
-   
+    private bool canAttack = true;
+
 
     public override bool canSeePlayer()
     {
@@ -31,7 +32,7 @@ public class Enemy___Melee : Enemy_Scpt
                     FacePlayer();
                 }
 
-                if (!isAttacking && angleToPlayer <= AttackAngle)
+                if (!isAttacking && angleToPlayer <= AttackAngle && !gameManager.instance.playerScript.isUnderAttack && canAttack)
                 {
                     //aud.PlayOneShot(audShoot[Random.Range(0, audShoot.Length)], audShootVol);
                     StartCoroutine(Attack());
@@ -43,13 +44,16 @@ public class Enemy___Melee : Enemy_Scpt
         return false;
     }
 
-#region Attacking Functions
-IEnumerator Attack()
+    #region Attacking Functions
+    IEnumerator Attack()
     {
         isAttacking = true;
+        gameManager.instance.playerScript.isUnderAttack = true;
         animr.SetTrigger("MeleeAttack");
         yield return new WaitForSeconds(AttackRate);
+        gameManager.instance.playerScript.isUnderAttack = false;
         isAttacking = false;
+        StartCoroutine(AttackCooldown());
     }
     public void AttackingOn()
     {
@@ -58,6 +62,13 @@ IEnumerator Attack()
     public void AttackingOff()
     {
         MeleeObj.enabled = false;
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(Random.Range(1f, 2f));
+        canAttack = true;
     }
     #endregion
 

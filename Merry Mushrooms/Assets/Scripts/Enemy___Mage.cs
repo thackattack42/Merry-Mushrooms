@@ -11,6 +11,7 @@ public class Enemy___Mage : Enemy_Scpt
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
     private bool isShooting;
+    private bool canShoot = true;
 
     public override bool canSeePlayer()
     {
@@ -32,7 +33,7 @@ public class Enemy___Mage : Enemy_Scpt
                     FacePlayer();
                 }
 
-                if (!isShooting && angleToPlayer <= ShootAngle)
+                if (!isShooting && angleToPlayer <= ShootAngle && !gameManager.instance.playerScript.isUnderAttack && canShoot)
                 {
                     StartCoroutine(shoot());
                 }
@@ -47,13 +48,23 @@ public class Enemy___Mage : Enemy_Scpt
     IEnumerator shoot()
     {
         isShooting = true;
+        gameManager.instance.playerScript.isUnderAttack = true;
         animr.SetTrigger("MageAttack");
         yield return new WaitForSeconds(ShootRate);
+        gameManager.instance.playerScript.isUnderAttack = false;
         isShooting = false;
+        StartCoroutine(AttackCooldown());
     }
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(Random.Range(1f, 2f));
+        canShoot = true;
     }
     #endregion
 }

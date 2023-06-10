@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     private Vector3 destination;
     private Vector3 pushBack;
     private int isDashing;
+    public bool isUnderAttack;
     
    
     
