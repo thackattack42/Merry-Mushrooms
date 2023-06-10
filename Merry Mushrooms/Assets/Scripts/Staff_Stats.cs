@@ -18,7 +18,7 @@ public class Staff_Stats : ScriptableObject
     [Header("-----Ammo Stuff-----")]
     public GameObject model;
     public GameObject hitEffect;
-    public GameObject muzzleFlash;
+    public GameObject BulletToShoot;
     public GameObject muzzleEffect;
     public AudioClip shootSound;
     public float shootVol;

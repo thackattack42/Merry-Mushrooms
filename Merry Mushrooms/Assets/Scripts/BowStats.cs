@@ -10,7 +10,7 @@ public class BowStats : ScriptableObject
     [Range(1, 20)] public int bowShootDamage;
 
     [Header("---- Bow Model things ----")]
-    public GameObject model;
+    public GameObject model;        
     //public GameObject hitEffect;
     public AudioClip shootSound;
     public float shootVol;

@@ -17,14 +17,15 @@ MonoBehaviour:
   shootDamage: 2
   model: {fileID: 1562803131489952075, guid: 2f03c9a908c71a044b682f291082938c, type: 3}
   hitEffect: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
-  muzzleFlash: {fileID: 0}
+  BulletToShoot: {fileID: 2872036455639188616, guid: a70a247d6265df540b2a001e9903018e, type: 3}
   muzzleEffect: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
   shootSound: {fileID: 8300000, guid: db6506d685e320a40bd4099b81ba240c, type: 3}
   shootVol: 2
-  ammoClip: 10
+  ammoClip: 0
   ammoReserves: 200
   origAmmo: 10
   origAmmoReserves: 200
   fire: 0
   ice: 0
   earth: 1
+  baseStaff: 0

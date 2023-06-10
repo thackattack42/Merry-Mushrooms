@@ -36,6 +36,7 @@ public class PlayerBulletDamage : MonoBehaviour
                 damageable.takeDamage(gameManager.instance.playerScript.shootDamage);
         }
 
+        Destroy(gameObject);
         //IDamage damageable = collision.gameObject.GetComponent<IDamage>();
 
         //if (damageable != null)

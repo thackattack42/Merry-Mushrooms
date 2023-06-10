@@ -353,9 +353,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 destination = ray.GetPoint(staffList[selectedStaff].shootDistance);
             }
             // Creates bullet object and shoots it towards the center ray of the camera
-            GameObject bulletToShoot = Instantiate(playerBullet, bulletPoint.transform.position, transform.rotation);
+            GameObject bulletToShoot = Instantiate(staffList[selectedStaff].BulletToShoot, bulletPoint.transform.position, transform.rotation);
             bulletToShoot.GetComponent<Rigidbody>().velocity = (destination - bulletPoint.transform.position).normalized * speedOfBullet;
-            Destroy(bulletToShoot, 1);
+            //Destroy(bulletToShoot, 1);
 
             //Muzzle Flash
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
