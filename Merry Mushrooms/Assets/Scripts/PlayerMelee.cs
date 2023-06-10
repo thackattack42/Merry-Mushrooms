@@ -11,7 +11,7 @@ public class PlayerMelee : MonoBehaviour
     [SerializeField] int dmg;
    // Animator animator;
     public float animrTransSpeed;
-    [SerializeField] Animator animr;
+    //[SerializeField] Animator animr;
     bool playerSwung;
     // Start is called before the first frame update
     void Start()
@@ -25,18 +25,18 @@ public class PlayerMelee : MonoBehaviour
 
         if (gameManager.instance.playerScript.SwordEquipped)
         {
-            GetComponent<BoxCollider>().enabled = true;
+           
             
             if (Input.GetButtonDown("Shoot") && !playerSwung && !gameManager.instance.playerScript.holdingShield)
             {
-                animr.SetBool("Attacking", true);
-
+                //animr.SetBool("Attacking", true);
+                GetComponent<BoxCollider>().enabled = true;
             }
             else if (Input.GetButtonUp("Shoot"))
             {
-
+               
                 playerSwung = false; ;
-                animr.SetBool("Attacking", false);
+               // animr.SetBool("Attacking", false);
             }
         }
     }
@@ -75,6 +75,7 @@ public class PlayerMelee : MonoBehaviour
             if (damagable != null)
             {
                 damagable.takeDamage(dmg);
+                //GetComponent<BoxCollider>().enabled = false;
             }
         }
         
