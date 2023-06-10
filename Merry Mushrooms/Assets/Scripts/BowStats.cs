@@ -11,7 +11,7 @@ public class BowStats : ScriptableObject
 
     [Header("---- Bow Model things ----")]
     public GameObject model;        
-    //public GameObject hitEffect;
+    public GameObject arrowToShoot;
     public AudioClip shootSound;
     public float shootVol;
     [Header("-----Ammo Stuff-----")]
