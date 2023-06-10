@@ -11,6 +11,8 @@ public class PlayerHUD : MonoBehaviour
     int funGil;
     int damageTaken;
     public Transform damagePopup;
+    public Transform expPopup;
+    int expGained;
 
     //Audio Stuff
     [Header("-----Audio Stuff-----")]
@@ -49,7 +51,7 @@ public class PlayerHUD : MonoBehaviour
         minimapBGRot.AddSource(constraint);
         minimapCamRot.AddSource(constraint);
         UpdatePlayerLevel();
-        UpdatePlayerEXP();
+        UpdatePlayerEXP(0);
     }
 
     // Update is called once per frame
@@ -151,10 +153,13 @@ public class PlayerHUD : MonoBehaviour
     public void UpdatePlayerLevel()
     {
         gameManager.instance.PlayerLevelCounter.text = gameManager.instance.playerScript.level.ToString();
-        UpdatePlayerEXP();
+        UpdatePlayerEXP(0);
     }
-    public void UpdatePlayerEXP()
+    public void UpdatePlayerEXP(int amount)
     {
+        expGained = amount;
+        if (amount > 0)
+            Instantiate(expPopup, gameManager.instance.UICanvas);
         float expPercent = ((float)gameManager.instance.playerScript.currExp / gameManager.instance.playerScript.expToNextLevel) * 100;
         gameManager.instance.PlayerExpNumber.text = gameManager.instance.playerScript.currExp.ToString() + " / " + gameManager.instance.playerScript.expToNextLevel.ToString();
         gameManager.instance.PlayerExpPercent.text = expPercent.ToString("0") + "%";
@@ -163,5 +168,9 @@ public class PlayerHUD : MonoBehaviour
     public int GetDamageTaken()
     {
         return damageTaken;
+    }
+    public int GetExpGained()
+    {
+        return expGained;
     }
 }

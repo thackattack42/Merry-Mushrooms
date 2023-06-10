@@ -689,7 +689,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public void AddEXP(int amount)
     {
         currExp += amount;
-        gameManager.instance.playerHUD.UpdatePlayerEXP();
+        gameManager.instance.playerHUD.UpdatePlayerEXP(amount);
         if (currExp >= expToNextLevel)
         {
             level++;
