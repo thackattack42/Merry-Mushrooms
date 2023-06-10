@@ -14,6 +14,9 @@ public class EnemyUI : MonoBehaviour
     public GameObject enemy;
     public Enemy_Scpt enemyScript;
     public Image enemyHPSlider;
+
+    public RectTransform floatingDamage;
+    public Transform EnemyUITransform;
     //public TextMeshProUGUI enemyName;
 
     //other useful stuff
@@ -48,7 +51,11 @@ public class EnemyUI : MonoBehaviour
         // Also, I've tried calling EnemyUI.updateEnemyHealth in the Enemy Script under takeDamage,
         // but it only updates one UI (usually the highest enemy in the hierarchy list). :/
         if (enemyScript.HP != currHP)
+        {
+            Instantiate(floatingDamage, EnemyUITransform);
+            
             updateEnemyHealth();
+        }
     }
 
     public void updateEnemyHealth()
@@ -56,4 +63,10 @@ public class EnemyUI : MonoBehaviour
         currHP = enemyScript.HP;
         enemyHPSlider.fillAmount = currHP / enemyMaxHP;
     }
+
+    public float GetUIHPVal()
+    {
+        return currHP;
+    }
+
 }
