@@ -541,7 +541,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         // Player will take damage based off the amount 
         HP -= amount;
         aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
-        gameManager.instance.playerHUD.updatePlayerHealth(HP);
+        gameManager.instance.playerHUD.updatePlayerHealth(amount);
         if (HP <= 0)
         {
             HP = 0;

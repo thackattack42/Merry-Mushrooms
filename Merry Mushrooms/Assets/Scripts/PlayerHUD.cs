@@ -9,6 +9,8 @@ public class PlayerHUD : MonoBehaviour
     int maxPlayerHP;
     int maxPlayerMP;
     int funGil;
+    int damageTaken;
+    public Transform damagePopup;
 
     //Audio Stuff
     [Header("-----Audio Stuff-----")]
@@ -82,14 +84,16 @@ public class PlayerHUD : MonoBehaviour
             lowHP = false;
         }
     }
-    public void updatePlayerHealth(int currHP)
+    public void updatePlayerHealth(int amount)
     {
-        if (currHP < 0) //to make sure the number in the UI doesn't show negative, or it will look weird.
-            currHP = 0;
-        if (((float)currHP / maxPlayerHP) < gameManager.instance.HPSlider.fillAmount)
+        damageTaken = amount;
+        Instantiate(damagePopup, gameManager.instance.UICanvas);
+        if (gameManager.instance.playerScript.HP < 0) //to make sure the number in the UI doesn't show negative, or it will look weird.
+            gameManager.instance.playerScript.HP = 0;
+        if (((float)gameManager.instance.playerScript.HP / maxPlayerHP) < gameManager.instance.HPSlider.fillAmount)
             StartCoroutine(damageFlash());
-        gameManager.instance.healthPoints.text = currHP.ToString();
-        gameManager.instance.HPSlider.fillAmount = (float)currHP / maxPlayerHP;
+        gameManager.instance.healthPoints.text = gameManager.instance.playerScript.HP.ToString();
+        gameManager.instance.HPSlider.fillAmount = (float)gameManager.instance.playerScript.HP / maxPlayerHP;
         
     }
     public void updatePlayerMana()
@@ -155,5 +159,9 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.PlayerExpNumber.text = gameManager.instance.playerScript.currExp.ToString() + " / " + gameManager.instance.playerScript.expToNextLevel.ToString();
         gameManager.instance.PlayerExpPercent.text = expPercent.ToString("0") + "%";
         gameManager.instance.ExpBarSlider.fillAmount = expPercent / 100;
+    }
+    public int GetDamageTaken()
+    {
+        return damageTaken;
     }
 }

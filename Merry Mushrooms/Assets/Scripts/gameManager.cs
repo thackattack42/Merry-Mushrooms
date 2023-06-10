@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject weaponSelectMenu;
     public GameObject reticle;
+    public Transform UICanvas;
     public TextMeshProUGUI ammoCount;
     public TextMeshProUGUI ammoTotal;
     public TextMeshProUGUI healthPoints;
