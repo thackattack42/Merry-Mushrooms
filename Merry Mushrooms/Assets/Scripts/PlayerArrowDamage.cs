@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class PlayerArrowDamage : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerArrowDamage : MonoBehaviour
             IEarthDamage earthDamage = collision.gameObject.GetComponent<IEarthDamage>();
 
             if (earthDamage != null)
-                earthDamage.TakeEarthDamage(gameManager.instance.playerScript.bowShootDamage);
+                earthDamage.TakeEarthDamage((gameManager.instance.playerScript.bowShootDamage * (int)gameManager.instance.playerScript.timer));
         }
 
         if (gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].ice)
@@ -33,7 +34,9 @@ public class PlayerArrowDamage : MonoBehaviour
             IDamage damageable = collision.gameObject.GetComponent<IDamage>();
 
             if (damageable != null)
-                damageable.takeDamage(gameManager.instance.playerScript.bowShootDamage);
+                damageable.takeDamage((gameManager.instance.playerScript.bowShootDamage) * (int)(Time.time - gameManager.instance.playerScript.timer));
+             
+           // Debug.Log((gameManager.instance.playerScript.bowShootDamage * (int)gameManager.instance.playerScript.timer) / Time.deltaTime);
         }
 
         Destroy(gameObject);    

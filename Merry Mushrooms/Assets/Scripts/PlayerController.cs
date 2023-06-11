@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     private Vector3 destination;
     private Vector3 pushBack;
     private int isDashing;
+    public float timer;
     public bool isUnderAttack;
     
    
@@ -146,6 +147,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
         if (gameManager.instance.activeMenu == null)
         {
+            
             OnPlayerCrouch();
             OnPlayerUncrouch();
             Movement();
@@ -184,14 +186,27 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 StartCoroutine(shoot());
              
             }
-            if (Input.GetButton("Shoot") && !isShooting && !isReloading && BowList.Count > 0 && BowEquipped)
+            if (Input.GetButtonDown("Shoot") && !isShooting && !isReloading && BowList.Count > 0 && BowEquipped)
             {
-
-
-                StartCoroutine(BowShoot());
-
+                if(timer < 4)
+                {
+                timer = Time.time;
+                    return;
+                }
+                
+                //timer = Time.time;
             }
-            
+            else if (Input.GetButtonUp("Shoot") && !isShooting/* || timer - Time.time == 4*/)
+            {
+                //Debug.Log((int)(Time.time - timer));
+                //Debug.Log(Mathf.RoundToInt(Time.time - timer));
+                //timer = 0;
+                StartCoroutine(BowShoot());
+                StartCoroutine(BowCoolDown());
+                
+            }
+
+
             // Call anything in here we want to update per second (not per frame)
             if (period > 1.0f)
             {
@@ -203,6 +218,15 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
         Sprint();
         CrouchPlayer();
+    }
+    
+    IEnumerator BowCoolDown()
+    {
+        isShooting = true;
+        yield return new WaitForSeconds(3);
+        Debug.Log("did thing");
+        isShooting = false;
+
     }
     #region PlayerMovement
     void Movement()
@@ -419,10 +443,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //    origDamge = shootDamage; 
         //    shootDamage += 5;
         //}
-       
+
         //if (BowList[selectedBow].ammoClip > 0)
         //{
-            isShooting = true;
+        
+
+
+        //isShooting = true;
 
            
             BowList[selectedBow].ammoClip--;
@@ -455,7 +482,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //}
         gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(bowShootRate);
-        isShooting = false;
+        //isShooting = false;
 
     }
     void SwitchBow()
