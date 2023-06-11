@@ -13,6 +13,8 @@ public class SwordStats : ScriptableObject
     [Header("-----Ammo Stuff-----")]
     public GameObject model;
     public AudioClip swingSound;
+    //public GameObject magicEffect;
+    //public GameObject slashEffect;
     public float swingVol;
     public bool fire;
     public bool ice;

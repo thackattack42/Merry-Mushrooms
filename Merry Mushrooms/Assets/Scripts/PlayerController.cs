@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [Header("----- Sword Stats -----")]
     public List<SwordStats> SwordList = new List<SwordStats>();
     public List<ShieldStat> ShieldList = new List<ShieldStat>();
+    [SerializeField] public GameObject MagicEffectPoint;
+    [SerializeField] GameObject slashEffect;
     [SerializeField] public MeshRenderer swordMat;
     [SerializeField] public MeshFilter swordModel;
     [SerializeField] public MeshRenderer shieldMat;
@@ -391,7 +393,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
             
         //}
-        gameManager.instance.UpdateAmmoCount();
+        //gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -560,6 +562,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //shootDamage = staffList[selectedStaff].shootDamage;
         //shootDistance = staffList[selectedStaff].shootDistance;
         //shootRate = staffList[selectedStaff].shootRate;
+        //GameObject magic = GameObject.FindGameObjectWithTag("MagicEffect");
+        //Instantiate(SwordList[selectedSword].magicEffect, magic.transform.position, (SwordList[selectedSword].magicEffect.transform.rotation));
         swordModel.mesh = SwordList[selectedSword].model.GetComponent<MeshFilter>().sharedMesh;
         swordMat.material = SwordList[selectedSword].model.GetComponent<MeshRenderer>().sharedMaterial;
         //gameManager.instance.UpdateAmmoCount();

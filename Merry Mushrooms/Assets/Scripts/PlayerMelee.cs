@@ -13,6 +13,7 @@ public class PlayerMelee : MonoBehaviour
     public float animrTransSpeed;
     //[SerializeField] Animator animr;
     bool playerSwung;
+    private GameObject slash;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +30,11 @@ public class PlayerMelee : MonoBehaviour
             
             if (Input.GetButtonDown("Shoot") && !playerSwung && !gameManager.instance.playerScript.holdingShield)
             {
+                 slash = GameObject.FindGameObjectWithTag("Slash");
+                
                 //animr.SetBool("Attacking", true);
                 GetComponent<BoxCollider>().enabled = true;
+               
             }
             else if (Input.GetButtonUp("Shoot"))
             {
@@ -79,6 +83,14 @@ public class PlayerMelee : MonoBehaviour
             }
         }
         
+    }
+
+    IEnumerator WaitForSlash()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Did slash");
+       // Instantiate(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].slashEffect, slash.transform.position, Camera.main.transform.rotation);
     }
     #region Attacking Functions
      
