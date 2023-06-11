@@ -15,8 +15,8 @@ public class PlayerSwordSwing : MonoBehaviour
         if (Input.GetButtonDown("Shoot") && !gameManager.instance.playerScript.holdingShield)
         {
             animr.SetTrigger("Attacking");
+           
             
-
         } 
         else
         {
@@ -33,5 +33,9 @@ public class PlayerSwordSwing : MonoBehaviour
     public void TurnOffSwing()
     {
         animr.ResetTrigger("Attacking");
+    } 
+    public void PlaySwingSound()
+    {
+        gameManager.instance.playerScript.aud.PlayOneShot(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingSound, gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingVol);
     }
 }
