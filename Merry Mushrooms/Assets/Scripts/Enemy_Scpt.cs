@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 //using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
@@ -201,7 +202,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     public IEnumerator EnemyDespawn()
     {
         gameManager.instance.playerScript.AddEXP(20);
-        Instantiate(FunGilDrop, transform.position, transform.rotation);
+        Instantiate(FunGilDrop, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.rotation);
         yield return new WaitForSeconds(3);
 
         Destroy(gameObject);

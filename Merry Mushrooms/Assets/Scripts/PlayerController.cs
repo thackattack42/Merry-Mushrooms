@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 
                 //timer = Time.time;
             }
-            else if (Input.GetButtonUp("Shoot") && !isShooting/* || timer - Time.time == 4*/)
+            else if (Input.GetButtonUp("Shoot") && !isShooting && BowEquipped/* || timer - Time.time == 4*/)
             {
                 //Debug.Log((int)(Time.time - timer));
                 //Debug.Log(Mathf.RoundToInt(Time.time - timer));
