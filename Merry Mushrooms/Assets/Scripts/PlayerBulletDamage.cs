@@ -43,4 +43,9 @@ public class PlayerBulletDamage : MonoBehaviour
         //    damageable.takeDamage(gameManager.instance.playerScript.shootDamage);
 
     }
+
+    IEnumerator FireDamageTime()
+    {
+        yield return new WaitForSeconds(3);
+    }
 }
