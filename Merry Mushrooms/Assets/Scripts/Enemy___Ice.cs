@@ -24,23 +24,23 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     }
     public void TakeFireDamage(int dmg)
     {
-        //enemy.HP -= dmg;
-       onFire = true;
+        enemy.HP -= dmg * 2;
+        onFire = true;
         damage = dmg;
         StartCoroutine(FireDamageTime());
-        //if (enemy.HP <= 0)
-        //{
-        //    enemy.animr.SetBool("Death", true);
-        //    enemy.agent.enabled = false;
-        //    GetComponent<CapsuleCollider>().enabled = false;
-        //    StartCoroutine(enemy.EnemyDespawn());
-        //}
-        //else
-        //{
-        //    enemy.animr.SetTrigger("Damaged");
-        //    enemy.agent.SetDestination(gameManager.instance.player.transform.position);
-        //    StartCoroutine(enemy.FlashHitColor());
-        //}
+        if (enemy.HP <= 0 && !onFire)
+        {
+            enemy.animr.SetBool("Death", true);
+            enemy.agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+            StartCoroutine(enemy.EnemyDespawn());
+        }
+        else
+        {
+            enemy.animr.SetTrigger("Damaged");
+            enemy.agent.SetDestination(gameManager.instance.player.transform.position);
+            StartCoroutine(enemy.FlashHitColor());
+        }
     }
 
     public void TakeEarthDamage(int dmg)
@@ -89,28 +89,31 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
 
         for (int i = 0; i < timer ; i++)
         {
-            
-            if(timer >= 1)
+            if (timer >= 1)
             {
                 timer = 0f;
                 enemy.HP -= damage;
-            }
-            if (enemy.HP <= 0)
-            {
-                enemy.animr.SetBool("Death", true);
-                enemy.agent.enabled = false;
-                GetComponent<CapsuleCollider>().enabled = false;
-                StartCoroutine(enemy.EnemyDespawn());
-            }
-            else
-            {
-                enemy.animr.SetTrigger("Damaged");
-                enemy.agent.SetDestination(gameManager.instance.player.transform.position);
                 StartCoroutine(enemy.FlashHitColor());
+                
             }
+            
+        }
+        if (enemy.HP <= 0)
+        {
+            enemy.animr.SetBool("Death", true);
+            enemy.agent.enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+            StartCoroutine(enemy.EnemyDespawn());
+        }
+        else
+        {
+            enemy.animr.SetTrigger("Damaged");
+            enemy.agent.SetDestination(gameManager.instance.player.transform.position);
+
         }
         yield return new WaitForSeconds(3);
-        onFire = false;
+            onFire = false;
+    
         
 
 
