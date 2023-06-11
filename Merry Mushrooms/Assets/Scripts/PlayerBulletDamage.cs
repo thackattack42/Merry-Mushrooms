@@ -44,8 +44,5 @@ public class PlayerBulletDamage : MonoBehaviour
 
     }
 
-    IEnumerator FireDamageTime()
-    {
-        yield return new WaitForSeconds(3);
-    }
+   
 }
