@@ -15,9 +15,11 @@ MonoBehaviour:
   bowShootDistance: 50
   bowShootDamage: 4
   model: {fileID: 543490590627816055, guid: 108ba45e87638994db915966a7ae0aeb, type: 3}
-  arrowToShoot: {fileID: 2834199721020510925, guid: d28d4e4700f2d7d4b8edfb0752db8660, type: 3}
+  arrowToShoot: {fileID: 2834199721020510925, guid: 4129e53b1ad358b49bcb3d006ef5453c, type: 3}
   shootSound: {fileID: 8300000, guid: d9419ba0bfac1e84a95418ac5851caf6, type: 3}
+  pullSound: {fileID: 8300000, guid: 88122c63759aae140bb59a8f78d8523b, type: 3}
   shootVol: 0.5
+  pullVol: 1
   ammoClip: 2
   ammoReserves: 40
   origAmmo: 5

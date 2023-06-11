@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool SwordEquipped;
     public bool ShieldEquipped;
     public bool holdingShield;
+    public bool bowShot;
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
@@ -186,25 +187,25 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 StartCoroutine(shoot());
              
             }
-            if (Input.GetButtonDown("Shoot") && !isShooting && !isReloading && BowList.Count > 0 && BowEquipped)
-            {
-                if(timer < 4)
-                {
 
+            if (Input.GetButtonDown("Shoot") && !isShooting && !isReloading && BowList.Count > 0 && BowEquipped && !bowShot)
+            {
+                    bowShot = true;
+                aud.PlayOneShot(BowList[selectedBow].pullSound, BowList[selectedBow].pullVol);
                 timer = Time.time;
-                    return;
-                }
+                   
+                
+                
                 
                 //timer = Time.time;
             }
-            else if (Input.GetButtonUp("Shoot") && !isShooting && BowEquipped/* || timer - Time.time == 4*/)
+            else if (Input.GetButtonUp("Shoot") && !isShooting && BowEquipped && bowShot/* || timer - Time.time == 4*/)
             {
-                //Debug.Log((int)(Time.time - timer));
-                //Debug.Log(Mathf.RoundToInt(Time.time - timer));
-                //timer = 0;
+                    //Debug.Log((int)(Time.time - timer));
+                    //Debug.Log(Mathf.RoundToInt(Time.time - timer));
+                   
                 StartCoroutine(BowShoot());
                 StartCoroutine(BowCoolDown());
-                
             }
 
 
@@ -224,10 +225,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     IEnumerator BowCoolDown()
     {
         isShooting = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         Debug.Log("did thing");
         isShooting = false;
-
+        bowShot = false;
     }
     #region PlayerMovement
     void Movement()
@@ -362,7 +363,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //{
             isShooting = true;
 
-            staffList[selectedStaff].ammoClip--;
+            //staffList[selectedStaff].ammoClip--;
             
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
            
@@ -431,7 +432,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         shootRate = staffList[selectedStaff].shootRate;
         staffModel.mesh = staffList[selectedStaff].model.GetComponent<MeshFilter>().sharedMesh;
         staffMat.material = staffList[selectedStaff].model.GetComponent<MeshRenderer>().sharedMaterial;
-        gameManager.instance.UpdateAmmoCount();
+        //gameManager.instance.UpdateAmmoCount();
     }
     #endregion
 
@@ -453,7 +454,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //isShooting = true;
 
            
-            BowList[selectedBow].ammoClip--;
+           // BowList[selectedBow].ammoClip--;
             
             aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
 
@@ -471,7 +472,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 destination = ray.GetPoint(BowList[selectedStaff].bowShootDistance);
             }
             // Creates bullet object and shoots it towards the center ray of the camera
-            GameObject bulletToShoot = Instantiate(BowList[selectedStaff].arrowToShoot, arrowPoint.transform.position, Camera.main.transform.rotation);
+            GameObject bulletToShoot = Instantiate(BowList[selectedBow].arrowToShoot, arrowPoint.transform.position, Camera.main.transform.rotation);
             bulletToShoot.GetComponent<Rigidbody>().velocity = (destination - arrowPoint.transform.position).normalized * speedOfArrow;
             //Destroy(bulletToShoot, 1);
 
@@ -481,7 +482,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
 
         //}
-        gameManager.instance.UpdateAmmoCount();
+       // gameManager.instance.UpdateAmmoCount();
         yield return new WaitForSeconds(bowShootRate);
         //isShooting = false;
 
