@@ -190,6 +190,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             {
                 if(timer < 4)
                 {
+
                 timer = Time.time;
                     return;
                 }
