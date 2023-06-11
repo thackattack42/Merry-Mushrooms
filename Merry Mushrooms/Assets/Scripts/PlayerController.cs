@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool SwordEquipped;
     public bool ShieldEquipped;
     public bool holdingShield;
+    public bool bowShot;
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
@@ -186,25 +187,25 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 StartCoroutine(shoot());
              
             }
-            if (Input.GetButtonDown("Shoot") && !isShooting && !isReloading && BowList.Count > 0 && BowEquipped)
+
+            if (Input.GetButtonDown("Shoot") && !isShooting && !isReloading && BowList.Count > 0 && BowEquipped && !bowShot)
             {
-                if(timer < 4)
-                {
+                    bowShot = true;
 
                 timer = Time.time;
-                    return;
-                }
+                   
+                
+                
                 
                 //timer = Time.time;
             }
-            else if (Input.GetButtonUp("Shoot") && !isShooting && BowEquipped/* || timer - Time.time == 4*/)
+            else if (Input.GetButtonUp("Shoot") && !isShooting && BowEquipped && bowShot/* || timer - Time.time == 4*/)
             {
-                //Debug.Log((int)(Time.time - timer));
-                //Debug.Log(Mathf.RoundToInt(Time.time - timer));
-                //timer = 0;
+                    //Debug.Log((int)(Time.time - timer));
+                    //Debug.Log(Mathf.RoundToInt(Time.time - timer));
+                   
                 StartCoroutine(BowShoot());
                 StartCoroutine(BowCoolDown());
-                
             }
 
 
@@ -224,10 +225,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     IEnumerator BowCoolDown()
     {
         isShooting = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         Debug.Log("did thing");
         isShooting = false;
-
+        bowShot = false;
     }
     #region PlayerMovement
     void Movement()
