@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Enemy___Melee : Enemy_Scpt
@@ -11,6 +12,8 @@ public class Enemy___Melee : Enemy_Scpt
     private bool isAttacking;
     private bool canAttack = true;
 
+    [Header("------ Components ------")]
+    [SerializeField] MeleeWeapon_Scpt meleeScript;
 
     public override bool canSeePlayer()
     {
@@ -47,6 +50,7 @@ public class Enemy___Melee : Enemy_Scpt
     #region Attacking Functions
     IEnumerator Attack()
     {
+        SetAttackDamage();
         isAttacking = true;
         gameManager.instance.playerScript.isUnderAttack = true;
         animr.SetTrigger("MeleeAttack");
@@ -62,6 +66,11 @@ public class Enemy___Melee : Enemy_Scpt
     public void AttackingOff()
     {
         MeleeObj.enabled = false;
+    }
+
+    void SetAttackDamage()
+    {
+        meleeScript.dmg = level;
     }
 
     IEnumerator AttackCooldown()

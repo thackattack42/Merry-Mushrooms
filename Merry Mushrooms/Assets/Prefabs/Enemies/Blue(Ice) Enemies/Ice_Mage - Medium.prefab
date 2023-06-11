@@ -1507,7 +1507,7 @@ GameObject:
   - component: {fileID: 2942913921109807436}
   - component: {fileID: 4294833551948662470}
   m_Layer: 6
-  m_Name: Ice_Mage - Easy
+  m_Name: Ice_Mage - Medium
   m_TagString: Ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1522,7 +1522,7 @@ Transform:
   m_GameObject: {fileID: 4887033869842233575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.787964, y: 0, z: -1.7277803}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4887033869841736901}
@@ -1560,7 +1560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   playerFaceSpeed: 15
-  level: 1
+  level: 2
   viewCone: 90
   animrTransSpeed: 3
   roamDist: 25
@@ -1577,7 +1577,7 @@ MonoBehaviour:
   angleToPlayer: 0
   stoppingDistOrig: 0
   FunGilDrop: {fileID: 7266967030504875833, guid: 1db1e58dfd299ea429c83c9481f69227, type: 3}
-  shootDist: 5
+  shootDist: 6
   ShootRate: 0.5
   ShootAngle: 30
   shootPos: {fileID: 6964127046538717290}
