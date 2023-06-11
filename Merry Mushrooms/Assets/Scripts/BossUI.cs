@@ -5,22 +5,18 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.UI;
 
-
-public class EnemyUI : MonoBehaviour
+public class BossUI : MonoBehaviour
 {
-    //public static EnemyUI instance;
 
     [Header("-----Enemy Stuff-----")]
-    public GameObject enemy;
-    public Enemy_Scpt enemyScript;
-    public Image enemyHPSlider;
+    public GameObject boss;
+    public Boss_Scpt bossScript;
+    public Image bossHPSlider;
 
     public RectTransform floatingDamage;
-    public Transform EnemyUITransform;
-    //public TextMeshProUGUI enemyName;
+    public Transform BossUITransform;
 
     //other useful stuff
-    int enemyMaxHP;
     float currHP;
 
 
@@ -28,45 +24,43 @@ public class EnemyUI : MonoBehaviour
     void Start()
     {
         //Enemy Stuff grabbers
-        //instance = this;
-        enemy = transform.parent.gameObject;
-        enemyScript = enemy.GetComponent<Enemy_Scpt>();
+        boss = transform.parent.gameObject;
+        bossScript = boss.GetComponent<Boss_Scpt>();
 
         //Setup UI
         //enemyName.text = enemy.name;
-        enemyHPSlider.fillAmount = 1f;
-        enemyMaxHP = enemyScript.HP;
-        currHP = enemyMaxHP;
+        bossHPSlider.fillAmount = 1f;
+        currHP = bossScript.GetMaxHP();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // WHY DOES THE UI NEED TO FACE *AWAY* FROM THE PLAYER, NOT TOWARDS FOR IT TO LOOK NORMAL?????? >:(
-        transform.rotation = gameManager.instance.player.transform.rotation;
 
 
         // I can't think of a better solution for this without adding a GetComponentInChildren
         // in the Enemy Script which *might* break stuff, but IDK, I'm too scared to try!
         // Also, I've tried calling EnemyUI.updateEnemyHealth in the Enemy Script under takeDamage,
         // but it only updates one UI (usually the highest enemy in the hierarchy list). :/
-        if (enemyScript.HP != currHP)
+        if (bossScript.GetCurrHP() != currHP)
         {
-            Instantiate(floatingDamage, EnemyUITransform);
-            
+            Instantiate(floatingDamage, BossUITransform);
+
             updateEnemyHealth();
         }
+
     }
 
     public void updateEnemyHealth()
     {
-        currHP = enemyScript.HP;
-        enemyHPSlider.fillAmount = currHP / enemyMaxHP;
+        currHP = bossScript.GetCurrHP();
+        bossHPSlider.fillAmount = currHP / bossScript.GetMaxHP();
+        if (currHP <= 0)
+            gameObject.SetActive(false);
     }
 
     public float GetUIHPVal()
     {
         return currHP;
     }
-
 }

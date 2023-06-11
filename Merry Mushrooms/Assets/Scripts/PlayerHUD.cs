@@ -12,6 +12,7 @@ public class PlayerHUD : MonoBehaviour
     int damageTaken;
     public Transform damagePopup;
     public Transform expPopup;
+    public Transform LevelUpPopup;
     int expGained;
 
     //Audio Stuff
@@ -153,6 +154,8 @@ public class PlayerHUD : MonoBehaviour
     public void UpdatePlayerLevel()
     {
         gameManager.instance.PlayerLevelCounter.text = gameManager.instance.playerScript.level.ToString();
+        if (gameManager.instance.playerScript.level > 0)
+            Instantiate(LevelUpPopup, gameManager.instance.UICanvas);
         UpdatePlayerEXP(0);
     }
     public void UpdatePlayerEXP(int amount)

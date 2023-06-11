@@ -256,5 +256,13 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
 
     //}
     #endregion
+    public int GetCurrHP()
+    {
+        return currHP;
+    }
+    public int GetMaxHP()
+    {
+        return maxHP;
+    }
     #endregion
 }

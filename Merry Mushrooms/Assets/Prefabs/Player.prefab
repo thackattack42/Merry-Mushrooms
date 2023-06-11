@@ -3268,11 +3268,14 @@ MonoBehaviour:
   playerWeapon: 0
   isReloading: 0
   isCrouching: 0
+  timer: 0
+  isUnderAttack: 0
   StaffEquipped: 0
   BowEquipped: 0
   SwordEquipped: 0
   ShieldEquipped: 0
   holdingShield: 0
+  bowShot: 0
 --- !u!114 &8863840815364814771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3287,6 +3290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePopup: {fileID: 8513133656748376550, guid: a28e72dac6c297e4e9c10e539e8a3a72, type: 3}
   expPopup: {fileID: 8513133656748376550, guid: 9d574cc12806b9340928edfec6f48917, type: 3}
+  LevelUpPopup: {fileID: 8513133656748376550, guid: 4e4700ba92298904aafa0607ae1aa50a, type: 3}
   dashCooldownFinishPing: {fileID: 8300000, guid: 826ac13366a44c8459091fbcfa5f0c1d, type: 3}
   minimapBGRot: {fileID: 1998479975}
   minimapCamRot: {fileID: 2107280112}
