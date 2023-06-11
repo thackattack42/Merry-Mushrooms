@@ -8,10 +8,34 @@ public class Music : MonoBehaviour
     public AudioSource MusicSource;
     public AudioClip MainMenuMusic;
     public AudioClip GameplayMusic;
-    public AudioClip Boss1Music;
-    public AudioClip Boss2Music;
+    public AudioClip BossMusic;
+    bool switchingMusic;
+    bool bossIsAlive;
+    float fadeoutSpeed = 0.5f;
     // Start is called before the first frame update
     void Start()
+    {
+        PlayMusic();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!MusicSource.isPlaying)
+            PlayMusic();
+        if (switchingMusic)
+        {
+            MusicSource.volume -= fadeoutSpeed * Time.deltaTime;
+            if (MusicSource.volume <= 0.001)
+            {
+                MusicSource.Stop();
+                MusicSource.volume = 1f;
+                switchingMusic = false;
+            }
+        }
+    }
+
+    void PlayMusic()
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
@@ -19,13 +43,15 @@ public class Music : MonoBehaviour
         }
         else
         {
-            MusicSource.PlayOneShot(GameplayMusic);
+            if (bossIsAlive)
+                MusicSource.PlayOneShot(BossMusic);
+            else
+                MusicSource.PlayOneShot(GameplayMusic);
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    public void BossState(bool state)
     {
-
+        switchingMusic = true;
+        bossIsAlive = state;
     }
 }

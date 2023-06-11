@@ -58,6 +58,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
         //base.Start();
         gameManager.instance.UpdateGameGoal(1);
+        gameManager.instance.musicScript.BossState(true);
     }
 
         // Update is called once per frame
@@ -189,6 +190,8 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
             Instantiate(teleporter, transform.position, transform.rotation);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
+            gameManager.instance.musicScript.BossState(false);
+
         }
         else
         {
@@ -208,6 +211,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
             anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
+            gameManager.instance.musicScript.BossState(false);
         }
         else
         {
@@ -229,6 +233,8 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
             anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
+            gameManager.instance.musicScript.BossState(false);
+
         }
         else
         {

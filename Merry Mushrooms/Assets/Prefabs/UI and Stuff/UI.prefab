@@ -6254,10 +6254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MusicSource: {fileID: 2122218968}
-  MainMenuMusic: {fileID: 8300000, guid: b02862b729e114b4aa790739a123fb6d, type: 3}
-  GameplayMusic: {fileID: 8300000, guid: b6c97f9c9f15b22438f294a3b3740905, type: 3}
-  Boss1Music: {fileID: 0}
-  Boss2Music: {fileID: 0}
+  MainMenuMusic: {fileID: 8300000, guid: 851b58d26ab060b4da521130368c8e44, type: 3}
+  GameplayMusic: {fileID: 8300000, guid: 7c8ded844854b2b49a0f557923326b3c, type: 3}
+  BossMusic: {fileID: 8300000, guid: f9a345a884409364499914fce7ae5c49, type: 3}
 --- !u!82 &2122218968
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6272,7 +6271,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -11177,6 +11176,7 @@ MonoBehaviour:
   minimapRotationLock: {fileID: 1093354636}
   SFXSlider: {fileID: 24100000, guid: 154978e52ec9f0445a1882bdf10e4a88, type: 2}
   MusicSlider: {fileID: 24100000, guid: 05eb67136fc9d3746af1dd4547eace51, type: 2}
+  musicScript: {fileID: 2122218969}
   dmgFlash: {fileID: 1650296044415360650}
   loadingScreen: {fileID: 5243417770992706468}
   Inventory: {fileID: 2653707180426779251}

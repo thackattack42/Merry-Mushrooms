@@ -45,6 +45,7 @@ public class gameManager : MonoBehaviour
     public Transform minimapRotationLock;
     public AudioMixer SFXSlider;
     public AudioMixer MusicSlider;
+    public Music musicScript;
     public Image dmgFlash;
     public GameObject loadingScreen;
     public GameObject Inventory;
