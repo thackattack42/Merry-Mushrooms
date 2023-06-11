@@ -13,7 +13,9 @@ public class BowStats : ScriptableObject
     public GameObject model;        
     public GameObject arrowToShoot;
     public AudioClip shootSound;
+    public AudioClip pullSound;
     public float shootVol;
+    public float pullVol;
     [Header("-----Ammo Stuff-----")]
     public int ammoClip;
     public int ammoReserves;
