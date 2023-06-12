@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834199721020510925, guid: 0c569073a47a960479946b60cdc3426a, type: 3}
       propertyPath: m_Name
-      value: IceArrow_New
+      value: IceArrow_New Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6445907743294018583, guid: 0c569073a47a960479946b60cdc3426a, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4990,6 +4990,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6730269192128573118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930104592122723581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abacac3cac1a7245a590492c75bad6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7831074531984936266 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1851964470201508730, guid: 0c569073a47a960479946b60cdc3426a, type: 3}
