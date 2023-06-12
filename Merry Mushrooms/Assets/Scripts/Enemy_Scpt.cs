@@ -24,6 +24,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     public Transform headPos;
     [SerializeField] public Animator animr;
     [SerializeField] AudioSource aud;
+    //[SerializeField] ParticleSystem spawnParticle;
 
     [Header("------ Audio ------")]
     [SerializeField] AudioClip[] audShoot;
@@ -207,6 +208,11 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
         yield return new WaitForSeconds(3);
 
         Destroy(gameObject);
+    }
+
+    void SpawnParticles()
+    {
+        //Instantiate(spawnParticle, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
     }
     #endregion
     #endregion
