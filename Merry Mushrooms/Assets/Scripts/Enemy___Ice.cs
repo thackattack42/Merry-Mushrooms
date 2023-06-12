@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, IDamage
+public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, IDamage, IPhysics
 {
     Enemy_Scpt enemy;
 
     float timer ;
     int damage;
     bool onFire;
-    bool onEarth;
+   
+
+    [SerializeField] public int knockbackPower;
     private void Start()
     {
         enemy = GetComponent<Enemy_Scpt>();
@@ -23,9 +26,9 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
 
         }
     }
-    void KnockBack(Vector3 dir)
+    public void KnockBack(Vector3 dir)
     {
-        
+        GetComponent<NavMeshAgent>().velocity += dir;
     }
     public void TakeFireDamage(int dmg)
     {
@@ -51,7 +54,8 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
 
     public void TakeEarthDamage(int dmg)
     {
-        onEarth = true;
+        KnockBack(new Vector3(0, 0, knockbackPower));
+       
         enemy.HP -= dmg;
         if (enemy.HP <= 0)
         {
