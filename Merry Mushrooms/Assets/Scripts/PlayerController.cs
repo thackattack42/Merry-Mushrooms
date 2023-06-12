@@ -582,7 +582,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
-        //takeDamage(-maxHP);
+        HP = maxHP;
+        gameManager.instance.playerHUD.updatePlayerHealth(0);
     }
 
     public void KnockBack(Vector3 dir)
