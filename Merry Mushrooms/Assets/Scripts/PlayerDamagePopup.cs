@@ -20,12 +20,14 @@ public class PlayerDamagePopup : MonoBehaviour
             damageTaken.color = textColor;
             damageTaken.text = "-" + gameManager.instance.playerHUD.GetDamageTaken().ToString();
         }
-        else
+        else if (gameManager.instance.playerHUD.GetDamageTaken() < 0)
         {
             textColor = Color.green;
             damageTaken.color = textColor;
             damageTaken.text = "+" + gameManager.instance.playerHUD.GetDamageTaken().ToString();
         }
+        else
+            Destroy(gameObject);
         delTimer = 2f;
     }
 
