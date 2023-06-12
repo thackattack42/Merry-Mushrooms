@@ -190,14 +190,18 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
              
             }
 
-            if (Input.GetButtonDown("Shoot"))
+            if (Input.GetButtonDown("Shoot") && BowEquipped)
+            {
+                aud.PlayOneShot(BowList[selectedBow].pullSound, BowList[selectedBow].pullVol);
                 timer = 0;
 
-                if (Input.GetButton("Shoot"))
+            }
+
+                if (Input.GetButton("Shoot") && BowEquipped)
             {
                     bowShot = true;
-                aud.PlayOneShot(BowList[selectedBow].pullSound, BowList[selectedBow].pullVol);
-                timer = Mathf.MoveTowards(timer, 4, Time.deltaTime);
+                
+                timer = Mathf.MoveTowards(timer, 3, Time.deltaTime);
                // Debug.Log(timer);
                 Debug.Log(timer);
                 
