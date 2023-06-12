@@ -7,13 +7,18 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    public List<TabButton> tabButtons;
+    public List<GameObject> tabObjects;
+    public Color tabIdle;
+    public Color tabHover;
+    public Color tabActive;
+    public TabButton selectedTab;
     public int maxItemStack;
     public InventorySlot[] InventorySlots;
     public GameObject invItemPrefab;
     public TextMeshProUGUI SkillPointCounter;
     //public TextMeshProUGUI PlayerLevelCounter;
     public bool updated;
-
 
     [SerializeField] MeshFilter staffModel;
     [SerializeField] MeshRenderer staffMat;
@@ -92,5 +97,47 @@ public class InventoryManager : MonoBehaviour
     {
         SkillPointCounter.text = gameManager.instance.playerScript.skillPoints.ToString();
     }
-    
+
+    //Inventory Tabs
+    public void AddTab(TabButton btn)
+    {
+        if (tabButtons == null)
+            tabButtons = new List<TabButton>();
+        tabButtons.Add(btn);
+    }
+    public void OnTabEnter(TabButton btn)
+    {
+        ResetTabs();
+        if (selectedTab == null || btn != selectedTab)
+        {
+            btn.tabImage.color = tabHover;
+        }
+    }
+    public void OnTabExit(TabButton btn)
+    {
+        ResetTabs();
+    }
+    public void OnTabSelected(TabButton btn)
+    {
+        selectedTab = btn;
+        ResetTabs();
+        btn.tabImage.color = tabActive;
+        int index = btn.transform.GetSiblingIndex();
+        for (int i = 0; i < tabObjects.Count; i++)
+        {
+            if (i == index)
+                tabObjects[i].SetActive(true);
+            else
+                tabObjects[i].SetActive(false);
+        }
+    }
+    public void ResetTabs()
+    {
+        foreach (TabButton btn in tabButtons)
+        {
+            if (selectedTab != null && btn == selectedTab)
+                continue;
+            btn.tabImage.color = tabIdle;
+        }
+    }
 }
