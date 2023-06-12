@@ -34,7 +34,9 @@ public class PlayerMelee : MonoBehaviour
 
                 //gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ps.Play();
                 //animr.SetBool("Attacking", true);
+
                 GetComponent<BoxCollider>().enabled = true;
+                
                
             }
             else if (Input.GetButtonUp("Shoot"))

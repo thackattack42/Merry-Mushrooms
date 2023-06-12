@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] public MeshFilter swordModel;
     [SerializeField] public MeshRenderer shieldMat;
     [SerializeField] public MeshFilter shieldModel;
+    [SerializeField] public ParticleSystem Ps;
     public int selectedSword;
     
    
