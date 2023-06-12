@@ -9,6 +9,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     float timer ;
     int damage;
     bool onFire;
+    bool onEarth;
     private void Start()
     {
         enemy = GetComponent<Enemy_Scpt>();
@@ -21,6 +22,10 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
             StartCoroutine(FireDamageTime());
 
         }
+    }
+    void KnockBack(Vector3 dir)
+    {
+        
     }
     public void TakeFireDamage(int dmg)
     {
@@ -46,6 +51,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
 
     public void TakeEarthDamage(int dmg)
     {
+        onEarth = true;
         enemy.HP -= dmg;
         if (enemy.HP <= 0)
         {

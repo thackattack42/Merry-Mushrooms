@@ -30,8 +30,9 @@ public class PlayerMelee : MonoBehaviour
             
             if (Input.GetButtonDown("Shoot") && !playerSwung && !gameManager.instance.playerScript.holdingShield)
             {
-                 slash = GameObject.FindGameObjectWithTag("Slash");
-                
+                //slash = GameObject.FindGameObjectWithTag("Slash");
+
+                //gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ps.Play();
                 //animr.SetBool("Attacking", true);
                 GetComponent<BoxCollider>().enabled = true;
                
