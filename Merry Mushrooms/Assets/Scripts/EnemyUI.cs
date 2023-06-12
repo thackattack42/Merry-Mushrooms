@@ -17,7 +17,7 @@ public class EnemyUI : MonoBehaviour
 
     public RectTransform floatingDamage;
     public Transform EnemyUITransform;
-    //public TextMeshProUGUI enemyName;
+    public TextMeshProUGUI enemyLevel;
 
     //other useful stuff
     int enemyMaxHP;
@@ -37,6 +37,7 @@ public class EnemyUI : MonoBehaviour
         enemyHPSlider.fillAmount = 1f;
         enemyMaxHP = enemyScript.HP;
         currHP = enemyMaxHP;
+        enemyLevel.text = enemyScript.level.ToString();
     }
 
     // Update is called once per frame
