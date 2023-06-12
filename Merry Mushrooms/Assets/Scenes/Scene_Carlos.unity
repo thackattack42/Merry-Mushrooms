@@ -1169,6 +1169,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -161209887514638569, guid: 4726b6b3cd0cdaa49abdd890060c14e7, type: 3}
+      propertyPath: knockbackPower
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4887033869841736903, guid: 4726b6b3cd0cdaa49abdd890060c14e7, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1273,6 +1277,10 @@ PrefabInstance:
     - target: {fileID: 7546283163508901817, guid: 833661b0035396e4ab794c351306d3f6, type: 3}
       propertyPath: m_Name
       value: Ice_Weaponless - Hard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8360245558655515863, guid: 833661b0035396e4ab794c351306d3f6, type: 3}
+      propertyPath: knockbackPower
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 833661b0035396e4ab794c351306d3f6, type: 3}
