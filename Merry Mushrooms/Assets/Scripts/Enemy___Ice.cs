@@ -18,7 +18,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
         timer += Time.deltaTime;
         if (onFire)
         {
-        StartCoroutine(FireDamageTime());
+            StartCoroutine(FireDamageTime());
 
         }
     }
@@ -34,6 +34,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
             enemy.agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(enemy.EnemyDespawn());
+            return;
         }
         else
         {
@@ -87,23 +88,25 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     IEnumerator FireDamageTime()
     {
 
-        for (int i = 0; i < timer ; i++)
+        for (int i = 0; i < timer; i++)
         {
             if (timer >= 1)
             {
                 timer = 0f;
                 enemy.HP -= damage;
                 StartCoroutine(enemy.FlashHitColor());
-                
             }
             
         }
         if (enemy.HP <= 0)
         {
+            //TakeFireDamage(damage);
             enemy.animr.SetBool("Death", true);
             enemy.agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(enemy.EnemyDespawn());
+            onFire = false;
+            yield break;
         }
         else
         {
@@ -112,7 +115,10 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
 
         }
         yield return new WaitForSeconds(3);
+        if(onFire)
+        {
             onFire = false;
+        }
     
         
 
