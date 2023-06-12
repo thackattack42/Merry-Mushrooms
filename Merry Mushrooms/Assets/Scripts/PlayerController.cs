@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] public MeshFilter swordModel;
     [SerializeField] public MeshRenderer shieldMat;
     [SerializeField] public MeshFilter shieldModel;
+    [SerializeField] public ParticleSystem Ps;
     public int selectedSword;
     
    
@@ -190,12 +191,20 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
              
             }
 
-            if (Input.GetButtonDown("Shoot") && !isShooting && !isReloading && BowList.Count > 0 && BowEquipped && !bowShot)
+            if (Input.GetButtonDown("Shoot") && BowEquipped)
+            {
+                aud.PlayOneShot(BowList[selectedBow].pullSound, BowList[selectedBow].pullVol);
+                timer = 0;
+
+            }
+
+                if (Input.GetButton("Shoot") && BowEquipped)
             {
                     bowShot = true;
-                aud.PlayOneShot(BowList[selectedBow].pullSound, BowList[selectedBow].pullVol);
-                timer = Time.time;
-                   
+                
+                timer = Mathf.MoveTowards(timer, 3, Time.deltaTime);
+               // Debug.Log(timer);
+                Debug.Log(timer);
                 
                 
                 
@@ -203,9 +212,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             }
             else if (Input.GetButtonUp("Shoot") && !isShooting && BowEquipped && bowShot/* || timer - Time.time == 4*/)
             {
-                    //Debug.Log((int)(Time.time - timer));
-                    //Debug.Log(Mathf.RoundToInt(Time.time - timer));
-                   
+                //Debug.Log((int)(Time.time - timer));
+                //Debug.Log(Mathf.RoundToInt(Time.time - timer));
                 StartCoroutine(BowShoot());
                 StartCoroutine(BowCoolDown());
             }
@@ -228,7 +236,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
         isShooting = true;
         yield return new WaitForSeconds(1);
-        Debug.Log("did thing");
+        //Debug.Log("did thing");
         isShooting = false;
         bowShot = false;
     }
@@ -441,23 +449,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     #region Bow
     IEnumerator BowShoot()
     {
-        //if(Input.GetButtonDown("Shoot"))
-        //{
-        //    int origDamge = 0;
-        //    origDamge = shootDamage; 
-        //    shootDamage += 5;
-        //}
-
-        //if (BowList[selectedBow].ammoClip > 0)
-        //{
-        
-
-
-        //isShooting = true;
-
-           
-           // BowList[selectedBow].ammoClip--;
-            
+       
             aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
 
 

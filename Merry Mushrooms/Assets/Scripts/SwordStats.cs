@@ -12,6 +12,7 @@ public class SwordStats : ScriptableObject
 
     [Header("-----Ammo Stuff-----")]
     public GameObject model;
+    public ParticleSystem ps;
     public AudioClip swingSound;
     //public GameObject magicEffect;
     //public GameObject slashEffect;
