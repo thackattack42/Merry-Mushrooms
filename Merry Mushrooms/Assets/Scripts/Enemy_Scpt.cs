@@ -12,6 +12,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     [Header("------ Stats ------")]
     [Range(5, 1000)][SerializeField] public int HP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
+    [SerializeField] public int level;
     public int viewCone;
     public float animrTransSpeed;
     [SerializeField] int roamDist;

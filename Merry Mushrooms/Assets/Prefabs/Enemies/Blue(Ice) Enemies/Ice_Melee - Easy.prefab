@@ -1465,7 +1465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6815654208747896387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.648, y: 0, z: -24.74}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1504,6 +1504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   playerFaceSpeed: 15
+  level: 1
   viewCone: 90
   animrTransSpeed: 3
   roamDist: 25
@@ -1523,6 +1524,7 @@ MonoBehaviour:
   AttackRate: 0.5
   AttackAngle: 30
   MeleeObj: {fileID: 6815654209256148759}
+  meleeScript: {fileID: 6815654209256148758}
 --- !u!114 &6815654208747896408
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1521,7 +1521,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4887033869842233575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.787964, y: 0, z: -1.7277803}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1560,6 +1560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   playerFaceSpeed: 15
+  level: 1
   viewCone: 90
   animrTransSpeed: 3
   roamDist: 25
@@ -1581,6 +1582,7 @@ MonoBehaviour:
   ShootAngle: 30
   shootPos: {fileID: 6964127046538717290}
   bullet: {fileID: 5463603646565746171, guid: c9b12a9667af10747bd2d0d5098e5922, type: 3}
+  bulletScript: {fileID: 1918069476694107133, guid: c9b12a9667af10747bd2d0d5098e5922, type: 3}
 --- !u!114 &-161209887514638569
 MonoBehaviour:
   m_ObjectHideFlags: 0

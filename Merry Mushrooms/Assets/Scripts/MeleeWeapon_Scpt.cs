@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeleeWeapon_Scpt : MonoBehaviour
 {
-    [SerializeField] int dmg;
+    [SerializeField] public int dmg;
     void OnTriggerEnter(Collider other)
     {
         IDamage damagable = other.GetComponent<IDamage>();

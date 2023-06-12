@@ -11,6 +11,9 @@ public class Enemy___Weaponless : Enemy_Scpt
     private bool isAttacking;
     private bool canAttack = true;
 
+    [Header("------ Components ------")]
+    [SerializeField] HeadButt_Scpt headbuttScript;
+
 
     override public bool canSeePlayer()
     {
@@ -47,6 +50,7 @@ public class Enemy___Weaponless : Enemy_Scpt
     #region Shooting Functions
     IEnumerator Attack()
     {
+        SetAttackDamage();
         isAttacking = true;
         gameManager.instance.playerScript.isUnderAttack = true;
         animr.SetTrigger("HeadButtAttack");
@@ -62,6 +66,11 @@ public class Enemy___Weaponless : Enemy_Scpt
     public void HeadOff()
     {
         HeadButtObj.enabled = false;
+    }
+
+    void SetAttackDamage()
+    {
+        headbuttScript.dmg = level;
     }
     IEnumerator AttackCooldown()
     {

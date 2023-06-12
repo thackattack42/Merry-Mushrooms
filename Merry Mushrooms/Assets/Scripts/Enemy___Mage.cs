@@ -10,6 +10,7 @@ public class Enemy___Mage : Enemy_Scpt
     [Range(30, 180)][SerializeField] float ShootAngle;
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
+    [SerializeField] Bullet bulletScript;
     private bool isShooting;
     private bool canShoot = true;
 
@@ -57,7 +58,13 @@ public class Enemy___Mage : Enemy_Scpt
     }
     public void createBullet()
     {
+        SetBulletDamage();
         Instantiate(bullet, shootPos.position, transform.rotation);
+    }
+
+    void SetBulletDamage()
+    {
+        bulletScript.damage = level;
     }
 
     IEnumerator AttackCooldown()

@@ -10,8 +10,15 @@ public class Enemy___Archer : Enemy_Scpt
     [Range(30, 180)][SerializeField] float ShootAngle;
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
+    [SerializeField] Bullet bulletScript;
+    //[SerializeField] int bulletDamage;
     private bool isShooting;
     private bool canShoot = true;
+
+    private void SetBulletDamage()
+    {
+        bulletScript.damage = level;
+    }
 
     public override bool canSeePlayer()
     {
@@ -57,6 +64,7 @@ public class Enemy___Archer : Enemy_Scpt
     }
     public void createBullet()
     {
+        SetBulletDamage();
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
     IEnumerator AttackCooldown()

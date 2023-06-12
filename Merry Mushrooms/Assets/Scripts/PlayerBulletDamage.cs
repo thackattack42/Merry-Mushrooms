@@ -43,4 +43,6 @@ public class PlayerBulletDamage : MonoBehaviour
         //    damageable.takeDamage(gameManager.instance.playerScript.shootDamage);
 
     }
+
+   
 }
