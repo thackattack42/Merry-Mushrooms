@@ -637,8 +637,8 @@ GameObject:
   - component: {fileID: 6569953905408333505}
   - component: {fileID: 6569953905408333506}
   m_Layer: 6
-  m_Name: EM-Green-Weak-Melee
-  m_TagString: Ice
+  m_Name: Earth_Melee - Hard
+  m_TagString: Earth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -651,8 +651,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6569953905408333507}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6569953906761815320}
@@ -688,8 +688,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a3203339ffb4d458e3af6d46805bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  HP: 25
   playerFaceSpeed: 15
+  level: 3
   viewCone: 90
   animrTransSpeed: 3
   roamDist: 25
@@ -709,6 +710,7 @@ MonoBehaviour:
   AttackRate: 0.5
   AttackAngle: 30
   MeleeObj: {fileID: 6569953906108295063}
+  meleeScript: {fileID: 6569953906108295062}
 --- !u!114 &3805220873415868185
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -907,8 +907,8 @@ GameObject:
   - component: {fileID: 3253053944757139087}
   - component: {fileID: 4496896531998679301}
   m_Layer: 6
-  m_Name: EM-Green-Weak-Weaponless
-  m_TagString: Ice
+  m_Name: Earth_Weaponless - Medium
+  m_TagString: Earth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -921,8 +921,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5053114256516210468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.09, y: 0.00000011920929, z: -24.729908}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5053114256516170502}
@@ -958,8 +958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9e9ed425ab604468fcbb9789f3181f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  HP: 15
   playerFaceSpeed: 15
+  level: 2
   viewCone: 90
   animrTransSpeed: 3
   roamDist: 25
@@ -979,6 +980,7 @@ MonoBehaviour:
   AttackRate: 0.5
   AttackAngle: 30
   HeadButtObj: {fileID: 1193955160248379291}
+  headbuttScript: {fileID: 1193955160248379288}
 --- !u!114 &1067397441167723003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,7 +1028,7 @@ NavMeshAgent:
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 1.8
+  m_StoppingDistance: 2.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
