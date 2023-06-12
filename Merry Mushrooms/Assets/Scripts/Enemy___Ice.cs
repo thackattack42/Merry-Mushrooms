@@ -10,7 +10,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     float timer ;
     int damage;
     bool onFire;
-    bool onEarth;
+   
 
     [SerializeField] public int knockbackPower;
     private void Start()
@@ -55,7 +55,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     public void TakeEarthDamage(int dmg)
     {
         KnockBack(new Vector3(0, 0, knockbackPower));
-        onEarth = true;
+       
         enemy.HP -= dmg;
         if (enemy.HP <= 0)
         {
