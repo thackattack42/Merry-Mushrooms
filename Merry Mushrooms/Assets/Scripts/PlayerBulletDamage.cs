@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBulletDamage : MonoBehaviour
 {
+    private void Update()
+    {
+        Destroy(gameObject, 1);
+    }
     public void OnCollisionEnter(Collision collision)
     {
         if (gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].earth)
@@ -12,6 +17,7 @@ public class PlayerBulletDamage : MonoBehaviour
 
             if (earthDamage != null)
                 earthDamage.TakeEarthDamage(gameManager.instance.playerScript.shootDamage);
+            Destroy(gameObject);
         }
 
         if (gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].ice)
@@ -20,6 +26,7 @@ public class PlayerBulletDamage : MonoBehaviour
 
             if (iceDamage != null)
                 iceDamage.TakeIceDamage(gameManager.instance.playerScript.shootDamage);
+            Destroy(gameObject);
         }
         if (gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].fire)
         {
@@ -27,6 +34,7 @@ public class PlayerBulletDamage : MonoBehaviour
 
             if (fireDamge != null)
                 fireDamge.TakeFireDamage(gameManager.instance.playerScript.shootDamage);
+            Destroy(gameObject);
         }
         if (gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].baseStaff)
         {
@@ -34,9 +42,10 @@ public class PlayerBulletDamage : MonoBehaviour
 
             if (damageable != null)
                 damageable.takeDamage(gameManager.instance.playerScript.shootDamage);
+        Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+        
         //IDamage damageable = collision.gameObject.GetComponent<IDamage>();
 
         //if (damageable != null)
