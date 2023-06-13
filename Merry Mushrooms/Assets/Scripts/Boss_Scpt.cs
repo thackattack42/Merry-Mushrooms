@@ -119,7 +119,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
 
     public void AOEAttack()
     {
-        Instantiate(aoeAttack, transform.position, aoeAttack.transform.rotation);
+        Instantiate(aoeAttack, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), aoeAttack.transform.rotation);
     }
 
     public void SpawnMinions()

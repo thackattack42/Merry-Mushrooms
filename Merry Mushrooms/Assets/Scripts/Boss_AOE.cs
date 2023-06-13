@@ -20,5 +20,11 @@ public class Boss_AOE : MonoBehaviour
             Vector3 dir = other.transform.position - transform.position;
             physicsable.KnockBack(dir * pushAmount);
         }
+
+        IDamage damageable = other.GetComponent<IDamage>();
+        if (damageable != null) 
+        {
+            damageable.takeDamage(damage);        
+        }
     }
 }
