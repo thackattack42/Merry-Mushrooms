@@ -7,8 +7,8 @@ public class Boss_Phase2 : StateMachineBehaviour
 {
     Boss_Scpt boss;
     NavMeshAgent agent;
-    public int rand;
-    public float timer;
+    int rand;
+    float timer;
     public float minTime;
     public float maxTime;
 
@@ -20,10 +20,11 @@ public class Boss_Phase2 : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         agent.stoppingDistance = 10;
 
-        animator.ResetTrigger("Shoot");
-        animator.ResetTrigger("Summon Minions");
-        animator.ResetTrigger("Jump Attack");
-        animator.ResetTrigger("Idle");
+        //animator.ResetTrigger("Shoot");
+        //animator.ResetTrigger("Summon Minions");
+        //animator.ResetTrigger("Jump Attack");
+        //animator.ResetTrigger("Idle");
+        animator.ResetTrigger("Punch");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -35,43 +36,44 @@ public class Boss_Phase2 : StateMachineBehaviour
 
         }
 
-        if (agent.isActiveAndEnabled)
-        {
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                animator.SetTrigger("Idle");
-            }
-        }
+        //    if (agent.isActiveAndEnabled)
+        //    {
+        //        if (agent.remainingDistance <= agent.stoppingDistance)
+        //        {
+        //            animator.SetTrigger("Idle");
+        //        }
+        //    }
 
-        if (timer <= 0)
-        {
-            if (boss.numMinions <= 0)
-            {
-                rand = Random.Range(0, 3);
+        //    if (timer <= 0)
+        //    {
+        //        if (boss.numMinions <= 0)
+        //        {
+        //            rand = Random.Range(0, 3);
 
-                if (rand == 0)
-                    animator.SetTrigger("Jump Attack");
-                else if (rand == 1)
-                    animator.SetTrigger("Shoot");
-                else
-                    animator.SetTrigger("Summon Minions");
-            }
-            else
-            {
-                rand = Random.Range(0, 2);
-                if (rand == 0)
-                    animator.SetTrigger("Jump Attack");
-                else
-                    animator.SetTrigger("Shoot");
-            }
-        }
-        else
-            timer -= Time.deltaTime;
-    }
+        //            if (rand == 0)
+        //                animator.SetTrigger("Jump Attack");
+        //            else if (rand == 1)
+        //                animator.SetTrigger("Shoot");
+        //            else
+        //                animator.SetTrigger("Summon Minions");
+        //        }
+        //        else
+        //        {
+        //            rand = Random.Range(0, 2);
+        //            if (rand == 0)
+        //                animator.SetTrigger("Jump Attack");
+        //            else
+        //                animator.SetTrigger("Shoot");
+        //        }
+        //    }
+        //    else
+        //        timer -= Time.deltaTime;
+        //}
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
+        //// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+        //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
 
+        //}
     }
 }

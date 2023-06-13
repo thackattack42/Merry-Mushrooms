@@ -19,12 +19,24 @@ public class Boss_Jump : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if(agent.isActiveAndEnabled)
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        {
+            agent.SetDestination(gameManager.instance.player.transform.position);
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("Jump Attack");
+
+        //if (agent.isActiveAndEnabled)
+        //{
+        //    if (agent.remainingDistance < agent.stoppingDistance)
+        //    {
+        //        animator.SetTrigger("Idle");
+        //    }
+        //    else
+        //        animator.SetTrigger("Run");
+        //}
     }
 }
