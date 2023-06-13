@@ -18,7 +18,7 @@ public class Boss_Phase2 : StateMachineBehaviour
         timer = Random.Range(minTime, maxTime);
         boss = animator.GetComponent<Boss_Scpt>();
         agent = animator.GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = 10;
+        agent.stoppingDistance = 5;
 
         //animator.ResetTrigger("Shoot");
         //animator.ResetTrigger("Summon Minions");

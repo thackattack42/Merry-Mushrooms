@@ -74,6 +74,15 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
         anim.SetFloat("Speed", speed);
 
+        if (playerInRange && !canSeePlayer())
+        {
+            
+        }
+        else if (agent.destination != gameManager.instance.player.transform.position)
+        {
+            
+        }
+
         if (currHP <= (maxHP / 2))
         {
             anim.SetTrigger("Phase 2");
@@ -113,7 +122,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
             //else
             //    timer -= Time.deltaTime;
 
-            rand = Random.Range(0, 1 * Time.deltaTime);
+            rand = Random.Range(0, 60);
             if (numMinions <= 0)
             {
                 if (rand == 0)
@@ -135,22 +144,22 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     #endregion
     #region Functions
     #region Collider Enter/Exit
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        playerInRange = true;
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
 
-    //    }
-    //}
-    //public void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        //agent.stoppingDistance = 0;
-    //        playerInRange = false;
-    //    }
-    //}
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //agent.stoppingDistance = 0;
+            playerInRange = false;
+        }
+    }
     #endregion
     public void Punch()
     {
@@ -195,16 +204,15 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
                 agent.stoppingDistance = stoppingDistOrig;
-                if (agent.isActiveAndEnabled)
-                {
-                    agent.SetDestination(gameManager.instance.player.transform.position);
-                }
+                agent.SetDestination(gameManager.instance.player.transform.position);
 
                 if (agent.isActiveAndEnabled)
+                {
                     if (agent.remainingDistance < agent.stoppingDistance)
                     {
                         FacePlayer();
                     }
+                }                    
                 return true;
             }
         }

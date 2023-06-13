@@ -27,26 +27,26 @@ public class Boss_Phase_Scpts : MonoBehaviour
             {
                 phase2 = true;
             }
-            if (boss.agent.remainingDistance >= boss.agent.stoppingDistance /*&& !boss.canSeePlayer()*/)
+            if (boss.agent.remainingDistance >= boss.agent.stoppingDistance && !boss.canSeePlayer())
             {
                 boss.anim.SetTrigger("Idle");
             }
-            else if (boss.agent.remainingDistance >= boss.agent.stoppingDistance/* && boss.canSeePlayer() && !phase2*/)
+            else if (boss.agent.remainingDistance >= boss.agent.stoppingDistance && boss.canSeePlayer() && !phase2)
             {
                 boss.anim.SetTrigger("Run");
             }
-            else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance/* && boss.canSeePlayer() && !phase2*/)
+            else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance && boss.canSeePlayer() && !phase2)
             {
                 boss.anim.SetTrigger("Punch");
             }
-            else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance/* && boss.canSeePlayer() && phase2 && breath*/)
+            else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance && boss.canSeePlayer() && phase2 && breath)
             {
                 boss.anim.SetTrigger("Phase 2");
                 breath = false;
                 StartCoroutine(Idlewait());
 
             }
-            else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance/* && boss.canSeePlayer() && phase2 && !breath*/)
+            else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance && boss.canSeePlayer() && phase2 && !breath)
             {
                 
                 if (boss.numMinions <= 0)
