@@ -53,6 +53,21 @@ public class TurnOnParticle : MonoBehaviour
             _particleSystem.Play();
 
         }
+        else if (gameManager.instance.playerScript.BowEquipped && gameObject.CompareTag("FireBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].fire)
+        {
+            _particleSystem.Play();
+
+        }
+        else if (gameManager.instance.playerScript.BowEquipped && gameObject.CompareTag("IceBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].ice)
+        {
+            _particleSystem.Play();
+
+        }
+        else if (gameManager.instance.playerScript.BowEquipped && gameObject.CompareTag("EarthBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].earth)
+        {
+            _particleSystem.Play();
+
+        }
         else
         {
 
