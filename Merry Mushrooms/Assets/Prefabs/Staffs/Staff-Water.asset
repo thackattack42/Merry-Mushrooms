@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5916e12e294a590459a1cf367ba17057, type: 3}
+  m_Name: Staff-Water
+  m_EditorClassIdentifier: 
+  shootDistance: 60
+  shootRate: 0.7
+  shootDamage: 3
+  model: {fileID: 3098176644952511447, guid: a98b368146adbf941810842af44053bf, type: 3}
+  hitEffect: {fileID: 0}
+  BulletToShoot: {fileID: 6224293926236972151, guid: 46109772de6bd424bb63806ad82b5cac, type: 3}
+  muzzleEffect: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
+  shootSound: {fileID: 8300000, guid: 681616feff254fc47954e81052486e70, type: 3}
+  shootVol: 2
+  ammoClip: 5
+  ammoReserves: 100
+  origAmmo: 5
+  origAmmoReserves: 100
+  fire: 0
+  ice: 1
+  earth: 0
+  baseStaff: 0

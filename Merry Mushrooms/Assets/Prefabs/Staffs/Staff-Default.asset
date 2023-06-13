@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5916e12e294a590459a1cf367ba17057, type: 3}
+  m_Name: Staff-Default
+  m_EditorClassIdentifier: 
+  shootDistance: 40
+  shootRate: 0.3
+  shootDamage: 1
+  model: {fileID: 3157273356674643292, guid: fe419461d3b477f4697669bbd929c0bb, type: 3}
+  hitEffect: {fileID: 4535006216103734310, guid: 98c4704d0fd7211449bcf5c451095a60, type: 3}
+  BulletToShoot: {fileID: 2872036455639188616, guid: 9450518a5e37eef4cad2fe4a1a0e545d, type: 3}
+  muzzleEffect: {fileID: 2965222256817593503, guid: a164e676dbbd6e54587237e619372c98, type: 3}
+  shootSound: {fileID: 8300000, guid: 06ada5590eba8d6489b36c6f3c54ff78, type: 3}
+  shootVol: 2
+  ammoClip: -639
+  ammoReserves: 400
+  origAmmo: 10
+  origAmmoReserves: 400
+  fire: 0
+  ice: 0
+  earth: 0
+  baseStaff: 1
