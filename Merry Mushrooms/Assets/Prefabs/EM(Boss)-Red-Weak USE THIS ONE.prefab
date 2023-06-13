@@ -1257,7 +1257,6 @@ GameObject:
   - component: {fileID: 4088644508943652478}
   - component: {fileID: 3362591850295348508}
   - component: {fileID: 4592515802600891475}
-  - component: {fileID: 3163763719191756886}
   - component: {fileID: 4088644508951044891}
   - component: {fileID: 3163763719191756887}
   - component: {fileID: 6032755816205093979}
@@ -1357,7 +1356,7 @@ MonoBehaviour:
   playerFaceSpeed: 100
   viewCone: 180
   anim: {fileID: 4088644508943652478}
-  animrTransSpeed: 0
+  animrTransSpeed: 3
   model: {fileID: 4088644508939577534}
   punchPos: {fileID: 8976716524614112991}
   agent: {fileID: 4088644508951044891}
@@ -1371,6 +1370,8 @@ MonoBehaviour:
   stoppingDistOrig: 0
   angleToPlayer: 0
   teleporter: {fileID: 1538656381750801956, guid: 0f0aa7dfcccea3443afa4466d44c6017, type: 3}
+  minTime: 1
+  maxTime: 2
 --- !u!114 &4592515802600891475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1384,19 +1385,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockbackPower: 0
---- !u!114 &3163763719191756886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4088644508951078384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a57f7f50f74fce479b6bcb1102e8c2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rand: 0
 --- !u!195 &4088644508951044891
 NavMeshAgent:
   m_ObjectHideFlags: 0
