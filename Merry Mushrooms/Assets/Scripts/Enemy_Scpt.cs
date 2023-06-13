@@ -82,9 +82,11 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     #region If Hit Color Flash
     public IEnumerator FlashHitColor() //flash when the enemy is hit
     {
+        animr.SetTrigger("Damaged");
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = origColor;
+        animr.ResetTrigger("Damaged");
     }
     #endregion
     #region Collider Enter/Exit
