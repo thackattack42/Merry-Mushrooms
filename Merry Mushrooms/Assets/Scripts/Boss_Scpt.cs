@@ -15,8 +15,8 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     //int numberSpawnedd;
     //bool isSpawningg;
     [Header("----- Boss Stats -----")]
-    [SerializeField] int maxHP;
-    [SerializeField] int currHP;
+    [SerializeField] public int maxHP;
+    [SerializeField] public int currHP;
     [SerializeField] int projectileDamage;
     [SerializeField] int punchDamage;
     [SerializeField] int AOEDamage;
@@ -26,10 +26,11 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     public int viewCone;
 
     [Header("----- Boss Components -----")]
-    [SerializeField] Animator anim;
+    [SerializeField] public Animator anim;
+    public float animrTransSpeed;
     [SerializeField] Renderer model;
     [SerializeField] Transform punchPos;
-    [SerializeField] NavMeshAgent agent;
+    [SerializeField] public NavMeshAgent agent;
     [SerializeField] Transform shootPos;
     [SerializeField] public Transform headPos;
     [SerializeField] GameObject bullet;
@@ -43,6 +44,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     public float angleToPlayer;
     [SerializeField] public GameObject teleporter;
     Color origColor;
+    float speed;
 
 
     #endregion
@@ -64,17 +66,20 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         // Update is called once per frame
     private void Update()
     {
-        if (currHP <= (maxHP / 2))
-        {
-            anim.SetTrigger("Phase 2");
-        }
+        speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
+        anim.SetFloat("Speed", speed);
+
+        //if (currHP <= (maxHP / 2))
+        //{
+        //    anim.SetTrigger("Phase 2");
+        //}
         if (playerInRange && !canSeePlayer())
         {
-            //StartCoroutine(Roam());
+            
         }
         else if (agent.destination != gameManager.instance.player.transform.position)
         {
-            //StartCoroutine(Roam());
+           
         }
         //if (agent.remainingDistance < agent.stoppingDistance)
         //{
