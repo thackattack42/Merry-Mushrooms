@@ -7,10 +7,14 @@ public class Enemy___Fire : MonoBehaviour, IEarthDamage, IIceDamage, IFireDamage
 {
     Enemy_Scpt enemy;
 
+    float origSpeed;
+    NavMeshAgent agent;
     [SerializeField] public int knockbackPower;
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         enemy = GetComponent<Enemy_Scpt>();
+        origSpeed = agent.speed;
     }
     public void TakeEarthDamage(int dmg)
     {
@@ -40,6 +44,8 @@ public class Enemy___Fire : MonoBehaviour, IEarthDamage, IIceDamage, IFireDamage
     {
         enemy.HP -= dmg / 2;
 
+
+        StartCoroutine(SlowDownCoolDown());
         if (enemy.HP <= 0)
         {
             enemy.animr.SetBool("Death", true);
@@ -76,5 +82,16 @@ public class Enemy___Fire : MonoBehaviour, IEarthDamage, IIceDamage, IFireDamage
             enemy.agent.SetDestination(gameManager.instance.player.transform.position);
             StartCoroutine(enemy.FlashHitColor());
         }
+    }
+
+    IEnumerator SlowDownCoolDown()
+    {
+
+        agent.speed /= 2;
+
+        yield return new WaitForSeconds(3);
+
+        
+        agent.speed = origSpeed;
     }
 }
