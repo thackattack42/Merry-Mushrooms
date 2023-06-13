@@ -22,6 +22,7 @@ public class Boss_Idle : StateMachineBehaviour
         animator.ResetTrigger("Shoot");
         animator.ResetTrigger("Summon Minions");
         animator.ResetTrigger("Jump Attack");
+        animator.ResetTrigger("Run");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -29,41 +30,41 @@ public class Boss_Idle : StateMachineBehaviour
     {
         if (agent.isActiveAndEnabled)
         {
-            if (agent.remainingDistance >= agent.stoppingDistance)
+            if (agent.remainingDistance > agent.stoppingDistance)
             {
                 animator.SetTrigger("Run");
             }
-        }
 
-        if (timer <= 0)
-        {
-            if (boss.numMinions <= 0)
+            else if (timer <= 0)
             {
-                rand = Random.Range(0, 3);
+                if (boss.numMinions <= 0)
+                {
+                    rand = Random.Range(0, 3);
 
-                if (rand == 0)
-                    animator.SetTrigger("Jump Attack");
-                else if (rand == 1)
-                    animator.SetTrigger("Shoot");
+                    if (rand == 0)
+                        animator.SetTrigger("Jump Attack");
+                    else if (rand == 1)
+                        animator.SetTrigger("Shoot");
+                    else
+                        animator.SetTrigger("Summon Minions");
+                }
                 else
-                    animator.SetTrigger("Summon Minions");
+                {
+                    rand = Random.Range(0, 2);
+                    if (rand == 0)
+                        animator.SetTrigger("Jump Attack");
+                    else
+                        animator.SetTrigger("Shoot");
+                }
             }
             else
-            {
-                rand = Random.Range(0, 2);
-                if (rand == 0)
-                    animator.SetTrigger("Jump Attack");
-                else
-                    animator.SetTrigger("Shoot");
-            }
+                timer -= Time.deltaTime;
         }
-        else
-            timer -= Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        animator.ResetTrigger("Idle");
     }
 }

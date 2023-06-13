@@ -28,7 +28,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     }
     public void KnockBack(Vector3 dir)
     {
-        //GetComponent<NavMeshAgent>().velocity += dir;
+        GetComponent<NavMeshAgent>().velocity += dir;
     }
     public void TakeFireDamage(int dmg)
     {

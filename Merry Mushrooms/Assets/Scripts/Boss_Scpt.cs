@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +23,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     [SerializeField] int AOEDamage;
     [SerializeField] public int numMinions;
     [SerializeField] public int maxMinions;
-    [Range(5, 100)][SerializeField] int playerFaceSpeed;
+    [Range(5, 100)][SerializeField] public int playerFaceSpeed;
     public int viewCone;
 
     [Header("----- Boss Components -----")]
@@ -45,6 +46,10 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     [SerializeField] public GameObject teleporter;
     Color origColor;
     float speed;
+    float rand;
+    float timer;
+    public float minTime;
+    public float maxTime;
 
 
     #endregion
@@ -69,47 +74,87 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
         anim.SetFloat("Speed", speed);
 
-        //if (currHP <= (maxHP / 2))
-        //{
-        //    anim.SetTrigger("Phase 2");
-        //}
-        if (playerInRange && !canSeePlayer())
+        if (currHP <= (maxHP / 2))
         {
-            
+            anim.SetTrigger("Phase 2");
         }
-        else if (agent.destination != gameManager.instance.player.transform.position)
+
+        if (!anim.GetBool("Phase 2"))
         {
-           
+            if (agent.remainingDistance < agent.stoppingDistance)
+                anim.SetTrigger("Punch");
         }
-        //if (agent.remainingDistance < agent.stoppingDistance)
-        //{
-        //    FacePlayer();
-        //}
+        else if (anim.GetBool("Phase 2"))
+        {
+            //timer = Random.Range(minTime, maxTime);
+
+            //if (timer <= 0)
+            //{
+            //    if (numMinions <= 0)
+            //    {
+            //        rand = Random.Range(0, 3);
+
+            //        if (rand == 0)
+            //            anim.SetTrigger("Jump Attack");
+            //        else if (rand == 1)
+            //            anim.SetTrigger("Shoot");
+            //        else
+            //            anim.SetTrigger("Summon Minions");
+            //    }
+            //    else
+            //    {
+            //        rand = Random.Range(0, 2);
+            //        if (rand == 0)
+            //            anim.SetTrigger("Jump Attack");
+            //        else
+            //            anim.SetTrigger("Shoot");
+            //    }
+            //}
+            //else
+            //    timer -= Time.deltaTime;
+
+            rand = Random.Range(0, 1 * Time.deltaTime);
+            if (numMinions <= 0)
+            {
+                if (rand == 0)
+                    anim.SetTrigger("Jump Attack");
+                else if (rand == 1)
+                    anim.SetTrigger("Summon Minions");
+                else if (rand == 2)
+                    anim.SetTrigger("Shoot");
+            }
+            else
+            {
+                if (rand == 0)
+                    anim.SetTrigger("Jump Attack");
+                else if (rand == 1)
+                    anim.SetTrigger("Shoot");
+            }
+        }
     }
     #endregion
     #region Functions
     #region Collider Enter/Exit
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        playerInRange = true;
 
-        }
-    }
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            //agent.stoppingDistance = 0;
-            playerInRange = false;
-        }
-    }
+    //    }
+    //}
+    //public void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        //agent.stoppingDistance = 0;
+    //        playerInRange = false;
+    //    }
+    //}
     #endregion
     public void Punch()
     {
         punchPos.GetComponent<SphereCollider>().enabled = true;
-        //Collider[] collider = Physics.OverlapCapsule(new Vector3(punchPos.position.x, punchPos.position.y, punchPos.position.z), gameManager.instance.player.transform.position, agent.stoppingDistance);
     }
 
     public void StopPunch()
@@ -158,7 +203,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
                 if (agent.isActiveAndEnabled)
                     if (agent.remainingDistance < agent.stoppingDistance)
                     {
-                        
                         FacePlayer();
                     }
                 return true;
