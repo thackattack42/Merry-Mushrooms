@@ -46,55 +46,56 @@ public class Boss_Phase_Scpts : MonoBehaviour
                 StartCoroutine(Idlewait());
 
             }
-            else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance && boss.canSeePlayer() && phase2 && !breath)
-            {
-                
-                if (boss.numMinions <= 0)
-                {
-                    if (rand == 0)
-                    {
-                        boss.anim.SetTrigger("Jump Attack");
-                        //StartCoroutine(Idlewait());
-                    }
-                    else if (rand == 1)
-                    {
-                        boss.anim.SetTrigger("Shoot");
-                        //StartCoroutine(Idlewait());
-                    }
-                    else
-                    {
-                        boss.anim.SetTrigger("Summon Minions");
-                        //StartCoroutine(Idlewait());
-                    }
+            //        else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance && boss.canSeePlayer() && phase2 && !breath)
+            //        {
 
-                }
-                else
-                {
-                    if (rand == 0)
-                    {
-                        boss.anim.SetTrigger("Jump Attack");
-                        //StartCoroutine(Idlewait());
-                    }
-                    else
-                    {
-                        boss.anim.SetTrigger("Shoot");
-                        //StartCoroutine(Idlewait());
-                    }
-                }
-                StartCoroutine(Idlewait());
-            }
+            //            if (boss.numMinions <= 0)
+            //            {
+            //                if (rand == 0)
+            //                {
+            //                    boss.anim.SetTrigger("Jump Attack");
+            //                    //StartCoroutine(Idlewait());
+            //                }
+            //                else if (rand == 1)
+            //                {
+            //                    boss.anim.SetTrigger("Shoot");
+            //                    //StartCoroutine(Idlewait());
+            //                }
+            //                else
+            //                {
+            //                    boss.anim.SetTrigger("Summon Minions");
+            //                    //StartCoroutine(Idlewait());
+            //                }
+
+            //            }
+            //            else
+            //            {
+            //                if (rand == 0)
+            //                {
+            //                    boss.anim.SetTrigger("Jump Attack");
+            //                    //StartCoroutine(Idlewait());
+            //                }
+            //                else
+            //                {
+            //                    boss.anim.SetTrigger("Shoot");
+            //                    //StartCoroutine(Idlewait());
+            //                }
+            //            }
+            //            StartCoroutine(Idlewait());
+            //        }
+            //    }
+
         }
-        
-    }
-    IEnumerator Idlewait()
-    {
-        boss.anim.SetTrigger("Run");
-        yield return new WaitForSeconds(2);
-        rand = Random.Range(0, 3);
-        boss.anim.ResetTrigger("Punch");
-        boss.anim.ResetTrigger("Jump Attack");
-        boss.anim.ResetTrigger("Shoot");
-        boss.anim.ResetTrigger("Summon Minions");
+        IEnumerator Idlewait()
+        {
+            boss.anim.SetTrigger("Run");
+            yield return new WaitForSeconds(2);
+            rand = Random.Range(0, 3);
+            boss.anim.ResetTrigger("Punch");
+            boss.anim.ResetTrigger("Jump Attack");
+            boss.anim.ResetTrigger("Shoot");
+            boss.anim.ResetTrigger("Summon Minions");
+        }
     }
 }
 
