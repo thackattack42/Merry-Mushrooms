@@ -47,7 +47,6 @@ public class gameManager : MonoBehaviour
     public AudioMixer MusicSlider;
     public Music musicScript;
     public Image dmgFlash;
-    public GameObject loadingScreen;
     public GameObject Inventory;
     public InventoryManager invManager;
     public TextMeshProUGUI PlayerLevelCounter;
@@ -87,7 +86,7 @@ public class gameManager : MonoBehaviour
         //Staff = GameObject.FindGameObjectWithTag("Staff");
         //weaponSelectMenu.SetActive(true);
         //activeMenu = weaponSelectMenu;
-        //loadingScreen.SetActive(true);
+
     }
     
     IEnumerator StartSelection()
@@ -103,35 +102,24 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (loadingScreen.activeSelf == true)
+        if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
-            loadTimer -= Time.deltaTime;
-            if (loadTimer <= 0)
-            {
-                loadingScreen.SetActive(false);
-            }
+            isPaused = !isPaused;
+            activeMenu = pauseMenu;
+            activeMenu.SetActive(isPaused);
+            PauseState();
         }
-        else
+        if (Input.GetButtonDown("Tab"))
         {
-            if (Input.GetButtonDown("Cancel") && activeMenu == null)
-            {
-                isPaused = !isPaused;
-                activeMenu = pauseMenu;
-                activeMenu.SetActive(isPaused);
+            InvToggle = !InvToggle;
+            activeMenu = Inventory;
+            Inventory.SetActive(InvToggle);
+            if (InvToggle)
                 PauseState();
-            }
-            if (Input.GetButtonDown("Tab"))
+            else
             {
-                InvToggle = !InvToggle;
-                activeMenu = Inventory;
-                Inventory.SetActive(InvToggle);
-                if (InvToggle)
-                    PauseState();
-                else
-                {
-                    UnpausedState();
-                    invManager.updated = false;
-                }
+                UnpausedState();
+                invManager.updated = false;
             }
         }
     }

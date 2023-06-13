@@ -5,8 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UIElements.Button;
 
 public class buttonFunctions : MonoBehaviour
 {
@@ -15,19 +13,21 @@ public class buttonFunctions : MonoBehaviour
     public AudioClip MenuButtonClick;
     public AudioClip MenuSelection;
     [SerializeField] GameObject skillTree;
-    [SerializeField] public GameObject fireButton;
-    [SerializeField] public GameObject iceButton;
-    [SerializeField] public GameObject earthButton;
-    [SerializeField] public SwordStats fireSword;
-    [SerializeField] public SwordStats iceSword;
-    [SerializeField] public SwordStats earthSword;
-    [SerializeField] public Staff_Stats fireStaff;
-    [SerializeField] public Staff_Stats iceStaff;
-    [SerializeField] public Staff_Stats earthStaff;
-    [SerializeField] public BowStats fireBow;
-    [SerializeField] public BowStats iceBow;
-    [SerializeField] public BowStats earthBow;
-    [SerializeField] public AudioClip SFXTest;
+    public GameObject fireButton;
+    public GameObject iceButton;
+    public GameObject earthButton;
+    public SwordStats fireSword;
+    public SwordStats iceSword;
+    public SwordStats earthSword;
+    public Staff_Stats fireStaff;
+    public Staff_Stats iceStaff;
+    public Staff_Stats earthStaff;
+    public BowStats fireBow;
+    public BowStats iceBow;
+    public BowStats earthBow;
+    public AudioClip SFXTest;
+    public GameObject LoadingScreen;
+    public Image LoadingBar;
 
     public void resume()
     {
@@ -38,7 +38,7 @@ public class buttonFunctions : MonoBehaviour
     {
         UIAudio.PlayOneShot(MenuButtonClick);
         gameManager.instance.UnpausedState();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
     }
     public void quit()
     {
@@ -54,7 +54,7 @@ public class buttonFunctions : MonoBehaviour
     public void startGame()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        SceneManager.LoadScene(1);
+        StartCoroutine(LoadSceneAsync(1));
     }
     public void options()
     {
@@ -81,13 +81,24 @@ public class buttonFunctions : MonoBehaviour
     public void mainMenu()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        SceneManager.LoadScene(0);
+        StartCoroutine(LoadSceneAsync(0));
     }
     public void PlaySelection()
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || 
             Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow))
             UIAudio.PlayOneShot(MenuSelection);
+    }
+
+    IEnumerator LoadSceneAsync(int id)
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(id);
+        LoadingScreen.SetActive(true);
+        while (!op.isDone)
+        {
+            LoadingBar.fillAmount = Mathf.Clamp01(op.progress / 0.9f);
+            yield return null;
+        }
     }
 
     //Option buttons
