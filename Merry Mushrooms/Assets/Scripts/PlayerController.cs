@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] public int maxHP;
     [SerializeField] public int maxMP;
     [SerializeField] public int HP;
-    [SerializeField] public int MP;
+    [SerializeField] public float MP;
     [SerializeField] public int level;
     [SerializeField] public int currExp;
     [SerializeField] public int expToNextLevel;
@@ -151,7 +151,9 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
         if (gameManager.instance.activeMenu == null)
         {
-            
+
+            MP = Mathf.MoveTowards(MP, maxMP, Time.deltaTime);
+            gameManager.instance.playerHUD.updatePlayerMana();
             OnPlayerCrouch();
             OnPlayerUncrouch();
             Movement();
@@ -227,7 +229,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             }
             period += UnityEngine.Time.deltaTime;
         }
-
+       
         Sprint();
         CrouchPlayer();
     }
@@ -376,8 +378,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             //staffList[selectedStaff].ammoClip--;
             
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
-           
-
+            MP--;
+        
 
 
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -401,7 +403,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
             
         //}
-        //gameManager.instance.UpdateAmmoCount();
+        gameManager.instance.playerHUD.updatePlayerMana();
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -451,7 +453,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
        
             aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
-
+        if (BowList[selectedBow].fire || BowList[selectedBow].ice || BowList[selectedBow].earth)
+        {
+            MP--;
+        }
 
 
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -476,7 +481,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
 
         //}
-       // gameManager.instance.UpdateAmmoCount();
+       gameManager.instance.playerHUD.updatePlayerMana();
         yield return new WaitForSeconds(bowShootRate);
         //isShooting = false;
 

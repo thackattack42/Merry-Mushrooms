@@ -104,7 +104,7 @@ public class PlayerHUD : MonoBehaviour
         float currMP = gameManager.instance.playerScript.MP;
         if (currMP < 0) 
             currMP = 0;
-        gameManager.instance.manaPoints.text = currMP.ToString();
+        gameManager.instance.manaPoints.text = Mathf.RoundToInt(currMP).ToString();
         gameManager.instance.MPSlider.fillAmount = (float)currMP / maxPlayerMP;
         
     }
