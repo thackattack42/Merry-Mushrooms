@@ -28,7 +28,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     }
     public void KnockBack(Vector3 dir)
     {
-        GetComponent<NavMeshAgent>().velocity += dir;
+        //GetComponent<NavMeshAgent>().velocity += dir;
     }
     public void TakeFireDamage(int dmg)
     {
@@ -36,6 +36,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
         onFire = true;
         damage = dmg;
         StartCoroutine(FireDamageTime());
+        StartCoroutine(WaitForThing());
         if (enemy.HP <= 0 && !onFire)
         {
             enemy.animr.SetBool("Death", true);
@@ -63,6 +64,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
             enemy.agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(enemy.EnemyDespawn());
+           
         }
         else
         {
@@ -125,13 +127,14 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
 
         }
         yield return new WaitForSeconds(3);
+        
+    }
+    IEnumerator WaitForThing()
+    {
+        yield return new WaitForSeconds(3);
         if(onFire)
         {
             onFire = false;
         }
-    
-        
-
-
     }
-}
+    }
