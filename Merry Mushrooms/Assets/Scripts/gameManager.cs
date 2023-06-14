@@ -89,6 +89,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerHUD = player.GetComponent<PlayerHUD>();
+        isPaused = false;
         //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
 
         //if (playerSpawnPos == null)
