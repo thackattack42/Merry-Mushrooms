@@ -103,6 +103,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     private int isDashing;
     public float timer;
     public bool isUnderAttack;
+    public bool onFire;
+    public bool onIce;
+    public bool onFiref;
+    
     
    
     
