@@ -86,8 +86,8 @@ public class InventoryManager : MonoBehaviour
                     itemInSlot.stackCount--;
                     if (itemInSlot.stackCount < 1)
                     {
-                        Destroy(itemInSlot);
-                        //Destroy(item);
+                        Destroy(itemInSlot.gameObject);
+                        
                     }
                     itemInSlot.UpdateStack();
                     return true;
@@ -101,7 +101,7 @@ public class InventoryManager : MonoBehaviour
                 InventoryDraggableItem itemInSlot = InventorySlots[i].GetComponentInChildren<InventoryDraggableItem>();
                 if (itemInSlot != null && itemInSlot.item == item)
                 {
-                    Destroy(itemInSlot);
+                    Destroy(itemInSlot.gameObject);
                     return true;
                 }
             }
