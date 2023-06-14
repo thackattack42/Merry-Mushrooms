@@ -145,6 +145,7 @@ public class gameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         isPaused = false;
+        InvToggle = false;
 
         activeMenu.SetActive(false);
         activeMenu = null;
@@ -168,10 +169,10 @@ public class gameManager : MonoBehaviour
     {
         enemiesRemaining += amount;
 
-        //if (enemiesRemaining <= 0)
-        //{
-        //    teleporter.SetActive(true);
-        //}
+       if (enemiesRemaining <= 0) 
+        {
+            StartCoroutine(YouWin());
+        }
     }
 
     public IEnumerator YouWin()

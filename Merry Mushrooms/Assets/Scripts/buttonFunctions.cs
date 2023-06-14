@@ -150,6 +150,12 @@ public class buttonFunctions : MonoBehaviour
             gameManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
     }
 
+    public void NextLevel()
+    {
+        UIAudio.PlayOneShot(MenuButtonClick);
+        StartCoroutine(LoadSceneAsync(2));
+    }
+
     //Credits Buttons
     public void creditsBack()
     {
