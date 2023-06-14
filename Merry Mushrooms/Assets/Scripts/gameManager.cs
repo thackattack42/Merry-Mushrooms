@@ -100,6 +100,7 @@ public class gameManager : MonoBehaviour
         loadTimer = 3;
 
         StartCoroutine(StartSelection());
+        playerScript.SpawnOnLoad();
     }
     
     IEnumerator StartSelection()

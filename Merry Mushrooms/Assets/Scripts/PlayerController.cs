@@ -620,6 +620,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         gameManager.instance.playerHUD.updatePlayerHealth(0);
     }
 
+    public void SpawnOnLoad()
+    {
+        controller.enabled = false;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        transform.rotation = gameManager.instance.playerSpawnPos.transform.rotation;
+        controller.enabled = true;
+    }
     public void KnockBack(Vector3 dir)
     {
         pushBack += dir;
