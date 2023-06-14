@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEditor.ShaderKeywordFilter;
 
-public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     public Item item;
     public TextMeshProUGUI countText;
@@ -41,9 +41,9 @@ public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
         transform.SetAsLastSibling();
         img.raycastTarget = false;
 
-        //if (Input.GetMouseButtonDown(1))
+        //if (eventData.button == PointerEventData.InputButton.Right)
         //{
-           
+            
         //}
     }
 
@@ -57,14 +57,15 @@ public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
         transform.SetParent(newParent);
         img.raycastTarget = true;
     }
-    public void OnMouseOver()
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonDown(1))
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("RightClickTest");
-            if (item.sprite == HealthPot)
+
+            if (img.sprite == HealthPot && gameManager.instance.playerScript.HP !>= gameManager.instance.playerScript.maxHP)
             {
-                Debug.Log("HealthTest");
+
                 gameManager.instance.playerScript.takeDamage(-30);
                 if (gameManager.instance.playerScript.HP > gameManager.instance.playerScript.maxHP)
                 {
@@ -73,19 +74,17 @@ public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
                 }
                 gameManager.instance.invManager.RemoveItem(item);
             }
-            else if (item.sprite = ManaPot)
+            else if (img.sprite == ManaPot && gameManager.instance.playerScript.MP !>= gameManager.instance.playerScript.maxMP)
             {
-                Debug.Log("ManaTest");
+
                 gameManager.instance.playerScript.MP += 50;
-                gameManager.instance.playerHUD.updatePlayerMana();
                 if (gameManager.instance.playerScript.MP > gameManager.instance.playerScript.maxMP)
                 {
                     gameManager.instance.playerScript.MP = gameManager.instance.playerScript.maxMP;
-
                 }
+                gameManager.instance.playerHUD.updatePlayerMana();
                 gameManager.instance.invManager.RemoveItem(item);
             }
         }
     }
-
 }
