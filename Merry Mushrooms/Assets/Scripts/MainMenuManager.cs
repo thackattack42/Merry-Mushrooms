@@ -13,6 +13,9 @@ public class MainMenuManager : MonoBehaviour
     public GameObject creditsScreen;
     public AudioMixer SFXSlider;
     public AudioMixer MusicSlider;
+    GameObject Player;
+    GameObject UI;
+    public bool playerInScene;
 
     float loadTimer;
 
@@ -21,7 +24,14 @@ public class MainMenuManager : MonoBehaviour
     {
         instance = this;
         Time.timeScale = 1;
-        
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+            UI = GameObject.FindGameObjectWithTag("UI");
+            Player.SetActive(false);
+            UI.SetActive(false);
+            playerInScene = true;
+        }
     }
 
     // Update is called once per frame
@@ -29,5 +39,13 @@ public class MainMenuManager : MonoBehaviour
     {
         
     }
-
+    public void PlayAgain()
+    {
+        if (playerInScene)
+        {
+            Player.SetActive(true);
+            UI.SetActive(true);
+            gameManager.instance.buttons.LoadingScreen.SetActive(false);
+        }
+    }
 }
