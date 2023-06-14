@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 496446027071114879}
-  - component: {fileID: 3552412278540471662}
+  - component: {fileID: 8478135959628016643}
   - component: {fileID: 5549779828478751024}
   m_Layer: 10
   m_Name: Boss Spawner
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3552412278540471662
+--- !u!114 &8478135959628016643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,21 +43,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172221048297955538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2880dce5268703e4ebb75c4435d97fb9, type: 3}
+  m_Script: {fileID: 11500000, guid: e45f14ade1939a843b1fc7ac967e0c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn:
-  - {fileID: 1826170580222476799, guid: 96d93b059d4326041a505360c17a16ef, type: 3}
-  - {fileID: 2199458785256702277, guid: 5fe6ba703c46b4e46b2c4fb7d1cdd732, type: 3}
-  - {fileID: 8667295360013802714, guid: 57041bf35fcfb2a4b83a5d7b377f821a, type: 3}
-  - {fileID: 2402034563426647021, guid: bb1d6de6cc2d1324b914f99cb1c53f0e, type: 3}
+  - {fileID: 4088644508951078384, guid: 0886d44c365ef2b4484131836a681573, type: 3}
   spawnPos:
   - {fileID: 6039290028764653104}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  spawnDelay: 2
-  spawnCount: 4
+  spawnDelay: 0
+  spawnCount: 1
 --- !u!135 &5549779828478751024
 SphereCollider:
   m_ObjectHideFlags: 0
