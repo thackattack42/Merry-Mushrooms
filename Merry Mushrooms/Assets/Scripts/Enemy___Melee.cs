@@ -54,6 +54,11 @@ public class Enemy___Melee : Enemy_Scpt
         isAttacking = true;
         gameManager.instance.playerScript.isUnderAttack = true;
         animr.SetTrigger("MeleeAttack");
+        if (audShoot.Length != 0)
+        {
+            aud.PlayOneShot(audShoot[0], audShootVol);
+
+        }
         yield return new WaitForSeconds(AttackRate);
         gameManager.instance.playerScript.isUnderAttack = false;
         isAttacking = false;

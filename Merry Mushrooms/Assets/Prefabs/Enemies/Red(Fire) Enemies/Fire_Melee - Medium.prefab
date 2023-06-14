@@ -696,9 +696,9 @@ MonoBehaviour:
   headPos: {fileID: 4459998285376059363}
   animr: {fileID: 4459998283899344362}
   aud: {fileID: 4459998283899344366}
-  spawnParticle: {fileID: 198938402097657526, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
-  audShoot: []
-  audShootVol: 0
+  audShoot:
+  - {fileID: 8300000, guid: 782d732985575f54b838e97de783c52f, type: 3}
+  audShootVol: 4
   playerDir: {x: 0, y: 0, z: 0}
   playerInRange: 0
   angleToPlayer: 0
@@ -720,6 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6547c2cfe905f74480134c866ffacef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackPower: 0
 --- !u!95 &4459998283899344362
 Animator:
   serializedVersion: 5
@@ -799,7 +800,7 @@ AudioSource:
   m_GameObject: {fileID: 4459998283899344367}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 154978e52ec9f0445a1882bdf10e4a88, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
