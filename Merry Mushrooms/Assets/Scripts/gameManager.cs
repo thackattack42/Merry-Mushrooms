@@ -54,6 +54,7 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI PlayerExpNumber;
     public Image ExpBarSlider;
     public GameObject shopMenu;
+    public buttonFunctions buttons;
     bool InvToggle;
     [Header("-----Player Pickups-----")]
     //public GameObject Sword;
@@ -110,7 +111,7 @@ public class gameManager : MonoBehaviour
             activeMenu.SetActive(isPaused);
             PauseState();
         }
-        if (Input.GetButtonDown("Tab"))
+        if (Input.GetButtonDown("Tab") && activeMenu == null)
         {
             InvToggle = !InvToggle;
             activeMenu = Inventory;

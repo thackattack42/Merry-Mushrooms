@@ -24,12 +24,12 @@ public class NPCTextBubbles : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             transform.rotation = gameManager.instance.player.transform.rotation;
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) && gameManager.instance.activeMenu == null)
             {
                 gameManager.instance.isPaused = !gameManager.instance.isPaused;
+                gameManager.instance.activeMenu = gameManager.instance.shopMenu;
+                gameManager.instance.activeMenu.SetActive(gameManager.instance.isPaused);
                 gameManager.instance.PauseState();
-                //gameManager.instance.activeMenu = gameManager.
-
             }
         }
     }
