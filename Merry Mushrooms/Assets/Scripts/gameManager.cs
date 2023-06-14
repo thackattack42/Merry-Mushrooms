@@ -83,7 +83,7 @@ public class gameManager : MonoBehaviour
         DontDestroyOnLoad(this.transform.parent);
     }
 
-    void RefreshGameManager()
+    public void RefreshGameManager()
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
@@ -91,10 +91,10 @@ public class gameManager : MonoBehaviour
         playerHUD = player.GetComponent<PlayerHUD>();
         //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
 
-        if (playerSpawnPos == null)
-        {
+        //if (playerSpawnPos == null)
+        //{
             playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-        }
+       // }
 
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;

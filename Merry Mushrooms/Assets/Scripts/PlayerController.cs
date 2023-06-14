@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 {
+    static PlayerController pc;
 
     private Vector3 playerVelocity;
     private Vector3 move;
@@ -140,17 +141,27 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     private void Start()
     {
         // Sets original variables to players starting stats
-        origSpeed = playerSpeed;
-        controller.height = 2.0f;
-        origHeight = controller.height;
-        HP = maxHP;
-        holdingShield = false;
-        statusEffects = new Dictionary<string, StatusEffectData>();
+        if(pc == null)
+        {
+            pc = this;
+            origSpeed = playerSpeed;
+            Spawn();
+            controller.height = 2.0f;
+            origHeight = controller.height;
+            HP = maxHP;
+            holdingShield = false;
+            statusEffects = new Dictionary<string, StatusEffectData>();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
         //gameManager.instance.playerSpawnPos = this.gameObject;
 
         // Spawns Player
         DontDestroyOnLoad(gameObject);
-        Spawn();
+        
     }
 
     void Update()
