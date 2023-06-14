@@ -14,7 +14,12 @@ public class PlayerBulletDamage : MonoBehaviour
         if (gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].earth)
         {
             IEarthDamage earthDamage = collision.gameObject.GetComponent<IEarthDamage>();
-
+            IPhysics physicsable = collision.gameObject.GetComponent<IPhysics>();
+            if (physicsable != null)
+            {
+                Vector3 dir = collision.transform.position - transform.position;
+                physicsable.KnockBack(dir * gameManager.instance.playerScript.knockbackPower);
+            }
             if (earthDamage != null)
                 earthDamage.TakeEarthDamage(gameManager.instance.playerScript.shootDamage);
             Destroy(gameObject);

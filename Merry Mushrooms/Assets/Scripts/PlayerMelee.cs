@@ -57,8 +57,12 @@ public class PlayerMelee : MonoBehaviour
         if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
         {
             IEarthDamage earthDamage = other.gameObject.GetComponent<IEarthDamage>();
-
-            
+            IPhysics physicsable = other.gameObject.GetComponent<IPhysics>();
+            if (physicsable != null)
+            {
+                Vector3 dir = other.transform.position - transform.position;
+                physicsable.KnockBack(dir * gameManager.instance.playerScript.knockbackPower);
+            }
             if (earthDamage != null)
                 earthDamage.TakeEarthDamage(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingtDamage);
         }

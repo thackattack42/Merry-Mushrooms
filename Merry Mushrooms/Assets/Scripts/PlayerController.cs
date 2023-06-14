@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] public int expToNextLevel;
     [SerializeField] public int skillPoints;
     [SerializeField] float pushBackResolve;
+    [SerializeField] public int knockbackPower;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
