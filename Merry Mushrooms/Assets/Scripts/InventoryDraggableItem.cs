@@ -62,6 +62,10 @@ public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
         else if (item.name == "Mana Potion")
         {
             gameManager.instance.playerScript.MP += 50;
+            if (gameManager.instance.playerScript.MP > gameManager.instance.playerScript.maxMP)
+            {
+
+            }
         }
     }
 }
