@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     // Bullet for Player
     [SerializeField] GameObject playerBullet;
     [SerializeField] GameObject bulletPoint;
-    [SerializeField] float speedOfBullet = 600;
     [Header("----- Staff Shoot Stats -----")]
     [Range(2, 300)][SerializeField] int shootDistance;
     [Range(0.1f, 3)][SerializeField] float shootRate;
