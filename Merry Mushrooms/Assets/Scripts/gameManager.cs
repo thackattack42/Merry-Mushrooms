@@ -99,7 +99,11 @@ public class gameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
 
-        StartCoroutine(StartSelection());
+        if (playerScript.playerWeapon == 0)
+        {
+            StartCoroutine(StartSelection());
+        }
+
         playerScript.SpawnOnLoad();
     }
     
