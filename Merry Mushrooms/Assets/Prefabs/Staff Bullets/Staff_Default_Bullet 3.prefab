@@ -179,9 +179,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.773
       objectReference: {fileID: 0}
+    - target: {fileID: 6469540316673891698, guid: 583d1eff84b31ab459c775e3a98693d7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8765829b4c1b820409385ae53384fb25, type: 2}
     - target: {fileID: 8503996231018908264, guid: 583d1eff84b31ab459c775e3a98693d7, type: 3}
       propertyPath: m_Name
-      value: Snow Flakes
+      value: Twinkle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642782815063897713, guid: 583d1eff84b31ab459c775e3a98693d7, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 583d1eff84b31ab459c775e3a98693d7, type: 3}
@@ -194,7 +202,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 735d1d1e5a1d1934589aa44da6a7ea75, type: 3}
       propertyPath: m_Name
-      value: IceLance
+      value: Twinkle
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 735d1d1e5a1d1934589aa44da6a7ea75, type: 3}
       propertyPath: m_RootOrder
@@ -240,6 +248,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90.773
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 735d1d1e5a1d1934589aa44da6a7ea75, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8765829b4c1b820409385ae53384fb25, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 735d1d1e5a1d1934589aa44da6a7ea75, type: 3}
 --- !u!4 &4135523826481917195 stripped
