@@ -8,7 +8,7 @@ public class PlayerHUD : MonoBehaviour
     //Player stuff
     int maxPlayerHP;
     int maxPlayerMP;
-    int funGil;
+    [SerializeField ]int funGil;
     int damageTaken;
     public Transform damagePopup;
     public Transform expPopup;
@@ -175,5 +175,9 @@ public class PlayerHUD : MonoBehaviour
     public int GetExpGained()
     {
         return expGained;
+    }
+    public int GetFunGil()
+    {
+        return funGil;
     }
 }

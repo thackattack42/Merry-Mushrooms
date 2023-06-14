@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -46,7 +48,7 @@ public class InventoryManager : MonoBehaviour
                 InventoryDraggableItem itemInSlot = InventorySlots[i].GetComponentInChildren<InventoryDraggableItem>();
                 if (itemInSlot != null && itemInSlot.item == item && itemInSlot.stackCount < maxItemStack)
                 {
-                    PlaceNewItem(item, InventorySlots[i]);
+                    //PlaceNewItem(item, InventorySlots[i]);
                     itemInSlot.stackCount++;
                     itemInSlot.UpdateStack();
                     return true;
@@ -65,6 +67,70 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return false;
+    }
+    public bool RemoveItem(Item item)
+    {
+        if (item.stackable == true)
+        {
+            for (int i = 0; i < InventorySlots.Length; i++)
+            {
+                InventoryDraggableItem itemInSlot = InventorySlots[i].GetComponentInChildren<InventoryDraggableItem>();
+                if (itemInSlot != null && itemInSlot.item == item && itemInSlot.stackCount < maxItemStack)
+                {
+                    
+                    itemInSlot.stackCount--;
+                    if (itemInSlot.stackCount < 1)
+                    {
+                        Destroy(itemInSlot);
+                        //Destroy(item);
+                    }
+                    itemInSlot.UpdateStack();
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < InventorySlots.Length; i++)
+            {
+                InventoryDraggableItem itemInSlot = InventorySlots[i].GetComponentInChildren<InventoryDraggableItem>();
+                if (itemInSlot != null && itemInSlot.item == item)
+                {
+                    Destroy(itemInSlot);
+                    return true;
+                }
+            }
+        }
+
+
+        
+        return false;
+    }
+    public int GetStackCount(Item item)
+    {
+        if (item.stackable == true)
+        {
+            for (int i = 0; i < InventorySlots.Length; i++)
+            {
+                InventoryDraggableItem itemInSlot = InventorySlots[i].GetComponentInChildren<InventoryDraggableItem>();
+                if (itemInSlot != null && itemInSlot.item == item && itemInSlot.stackCount < maxItemStack)
+                {
+                    return itemInSlot.stackCount;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < InventorySlots.Length; i++)
+            {
+                InventoryDraggableItem itemInSlot = InventorySlots[i].GetComponentInChildren<InventoryDraggableItem>();
+                if (itemInSlot != null && itemInSlot.item == item)
+                {
+                    return 1;
+                }
+            }
+        }
+        return 0;
     }
 
     void PlaceNewItem(Item item, InventorySlot slot)

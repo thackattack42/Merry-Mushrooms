@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 111bc899fda443641961ecbf6544b730, type: 2}
---- !u!1 &79067549 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1039440355, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-  m_PrefabInstance: {fileID: 857748468}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &507872449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -383,72 +378,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 164414783, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 164414785, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_Color.b
-      value: 0.972549
-      objectReference: {fileID: 0}
-    - target: {fileID: 164414785, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8814353
-      objectReference: {fileID: 0}
-    - target: {fileID: 164414785, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_Color.r
-      value: 0.22352937
-      objectReference: {fileID: 0}
-    - target: {fileID: 1039440355, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1039440357, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1039440357, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1039440357, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1439889839, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: ShopBubble
-      value: 
-      objectReference: {fileID: 857748471}
-    - target: {fileID: 1557666398, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_Name
-      value: NPC UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557666404, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1557666404, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: ChatBubble
-      value: 
-      objectReference: {fileID: 79067549}
-    - target: {fileID: 1557666404, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: QuestBubble
-      value: 
-      objectReference: {fileID: 954171065}
-    - target: {fileID: 1557666404, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: QuestReturnBubble
-      value: 
-      objectReference: {fileID: 857748471}
-    - target: {fileID: 1569163612, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-      propertyPath: m_text
-      value: ' Hello Player
-
-        Would like to buy my wares?
-
-
-        Just Press
-        F while near me!'
-      objectReference: {fileID: 0}
     - target: {fileID: 5123275503138519528, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
       propertyPath: m_Name
       value: Kyle_ToadStool(npc)-merchant
@@ -497,33 +426,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1439889839, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
---- !u!1 &857748469 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5123275503138519528, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-  m_PrefabInstance: {fileID: 857748468}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &857748470
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857748469}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 15
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &857748471 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 164414783, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-  m_PrefabInstance: {fileID: 857748468}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &940277204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -579,13 +483,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8863840815364814771, guid: d021e34254e59f5419d84c474828eff9, type: 3}
+      propertyPath: funGil
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d021e34254e59f5419d84c474828eff9, type: 3}
---- !u!1 &954171065 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 152805533, guid: 9425e0560127c98418e9d726e6788cbd, type: 3}
-  m_PrefabInstance: {fileID: 857748468}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1362587863
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEditor.ShaderKeywordFilter;
 
 public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -47,4 +48,32 @@ public class InventoryDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
         transform.SetParent(newParent);
         img.raycastTarget = true;
     }
+    public void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            {
+                if (item.name == "Health Potion")
+                {
+                    gameManager.instance.playerScript.takeDamage(-30);
+                    if (gameManager.instance.playerScript.HP > gameManager.instance.playerScript.maxHP)
+                    {
+                        gameManager.instance.playerScript.HP = gameManager.instance.playerScript.maxHP;
+                        gameManager.instance.playerHUD.updatePlayerHealth(0);
+                    }
+                }
+                else if (item.name == "Mana Potion")
+                {
+                    gameManager.instance.playerScript.MP += 50;
+                    gameManager.instance.playerHUD.updatePlayerMana();
+                    if (gameManager.instance.playerScript.MP > gameManager.instance.playerScript.maxMP)
+                    {
+                        gameManager.instance.playerScript.MP = gameManager.instance.playerScript.maxMP;
+
+                    }
+                }
+            }
+        }
+    }
+
 }
