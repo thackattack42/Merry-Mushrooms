@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -25,7 +26,10 @@ public class NPCTextBubbles : MonoBehaviour
             transform.rotation = gameManager.instance.player.transform.rotation;
             if (Input.GetKeyDown(KeyCode.F))
             {
-                
+                gameManager.instance.isPaused = !gameManager.instance.isPaused;
+                gameManager.instance.PauseState();
+                //gameManager.instance.activeMenu = gameManager.
+
             }
         }
     }
