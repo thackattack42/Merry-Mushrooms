@@ -384,7 +384,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             //staffList[selectedStaff].ammoClip--;
             
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
+
+            if (!staffList[selectedStaff].baseStaff)
             MP -= 5;
+            else
+                MP--;
         
 
 
