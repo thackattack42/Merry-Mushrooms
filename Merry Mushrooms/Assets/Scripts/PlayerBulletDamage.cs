@@ -7,7 +7,7 @@ public class PlayerBulletDamage : MonoBehaviour
 {
     private void Update()
     {
-        Destroy(gameObject, 1);
+        Destroy(gameObject, 0.5f);
     }
     public void OnCollisionEnter(Collision collision)
     {
