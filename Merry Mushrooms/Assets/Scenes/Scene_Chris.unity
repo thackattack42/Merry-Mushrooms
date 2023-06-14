@@ -3985,7 +3985,6 @@ Transform:
   - {fileID: 144935740}
   - {fileID: 1374169897}
   - {fileID: 970556041}
-  - {fileID: 1725046595}
   - {fileID: 749292765}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -4387,11 +4386,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e06d4c3585ccb124c89075a82229b5bc, type: 3}
---- !u!4 &1725046595 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-  m_PrefabInstance: {fileID: 4108563643088950807}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1775497352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5081,79 +5075,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ef7b81540ccd164089a64ad92fa397a, type: 3}
---- !u!1001 &4108563643088950807
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1174709690}
-    m_Modifications:
-    - target: {fileID: 1947871717301538, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_Name
-      value: FireBall with explosion
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -53.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209731392266258, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8635915191000223937, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8635915191000223937, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: prewarm
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8635915191000223937, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: startDelay.scalar
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8635915191000223937, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a415873a53a7bb64f8b354878e504ad6, type: 3}
 --- !u!1001 &4210757849481001022
 PrefabInstance:
   m_ObjectHideFlags: 0
