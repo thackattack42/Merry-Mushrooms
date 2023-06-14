@@ -9,20 +9,22 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
 
     float timer ;
     int damage;
-    bool onFire;
-   
+    
 
     [SerializeField] public int knockbackPower;
     private void Start()
     {
+       
         enemy = GetComponent<Enemy_Scpt>();
     }
     private void Update()
     {
         timer += Time.deltaTime;
-        if (onFire)
+        if (gameManager.instance.playerScript.onFire)
         {
             StartCoroutine(FireDamageTime());
+            
+
 
         }
     }
@@ -33,11 +35,12 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     public void TakeFireDamage(int dmg)
     {
         enemy.HP -= dmg * 2;
-        onFire = true;
+        gameManager.instance.playerScript.onFire = true;
+        
         damage = dmg;
         StartCoroutine(FireDamageTime());
         StartCoroutine(WaitForThing());
-        if (enemy.HP <= 0 && !onFire)
+        if (enemy.HP <= 0 && !gameManager.instance.playerScript.onFire)
         {
             enemy.animr.SetBool("Death", true);
             enemy.agent.enabled = false;
@@ -99,7 +102,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     }
     IEnumerator FireDamageTime()
     {
-
+        gameManager.instance.playerScript.onFiref = true;
         for (int i = 0; i < timer; i++)
         {
             if (timer >= 1)
@@ -117,7 +120,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
             enemy.agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             StartCoroutine(enemy.EnemyDespawn());
-            onFire = false;
+            gameManager.instance.playerScript.onFire = false;
             yield break;
         }
         else
@@ -132,9 +135,9 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
     IEnumerator WaitForThing()
     {
         yield return new WaitForSeconds(3);
-        if(onFire)
+        if(gameManager.instance.playerScript.onFire)
         {
-            onFire = false;
+            gameManager.instance.playerScript.onFire = false;
         }
     }
     }
