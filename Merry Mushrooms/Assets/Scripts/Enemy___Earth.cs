@@ -81,9 +81,9 @@ public class Enemy___Earth : MonoBehaviour, IIceDamage, IFireDamage, IEarthDamag
     {
 
         agent.speed /= 2;
-
+        gameManager.instance.playerScript.onIce = true;
         yield return new WaitForSeconds(3);
-
+        gameManager.instance.playerScript.onIce = false;
 
         agent.speed = origSpeed;
     }

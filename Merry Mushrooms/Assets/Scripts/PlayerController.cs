@@ -103,6 +103,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     private int isDashing;
     public float timer;
     public bool isUnderAttack;
+    public bool onFire;
+    public bool onIce;
+    public bool onFiref;
+    
     
    
     
@@ -371,14 +375,16 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     #region Staff
     IEnumerator shoot()
     {
-        //if (staffList[selectedStaff].ammoClip > 0)
-        //{
+      if(MP >= 5)
+        {
+
+        
             isShooting = true;
 
             //staffList[selectedStaff].ammoClip--;
             
             aud.PlayOneShot(staffList[selectedStaff].shootSound, staffList[selectedStaff].shootVol);
-            MP--;
+            MP -= 5;
         
 
 
@@ -400,8 +406,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             //Muzzle Flash
             GameObject muzzle = GameObject.FindGameObjectWithTag("MuzzleFlash");
             Instantiate(staffList[selectedStaff].muzzleEffect, muzzle.transform.position, staffList[selectedStaff].muzzleEffect.transform.rotation);
+        }
 
-            
         //}
         gameManager.instance.playerHUD.updatePlayerMana();
         yield return new WaitForSeconds(shootRate);
@@ -451,11 +457,15 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     #region Bow
     IEnumerator BowShoot()
     {
-       
+
+        if (MP >= 10 && !BowList[selectedBow].baseStaff)
+        {
+
+        }
             aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
         if (BowList[selectedBow].fire || BowList[selectedBow].ice || BowList[selectedBow].earth)
         {
-            MP--;
+            MP -= 10;
         }
 
 

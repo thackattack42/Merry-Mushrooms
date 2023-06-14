@@ -15,7 +15,7 @@ public class PlayerSwordSwing : MonoBehaviour
         if (Input.GetButtonDown("Shoot") && !gameManager.instance.playerScript.holdingShield && gameManager.instance.playerScript.SwordEquipped)
         {
             animr.SetTrigger("Attacking");
-           
+            
             
         } 
         else
@@ -30,8 +30,16 @@ public class PlayerSwordSwing : MonoBehaviour
 
     }
 
+    public void UseMana()
+    {
+
+        if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].fire || gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ice || gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
+        gameManager.instance.playerScript.MP -= 10;
+        gameManager.instance.playerHUD.updatePlayerMana();
+    }
     public void TurnOffSwing()
     {
+       
         animr.ResetTrigger("Attacking");
     }
    
