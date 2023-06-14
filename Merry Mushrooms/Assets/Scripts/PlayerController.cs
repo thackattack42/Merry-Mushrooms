@@ -146,8 +146,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         HP = maxHP;
         holdingShield = false;
         statusEffects = new Dictionary<string, StatusEffectData>();
+        //gameManager.instance.playerSpawnPos = this.gameObject;
 
         // Spawns Player
+        DontDestroyOnLoad(gameObject);
         Spawn();
     }
 
@@ -601,6 +603,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        transform.rotation = gameManager.instance.playerSpawnPos.transform .rotation;
         controller.enabled = true;
         HP = maxHP;
         gameManager.instance.playerHUD.updatePlayerHealth(0);

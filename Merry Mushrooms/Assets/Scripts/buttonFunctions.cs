@@ -95,12 +95,6 @@ public class buttonFunctions : MonoBehaviour
         AsyncOperation op = SceneManager.LoadSceneAsync(id);
         LoadingScreen.SetActive(true);
 
-        if (id == 2)
-        {
-            string sceneToLoad = SceneManager.GetSceneByBuildIndex(2).name;
-            SceneManager.MoveGameObjectToScene(gameManager.instance.player, SceneManager.GetSceneByBuildIndex(2));
-            SceneManager.LoadScene(sceneToLoad);
-        }
         
         while (!op.isDone)
         {
@@ -108,6 +102,12 @@ public class buttonFunctions : MonoBehaviour
             yield return null;
         }
 
+        //if (id == 2)
+        //{
+        //    string sceneToLoad = SceneManager.GetSceneByBuildIndex(2).name;
+        //    //SceneManager.MoveGameObjectToScene(gameManager.instance.player, SceneManager.GetSceneByBuildIndex(2));
+        //    SceneManager.LoadScene(sceneToLoad);
+        //}
     }
 
     //Option buttons

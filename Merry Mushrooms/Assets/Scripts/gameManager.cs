@@ -71,25 +71,35 @@ public class gameManager : MonoBehaviour
     // Awake is called before Start
     void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+        }
+        else
+        {
+            instance = this;
+            RefreshGameManager();
+        }
+        DontDestroyOnLoad(this.transform.parent);
+    }
+
+    void RefreshGameManager()
+    {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerHUD = player.GetComponent<PlayerHUD>();
         //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
-        playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+
+        if (playerSpawnPos == null)
+        {
+            playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+        }
+
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
 
-        if (playerScript.playerWeapon == 0)
-        {
-            StartCoroutine(StartSelection());
-        }
-        //Sword = GameObject.FindGameObjectWithTag("Sword");
-        //Bow = GameObject.FindGameObjectWithTag("Bow");
-        //Staff = GameObject.FindGameObjectWithTag("Staff");
-        //weaponSelectMenu.SetActive(true);
-        //activeMenu = weaponSelectMenu;
-
+        StartCoroutine(StartSelection());
     }
     
     IEnumerator StartSelection()
