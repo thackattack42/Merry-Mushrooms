@@ -112,7 +112,7 @@ public class gameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         isPaused = !isPaused;
         activeMenu = weaponSelectMenu;
-        activeMenu.SetActive(isPaused);
+        activeMenu.SetActive(true);
         PauseState();
 
     }

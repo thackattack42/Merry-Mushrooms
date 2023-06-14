@@ -81,6 +81,7 @@ public class buttonFunctions : MonoBehaviour
     public void mainMenu()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
+        gameManager.instance.pauseMenu.SetActive(false);
         StartCoroutine(LoadSceneAsync(0));
     }
     public void PlaySelection()
