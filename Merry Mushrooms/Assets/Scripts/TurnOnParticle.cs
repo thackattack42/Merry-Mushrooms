@@ -7,17 +7,17 @@ public class TurnOnParticle : MonoBehaviour
 
     ParticleSystem _particleSystem;
     // Start is called before the first frame update
-    void Start()
-    {
-        _particleSystem = GetComponent<ParticleSystem>();
-    }
+    //void Start()
+    //{
+        
+    //}
 
     // Update is called once per frame
     void Update()
     {
-        
+        _particleSystem = GetComponent<ParticleSystem>();
 
-        if(gameManager.instance.playerScript.SwordEquipped && gameObject.CompareTag("FireWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].fire)
+        if (gameManager.instance.playerScript.SwordEquipped && gameObject.CompareTag("FireWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].fire)
         {
         _particleSystem.Play();
 
