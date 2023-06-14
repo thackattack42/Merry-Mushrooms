@@ -71,7 +71,6 @@ public class gameManager : MonoBehaviour
     // Awake is called before Start
     void Awake()
     {
-        
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
@@ -81,8 +80,10 @@ public class gameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
         loadTimer = 3;
 
-
-        StartCoroutine(StartSelection());
+        if (playerScript.playerWeapon == 0)
+        {
+            StartCoroutine(StartSelection());
+        }
         //Sword = GameObject.FindGameObjectWithTag("Sword");
         //Bow = GameObject.FindGameObjectWithTag("Bow");
         //Staff = GameObject.FindGameObjectWithTag("Staff");

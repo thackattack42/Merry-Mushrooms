@@ -94,11 +94,20 @@ public class buttonFunctions : MonoBehaviour
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(id);
         LoadingScreen.SetActive(true);
+
+        if (id == 2)
+        {
+            string sceneToLoad = SceneManager.GetSceneByBuildIndex(2).name;
+            SceneManager.MoveGameObjectToScene(gameManager.instance.player, SceneManager.GetSceneByBuildIndex(2));
+            SceneManager.LoadScene(sceneToLoad);
+        }
+        
         while (!op.isDone)
         {
             LoadingBar.fillAmount = Mathf.Clamp01(op.progress / 0.9f);
             yield return null;
         }
+
     }
 
     //Option buttons
@@ -153,6 +162,7 @@ public class buttonFunctions : MonoBehaviour
     public void NextLevel()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
+        gameManager.instance.UnpausedState();
         StartCoroutine(LoadSceneAsync(2));
     }
 
