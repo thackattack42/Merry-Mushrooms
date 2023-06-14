@@ -1067,8 +1067,9 @@ MonoBehaviour:
   headPos: {fileID: 3452154447801695500}
   animr: {fileID: 3452154448743096069}
   aud: {fileID: 3452154448743096065}
-  audShoot: []
-  audShootVol: 0
+  audShoot:
+  - {fileID: 8300000, guid: 782d732985575f54b838e97de783c52f, type: 3}
+  audShootVol: 4
   playerDir: {x: 0, y: 0, z: 0}
   playerInRange: 0
   angleToPlayer: 0
@@ -1170,7 +1171,7 @@ AudioSource:
   m_GameObject: {fileID: 3452154448743096064}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 154978e52ec9f0445a1882bdf10e4a88, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

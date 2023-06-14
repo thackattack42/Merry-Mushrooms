@@ -57,23 +57,28 @@ public class PlayerMelee : MonoBehaviour
         if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
         {
             IEarthDamage earthDamage = other.gameObject.GetComponent<IEarthDamage>();
-
+            IPhysics physicsable = other.gameObject.GetComponent<IPhysics>();
+            if (physicsable != null)
+            {
+                Vector3 dir = other.transform.position - transform.position;
+                physicsable.KnockBack(dir * gameManager.instance.playerScript.knockbackPower);
+            }
             if (earthDamage != null)
-                earthDamage.TakeEarthDamage(dmg);
+                earthDamage.TakeEarthDamage(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingtDamage);
         }
         if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ice)
         {
             IIceDamage iceDamage = other.gameObject.GetComponent<IIceDamage>();
 
             if (iceDamage != null)
-                iceDamage.TakeIceDamage(dmg);
+                iceDamage.TakeIceDamage(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingtDamage);
         }
         if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].fire)
         {
             IFireDamage fireDamage = other.gameObject.GetComponent<IFireDamage>();
 
             if (fireDamage != null)
-                fireDamage.TakeFireDamage(dmg);
+                fireDamage.TakeFireDamage(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingtDamage);
         }
         if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].baseStaff)
         {
@@ -81,7 +86,7 @@ public class PlayerMelee : MonoBehaviour
 
             if (damagable != null)
             {
-                damagable.takeDamage(dmg);
+                damagable.takeDamage(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingtDamage);
                 //GetComponent<BoxCollider>().enabled = false;
             }
         }

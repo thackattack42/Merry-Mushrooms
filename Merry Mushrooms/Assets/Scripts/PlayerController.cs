@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] public int expToNextLevel;
     [SerializeField] public int skillPoints;
     [SerializeField] float pushBackResolve;
+    [SerializeField] public int knockbackPower;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public List<BowStats> BowList = new List<BowStats>();
     [SerializeField] GameObject playerArrow;
     [SerializeField] GameObject arrowPoint;
-    [SerializeField] float speedOfArrow = 600;
+    
     [SerializeField] public MeshRenderer bowMat;
     [SerializeField] public MeshFilter bowModel;
     [Header("----- Bow Shoot Stats -----")]
@@ -427,7 +428,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
         //}
         gameManager.instance.playerHUD.updatePlayerMana();
-        yield return new WaitForSeconds(shootRate);
+        yield return new WaitForSeconds(staffList[selectedStaff].shootRate);
         isShooting = false;
     }
 

@@ -66,7 +66,7 @@ public class gameManager : MonoBehaviour
     public int enemiesRemaining;
     public bool isPaused;
     float timeScaleOrig;
-    float loadTimer;
+    //float loadTimer;
 
     // Awake is called before Start
     void Awake()
@@ -97,7 +97,7 @@ public class gameManager : MonoBehaviour
        // }
 
         timeScaleOrig = Time.timeScale;
-        loadTimer = 3;
+        //loadTimer = 3;
 
         if (playerScript.playerWeapon == 0)
         {

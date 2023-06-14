@@ -11,6 +11,12 @@ public class PlayerArrowDamage : MonoBehaviour
         {
             IEarthDamage earthDamage = collision.gameObject.GetComponent<IEarthDamage>();
 
+            IPhysics physicsable = collision.gameObject.GetComponent<IPhysics>();
+            if (physicsable != null)
+            {
+                Vector3 dir = collision.transform.position - transform.position;
+                physicsable.KnockBack(dir * gameManager.instance.playerScript.knockbackPower);
+            }
             if (earthDamage != null)
                 earthDamage.TakeEarthDamage((gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].bowShootDamage) * (int)(gameManager.instance.playerScript.timer + 1));
         }

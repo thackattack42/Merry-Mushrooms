@@ -1544,8 +1544,9 @@ MonoBehaviour:
   headPos: {fileID: 3998953649035227955}
   animr: {fileID: 3626144129681982585}
   aud: {fileID: 5339806715303594454}
-  audShoot: []
-  audShootVol: 0
+  audShoot:
+  - {fileID: 8300000, guid: 06ada5590eba8d6489b36c6f3c54ff78, type: 3}
+  audShootVol: 4
   playerDir: {x: 0, y: 0, z: 0}
   playerInRange: 0
   angleToPlayer: 0

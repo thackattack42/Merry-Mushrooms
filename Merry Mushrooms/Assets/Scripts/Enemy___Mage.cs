@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Enemy___Mage : Enemy_Scpt
@@ -59,6 +60,11 @@ public class Enemy___Mage : Enemy_Scpt
     public void createBullet()
     {
         SetBulletDamage();
+        if (audShoot.Length != 0)
+        {
+        aud.PlayOneShot(audShoot[0], audShootVol);
+
+        }
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
