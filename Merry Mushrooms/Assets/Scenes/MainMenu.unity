@@ -581,6 +581,7 @@ MonoBehaviour:
   creditsScreen: {fileID: 205874640}
   SFXSlider: {fileID: 24100000, guid: 154978e52ec9f0445a1882bdf10e4a88, type: 2}
   MusicSlider: {fileID: 24100000, guid: 05eb67136fc9d3746af1dd4547eace51, type: 2}
+  playerInScene: 0
 --- !u!82 &187570659
 AudioSource:
   m_ObjectHideFlags: 0
@@ -694,7 +695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &205874641
 Transform:
   m_ObjectHideFlags: 0
@@ -1539,18 +1540,23 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Carlos Ocampo Jr.
 
-
     Chase Thacker
 
-
     Christopher Montgomery
-
 
     John
     Harney
 
+    Trinity Sanders
 
-    Trinity Sanders'
+
+
+
+    Music & SFX
+
+    westarmusic.sourceaudio.com
+
+    freesound.org'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
