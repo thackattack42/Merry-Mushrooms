@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public List<BowStats> BowList = new List<BowStats>();
     [SerializeField] GameObject playerArrow;
     [SerializeField] GameObject arrowPoint;
-    [SerializeField] float speedOfArrow = 600;
+    
     [SerializeField] public MeshRenderer bowMat;
     [SerializeField] public MeshFilter bowModel;
     [Header("----- Bow Shoot Stats -----")]
