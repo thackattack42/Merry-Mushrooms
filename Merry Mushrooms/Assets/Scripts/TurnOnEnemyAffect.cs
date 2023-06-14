@@ -39,11 +39,11 @@ public class TurnOnEnemyAffect : MonoBehaviour
     {
         if (onFire == true && gameObject.CompareTag("IceStatusAffect"))
         {
-            _particleSystem.Play();
+            _particleSystem.Stop();
         }
         else if(gameManager.instance.playerScript.onIce == true && gameObject.CompareTag("EarthStatusAffect"))
         {
-            _particleSystem.Play();
+            _particleSystem.Stop();
         }
         else
         {
