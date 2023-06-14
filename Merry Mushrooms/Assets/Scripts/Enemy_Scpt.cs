@@ -23,14 +23,14 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     [SerializeField] public NavMeshAgent agent;
     public Transform headPos;
     [SerializeField] public Animator animr;
-    [SerializeField] AudioSource aud;
+    [SerializeField] public AudioSource aud;
     //[SerializeField] ParticleSystem spawnParticle;
 
     [Header("------ Audio ------")]
-    [SerializeField] AudioClip[] audShoot;
+    [SerializeField] public AudioClip[] audShoot;
 
     [Header("------ Audio Vol ------")]
-    [SerializeField] float audShootVol;
+    [SerializeField] public float audShootVol;
     //Other Assets
     Color origColor;
     public Vector3 playerDir;

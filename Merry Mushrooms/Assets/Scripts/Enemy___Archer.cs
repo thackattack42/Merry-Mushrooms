@@ -65,6 +65,11 @@ public class Enemy___Archer : Enemy_Scpt
     public void createBullet()
     {
         SetBulletDamage();
+        if (audShoot.Length != 0)
+        {
+            aud.PlayOneShot(audShoot[0], audShootVol);
+
+        }
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
     IEnumerator AttackCooldown()
