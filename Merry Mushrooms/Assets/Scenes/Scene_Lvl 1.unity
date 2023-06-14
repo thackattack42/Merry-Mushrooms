@@ -395,7 +395,6 @@ Transform:
   - {fileID: 911648252}
   - {fileID: 1606782972}
   - {fileID: 761664578}
-  - {fileID: 2977222378135330588}
   - {fileID: 2814196169144952585}
   - {fileID: 6921696504285738877}
   - {fileID: 1528451234709265389}
@@ -18972,7 +18971,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 53739511}
-  m_RootOrder: 59
+  m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: -67.746, y: 163.425, z: -10.743}
 --- !u!1 &1528451234709611147
 GameObject:
@@ -20196,22 +20195,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6457587042483724543}
   m_Mesh: {fileID: -5992063797816418947, guid: 2cb7600769591ae4a93dec0dd7351927, type: 3}
---- !u!1 &2476803960047268008
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2977222378135330588}
-  m_Layer: 0
-  m_Name: 'Cave Lighting (Missing Prefab with guid: c7b71f33f792f7b4499b652e164aeaae)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!33 &2477624069144019494
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -20893,7 +20876,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 53739511}
-  m_RootOrder: 57
+  m_RootOrder: 56
   m_LocalEulerAnglesHint: {x: -62.401, y: 127.882, z: 353.686}
 --- !u!64 &2814196169146874971
 MeshCollider:
@@ -21254,21 +21237,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4470176876845849874}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2977222378135330588
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2476803960047268008}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 53739511}
-  m_RootOrder: 56
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &3013362307831931273
 MeshRenderer:
@@ -27058,7 +27026,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 53739511}
-  m_RootOrder: 60
+  m_RootOrder: 59
   m_LocalEulerAnglesHint: {x: -67.911, y: 222.391, z: 13.534}
 --- !u!33 &6095695438678310410
 MeshFilter:
@@ -28233,7 +28201,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 53739511}
-  m_RootOrder: 58
+  m_RootOrder: 57
   m_LocalEulerAnglesHint: {x: -67.911, y: 222.391, z: 13.534}
 --- !u!1 &6921696504285908507
 GameObject:
