@@ -101,7 +101,7 @@ public class buttonFunctions : MonoBehaviour
             LoadingBar.fillAmount = Mathf.Clamp01(op.progress / 0.9f);
             yield return null;
         }
-
+        LoadingScreen.SetActive(false);
         //if (id == 2)
         //{
         //    string sceneToLoad = SceneManager.GetSceneByBuildIndex(2).name;
