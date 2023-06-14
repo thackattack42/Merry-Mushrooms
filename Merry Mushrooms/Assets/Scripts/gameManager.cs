@@ -97,7 +97,7 @@ public class gameManager : MonoBehaviour
        // }
 
         timeScaleOrig = Time.timeScale;
-        loadTimer = 3;
+        //loadTimer = 3;
 
         if (playerScript.playerWeapon == 0)
         {
