@@ -45,7 +45,7 @@ public class LootBox : MonoBehaviour
     {
         if (!other.CompareTag("Player"))
         {
-            InstantiateLoot(gameObject.transform.position);
+            InstantiateLoot(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z));
             Destroy(gameObject);
         }
     }
