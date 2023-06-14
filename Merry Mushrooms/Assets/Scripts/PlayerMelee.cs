@@ -58,6 +58,7 @@ public class PlayerMelee : MonoBehaviour
         {
             IEarthDamage earthDamage = other.gameObject.GetComponent<IEarthDamage>();
 
+            
             if (earthDamage != null)
                 earthDamage.TakeEarthDamage(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingtDamage);
         }
