@@ -427,7 +427,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
         //}
         gameManager.instance.playerHUD.updatePlayerMana();
-        yield return new WaitForSeconds(shootRate);
+        yield return new WaitForSeconds(staffList[selectedStaff].shootRate);
         isShooting = false;
     }
 
