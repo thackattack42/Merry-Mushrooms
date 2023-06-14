@@ -5,33 +5,40 @@ using UnityEngine;
 
 public class NPCTextBubbles : MonoBehaviour
 {
+    [Header("-----NPC Type-----")]
+    public NPCType type;
+    [Header("-----Chat Bubble Grabbers-----")]
     public GameObject ChatBubble;
     public GameObject QuestBubble;
-    public GameObject QuestReturnBubble;
     public GameObject ShopBubble;
-    // Start is called before the first frame update
-    void Start()
+    
+
+    public enum NPCType
     {
-        
+        Quest, Shop, Chat
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        transform.rotation = gameManager.instance.player.transform.rotation;
+        if (other.CompareTag("Player"))
+        {
+            transform.rotation = gameManager.instance.player.transform.rotation;
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            //if (has a quest to give)
-                //QuestBubble.SetActive(true);
-            //else if (player has quest ready to turn in)
-                //QuestReturnBubble.SetActive(true);
-            //else if (is shopkeeper)
-                //ShopBubble.SetActive(true);
-            //else
+            if (type == NPCType.Quest)
+                QuestBubble.SetActive(true);
+            else if (type == NPCType.Shop)
+                ShopBubble.SetActive(true);
+            else
                 ChatBubble.SetActive(true);
         }
     }
@@ -40,9 +47,9 @@ public class NPCTextBubbles : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             QuestBubble.SetActive(false);
-            QuestReturnBubble.SetActive(false);
             ShopBubble.SetActive(false);
             ChatBubble.SetActive(false);
         }
     }
+
 }
