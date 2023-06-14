@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ShopMenu : MonoBehaviour
 {
-    public GameObject ShopMenuObject;
     public GameObject BuySellMenu;
     public GameObject BuyMenu;
     public GameObject SellMenu;

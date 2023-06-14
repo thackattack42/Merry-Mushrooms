@@ -53,7 +53,7 @@ public class gameManager : MonoBehaviour
     public TextMeshProUGUI PlayerExpPercent;
     public TextMeshProUGUI PlayerExpNumber;
     public Image ExpBarSlider;
-    public ShopMenu shopMenu;
+    public GameObject shopMenu;
     bool InvToggle;
     [Header("-----Player Pickups-----")]
     //public GameObject Sword;
