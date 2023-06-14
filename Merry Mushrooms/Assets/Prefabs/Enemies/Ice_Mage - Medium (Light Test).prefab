@@ -899,8 +899,9 @@ MonoBehaviour:
   headPos: {fileID: 2453832117161740424}
   animr: {fileID: 2819331126985883586}
   aud: {fileID: 6874794918163477101}
-  audShoot: []
-  audShootVol: 0
+  audShoot:
+  - {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
+  audShootVol: 4
   playerDir: {x: 0, y: 0, z: 0}
   playerInRange: 0
   angleToPlayer: 0
@@ -924,6 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774f9b00eb0f7224895fd41de3f6e8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackPower: 0
 --- !u!95 &2819331126985883586
 Animator:
   serializedVersion: 5

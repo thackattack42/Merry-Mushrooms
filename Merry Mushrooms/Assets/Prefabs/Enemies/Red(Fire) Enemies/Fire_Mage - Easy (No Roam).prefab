@@ -783,9 +783,9 @@ MonoBehaviour:
   headPos: {fileID: 4917078019069800727}
   animr: {fileID: 4688666811781498461}
   aud: {fileID: 4132359055083359218}
-  spawnParticle: {fileID: 198938402097657526, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
-  audShoot: []
-  audShootVol: 0
+  audShoot:
+  - {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
+  audShootVol: 4
   playerDir: {x: 0, y: 0, z: 0}
   playerInRange: 0
   angleToPlayer: 0
@@ -809,6 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6547c2cfe905f74480134c866ffacef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackPower: 0
 --- !u!95 &4688666811781498461
 Animator:
   serializedVersion: 5
