@@ -244,7 +244,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             anim.SetBool("Death", true);
             gameManager.instance.UpdateGameGoal(-1);
-            Instantiate(teleporter, transform.position, transform.rotation);
+            //Instantiate(teleporter, transform.position, transform.rotation);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             gameManager.instance.musicScript.BossState(false);
@@ -264,7 +264,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (currHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            Instantiate(teleporter, transform.position, transform.rotation);
+            //Instantiate(teleporter, transform.position, transform.rotation);
             anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
@@ -286,7 +286,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (currHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            Instantiate(teleporter, transform.position, transform.rotation);
+            //Instantiate(teleporter, transform.position, transform.rotation);
             anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
