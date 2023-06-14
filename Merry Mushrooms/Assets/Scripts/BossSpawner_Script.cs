@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner_Script : MonoBehaviour
+public class BossSpawner_Script : MonoBehaviour
 {
     //[SerializeField] Animator animr;
     [SerializeField] GameObject[] objectToSpawn;
@@ -13,8 +13,15 @@ public class Spawner_Script : MonoBehaviour
     int numberSpawned;
     bool playerInRange;
     bool isSpawning;
+    GameObject bossBarrier;
+    BoxCollider bossBarrierCollider;
 
-    
+    private void Start()
+    {
+        bossBarrier = GameObject.FindGameObjectWithTag("Boss Barrier");
+        bossBarrierCollider = bossBarrier.GetComponent<BoxCollider>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,6 +35,7 @@ public class Spawner_Script : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            bossBarrierCollider.enabled = true;
             playerInRange = true;
         }
     }
