@@ -12235,7 +12235,7 @@ GameObject:
   - component: {fileID: 6667197205221200186}
   - component: {fileID: 863824807}
   m_Layer: 5
-  m_Name: Restart
+  m_Name: Next Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12721,7 +12721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Next Level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15627,7 +15627,6 @@ MonoBehaviour:
   PlayerExpNumber: {fileID: 280937811}
   ExpBarSlider: {fileID: 8520627264093847162}
   shopMenu: {fileID: 8533956134024679767}
-  buttons: {fileID: 7877924245492499045}
   enemiesRemaining: 0
   isPaused: 0
 --- !u!114 &7877924245492499045
@@ -18082,14 +18081,9 @@ MonoBehaviour:
   BuySellMenu: {fileID: 5193182785190141054}
   BuyMenu: {fileID: 8629286755765689466}
   SellMenu: {fileID: 8987291633331839041}
-  buyHealthPotCount: {fileID: 7020838681046450509}
-  buyManaPotCount: {fileID: 7080515621066426799}
-  sellHealthPotCount: {fileID: 4793512323048089555}
-  sellManaPotCount: {fileID: 8991783600649414372}
+  HealthPotCount: {fileID: 0}
+  ManaPotCount: {fileID: 0}
   FunGilCount: {fileID: 3579528764715783587}
-  warningText: {fileID: 5923198916289384564}
-  HealthPotion: {fileID: 11400000, guid: 295091b96b9167349a2551dd0dc583c0, type: 2}
-  ManaPotion: {fileID: 11400000, guid: 1ee839a148485344b9d28bcfd7f5c640, type: 2}
 --- !u!1 &8613775052659429334
 GameObject:
   m_ObjectHideFlags: 0
