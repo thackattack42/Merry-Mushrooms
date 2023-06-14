@@ -23,9 +23,6 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
         if (gameManager.instance.playerScript.onFire)
         {
             StartCoroutine(FireDamageTime());
-            
-
-
         }
     }
     public void KnockBack(Vector3 dir)
@@ -109,7 +106,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
             {
                 timer = 0f;
                 enemy.HP -= damage;
-                StartCoroutine(enemy.FlashHitColor());
+                
             }
             
         }
