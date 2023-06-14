@@ -3436,6 +3436,7 @@ MonoBehaviour:
   expToNextLevel: 100
   skillPoints: 0
   pushBackResolve: 0
+  knockbackPower: 20
   dashSpeed: 4
   dashCoolDown: 7
   staffList:
@@ -3444,7 +3445,6 @@ MonoBehaviour:
   staffMat: {fileID: 1711813856071030117}
   playerBullet: {fileID: 2872036455639188616, guid: 9450518a5e37eef4cad2fe4a1a0e545d, type: 3}
   bulletPoint: {fileID: 984233064}
-  speedOfBullet: 800
   shootDistance: 100
   shootRate: 0.3
   shootDamage: 1
@@ -3453,7 +3453,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c59afd4c68069704b8c57ca6615e60d1, type: 2}
   playerArrow: {fileID: 2834199721020510925, guid: d28d4e4700f2d7d4b8edfb0752db8660, type: 3}
   arrowPoint: {fileID: 1949705862}
-  speedOfArrow: 30
   bowMat: {fileID: 476571864147875218}
   bowModel: {fileID: 2412215107198787928}
   bowShootRate: 0.96

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Boss_Phase_Scpts : MonoBehaviour
 {
     Boss_Scpt boss;
+    NavMeshAgent agent;
     public int rand;
     bool phase2;
     bool breath;
@@ -14,18 +16,21 @@ public class Boss_Phase_Scpts : MonoBehaviour
     {
         boss = GetComponent<Boss_Scpt>();
         boss.anim.ResetTrigger("Punch");
+        agent = GetComponent<NavMeshAgent>();
         breath = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (boss.agent.isActiveAndEnabled)
         {
             if (boss.currHP <= boss.maxHP / 2)
             {
                 phase2 = true;
+                agent.stoppingDistance = 5;
+                boss.stoppingDistOrig = agent.stoppingDistance;
+                
             }
             if (boss.agent.remainingDistance >= boss.agent.stoppingDistance && !boss.canSeePlayer())
             {
@@ -41,49 +46,54 @@ public class Boss_Phase_Scpts : MonoBehaviour
             }
             else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance && boss.canSeePlayer() && phase2 && breath)
             {
+                //boss.anim.SetBool("BreathAttack", true);
                 boss.anim.SetTrigger("Phase 2");
                 breath = false;
                 StartCoroutine(Idlewait());
 
             }
-            //        else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance && boss.canSeePlayer() && phase2 && !breath)
+            //else if (boss.agent.remainingDistance <= boss.agent.stoppingDistance && boss.canSeePlayer() && phase2 && !breath)
+            //{
+            //    boss.anim.SetBool("BreathAttack", false);
+            //    StartCoroutine(Idlewait());
+            //}
             //        {
 
-            //            if (boss.numMinions <= 0)
-            //            {
-            //                if (rand == 0)
-            //                {
-            //                    boss.anim.SetTrigger("Jump Attack");
-            //                    //StartCoroutine(Idlewait());
-            //                }
-            //                else if (rand == 1)
-            //                {
-            //                    boss.anim.SetTrigger("Shoot");
-            //                    //StartCoroutine(Idlewait());
-            //                }
-            //                else
-            //                {
-            //                    boss.anim.SetTrigger("Summon Minions");
-            //                    //StartCoroutine(Idlewait());
-            //                }
+                //            if (boss.numMinions <= 0)
+                //            {
+                //                if (rand == 0)
+                //                {
+                //                    boss.anim.SetTrigger("Jump Attack");
+                //                    //StartCoroutine(Idlewait());
+                //                }
+                //                else if (rand == 1)
+                //                {
+                //                    boss.anim.SetTrigger("Shoot");
+                //                    //StartCoroutine(Idlewait());
+                //                }
+                //                else
+                //                {
+                //                    boss.anim.SetTrigger("Summon Minions");
+                //                    //StartCoroutine(Idlewait());
+                //                }
 
-            //            }
-            //            else
-            //            {
-            //                if (rand == 0)
-            //                {
-            //                    boss.anim.SetTrigger("Jump Attack");
-            //                    //StartCoroutine(Idlewait());
-            //                }
-            //                else
-            //                {
-            //                    boss.anim.SetTrigger("Shoot");
-            //                    //StartCoroutine(Idlewait());
-            //                }
-            //            }
-            //            StartCoroutine(Idlewait());
-            //        }
-            //    }
+                //            }
+                //            else
+                //            {
+                //                if (rand == 0)
+                //                {
+                //                    boss.anim.SetTrigger("Jump Attack");
+                //                    //StartCoroutine(Idlewait());
+                //                }
+                //                else
+                //                {
+                //                    boss.anim.SetTrigger("Shoot");
+                //                    //StartCoroutine(Idlewait());
+                //                }
+                //            }
+                //            StartCoroutine(Idlewait());
+                //        }
+                //    }
 
         }
         IEnumerator Idlewait()

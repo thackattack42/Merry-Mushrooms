@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] public int expToNextLevel;
     [SerializeField] public int skillPoints;
     [SerializeField] float pushBackResolve;
+    [SerializeField] public int knockbackPower;
 
     [Header("----- Player Dash Properties -----")]
     [SerializeField] float dashSpeed;
@@ -48,7 +49,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     // Bullet for Player
     [SerializeField] GameObject playerBullet;
     [SerializeField] GameObject bulletPoint;
-    [SerializeField] float speedOfBullet = 600;
     [Header("----- Staff Shoot Stats -----")]
     [Range(2, 300)][SerializeField] int shootDistance;
     [Range(0.1f, 3)][SerializeField] float shootRate;
@@ -417,7 +417,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             }
             // Creates bullet object and shoots it towards the center ray of the camera
             GameObject bulletToShoot = Instantiate(staffList[selectedStaff].BulletToShoot, bulletPoint.transform.position, Camera.main.transform.rotation);
-            bulletToShoot.GetComponent<Rigidbody>().AddForce(bulletPoint.transform.forward * speedOfBullet);
+            bulletToShoot.GetComponent<Rigidbody>().AddForce(bulletPoint.transform.forward * (staffList[selectedStaff].shootDistance * 100));
             //Destroy(staffList[selectedStaff].BulletToShoot, 2,);
 
             //Muzzle Flash

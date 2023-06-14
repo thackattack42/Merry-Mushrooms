@@ -7,14 +7,19 @@ public class PlayerBulletDamage : MonoBehaviour
 {
     private void Update()
     {
-        Destroy(gameObject, 1);
+        Destroy(gameObject, 0.5f);
     }
     public void OnCollisionEnter(Collision collision)
     {
         if (gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].earth)
         {
             IEarthDamage earthDamage = collision.gameObject.GetComponent<IEarthDamage>();
-
+            IPhysics physicsable = collision.gameObject.GetComponent<IPhysics>();
+            if (physicsable != null)
+            {
+                Vector3 dir = collision.transform.position - transform.position;
+                physicsable.KnockBack(dir * gameManager.instance.playerScript.knockbackPower);
+            }
             if (earthDamage != null)
                 earthDamage.TakeEarthDamage(gameManager.instance.playerScript.shootDamage);
             Destroy(gameObject);
