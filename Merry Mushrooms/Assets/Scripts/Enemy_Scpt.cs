@@ -194,7 +194,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     #region Enemy's Death
     public IEnumerator EnemyDespawn()
     {
-        gameManager.instance.playerScript.AddEXP(20);
+        gameManager.instance.playerScript.AddEXP(20 * level);
         Instantiate(FunGilDrop, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.rotation);
         yield return new WaitForSeconds(3);
 
