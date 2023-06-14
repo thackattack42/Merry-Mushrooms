@@ -37,7 +37,7 @@ public class TurnOnEnemyAffect : MonoBehaviour
 
     private void ChangeAffect()
     {
-        if (onFire == true)
+        if (onFire == true && gameObject.CompareTag("IceStatusAffect"))
             _particleSystem.Play();
         else
             _particleSystem.Stop();
