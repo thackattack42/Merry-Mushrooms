@@ -17,7 +17,7 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] InventorySlots;
     public GameObject invItemPrefab;
     public TextMeshProUGUI SkillPointCounter;
-    //public TextMeshProUGUI PlayerLevelCounter;
+    
     public bool updated;
 
     [SerializeField] MeshFilter staffModel;
