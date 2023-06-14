@@ -36,6 +36,11 @@ public class InventoryManager : MonoBehaviour
             updated = true;
             UpdateWeaponInInv();
         }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            updated = false;
+            gameManager.instance.UnpausedState();
+        }
         
     }
     public bool AddItem(Item item)
