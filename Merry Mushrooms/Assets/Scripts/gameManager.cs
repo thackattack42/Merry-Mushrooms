@@ -96,7 +96,6 @@ public class gameManager : MonoBehaviour
         //{
             playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
        // }
-
         timeScaleOrig = Time.timeScale;
         //loadTimer = 3;
 
@@ -104,7 +103,7 @@ public class gameManager : MonoBehaviour
         {
             StartCoroutine(StartSelection());
         }
-
+        playerScript.enabled = true;
         playerScript.SpawnOnLoad();
     }
     
@@ -149,6 +148,7 @@ public class gameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         reticle.SetActive(false);
+        playerScript.enabled = false;
     }
     public void SimiPauseState()
     {
@@ -167,6 +167,7 @@ public class gameManager : MonoBehaviour
         activeMenu.SetActive(false);
         activeMenu = null;
         reticle.SetActive(true);
+        playerScript.enabled = true;
     }
     public void SimiUnpausedState()
     {

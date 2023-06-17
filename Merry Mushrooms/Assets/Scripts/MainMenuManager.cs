@@ -13,7 +13,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject creditsScreen;
     public AudioMixer SFXSlider;
     public AudioMixer MusicSlider;
-    GameObject Player;
+    public GameObject Player;
     GameObject UI;
     public bool playerInScene;
 

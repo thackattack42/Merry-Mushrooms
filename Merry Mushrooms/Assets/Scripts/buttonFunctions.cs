@@ -37,7 +37,13 @@ public class buttonFunctions : MonoBehaviour
     public void restart()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        gameManager.instance.UnpausedState();
+        Time.timeScale = 1;
+        gameManager.instance.activeMenu.SetActive(false);
+        gameManager.instance.activeMenu = null;
+        gameManager.instance.isPaused = false;
+        gameManager.instance.reticle.SetActive(true);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         StartCoroutine(LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
     }
     public void quit()
@@ -48,7 +54,7 @@ public class buttonFunctions : MonoBehaviour
     public void respawn()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        gameManager.instance.UnpausedState();
+        StartCoroutine(UnpauseGame());
         gameManager.instance.playerScript.Spawn();
     }
     public void startGame()
@@ -97,6 +103,10 @@ public class buttonFunctions : MonoBehaviour
 
     IEnumerator LoadSceneAsync(int id)
     {
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0))
+        {
+            gameManager.instance.playerScript.enabled = false;
+        }
         AsyncOperation op = SceneManager.LoadSceneAsync(id);
         LoadingScreen.SetActive(true);
 
@@ -107,12 +117,14 @@ public class buttonFunctions : MonoBehaviour
             yield return null;
         }
         LoadingScreen.SetActive(false);
-        //if (id == 2)
-        //{
-        //    string sceneToLoad = SceneManager.GetSceneByBuildIndex(2).name;
-        //    //SceneManager.MoveGameObjectToScene(gameManager.instance.player, SceneManager.GetSceneByBuildIndex(2));
-        //    SceneManager.LoadScene(sceneToLoad);
-        //}
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0))
+        {
+            gameManager.instance.playerScript.enabled = true;
+        }
+    }
+    IEnumerator UnpauseGame()
+    {
+        yield return new WaitForSeconds(0.1f);
     }
 
     //Option buttons
@@ -167,7 +179,13 @@ public class buttonFunctions : MonoBehaviour
     public void NextLevel()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        gameManager.instance.UnpausedState();
+        Time.timeScale = 1;
+        gameManager.instance.activeMenu.SetActive(false);
+        gameManager.instance.activeMenu = null;
+        gameManager.instance.isPaused = false;
+        gameManager.instance.reticle.SetActive(true);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         StartCoroutine(LoadSceneAsync(2));
     }
 
