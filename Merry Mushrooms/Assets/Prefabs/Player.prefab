@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 3469287836561508552}
   m_Layer: 3
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1126,8 +1126,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1236513, y: 1.6078922, z: 0.5491897}
-  m_Center: {x: -0.010682877, y: -0.11588329, z: -0.17768481}
+  m_Size: {x: 1.0101492, y: 1.8302952, z: 0.83993864}
+  m_Center: {x: -0.013546704, y: -0.004681766, z: -0.03231017}
 --- !u!1 &987001077696254126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3546,7 +3546,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8327772038628251588}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8327772038628251593
 MeshRenderer:
   m_ObjectHideFlags: 0
