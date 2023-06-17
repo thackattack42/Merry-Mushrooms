@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 496446027071114879}
   - component: {fileID: 8478135959628016643}
-  - component: {fileID: 5549779828478751024}
+  - component: {fileID: 1554749501}
   m_Layer: 10
   m_Name: Boss Spawner
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1172221048297955538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 54.95, y: 1.0648174, z: -7.36}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6039290028764653104}
@@ -47,13 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn:
-  - {fileID: 4088644508951078384, guid: 0886d44c365ef2b4484131836a681573, type: 3}
+  - {fileID: 3562615267999270592, guid: 8d86a2bc813a1fb4ca445e35fb86c00e, type: 3}
   spawnPos:
   - {fileID: 6039290028764653104}
   spawnDelay: 0
   spawnCount: 1
---- !u!135 &5549779828478751024
-SphereCollider:
+--- !u!65 &1554749501
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -63,7 +63,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 40
+  m_Size: {x: 50, y: 7, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5666605623796234253
 GameObject:
@@ -89,8 +89,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5666605623796234253}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.93, y: 0.38, z: -4.01}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: -3, z: -40}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
