@@ -66,7 +66,7 @@ public class ShieldBlock : MonoBehaviour
     IEnumerator pauseShield()
     {
         yield return new WaitForSeconds(0.66f);
-        Debug.Log("Did thing");
+       
         anim.speed = 0;
     }
 }

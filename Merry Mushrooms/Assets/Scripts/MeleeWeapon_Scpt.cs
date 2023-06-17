@@ -11,6 +11,10 @@ public class MeleeWeapon_Scpt : MonoBehaviour
 
         if (damagable != null)
         {
+            if (gameManager.instance.playerScript.holdingShield)
+            {
+                return;
+            }
             damagable.takeDamage(dmg);
         }
     }
