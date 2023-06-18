@@ -491,11 +491,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     IEnumerator BowShoot()
     {
 
-        //if (MP >= 10 && !BowList[selectedBow].baseStaff)
-        //{
+        if (MP <= 9 && !BowList[selectedBow].baseStaff)
+        {
+            yield break;
+        }
 
-        //}
-        
         aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
         if (BowList[selectedBow].fire || BowList[selectedBow].ice || BowList[selectedBow].earth)
         {
