@@ -212,15 +212,25 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
             if (Input.GetButtonDown("Shoot") && BowEquipped)
             {
-                aud.PlayOneShot(BowList[selectedBow].pullSound, BowList[selectedBow].pullVol);
+                
+               
+
+                
                 timer = 0;
 
             }
 
-            if (Input.GetButton("Shoot") && BowEquipped)
+            if (Input.GetButton("Shoot") && BowEquipped && !bowShot)
             {
+                if (timer <= 0)
+                {
+                  aud.PlayOneShot(BowList[selectedBow].pullSound, BowList[selectedBow].pullVol);
+                }
+                
+                
                 bowShot = true;
-
+                
+               
                 timer = Mathf.MoveTowards(timer, 3, Time.deltaTime);
                 // Debug.Log(timer);
                 Debug.Log(timer);
@@ -483,6 +493,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //{
 
         //}
+        
         aud.PlayOneShot(BowList[selectedBow].shootSound, BowList[selectedBow].shootVol);
         if (BowList[selectedBow].fire || BowList[selectedBow].ice || BowList[selectedBow].earth)
         {
