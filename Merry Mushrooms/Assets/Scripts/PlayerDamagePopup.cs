@@ -14,13 +14,13 @@ public class PlayerDamagePopup : MonoBehaviour
     void Awake()
     {
 
-        if (gameManager.instance.playerHUD.GetDamageTaken() > 0)
+        if (gameManager.instance.playerHUD.GetDamageTaken() > 0 && gameManager.instance.playerHUD.GetDamageTaken() != 100)
         {
             textColor = Color.red;
             damageTaken.color = textColor;
             damageTaken.text = "-" + gameManager.instance.playerHUD.GetDamageTaken().ToString();
         }
-        else if (gameManager.instance.playerHUD.GetDamageTaken() < 0)
+        else if (gameManager.instance.playerHUD.GetDamageTaken() < 0 || gameManager.instance.playerHUD.GetDamageTaken() == 100)
         {
             textColor = Color.green;
             damageTaken.color = textColor;

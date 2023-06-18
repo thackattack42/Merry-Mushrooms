@@ -17,61 +17,96 @@ public class TurnOnParticle : MonoBehaviour
     {
         _particleSystem = GetComponent<ParticleSystem>();
 
-        if (gameManager.instance.playerScript.SwordEquipped && gameObject.CompareTag("FireWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].fire)
+        if (gameManager.instance.playerScript.SwordEquipped)
         {
-        _particleSystem.Play();
+            if(gameObject.CompareTag("FireWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].fire)
+            {
+             _particleSystem.Play();
+            }
+            else if (gameObject.CompareTag("IceWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ice)
+            {
+                _particleSystem.Play();
+            }
+            else if (gameObject.CompareTag("EarthWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
+            {
+                _particleSystem.Play();
 
-        }
-        else if (gameManager.instance.playerScript.SwordEquipped && gameObject.CompareTag("IceWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ice)
-        {
-            _particleSystem.Play();
+            }
+            else
+            {
+                _particleSystem.Stop();
+            }
+        //else if (gameManager.instance.playerScript.SwordEquipped && gameObject.CompareTag("IceWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ice)
+        //{
+        //    _particleSystem.Play();
 
-        }
-        else if (gameManager.instance.playerScript.SwordEquipped && gameObject.CompareTag("EarthWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
-        {
-        _particleSystem.Play();
+        //}
+        //else if (gameManager.instance.playerScript.SwordEquipped && gameObject.CompareTag("EarthWeaponAffect") && gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
+        //{
+        //_particleSystem.Play();
             
 
         }
-        else if (gameManager.instance.playerScript.StaffEquipped && gameObject.CompareTag("DefaultStaff") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].baseStaff)
+        else if (gameManager.instance.playerScript.StaffEquipped /*&& gameObject.CompareTag("DefaultStaff") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].baseStaff*/)
         {
+            if (gameObject.CompareTag("DefaultStaff") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].baseStaff)
+            {
+
             _particleSystem.Play();
+            }
+            else if (gameObject.CompareTag("FireStaffAffect") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].fire)
+            {
+                _particleSystem.Play();
+
+            }
+            else if (gameObject.CompareTag("IceStaffAffect") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].ice)
+            {
+                _particleSystem.Play();
+
+            }
+            else if (gameObject.CompareTag("EarthStaffAffect") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].earth)
+            {
+                _particleSystem.Play();
+
+            }
+            else
+            {
+                _particleSystem.Stop();
+            }
+
 
         }
-        else if (gameManager.instance.playerScript.StaffEquipped && gameObject.CompareTag("FireStaffAffect") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].fire)
+        
+        else if (gameManager.instance.playerScript.BowEquipped )
         {
-            _particleSystem.Play();
+            if (gameObject.CompareTag("FireBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].fire)
+            {
+                _particleSystem.Play();
+
+            }
+            else if (gameObject.CompareTag("IceBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].ice)
+            {
+                _particleSystem.Play();
+
+            }
+            else if (gameObject.CompareTag("EarthBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].earth)
+            {
+                _particleSystem.Play();
+
+            }
+            else
+            {
+                _particleSystem.Stop();
+            }
+
 
         }
-        else if (gameManager.instance.playerScript.StaffEquipped && gameObject.CompareTag("IceStaffAffect") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].ice)
-        {
-            _particleSystem.Play();
+       
+        
+        //else
+        //{
 
-        } 
-        else if (gameManager.instance.playerScript.StaffEquipped && gameObject.CompareTag("EarthStaffAffect") && gameManager.instance.playerScript.staffList[gameManager.instance.playerScript.selectedStaff].earth)
-        {
-            _particleSystem.Play();
-
-        }
-        else if (gameManager.instance.playerScript.BowEquipped && gameObject.CompareTag("FireBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].fire)
-        {
-            _particleSystem.Play();
-
-        }
-        else if (gameManager.instance.playerScript.BowEquipped && gameObject.CompareTag("IceBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].ice)
-        {
-            _particleSystem.Play();
-
-        }
-        else if (gameManager.instance.playerScript.BowEquipped && gameObject.CompareTag("EarthBowAffect") && gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].earth)
-        {
-            _particleSystem.Play();
-
-        }
-        else
-        {
-
-            _particleSystem.Stop();
-        }
+        //    _particleSystem.Stop();
+        //}
     }
 }
