@@ -8,12 +8,13 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-
+    public Transform UICanvas;
     [Header("-----Player Stuff-----")]
     public GameObject player;
     public PlayerController playerScript;
@@ -21,42 +22,60 @@ public class gameManager : MonoBehaviour
     [SerializeField] public GameObject playerSpawnPos;
    // public StaffPickup staffPick;
 
-    [Header("-----UI Stuff-----")]
+    [Header("-----UI Menus-----")]
     public GameObject activeMenu;
+    public GameObject gamePlayUI;
+    public GameObject mainMenuUI;
     public GameObject pauseMenu;
     public GameObject loseMenu;
     public GameObject optionsMenu;
     public GameObject winMenu;
     public GameObject weaponSelectMenu;
+    public GameObject mainMenuButtons;
+    public GameObject credits;
+    public bool isPaused;
+
+    [Header("-----GamePlay-----")]
     public GameObject reticle;
-    public Transform UICanvas;
-    public TextMeshProUGUI ammoCount;
-    public TextMeshProUGUI ammoTotal;
-    public TextMeshProUGUI healthPoints;
-    public TextMeshProUGUI manaPoints;
-    public TextMeshProUGUI funGil;
-    public Image HPSlider;
-    public Image MPSlider;
-    //public TextMeshProUGUI dashCooldownCounter;
+    public Transform minimapRotationLock;
     public Image dashCooldownSlider;
     public Image dashCooldownFinish;
-    public AudioSource dashCooldownFinishPing;
+
+    [Header("-----Health-----")]
+    public TextMeshProUGUI healthPoints;
+    public Image HPSlider;
     public GameObject lowHPFlash;
-    public Transform minimapRotationLock;
-    public AudioMixer SFXSlider;
-    public AudioMixer MusicSlider;
-    public Music musicScript;
     public Image dmgFlash;
-    public GameObject Inventory;
-    public InventoryManager invManager;
+
+    [Header("-----Ammo/MP-----")]
+    public TextMeshProUGUI ammoCount;
+    public TextMeshProUGUI ammoTotal;
+    public TextMeshProUGUI manaPoints;
+    public Image MPSlider;
+
+    [Header("-----EXP/Level-----")]
     public TextMeshProUGUI PlayerLevelCounter;
     public TextMeshProUGUI PlayerExpPercent;
     public TextMeshProUGUI PlayerExpNumber;
     public Image ExpBarSlider;
+
+    [Header("-----Inventory/Shop-----")]
+    public TextMeshProUGUI funGil;
+    public GameObject Inventory;
+    public InventoryManager invManager;
     public GameObject shopMenu;
-    public buttonFunctions buttons;
     bool InvToggle;
-    [Header("-----Player Pickups-----")]
+    [Header("-----Audio-----")]
+    public AudioMixer SFXSlider;
+    public AudioMixer MusicSlider;
+    public Music musicScript;
+    public AudioSource dashCooldownFinishPing;
+
+    [Header("-----Menuing-----")]
+    public buttonFunctions buttons;
+
+    
+    [Header("-----Other-----")]
     //public GameObject Sword;
     //public GameObject Bow;
     //public GameObject Staff;
@@ -64,8 +83,8 @@ public class gameManager : MonoBehaviour
 
     //[SerializeField] GameObject teleporter;
     public int enemiesRemaining;
-    public bool isPaused;
     float timeScaleOrig;
+    bool hasPlayed;
     //float loadTimer;
 
     // Awake is called before Start
@@ -89,22 +108,33 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerHUD = player.GetComponent<PlayerHUD>();
-        //isPaused = false;
-        //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
-
-        //if (playerSpawnPos == null)
-        //{
-            playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-       // }
-        timeScaleOrig = Time.timeScale;
-        //loadTimer = 3;
-
-        if (playerScript.playerWeapon == 0)
+        timeScaleOrig = 1;
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
-            StartCoroutine(StartSelection());
+            if (hasPlayed)
+            {
+                UnpausedState();
+            }
+            player.SetActive(false);
+            gamePlayUI.SetActive(false);
+            mainMenuUI.SetActive(true);
+            StartCoroutine(MainMenu());
         }
-        playerScript.enabled = true;
-        playerScript.SpawnOnLoad();
+        else
+        {
+            mainMenuUI.SetActive(false);
+            gamePlayUI.SetActive(true);
+            playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+            UnpausedState();
+            if (playerScript.playerWeapon == 0)
+            {
+                StartCoroutine(StartSelection());
+            }
+            playerScript.enabled = true;
+            playerScript.SpawnOnLoad();
+            hasPlayed = true;
+        }
+        musicScript.HardSwitchMusic();
     }
     
     IEnumerator StartSelection()
@@ -115,6 +145,14 @@ public class gameManager : MonoBehaviour
         activeMenu.SetActive(true);
         PauseState();
 
+    }
+    IEnumerator MainMenu()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isPaused = true;
+        activeMenu = mainMenuButtons;
+        activeMenu.SetActive(true);
+        PauseState();
     }
 
     // Update is called once per frame
@@ -150,12 +188,6 @@ public class gameManager : MonoBehaviour
         reticle.SetActive(false);
         playerScript.enabled = false;
     }
-    public void SimiPauseState()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        reticle.SetActive(false);
-    }
     public void UnpausedState()
     {
         Time.timeScale = timeScaleOrig;
@@ -168,12 +200,6 @@ public class gameManager : MonoBehaviour
         activeMenu = null;
         reticle.SetActive(true);
         playerScript.enabled = true;
-    }
-    public void SimiUnpausedState()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        reticle.SetActive(true);
     }
 
     public void GameOver()

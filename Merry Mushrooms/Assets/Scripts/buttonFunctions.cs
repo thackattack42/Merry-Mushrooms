@@ -37,13 +37,6 @@ public class buttonFunctions : MonoBehaviour
     public void restart()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        Time.timeScale = 1;
-        gameManager.instance.activeMenu.SetActive(false);
-        gameManager.instance.activeMenu = null;
-        gameManager.instance.isPaused = false;
-        gameManager.instance.reticle.SetActive(true);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         StartCoroutine(LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
     }
     public void quit()
@@ -54,44 +47,31 @@ public class buttonFunctions : MonoBehaviour
     public void respawn()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        StartCoroutine(UnpauseGame());
         gameManager.instance.playerScript.Spawn();
     }
     public void startGame()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        MainMenuManager.instance.PlayAgain();
+        gameManager.instance.player.SetActive(true);
         StartCoroutine(LoadSceneAsync(1));
     }
     public void options()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
-        {
-            MainMenuManager.instance.mainMenuScreen.SetActive(false);
-            MainMenuManager.instance.optionScreen.SetActive(true);
-        }
-        else
-        {
-            gameManager.instance.activeMenu.SetActive(false);
-            gameManager.instance.activeMenu = gameManager.instance.optionsMenu;
-            gameManager.instance.activeMenu.SetActive(true);
-
-        }
+        gameManager.instance.activeMenu.SetActive(false);
+        gameManager.instance.activeMenu = gameManager.instance.optionsMenu;
+        gameManager.instance.activeMenu.SetActive(true);
     }
     public void credits()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        MainMenuManager.instance.mainMenuScreen.SetActive(false);
-        MainMenuManager.instance.creditsScreen.SetActive(true);
+        gameManager.instance.activeMenu.SetActive(false);
+        gameManager.instance.activeMenu = gameManager.instance.credits;
+        gameManager.instance.activeMenu.SetActive(true);
     }
     public void mainMenu()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        gameManager.instance.activeMenu.SetActive(false);
-        gameManager.instance.activeMenu = null;
-        gameManager.instance.isPaused = false;
-        gameManager.instance.reticle.SetActive(true);
         StartCoroutine(LoadSceneAsync(0));
     }
     public void PlaySelection()
@@ -103,10 +83,7 @@ public class buttonFunctions : MonoBehaviour
 
     IEnumerator LoadSceneAsync(int id)
     {
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0))
-        {
-            gameManager.instance.playerScript.enabled = false;
-        }
+        gameManager.instance.playerScript.enabled = false;
         AsyncOperation op = SceneManager.LoadSceneAsync(id);
         LoadingScreen.SetActive(true);
 
@@ -117,64 +94,11 @@ public class buttonFunctions : MonoBehaviour
             yield return null;
         }
         LoadingScreen.SetActive(false);
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0))
-        {
-            gameManager.instance.playerScript.enabled = true;
-        }
-    }
-    IEnumerator UnpauseGame()
-    {
-        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerScript.enabled = true;
+        gameManager.instance.RefreshGameManager();
+        
     }
 
-    //Option buttons
-    public void optionsBack()
-    {
-        UIAudio.PlayOneShot(MenuButtonClick);
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
-        {
-            MainMenuManager.instance.optionScreen.SetActive(false);
-            MainMenuManager.instance.mainMenuScreen.SetActive(true);
-        }
-        else
-        {
-            gameManager.instance.activeMenu.SetActive(false);
-            gameManager.instance.activeMenu = gameManager.instance.pauseMenu;
-            gameManager.instance.activeMenu.SetActive(true);
-        }
-
-    }
-    public void minimapRotTottle(bool toggle)
-    {
-        UIAudio.PlayOneShot(MenuButtonClick);
-        if (toggle)
-        {
-            gameManager.instance.playerHUD.minimapCamRot.enabled = false; //disables the rotation lock
-            gameManager.instance.playerHUD.minimapCam.transform.rotation = gameManager.instance.player.transform.rotation;
-            gameManager.instance.playerHUD.minimapCam.transform.Rotate(90, 0, 0);
-        }
-        else
-            gameManager.instance.playerHUD.minimapCamRot.enabled = true; //enables the rotation lock
-
-    }
-    public void SFXVol(float val)
-    {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
-            MainMenuManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
-        else
-            gameManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
-    }
-    public void SFXVolTest()
-    {
-        SFXTestSource.PlayOneShot(SFXTest);
-    }
-    public void MusicVol(float val)
-    {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
-            MainMenuManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
-        else
-            gameManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
-    }
 
     public void NextLevel()
     {
@@ -193,8 +117,9 @@ public class buttonFunctions : MonoBehaviour
     public void creditsBack()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
-        MainMenuManager.instance.creditsScreen.SetActive(false);
-        MainMenuManager.instance.mainMenuScreen.SetActive(true);
+        gameManager.instance.activeMenu.SetActive(false);
+        gameManager.instance.activeMenu = gameManager.instance.mainMenuButtons;
+        gameManager.instance.activeMenu.SetActive(true);
     }
 
     public void SetPlayerBow()
@@ -309,5 +234,51 @@ public class buttonFunctions : MonoBehaviour
             gameManager.instance.invManager.UpdateSkillPoints();
             earthButton.SetActive(false);
         }
+    }
+
+    //Option buttons
+    public void optionsBack()
+    {
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
+        {
+            UIAudio.PlayOneShot(MenuButtonClick);
+            gameManager.instance.activeMenu.SetActive(false);
+            gameManager.instance.activeMenu = gameManager.instance.mainMenuButtons;
+            gameManager.instance.activeMenu.SetActive(true);
+        }
+        else
+        {
+            UIAudio.PlayOneShot(MenuButtonClick);
+            gameManager.instance.activeMenu.SetActive(false);
+            gameManager.instance.activeMenu = gameManager.instance.pauseMenu;
+            gameManager.instance.activeMenu.SetActive(true);
+        }
+
+    }
+    public void minimapRotTottle(bool toggle)
+    {
+        UIAudio.PlayOneShot(MenuButtonClick);
+        if (toggle)
+        {
+            gameManager.instance.playerHUD.minimapCamRot.enabled = false; //disables the rotation lock
+            gameManager.instance.playerHUD.minimapCam.transform.rotation = gameManager.instance.player.transform.rotation;
+            gameManager.instance.playerHUD.minimapCam.transform.Rotate(90, 0, 0);
+        }
+        else
+            gameManager.instance.playerHUD.minimapCamRot.enabled = true; //enables the rotation lock
+
+    }
+    public void SFXVol(float val)
+    {
+        gameManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
+    }
+    public void SFXVolTest()
+    {
+        SFXTestSource.PlayOneShot(SFXTest);
+    }
+    public void MusicVol(float val)
+    {
+        gameManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
     }
 }

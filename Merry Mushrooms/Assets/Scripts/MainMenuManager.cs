@@ -15,6 +15,7 @@ public class MainMenuManager : MonoBehaviour
     public AudioMixer MusicSlider;
     public GameObject Player;
     GameObject UI;
+    public buttonFunctions buttons;
     public bool playerInScene;
 
     float loadTimer;
@@ -31,21 +32,6 @@ public class MainMenuManager : MonoBehaviour
             Player.SetActive(false);
             UI.SetActive(false);
             playerInScene = true;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void PlayAgain()
-    {
-        if (playerInScene)
-        {
-            Player.SetActive(true);
-            UI.SetActive(true);
-            gameManager.instance.buttons.LoadingScreen.SetActive(false);
         }
     }
 }

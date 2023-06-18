@@ -10,6 +10,7 @@ public class Music : MonoBehaviour
     public AudioClip GameplayMusic;
     public AudioClip BossMusic;
     bool switchingMusic;
+    bool hardSwitch;
     bool bossIsAlive;
     float fadeoutSpeed = 0.5f;
     // Start is called before the first frame update
@@ -21,6 +22,11 @@ public class Music : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (hardSwitch)
+        {
+            MusicSource.Stop();
+            hardSwitch = false;
+        }
         if (!MusicSource.isPlaying)
             PlayMusic();
         if (switchingMusic)
@@ -53,5 +59,10 @@ public class Music : MonoBehaviour
     {
         switchingMusic = true;
         bossIsAlive = state;
+    }
+
+    public void HardSwitchMusic()
+    {
+        hardSwitch = true;
     }
 }
