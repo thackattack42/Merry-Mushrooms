@@ -47,6 +47,7 @@ public class buttonFunctions : MonoBehaviour
     public void respawn()
     {
         UIAudio.PlayOneShot(MenuButtonClick);
+        gameManager.instance.UnpausedState();
         gameManager.instance.playerScript.Spawn();
     }
     public void startGame()

@@ -95,6 +95,8 @@ public class PlayerHUD : MonoBehaviour
             gameManager.instance.playerScript.HP = 0;
         if (((float)gameManager.instance.playerScript.HP / maxPlayerHP) < gameManager.instance.HPSlider.fillAmount)
             StartCoroutine(damageFlash());
+        else
+            gameManager.instance.lowHPFlash.SetActive(false);
         gameManager.instance.healthPoints.text = gameManager.instance.playerScript.HP.ToString();
         gameManager.instance.HPSlider.fillAmount = (float)gameManager.instance.playerScript.HP / maxPlayerHP;
         
