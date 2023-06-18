@@ -700,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 25
+  MaxHP: 25
   playerFaceSpeed: 15
   level: 3
   viewCone: 90
@@ -711,7 +712,6 @@ MonoBehaviour:
   headPos: {fileID: 3884287658158596209}
   animr: {fileID: 3515700508001376059}
   aud: {fileID: 5224788859500337812}
-  spawnParticle: {fileID: 198938402097657526, guid: 6f672a31584a6a748912a49c1dce2f0c, type: 3}
   audShoot: []
   audShootVol: 0
   playerDir: {x: 0, y: 0, z: 0}
@@ -735,6 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6547c2cfe905f74480134c866ffacef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackPower: 0
 --- !u!95 &3515700508001376059
 Animator:
   serializedVersion: 5

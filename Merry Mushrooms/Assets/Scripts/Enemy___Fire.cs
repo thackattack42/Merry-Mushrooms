@@ -63,7 +63,8 @@ public class Enemy___Fire : MonoBehaviour, IEarthDamage, IIceDamage, IFireDamage
 
     public void TakeFireDamage(int dmg)
     {
-        enemy.HP += dmg;
+        if (enemy.HP < enemy.MaxHP)
+            enemy.HP += dmg;
     }
     public void takeDamage(int dmg)
     {

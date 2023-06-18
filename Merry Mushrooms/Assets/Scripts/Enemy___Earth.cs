@@ -56,7 +56,8 @@ public class Enemy___Earth : MonoBehaviour, IIceDamage, IFireDamage, IEarthDamag
 
     public void TakeEarthDamage(int dmg)
     {
-        enemy.HP += dmg;
+        if (enemy.HP < enemy.MaxHP)
+            enemy.HP += dmg;
     }
     public void takeDamage(int dmg)
     {

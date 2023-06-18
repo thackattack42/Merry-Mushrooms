@@ -929,6 +929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 10
+  MaxHP: 10
   playerFaceSpeed: 15
   level: 1
   viewCone: 90
@@ -966,7 +967,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774f9b00eb0f7224895fd41de3f6e8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackPower: 0
 --- !u!95 &893918683860758695
 Animator:
   serializedVersion: 5

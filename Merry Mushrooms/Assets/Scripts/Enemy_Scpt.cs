@@ -11,6 +11,7 @@ public class Enemy_Scpt : MonoBehaviour, IPhysics
     #region fields
     [Header("------ Stats ------")]
     [Range(5, 1000)][SerializeField] public int HP;
+    [SerializeField] public int MaxHP;
     [Range(5, 100)][SerializeField] int playerFaceSpeed;
     [SerializeField] public int level;
     public int viewCone;
