@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class buttonFunctions : MonoBehaviour
 {
-    public AudioSource SFXTestSource;
-    public AudioSource UIAudio;
-    public AudioClip MenuButtonClick;
-    public AudioClip MenuSelection;
+  
+    [Header("-----Inventory Menu Buttons-----")]
     [SerializeField] GameObject skillTree;
     public GameObject fireButton;
     public GameObject iceButton;
     public GameObject earthButton;
+    [Header("-----Audio-----")]
+    public AudioSource SFXTestSource;
+    public AudioClip SFXTest;
+    public AudioSource UIAudio;
+    public AudioClip MenuButtonClick;
+    public AudioClip MenuSelection;
+    [Header("-----Weapon Stats-----")]
     public SwordStats fireSword;
     public SwordStats iceSword;
     public SwordStats earthSword;
@@ -25,7 +31,7 @@ public class buttonFunctions : MonoBehaviour
     public BowStats fireBow;
     public BowStats iceBow;
     public BowStats earthBow;
-    public AudioClip SFXTest;
+    [Header("-----Loading Screen-----")] 
     public GameObject LoadingScreen;
     public Image LoadingBar;
 
