@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerArrowDamage : MonoBehaviour
@@ -44,8 +45,10 @@ public class PlayerArrowDamage : MonoBehaviour
             //Debug.Log((gameManager.instance.playerScript.bowShootDamage) * (int)(Time.time - gameManager.instance.playerScript.timer));
            // Debug.Log((gameManager.instance.playerScript.bowShootDamage * (int)gameManager.instance.playerScript.timer) / Time.deltaTime);
         }
-
+        
+       
         Destroy(gameObject);    
+        
         //IDamage damageable = collision.gameObject.GetComponent<IDamage>();
 
         //if (damageable != null)

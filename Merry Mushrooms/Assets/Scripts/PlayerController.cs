@@ -532,12 +532,12 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     }
     void SwitchBow()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedBow < BowList.Count - 1)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedBow < BowList.Count - 1 && !bowShot)
         {
             selectedBow++;
             ChangeBowStats();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedBow > 0)
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedBow > 0 && !bowShot)
         {
             selectedBow--;
             ChangeBowStats();
