@@ -195,7 +195,8 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         isPaused = false;
         InvToggle = false;
-
+        dmgFlash.enabled = false;
+        lowHPFlash.SetActive(false);
         activeMenu.SetActive(false);
         activeMenu = null;
         reticle.SetActive(true);
