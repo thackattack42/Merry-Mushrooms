@@ -76,7 +76,7 @@ public class Enemy___Ice : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage,
 
     public void TakeIceDamage(int dmg)
     {
-        if (enemy.HP < enemy.MaxHP)
+        if (enemy.HP < enemy.maxHP)
             enemy.HP += dmg;
     }
 
