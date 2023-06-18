@@ -344,7 +344,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             isSprinting = true;
 
         }
-        else if (Input.GetButtonUp("Sprint") && !isCrouching)
+        else if ((Input.GetButtonUp("Sprint") || !Input.GetButton("Sprint")) && !isCrouching)
         {
             playerSpeed = origSpeed;
             isSprinting = false;
@@ -394,6 +394,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             yield return new WaitForSeconds(0.5f);
         }
         stepIsPlaying = false;
+    }
+
+    public void ResetDash()
+    {
+        isDashing = 0;
     }
 
     #endregion

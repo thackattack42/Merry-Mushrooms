@@ -46,7 +46,7 @@ public class PlayerHUD : MonoBehaviour
         updatePlayerMana();
         gameManager.instance.funGil.text = funGil.ToString();
         //gameManager.instance.dashCooldownCounter.text = "";
-        gameManager.instance.dashCooldownSlider.fillAmount = 1f;
+        //gameManager.instance.dashCooldownSlider.fillAmount = 1f;
         constraint.sourceTransform = gameManager.instance.minimapRotationLock;
         constraint.weight = 1;
         minimapBGRot.AddSource(constraint);
@@ -152,6 +152,15 @@ public class PlayerHUD : MonoBehaviour
         gameManager.instance.dashCooldownFinish.enabled = true;
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.dashCooldownFinish.enabled = false;
+    }
+    public void ResetDash()
+    {
+        StopCoroutine(dashCooldownStart());
+        StopCoroutine(dashCooldownEnd());
+        isDashing = false;
+        dashIsOnCooldown = false;
+        gameManager.instance.dashCooldownSlider.fillAmount = 1f;
+
     }
     public void UpdatePlayerLevel()
     {

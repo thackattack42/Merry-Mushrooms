@@ -85,6 +85,7 @@ public class gameManager : MonoBehaviour
     public int enemiesRemaining;
     float timeScaleOrig;
     bool hasPlayed;
+    bool startedFromMainMenu;
     //float loadTimer;
 
     // Awake is called before Start
@@ -119,19 +120,26 @@ public class gameManager : MonoBehaviour
             gamePlayUI.SetActive(false);
             mainMenuUI.SetActive(true);
             StartCoroutine(MainMenu());
+            
         }
         else
         {
             mainMenuUI.SetActive(false);
             gamePlayUI.SetActive(true);
             playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-            UnpausedState();
+            if (startedFromMainMenu)
+                UnpausedState();
             if (playerScript.playerWeapon == 0)
             {
                 StartCoroutine(StartSelection());
             }
             playerScript.enabled = true;
             playerScript.SpawnOnLoad();
+            if (hasPlayed)
+            {
+                playerScript.ResetDash();
+                playerHUD.ResetDash();
+            }
             hasPlayed = true;
         }
         musicScript.HardSwitchMusic();
@@ -149,6 +157,7 @@ public class gameManager : MonoBehaviour
     IEnumerator MainMenu()
     {
         yield return new WaitForSeconds(0.1f);
+        startedFromMainMenu = true;
         isPaused = true;
         activeMenu = mainMenuButtons;
         activeMenu.SetActive(true);
@@ -162,7 +171,7 @@ public class gameManager : MonoBehaviour
         {
             isPaused = !isPaused;
             activeMenu = pauseMenu;
-            activeMenu.SetActive(isPaused);
+            activeMenu.SetActive(true);
             PauseState();
         }
         if (Input.GetButtonDown("Tab") && activeMenu == null)
@@ -197,7 +206,8 @@ public class gameManager : MonoBehaviour
         InvToggle = false;
         dmgFlash.enabled = false;
         lowHPFlash.SetActive(false);
-        activeMenu.SetActive(false);
+        if (activeMenu != null)
+            activeMenu.SetActive(false);
         activeMenu = null;
         reticle.SetActive(true);
         playerScript.enabled = true;
