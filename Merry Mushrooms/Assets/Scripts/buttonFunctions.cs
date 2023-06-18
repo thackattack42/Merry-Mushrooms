@@ -85,6 +85,7 @@ public class buttonFunctions : MonoBehaviour
     IEnumerator LoadSceneAsync(int id)
     {
         gameManager.instance.playerScript.enabled = false;
+        gameManager.instance.hasBeenOnLoadScreen = true;
         AsyncOperation op = SceneManager.LoadSceneAsync(id);
         LoadingScreen.SetActive(true);
 

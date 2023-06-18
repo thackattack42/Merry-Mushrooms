@@ -85,7 +85,7 @@ public class gameManager : MonoBehaviour
     public int enemiesRemaining;
     float timeScaleOrig;
     bool hasPlayed;
-    bool startedFromMainMenu;
+    public bool hasBeenOnLoadScreen;
     //float loadTimer;
 
     // Awake is called before Start
@@ -127,7 +127,7 @@ public class gameManager : MonoBehaviour
             mainMenuUI.SetActive(false);
             gamePlayUI.SetActive(true);
             playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-            if (startedFromMainMenu)
+            if (hasBeenOnLoadScreen)
                 UnpausedState();
             if (playerScript.playerWeapon == 0)
             {
@@ -157,7 +157,6 @@ public class gameManager : MonoBehaviour
     IEnumerator MainMenu()
     {
         yield return new WaitForSeconds(0.1f);
-        startedFromMainMenu = true;
         isPaused = true;
         activeMenu = mainMenuButtons;
         activeMenu.SetActive(true);
