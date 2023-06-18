@@ -27,7 +27,7 @@ public class EnemyDamagePopup : MonoBehaviour
         {
             textColor = Color.green;
             damageTaken.color = textColor;
-            damageTaken.text = "+" + (parent.GetUIHPVal() + parent.enemyScript.HP);
+            damageTaken.text = "+" + (parent.enemyScript.HP - parent.GetUIHPVal());
         }
         delTimer = 2f;
     }
