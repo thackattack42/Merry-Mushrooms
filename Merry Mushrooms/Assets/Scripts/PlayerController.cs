@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     private Vector3 destination;
     private Vector3 pushBack;
     private int isDashing;
+    private bool isPulling;
     public float timer;
     public bool isUnderAttack;
     public bool onFire;
@@ -220,14 +221,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
             }
 
-            if (Input.GetButton("Shoot") && BowEquipped && !bowShot)
+            if (Input.GetButton("Shoot") && BowEquipped)
             {
-                if (timer <= 0)
+                if (!isPulling)
                 {
                   aud.PlayOneShot(BowList[selectedBow].pullSound, BowList[selectedBow].pullVol);
                 }
-                
-                
+
+                isPulling = true;
                 bowShot = true;
                 
                
@@ -268,6 +269,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //Debug.Log("did thing");
         isShooting = false;
         bowShot = false;
+        isPulling = false;
     }
     #region PlayerMovement
     void Movement()
