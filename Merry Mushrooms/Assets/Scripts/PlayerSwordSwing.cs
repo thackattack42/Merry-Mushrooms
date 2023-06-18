@@ -7,15 +7,21 @@ public class PlayerSwordSwing : MonoBehaviour
 
     [SerializeField] Animator animr;
     // Start is called before the first frame update
-    
 
+
+    private void Awake()
+    {
+        animr.speed += 1;
+    }
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetButtonDown("Shoot") && !gameManager.instance.playerScript.holdingShield && gameManager.instance.playerScript.SwordEquipped)
         {
-            animr.SetTrigger("Attacking");
-            
+            if (gameManager.instance.playerScript.MP > 10 || gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].baseStaff)
+                animr.SetTrigger("Attacking");
+           
             
         } 
         else
