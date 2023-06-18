@@ -16,41 +16,45 @@ public class PlayerSwordSwing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetButtonDown("Shoot") && !gameManager.instance.playerScript.holdingShield && gameManager.instance.playerScript.SwordEquipped)
+        if (gameManager.instance.activeMenu == null)
         {
-            if (gameManager.instance.playerScript.MP > 10 || gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].baseStaff)
-                animr.SetTrigger("Attacking");
-           
-            
-        } 
-        else
-        {
-            animr.ResetTrigger("Attacking");
+
+
+            if (Input.GetButtonDown("Shoot") && !gameManager.instance.playerScript.holdingShield && gameManager.instance.playerScript.SwordEquipped)
+            {
+                if (gameManager.instance.playerScript.MP > 10 || gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].baseStaff)
+                    animr.SetTrigger("Attacking");
+
+
+            }
+            else
+            {
+                animr.ResetTrigger("Attacking");
+            }
+
+            //else if (Input.GetButtonUp("Shoot"))
+            //{
+            //    animr.SetBool("Attacking", false);
+            //}
         }
-
-        //else if (Input.GetButtonUp("Shoot"))
-        //{
-        //    animr.SetBool("Attacking", false);
-        //}
-
     }
 
     public void UseMana()
     {
 
         if (gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].fire || gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].ice || gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].earth)
-        gameManager.instance.playerScript.MP -= 10;
+            gameManager.instance.playerScript.MP -= 10;
         gameManager.instance.playerHUD.updatePlayerMana();
     }
     public void TurnOffSwing()
     {
-       
+
         animr.ResetTrigger("Attacking");
     }
-   
+
     public void PlaySwingSound()
     {
         gameManager.instance.playerScript.aud.PlayOneShot(gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingSound, gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].swingVol);
     }
+
 }
