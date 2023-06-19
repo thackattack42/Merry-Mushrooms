@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     [SerializeField] float playerSpeed;
     [Range(0, 20)][SerializeField] float jumpHeight;
     [SerializeField] float gravityValue;
-    [Range(1, 3)][SerializeField] int maxJumps;
+    [Range(0, 3)][SerializeField] int maxJumps;
     [Range(2, 3)][SerializeField] int sprintSpeed;
     [SerializeField] public int maxHP;
     [SerializeField] public int maxMP;

@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ice_Weaponless - Easy
       objectReference: {fileID: 0}
+    - target: {fileID: 7546283163508901817, guid: d9834cd2d4aeed548a3f80a5ddfeb9f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9834cd2d4aeed548a3f80a5ddfeb9f1, type: 3}
 --- !u!1001 &201893516
@@ -255,6 +259,14 @@ PrefabInstance:
     - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: maxMP
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
+      propertyPath: maxJumps
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
+      propertyPath: jumpHeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: skillPoints
@@ -323,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6815654208747896387, guid: 9febf6f94d007674992ceb2fae76034a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6815654208747896388, guid: 9febf6f94d007674992ceb2fae76034a, type: 3}
       propertyPath: m_RootOrder
@@ -697,6 +709,14 @@ PrefabInstance:
     - target: {fileID: 4921570995846447192, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921570995846447192, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921570995846447192, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7955122192680073816, guid: aaa19b3bbf6220e47ab01287a477f473, type: 3}
       propertyPath: m_RootOrder
