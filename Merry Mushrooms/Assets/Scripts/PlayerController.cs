@@ -134,8 +134,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     public enum weapon
     {
-        Restart,
-        Sword,
+        //Restart,
+        Sword = 1,
         Bow,
         Staff
     }

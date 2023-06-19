@@ -129,6 +129,15 @@ public class gameManager : MonoBehaviour
             playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
             if (hasBeenOnLoadScreen)
                 UnpausedState();
+            //if (playerScript.playerWeapon != 0 && SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+            //{
+            //    playerScript.playerWeapon = 0;
+            //    playerScript.swordMat.enabled = false;
+            //    playerScript.staffMat.enabled = false;
+            //    playerScript.bowMat.enabled = false;
+            //    playerScript.shieldMat.enabled = false;
+            //}
+
             if (playerScript.playerWeapon == 0)
             {
                 StartCoroutine(StartSelection());
