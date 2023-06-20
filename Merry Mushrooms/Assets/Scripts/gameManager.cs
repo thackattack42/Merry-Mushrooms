@@ -176,7 +176,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && activeMenu == null)
+        if (Input.GetButtonDown("Cancel") && activeMenu == null && !playerScript.swordSwung && !playerScript.holdingShield)
         {
             isPaused = !isPaused;
             activeMenu = pauseMenu;
