@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     static PlayerController pc;
 
     private Vector3 playerVelocity;
+    private Vector3 origPlayerVelocity;
     private Vector3 move;
     private int jumpedTimes;
     private bool groundedPlayer;
@@ -309,16 +310,20 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     IEnumerator Dash()
     {
         // Will make player dash
-        playerSpeed *= dashSpeed;
+        //playerSpeed *= dashSpeed;
+        origPlayerVelocity = playerVelocity;
+        playerVelocity = Camera.main.transform.forward * dashSpeed;
+
         Debug.Log("Player Dashed");
         // How long the player will dash for
         yield return new WaitForSeconds(dashTime);
-        if (isSprinting)
-        {
-            playerSpeed /= dashSpeed;
-        }
-        else
-            playerSpeed = origSpeed;
+        playerVelocity = origPlayerVelocity;
+        //if (isSprinting)
+        //{
+        //    playerSpeed /= dashSpeed;
+        //}
+        //else
+        //    playerSpeed = origSpeed;
 
     }
 
