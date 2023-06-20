@@ -196,14 +196,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 playerDash();
                 StartCoroutine(WaitForDash());
             }
-            //if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0 && StaffEquipped)
-            //{
-            //    StartCoroutine(Reload());
-            //}
-            //if (Input.GetKeyDown(KeyCode.R) || BowList.Count != 0 && BowList[selectedBow].ammoClip <= 0 && BowEquipped)
-            //{
-            //    StartCoroutine(Reload());
-            //}
+            
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0 && StaffEquipped)
             {
@@ -324,7 +317,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         //}
         //else
         //    playerSpeed = origSpeed;
-
     }
 
     void playerDash()
@@ -367,9 +359,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         {
             playerSpeed = origSpeed;
             isCrouching = false;
-            controller.height = origHeight;
+            controller.height = Mathf.MoveTowards(controller.height, origHeight, 2);
+            //controller.height = Mathf.MoveTowards(controller.height, origHeight, Time.deltaTime);
         }
     }
+    
     void OnPlayerCrouch()
     {
         if (Input.GetButtonDown("Crouch"))
