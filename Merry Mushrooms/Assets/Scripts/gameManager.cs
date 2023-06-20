@@ -30,6 +30,7 @@ public class gameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject optionsMenu;
     public GameObject winMenu;
+    public GameObject nextLevelMenu;
     public GameObject weaponSelectMenu;
     public GameObject mainMenuButtons;
     public GameObject credits;
@@ -129,6 +130,15 @@ public class gameManager : MonoBehaviour
             playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
             if (hasBeenOnLoadScreen)
                 UnpausedState();
+            //if (playerScript.playerWeapon != 0 && SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+            //{
+            //    playerScript.playerWeapon = 0;
+            //    playerScript.swordMat.enabled = false;
+            //    playerScript.staffMat.enabled = false;
+            //    playerScript.bowMat.enabled = false;
+            //    playerScript.shieldMat.enabled = false;
+            //}
+
             if (playerScript.playerWeapon == 0)
             {
                 StartCoroutine(StartSelection());
@@ -225,7 +235,10 @@ public class gameManager : MonoBehaviour
 
        if (enemiesRemaining <= 0) 
         {
-            StartCoroutine(YouWin());
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+                StartCoroutine(GoToNextLevel());
+            else
+                StartCoroutine(YouWin());
         }
     }
 
@@ -235,6 +248,14 @@ public class gameManager : MonoBehaviour
         //teleporter.SetActive(true);
         PauseState();
         activeMenu = winMenu;
+        activeMenu.SetActive(true);
+    }
+    public IEnumerator GoToNextLevel()
+    {
+        yield return new WaitForSeconds(5);
+        //teleporter.SetActive(true);
+        PauseState();
+        activeMenu = nextLevelMenu;
         activeMenu.SetActive(true);
     }
 
