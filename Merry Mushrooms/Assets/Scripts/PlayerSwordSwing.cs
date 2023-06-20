@@ -23,14 +23,17 @@ public class PlayerSwordSwing : MonoBehaviour
             if (Input.GetButtonDown("Shoot") && !gameManager.instance.playerScript.holdingShield && gameManager.instance.playerScript.SwordEquipped)
             {
                 if (gameManager.instance.playerScript.MP > 10 || gameManager.instance.playerScript.SwordList[gameManager.instance.playerScript.selectedSword].baseStaff)
+                {
                     animr.SetTrigger("Attacking");
+                    gameManager.instance.playerScript.swordSwung = true;
+                }
 
 
             }
-            else
-            {
-                animr.ResetTrigger("Attacking");
-            }
+            //else
+            //{
+            //    animr.ResetTrigger("Attacking");
+            //}
 
             //else if (Input.GetButtonUp("Shoot"))
             //{
@@ -50,6 +53,7 @@ public class PlayerSwordSwing : MonoBehaviour
     {
 
         animr.ResetTrigger("Attacking");
+        gameManager.instance.playerScript.swordSwung = false;
     }
 
     public void PlaySwingSound()

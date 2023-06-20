@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool ShieldEquipped;
     public bool holdingShield;
     public bool bowShot;
+    public bool swordSwung;
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
@@ -152,6 +153,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             controller.height = 2.0f;
             origHeight = controller.height;
             HP = maxHP;
+            MP = maxMP;
             holdingShield = false;
             statusEffects = new Dictionary<string, StatusEffectData>();
         }
@@ -177,6 +179,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             OnPlayerCrouch();
             OnPlayerUncrouch();
             Movement();
+            CrouchPlayer();
             if (staffList.Count > 0)
             {
                 SwitchStaff();
@@ -251,10 +254,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 UpdateStatusEffects();
             }
             period += UnityEngine.Time.deltaTime;
+       
         }
 
         Sprint();
-        CrouchPlayer();
     }
 
     IEnumerator BowCoolDown()
@@ -359,8 +362,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         {
             playerSpeed = origSpeed;
             isCrouching = false;
-            controller.height = Mathf.MoveTowards(controller.height, origHeight, 2);
-            //controller.height = Mathf.MoveTowards(controller.height, origHeight, Time.deltaTime);
+
+
+            //controller.height = Mathf.MoveTowards(controller.height, origHeight, 2);
+            controller.height = origHeight;
         }
     }
     
@@ -591,12 +596,12 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     void SwitchSword()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedSword < SwordList.Count - 1)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedSword < SwordList.Count - 1 && !swordSwung)
         {
             selectedSword++;
             ChangeSwordStats();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedSword > 0)
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedSword > 0 && !swordSwung)
         {
             selectedSword--;
             ChangeSwordStats();
@@ -639,7 +644,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         transform.rotation = gameManager.instance.playerSpawnPos.transform.rotation;
         controller.enabled = true;
         HP = maxHP;
+        MP = maxMP;
         gameManager.instance.playerHUD.updatePlayerHealth(0);
+        gameManager.instance.playerHUD.updatePlayerMana();
+
     }
 
     public void SpawnOnLoad()
