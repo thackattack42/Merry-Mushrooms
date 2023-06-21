@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     static PlayerController pc;
 
     private Vector3 playerVelocity;
+    private Vector3 origPlayerVelocity;
     private Vector3 move;
     private int jumpedTimes;
     private bool groundedPlayer;
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     private float origSpeed;
     private float origHeight;
-    private bool isShooting;
+    public bool isShooting;
     public bool isReloading;
     private bool isSprinting;
     public bool isCrouching;
@@ -119,12 +120,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     public bool ShieldEquipped;
     public bool holdingShield;
     public bool bowShot;
+    public bool swordSwung;
     public delegate void PlayerCrouch();
     public static event PlayerCrouch Crouch;
     public static event PlayerCrouch Uncrouch;
 
     private Dictionary<string, StatusEffectData> statusEffects;
     private float period = 0.0f;
+    public int lv2StartingHP;
 
     public PlayerController()
     {
@@ -151,6 +154,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             controller.height = 2.0f;
             origHeight = controller.height;
             HP = maxHP;
+            MP = maxMP;
             holdingShield = false;
             statusEffects = new Dictionary<string, StatusEffectData>();
         }
@@ -170,12 +174,15 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
         if (gameManager.instance.activeMenu == null)
         {
-
-            MP = Mathf.MoveTowards(MP, maxMP, Time.deltaTime);
+            if(MP < 100)
+            {
+            MP = Mathf.MoveTowards(MP, maxMP, Time.deltaTime * 2);
             gameManager.instance.playerHUD.updatePlayerMana();
+            }
             OnPlayerCrouch();
             OnPlayerUncrouch();
             Movement();
+            CrouchPlayer();
             if (staffList.Count > 0)
             {
                 SwitchStaff();
@@ -195,14 +202,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 playerDash();
                 StartCoroutine(WaitForDash());
             }
-            //if (Input.GetKeyDown(KeyCode.R) || staffList.Count != 0 && staffList[selectedStaff].ammoClip <= 0 && StaffEquipped)
-            //{
-            //    StartCoroutine(Reload());
-            //}
-            //if (Input.GetKeyDown(KeyCode.R) || BowList.Count != 0 && BowList[selectedBow].ammoClip <= 0 && BowEquipped)
-            //{
-            //    StartCoroutine(Reload());
-            //}
+            
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0 && StaffEquipped)
             {
@@ -257,10 +257,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 UpdateStatusEffects();
             }
             period += UnityEngine.Time.deltaTime;
+       
         }
 
         Sprint();
-        CrouchPlayer();
     }
 
     IEnumerator BowCoolDown()
@@ -309,17 +309,20 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     IEnumerator Dash()
     {
         // Will make player dash
-        playerSpeed *= dashSpeed;
+        //playerSpeed *= dashSpeed;
+        origPlayerVelocity = playerVelocity;
+        playerVelocity = Camera.main.transform.forward * dashSpeed;
+
         Debug.Log("Player Dashed");
         // How long the player will dash for
         yield return new WaitForSeconds(dashTime);
-        if (isSprinting)
-        {
-            playerSpeed /= dashSpeed;
-        }
-        else
-            playerSpeed = origSpeed;
-
+        playerVelocity = origPlayerVelocity;
+        //if (isSprinting)
+        //{
+        //    playerSpeed /= dashSpeed;
+        //}
+        //else
+        //    playerSpeed = origSpeed;
     }
 
     void playerDash()
@@ -362,9 +365,13 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         {
             playerSpeed = origSpeed;
             isCrouching = false;
+
+
+            //controller.height = Mathf.MoveTowards(controller.height, origHeight, 2);
             controller.height = origHeight;
         }
     }
+    
     void OnPlayerCrouch()
     {
         if (Input.GetButtonDown("Crouch"))
@@ -522,7 +529,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         }
         // Creates bullet object and shoots it towards the center ray of the camera
         GameObject bulletToShoot = Instantiate(BowList[selectedBow].arrowToShoot, arrowPoint.transform.position, Camera.main.transform.rotation);
-        bulletToShoot.GetComponent<Rigidbody>().velocity = (destination - arrowPoint.transform.position).normalized * (timer + BowList[selectedStaff].bowShootDistance);
+        bulletToShoot.GetComponent<Rigidbody>().velocity = (destination - arrowPoint.transform.position).normalized * ((timer + 0.2f) * BowList[selectedStaff].bowShootDistance);
         //Destroy(bulletToShoot, 1);
 
         ////Muzzle Flash
@@ -592,12 +599,12 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     void SwitchSword()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedSword < SwordList.Count - 1)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedSword < SwordList.Count - 1 && !swordSwung)
         {
             selectedSword++;
             ChangeSwordStats();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedSword > 0)
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedSword > 0 && !swordSwung)
         {
             selectedSword--;
             ChangeSwordStats();
@@ -640,15 +647,22 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         transform.rotation = gameManager.instance.playerSpawnPos.transform.rotation;
         controller.enabled = true;
         HP = maxHP;
+        MP = maxMP;
         gameManager.instance.playerHUD.updatePlayerHealth(0);
+        gameManager.instance.playerHUD.updatePlayerMana();
+
     }
 
-    public void SpawnOnLoad()
+    public void SpawnOnNextLvl()
     {
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         transform.rotation = gameManager.instance.playerSpawnPos.transform.rotation;
         controller.enabled = true;
+        HP = lv2StartingHP;
+        MP = maxMP;
+        gameManager.instance.playerHUD.updatePlayerHealth(0);
+        gameManager.instance.playerHUD.updatePlayerMana();
     }
     public void KnockBack(Vector3 dir)
     {

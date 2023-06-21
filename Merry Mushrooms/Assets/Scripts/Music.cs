@@ -64,5 +64,6 @@ public class Music : MonoBehaviour
     public void HardSwitchMusic()
     {
         hardSwitch = true;
+        bossIsAlive = false;
     }
 }

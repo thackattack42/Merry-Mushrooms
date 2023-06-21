@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8cc83c1b248c24a838d38006ab25a9, type: 3}
+  m_Name: PlayerBow-IceStat 1
+  m_EditorClassIdentifier: 
+  bowShootDistance: 20
+  bowShootDamage: 2
+  model: {fileID: 543490590627816055, guid: f0e2e0545f52fbe42b55e31d25e434b8, type: 3}
+  arrowToShoot: {fileID: 5930104592122723581, guid: eb264e13179c13146b612a3cf9bb1015, type: 3}
+  shootSound: {fileID: 8300000, guid: d9419ba0bfac1e84a95418ac5851caf6, type: 3}
+  pullSound: {fileID: 8300000, guid: 88122c63759aae140bb59a8f78d8523b, type: 3}
+  shootVol: 0.5
+  pullVol: 1
+  ammoClip: 5
+  ammoReserves: 40
+  origAmmo: 5
+  origAmmoReserves: 40
+  fire: 0
+  ice: 1
+  earth: 0
+  baseStaff: 0

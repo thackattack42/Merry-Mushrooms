@@ -21,7 +21,7 @@ public class ShieldBlock : MonoBehaviour
             //GetComponent<BoxCollider>().enabled = true;
             
             ActivateShield();
-            if (Input.GetMouseButtonDown(1) && amountClicked == 0)
+            if (Input.GetMouseButton(1) && amountClicked == 0)
             {
                 gameManager.instance.playerScript.holdingShield = true;
                 amountClicked++;
@@ -47,7 +47,7 @@ public class ShieldBlock : MonoBehaviour
 
     private void ActivateShield()
     {
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButton(1))
         {
             GetComponent<BoxCollider>().enabled = true ;
         }

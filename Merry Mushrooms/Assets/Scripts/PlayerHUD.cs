@@ -90,7 +90,7 @@ public class PlayerHUD : MonoBehaviour
     public void updatePlayerHealth(int amount)
     {
         damageTaken = amount;
-        Instantiate(damagePopup, gameManager.instance.UICanvas);
+        Instantiate(damagePopup, gameManager.instance.healthPoints.transform);
         if (gameManager.instance.playerScript.HP < 0) //to make sure the number in the UI doesn't show negative, or it will look weird.
             gameManager.instance.playerScript.HP = 0;
         if (((float)gameManager.instance.playerScript.HP / maxPlayerHP) < gameManager.instance.HPSlider.fillAmount)
@@ -166,14 +166,14 @@ public class PlayerHUD : MonoBehaviour
     {
         gameManager.instance.PlayerLevelCounter.text = gameManager.instance.playerScript.level.ToString();
         if (gameManager.instance.playerScript.level > 0)
-            Instantiate(LevelUpPopup, gameManager.instance.UICanvas);
+            Instantiate(LevelUpPopup, gameManager.instance.PlayerLevelCounter.transform);
         UpdatePlayerEXP(0);
     }
     public void UpdatePlayerEXP(int amount)
     {
         expGained = amount;
         if (amount > 0)
-            Instantiate(expPopup, gameManager.instance.UICanvas);
+            Instantiate(expPopup, gameManager.instance.PlayerExpNumber.transform);
         float expPercent = ((float)gameManager.instance.playerScript.currExp / gameManager.instance.playerScript.expToNextLevel) * 100;
         gameManager.instance.PlayerExpNumber.text = gameManager.instance.playerScript.currExp.ToString() + " / " + gameManager.instance.playerScript.expToNextLevel.ToString();
         gameManager.instance.PlayerExpPercent.text = expPercent.ToString("0") + "%";
