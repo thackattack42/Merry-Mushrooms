@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -34,6 +35,11 @@ public class buttonFunctions : MonoBehaviour
     [Header("-----Loading Screen-----")] 
     public GameObject LoadingScreen;
     public Image LoadingBar;
+    [Header("-----Option Buttons-----")]
+    public Slider SFXVolSlider;
+    public Slider MusicVolSlider;
+    public Toggle MinimapRotTogg;
+
 
     public void resume()
     {
@@ -101,6 +107,7 @@ public class buttonFunctions : MonoBehaviour
             LoadingBar.fillAmount = Mathf.Clamp01(op.progress / 0.9f);
             yield return null;
         }
+        yield return new WaitForSecondsRealtime(2);
         LoadingScreen.SetActive(false);
         gameManager.instance.playerScript.enabled = true;
         gameManager.instance.RefreshGameManager();
@@ -265,21 +272,54 @@ public class buttonFunctions : MonoBehaviour
         }
 
     }
+    
+    public void LoadSettings()
+    {
+        float sfxVol = PlayerPrefs.GetFloat("SFXVol");
+        float musicVol = PlayerPrefs.GetFloat("MusicVol");
+        int minimapTog = PlayerPrefs.GetInt("MiniMapRot");
+        if (sfxVol == 0)
+            sfxVol = .5f;
+        if (musicVol == 0)
+            musicVol = .5f;
+
+        if (minimapTog == 0)
+        {
+            MinimapRotTogg.isOn = false;
+            minimapRotTottle(false);
+        }
+        else
+        {
+            MinimapRotTogg.isOn = true;
+            minimapRotTottle(true);
+        }
+        SFXVolSlider.value = sfxVol;
+        SFXVol(sfxVol);
+        MusicVolSlider.value = musicVol;
+        MusicVol(musicVol);
+    }
+
     public void minimapRotTottle(bool toggle)
     {
         UIAudio.PlayOneShot(MenuButtonClick);
         if (toggle)
         {
+            PlayerPrefs.SetInt("MiniMapRot", 1);
             gameManager.instance.playerHUD.minimapCamRot.enabled = false; //disables the rotation lock
             gameManager.instance.playerHUD.minimapCam.transform.rotation = gameManager.instance.player.transform.rotation;
             gameManager.instance.playerHUD.minimapCam.transform.Rotate(90, 0, 0);
         }
         else
+        {
+            PlayerPrefs.SetInt("MiniMapRot", 0);
             gameManager.instance.playerHUD.minimapCamRot.enabled = true; //enables the rotation lock
+        }
+            
 
     }
     public void SFXVol(float val)
     {
+        PlayerPrefs.SetFloat("SFXVol", val);
         gameManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
     }
     public void SFXVolTest()
@@ -288,6 +328,7 @@ public class buttonFunctions : MonoBehaviour
     }
     public void MusicVol(float val)
     {
+        PlayerPrefs.SetFloat("MusicVol", val);
         gameManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
     }
 }

@@ -58,7 +58,7 @@ public class PlayerMelee : MonoBehaviour
         {
             IEarthDamage earthDamage = other.gameObject.GetComponent<IEarthDamage>();
             IPhysics physicsable = other.gameObject.GetComponent<IPhysics>();
-            if (physicsable != null)
+            if (physicsable != null && !other.gameObject.CompareTag("Boss Enemy"))
             {
                 Vector3 dir = other.transform.position - transform.position;
                 physicsable.KnockBack(dir * gameManager.instance.playerScript.knockbackPower);

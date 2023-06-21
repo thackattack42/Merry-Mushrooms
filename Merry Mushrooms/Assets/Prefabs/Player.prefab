@@ -72,7 +72,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1250348794}
   - component: {fileID: 1250348796}
-  - component: {fileID: 1250348795}
   m_Layer: 0
   m_Name: WeaponCamera
   m_TagString: Untagged
@@ -138,14 +137,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1250348795
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1250348793}
-  m_Enabled: 1
 --- !u!1 &1400410746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3431,7 +3422,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 33279
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3573,6 +3564,7 @@ MonoBehaviour:
   audDamageVol: 0.5
   audStepsVol: 1
   playerWeapon: 0
+  isShooting: 0
   isReloading: 0
   isCrouching: 0
   timer: 0
@@ -3586,6 +3578,8 @@ MonoBehaviour:
   ShieldEquipped: 0
   holdingShield: 0
   bowShot: 0
+  swordSwung: 0
+  lv2StartingHP: 0
 --- !u!114 &8863840815364814771
 MonoBehaviour:
   m_ObjectHideFlags: 0

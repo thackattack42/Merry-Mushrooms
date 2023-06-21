@@ -8,12 +8,13 @@ public class PlayerArrowDamage : MonoBehaviour
 {
     public void OnCollisionEnter(Collision collision)
     {
+        
         if (gameManager.instance.playerScript.BowList[gameManager.instance.playerScript.selectedBow].earth)
         {
             IEarthDamage earthDamage = collision.gameObject.GetComponent<IEarthDamage>();
 
             IPhysics physicsable = collision.gameObject.GetComponent<IPhysics>();
-            if (physicsable != null)
+            if (physicsable != null && !collision.gameObject.CompareTag("Boss Enemy"))
             {
                 Vector3 dir = collision.transform.position - transform.position;
                 physicsable.KnockBack(dir * gameManager.instance.playerScript.knockbackPower);
@@ -45,10 +46,10 @@ public class PlayerArrowDamage : MonoBehaviour
             //Debug.Log((gameManager.instance.playerScript.bowShootDamage) * (int)(Time.time - gameManager.instance.playerScript.timer));
            // Debug.Log((gameManager.instance.playerScript.bowShootDamage * (int)gameManager.instance.playerScript.timer) / Time.deltaTime);
         }
-        
-       
-        Destroy(gameObject);    
-        
+        Destroy(gameObject);
+
+
+
         //IDamage damageable = collision.gameObject.GetComponent<IDamage>();
 
         //if (damageable != null)
