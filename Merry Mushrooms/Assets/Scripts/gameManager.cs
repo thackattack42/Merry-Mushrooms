@@ -145,11 +145,8 @@ public class gameManager : MonoBehaviour
 
             if (playerScript.playerWeapon == 0)
             {
-                //StartCoroutine(StartSelection());
-                isPaused = !isPaused;
-                activeMenu = weaponSelectMenu;
-                activeMenu.SetActive(true);
-                PauseState();
+                StartCoroutine(StartSelection());
+                
             }
             playerScript.enabled = true;
             if (SceneManager.GetActiveScene().buildIndex != 1)
@@ -168,8 +165,11 @@ public class gameManager : MonoBehaviour
     
     IEnumerator StartSelection()
     {
-        yield return new WaitForSeconds(0.1f);
-        //moved to RefreshGameManager
+        yield return new WaitForSeconds(0.01f);
+        isPaused = !isPaused;
+        activeMenu = weaponSelectMenu;
+        activeMenu.SetActive(true);
+        PauseState();
 
     }
     IEnumerator MainMenu()
