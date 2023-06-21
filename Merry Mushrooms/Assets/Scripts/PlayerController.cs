@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     private float origSpeed;
     private float origHeight;
-    private bool isShooting;
+    public bool isShooting;
     public bool isReloading;
     private bool isSprinting;
     public bool isCrouching;
