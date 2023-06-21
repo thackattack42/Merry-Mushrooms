@@ -13,7 +13,7 @@ public class PlayerArrowDamage : MonoBehaviour
             IEarthDamage earthDamage = collision.gameObject.GetComponent<IEarthDamage>();
 
             IPhysics physicsable = collision.gameObject.GetComponent<IPhysics>();
-            if (physicsable != null)
+            if (physicsable != null && !collision.gameObject.CompareTag("Boss Enemy"))
             {
                 Vector3 dir = collision.transform.position - transform.position;
                 physicsable.KnockBack(dir * gameManager.instance.playerScript.knockbackPower);
