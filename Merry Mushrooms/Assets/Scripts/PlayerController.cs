@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     private Dictionary<string, StatusEffectData> statusEffects;
     private float period = 0.0f;
+    public int lv2StartingHP;
 
     public PlayerController()
     {
@@ -652,12 +653,16 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     }
 
-    public void SpawnOnLoad()
+    public void SpawnOnNextLvl()
     {
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         transform.rotation = gameManager.instance.playerSpawnPos.transform.rotation;
         controller.enabled = true;
+        HP = lv2StartingHP;
+        MP = maxMP;
+        gameManager.instance.playerHUD.updatePlayerHealth(0);
+        gameManager.instance.playerHUD.updatePlayerMana();
     }
     public void KnockBack(Vector3 dir)
     {

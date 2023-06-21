@@ -112,6 +112,7 @@ public class buttonFunctions : MonoBehaviour
     {
         UIAudio.PlayOneShot(MenuButtonClick);
         Time.timeScale = 1;
+        gameManager.instance.playerScript.lv2StartingHP = gameManager.instance.playerScript.HP;
         gameManager.instance.activeMenu.SetActive(false);
         gameManager.instance.activeMenu = null;
         gameManager.instance.isPaused = false;

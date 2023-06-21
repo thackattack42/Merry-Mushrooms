@@ -144,7 +144,10 @@ public class gameManager : MonoBehaviour
                 StartCoroutine(StartSelection());
             }
             playerScript.enabled = true;
-            playerScript.SpawnOnLoad();
+            if (SceneManager.GetActiveScene().buildIndex != 1)
+                playerScript.SpawnOnNextLvl();
+            else
+                playerScript.Spawn();
             if (hasPlayed)
             {
                 playerScript.ResetDash();
