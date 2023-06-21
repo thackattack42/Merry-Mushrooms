@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,10 +12,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     [Header("------ Enemy Spawner ------")]
     [SerializeField] public GameObject[] enemyToSpawn;
     [SerializeField] public Transform[] spawnPos;
-    //[SerializeField] float spawnDelayy;
-    //int spawnCountt;
-    //int numberSpawnedd;
-    //bool isSpawningg;
+
     [Header("----- Boss Stats -----")]
     [SerializeField] public int maxHP;
     [SerializeField] public int currHP;
@@ -24,6 +22,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     [SerializeField] public int numMinions;
     [SerializeField] public int maxMinions;
     [Range(5, 100)][SerializeField] public int playerFaceSpeed;
+    [SerializeField] public int attackAngle;
     public int viewCone;
 
     [Header("----- Boss Components -----")]
@@ -35,11 +34,15 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     [SerializeField] Transform shootPos;
     [SerializeField] public Transform headPos;
     [SerializeField] GameObject bullet;
+    [SerializeField] Bullet bulletScript;
     [SerializeField] public GameObject aoeAttack;
 
     [Header("----- Misc -----")]
     public bool playerInRange;
     public bool isSpawning;
+    private bool isAttacking;
+    private bool phase2;
+    private bool canAttack = true;
     public Vector3 playerDir;
     public float stoppingDistOrig;
     public float angleToPlayer;
@@ -50,6 +53,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     float timer;
     public float minTime;
     public float maxTime;
+    bool canSeePlayerr;
 
 
     #endregion
@@ -62,83 +66,90 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         anim = GetComponent<Animator>();
         stoppingDistOrig = agent.stoppingDistance;
         origColor = model.material.color;
-        //teleporter = GameObject.FindGameObjectWithTag("Teleporter");
-        //base.Start();
+        bulletScript.damage = 5;
         gameManager.instance.UpdateGameGoal(1);
         gameManager.instance.musicScript.BossState(true);
     }
 
-        // Update is called once per frame
+    // Update is called once per frame
     private void Update()
     {
-        speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
-        anim.SetFloat("Speed", speed);
+        if (agent.isActiveAndEnabled)
+        {
+            speed = Mathf.Lerp(speed, agent.velocity.normalized.magnitude, Time.deltaTime * animrTransSpeed);
+            anim.SetFloat("Speed", speed);
 
-        if (playerInRange && !canSeePlayer())
-        {
-            
-        }
-        else if (agent.destination != gameManager.instance.player.transform.position)
-        {
-            
-        }
+            if (playerInRange && !canSeePlayer())
+            {
 
-        if (currHP <= (maxHP / 2))
-        {
-            anim.SetTrigger("Phase 2");
-        }
-
-        if (!anim.GetBool("Phase 2"))
-        {
-            if (agent.remainingDistance < agent.stoppingDistance)
-                anim.SetTrigger("Punch");
-        }
-        else if (anim.GetBool("Phase 2"))
-        {
-            //timer = Random.Range(minTime, maxTime);
-
-            //if (timer <= 0)
+            }
+            //else if (agent.destination != gameManager.instance.player.transform.position)
             //{
+
+            //}
+
+            if (currHP <= (maxHP / 2))
+            {
+                phase2 = true;
+                agent.stoppingDistance = 10;
+            }
+
+            //if (phase2)
+            //{
+            //    timer = Random.Range(minTime, maxTime);
+            //}
+            //if (!anim.GetBool("Phase 2"))
+            //{
+            //    if (agent.remainingDistance < agent.stoppingDistance)
+            //        anim.SetTrigger("Punch");
+            //}
+            //else if (anim.GetBool("Phase 2"))
+            //{
+            //    //timer = Random.Range(minTime, maxTime);
+
+            //    //if (timer <= 0)
+            //    //{
+            //    //    if (numMinions <= 0)
+            //    //    {
+            //    //        rand = Random.Range(0, 3);
+
+            //    //        if (rand == 0)
+            //    //            anim.SetTrigger("Jump Attack");
+            //    //        else if (rand == 1)
+            //    //            anim.SetTrigger("Shoot");
+            //    //        else
+            //    //            anim.SetTrigger("Summon Minions");
+            //    //    }
+            //    //    else
+            //    //    {
+            //    //        rand = Random.Range(0, 2);
+            //    //        if (rand == 0)
+            //    //            anim.SetTrigger("Jump Attack");
+            //    //        else
+            //    //            anim.SetTrigger("Shoot");
+            //    //    }
+            //    //}
+            //    //else
+            //    //    timer -= Time.deltaTime;
+
+            //    rand = Random.Range(0, 60);
             //    if (numMinions <= 0)
             //    {
-            //        rand = Random.Range(0, 3);
-
+            //        if (rand == 0)
+            //            anim.SetTrigger("Jump Attack");
+            //        else if (rand == 1)
+            //            anim.SetTrigger("Summon Minions");
+            //        else if (rand == 2)
+            //            anim.SetTrigger("Shoot");
+            //    }
+            //    else
+            //    {
             //        if (rand == 0)
             //            anim.SetTrigger("Jump Attack");
             //        else if (rand == 1)
             //            anim.SetTrigger("Shoot");
-            //        else
-            //            anim.SetTrigger("Summon Minions");
-            //    }
-            //    else
-            //    {
-            //        rand = Random.Range(0, 2);
-            //        if (rand == 0)
-            //            anim.SetTrigger("Jump Attack");
-            //        else
-            //            anim.SetTrigger("Shoot");
             //    }
             //}
-            //else
-            //    timer -= Time.deltaTime;
-
-            rand = Random.Range(0, 60);
-            if (numMinions <= 0)
-            {
-                if (rand == 0)
-                    anim.SetTrigger("Jump Attack");
-                else if (rand == 1)
-                    anim.SetTrigger("Summon Minions");
-                else if (rand == 2)
-                    anim.SetTrigger("Shoot");
-            }
-            else
-            {
-                if (rand == 0)
-                    anim.SetTrigger("Jump Attack");
-                else if (rand == 1)
-                    anim.SetTrigger("Shoot");
-            }
         }
     }
     #endregion
@@ -149,7 +160,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-
         }
     }
     public void OnTriggerExit(Collider other)
@@ -161,7 +171,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         }
     }
     #endregion
-    public void Punch()
+    public void StartPunch()
     {
         punchPos.GetComponent<SphereCollider>().enabled = true;
     }
@@ -178,7 +188,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
 
     public void SpawnMinions()
     {
-        while (numMinions < maxMinions) 
+        while (numMinions < maxMinions)
         {
             Instantiate(enemyToSpawn[Random.Range(0, enemyToSpawn.Length)], spawnPos[Random.Range(0, spawnPos.Length)].position, transform.rotation);
             numMinions++;
@@ -204,30 +214,106 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
                 agent.stoppingDistance = stoppingDistOrig;
-
-                if (agent.isActiveAndEnabled)
-                {
                 agent.SetDestination(gameManager.instance.player.transform.position);
-                    if (agent.remainingDistance < agent.stoppingDistance)
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    FacePlayer();
+                }
+
+                if (!isAttacking && angleToPlayer <= attackAngle /*&& !gameManager.instance.playerScript.isUnderAttack && canAttack*/)
+                {
+                    if (!phase2)
                     {
-                        FacePlayer();
+                        StartCoroutine(Punch());
                     }
-                }                    
+                    else
+                    {
+                        anim.ResetTrigger("Punch");
+                        if (numMinions <= 0)
+                        {
+                            rand = Random.Range(0, 3);
+                            switch (rand)
+                            {
+                                case 0:
+                                    StartCoroutine(JumpAttack());
+                                    break;
+                                case 1:
+                                    StartCoroutine(Shoot());
+                                    break;
+                                case 2:
+                                    StartCoroutine(SummonMinions());
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            rand = Random.Range(0, 2);
+                            switch (rand)
+                            {
+                                case 0:
+                                    StartCoroutine(JumpAttack());
+                                    break;
+                                case 1:
+                                    StartCoroutine(Shoot());
+                                    break;
+                            }
+                        }
+                    }
+                }
+                canSeePlayerr = true;
                 return true;
             }
         }
-        agent.stoppingDistance = 0;
+        canSeePlayerr = false;
+        //agent.stoppingDistance = 0;
         return false;
     }
 
-    //IEnumerator SummonMinions()
-    //{
-    //    isSpawning = true;
-    //    Instantiate(enemyToSpawn[Random.Range(0, enemyToSpawn.Length)], spawnPos[Random.Range(0, spawnPos.Length)].position, transform.rotation);
-    //    numMinions++;
-    //    yield return new WaitForSeconds(0.1f);
-    //    isSpawning = false;
-    //}
+    IEnumerator Punch()
+    {
+        isAttacking = true;
+        //gameManager.instance.playerScript.isUnderAttack = true;
+        anim.SetTrigger("Punch");
+        yield return new WaitForSeconds(1);
+        //gameManager.instance.playerScript.isUnderAttack = false;
+        isAttacking = false;
+        //StartCoroutine(AttackCooldown());
+    }
+
+    IEnumerator JumpAttack()
+    {
+        isAttacking = true;
+        anim.SetTrigger("Jump Attack");
+        //Instantiate(aoeAttack, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), aoeAttack.transform.rotation);
+        yield return new WaitForSeconds(5);
+        isAttacking = false;
+        anim.ResetTrigger("Jump Attack");
+    }
+
+    IEnumerator Shoot()
+    {
+        isAttacking = true;
+        anim.SetTrigger("Shoot");
+        yield return new WaitForSeconds(5);
+        isAttacking = false;
+        anim.ResetTrigger("Shoot");
+    }
+    IEnumerator SummonMinions()
+    {
+        isSpawning = true;
+        anim.SetTrigger("Summon Minions");
+        yield return new WaitForSeconds(5);
+        isSpawning = false;
+        anim.ResetTrigger("Summon Minions");
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(Random.Range(1f, 2f));
+        canAttack = true;
+    }
 
     public void createBullet()
     {

@@ -9,22 +9,22 @@ public class Boss_AOE : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 0.15f);
+        Destroy(gameObject, 0.75f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        IDamage damageable = other.GetComponent<IDamage>();
+        if (damageable != null) 
+        {
+            damageable.takeDamage(damage);        
+        }
+
         IPhysics physicsable = other.GetComponent<IPhysics>();
         if (physicsable != null)
         {
             Vector3 dir = other.transform.position - transform.position;
             physicsable.KnockBack(dir * pushAmount);
-        }
-
-        IDamage damageable = other.GetComponent<IDamage>();
-        if (damageable != null) 
-        {
-            damageable.takeDamage(damage);        
         }
     }
 }

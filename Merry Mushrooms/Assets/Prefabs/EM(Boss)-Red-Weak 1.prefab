@@ -844,10 +844,11 @@ MonoBehaviour:
   currHP: 49
   projectileDamage: 0
   punchDamage: 0
-  AOEDamage: 0
+  AOEDamage: 10
   numMinions: 0
   maxMinions: 3
   playerFaceSpeed: 100
+  attackAngle: 0
   viewCone: 90
   anim: {fileID: 3562615268006671694}
   animrTransSpeed: 3
@@ -857,6 +858,7 @@ MonoBehaviour:
   shootPos: {fileID: 1299082309150185037}
   headPos: {fileID: 3773302089871294980}
   bullet: {fileID: 5463603646565746171, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
+  bulletScript: {fileID: 0}
   aoeAttack: {fileID: 2925210535606371465, guid: f87734e2707e3174eaf6114feea42fb2, type: 3}
   playerInRange: 0
   isSpawning: 0
