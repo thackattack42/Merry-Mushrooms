@@ -42,7 +42,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     public bool isSpawning;
     private bool isAttacking;
     private bool phase2;
-    private bool canAttack = true;
     public Vector3 playerDir;
     public float stoppingDistOrig;
     public float angleToPlayer;
@@ -50,10 +49,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     Color origColor;
     float speed;
     float rand;
-    float timer;
-    public float minTime;
-    public float maxTime;
-    bool canSeePlayerr;
 
 
     #endregion
@@ -83,73 +78,12 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
             {
 
             }
-            //else if (agent.destination != gameManager.instance.player.transform.position)
-            //{
-
-            //}
 
             if (currHP <= (maxHP / 2))
             {
                 phase2 = true;
                 agent.stoppingDistance = 10;
             }
-
-            //if (phase2)
-            //{
-            //    timer = Random.Range(minTime, maxTime);
-            //}
-            //if (!anim.GetBool("Phase 2"))
-            //{
-            //    if (agent.remainingDistance < agent.stoppingDistance)
-            //        anim.SetTrigger("Punch");
-            //}
-            //else if (anim.GetBool("Phase 2"))
-            //{
-            //    //timer = Random.Range(minTime, maxTime);
-
-            //    //if (timer <= 0)
-            //    //{
-            //    //    if (numMinions <= 0)
-            //    //    {
-            //    //        rand = Random.Range(0, 3);
-
-            //    //        if (rand == 0)
-            //    //            anim.SetTrigger("Jump Attack");
-            //    //        else if (rand == 1)
-            //    //            anim.SetTrigger("Shoot");
-            //    //        else
-            //    //            anim.SetTrigger("Summon Minions");
-            //    //    }
-            //    //    else
-            //    //    {
-            //    //        rand = Random.Range(0, 2);
-            //    //        if (rand == 0)
-            //    //            anim.SetTrigger("Jump Attack");
-            //    //        else
-            //    //            anim.SetTrigger("Shoot");
-            //    //    }
-            //    //}
-            //    //else
-            //    //    timer -= Time.deltaTime;
-
-            //    rand = Random.Range(0, 60);
-            //    if (numMinions <= 0)
-            //    {
-            //        if (rand == 0)
-            //            anim.SetTrigger("Jump Attack");
-            //        else if (rand == 1)
-            //            anim.SetTrigger("Summon Minions");
-            //        else if (rand == 2)
-            //            anim.SetTrigger("Shoot");
-            //    }
-            //    else
-            //    {
-            //        if (rand == 0)
-            //            anim.SetTrigger("Jump Attack");
-            //        else if (rand == 1)
-            //            anim.SetTrigger("Shoot");
-            //    }
-            //}
         }
     }
     #endregion
@@ -166,7 +100,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     {
         if (other.CompareTag("Player"))
         {
-            //agent.stoppingDistance = 0;
             playerInRange = false;
         }
     }
@@ -221,7 +154,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
                     FacePlayer();
                 }
 
-                if (!isAttacking && angleToPlayer <= attackAngle /*&& !gameManager.instance.playerScript.isUnderAttack && canAttack*/)
+                if (!isAttacking && angleToPlayer <= attackAngle)
                 {
                     if (!phase2)
                     {
@@ -261,32 +194,26 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
                         }
                     }
                 }
-                canSeePlayerr = true;
                 return true;
             }
         }
-        canSeePlayerr = false;
-        //agent.stoppingDistance = 0;
+        agent.stoppingDistance = 0;
         return false;
     }
 
     IEnumerator Punch()
     {
         isAttacking = true;
-        //gameManager.instance.playerScript.isUnderAttack = true;
         anim.SetTrigger("Punch");
         yield return new WaitForSeconds(1);
-        //gameManager.instance.playerScript.isUnderAttack = false;
         isAttacking = false;
-        //StartCoroutine(AttackCooldown());
     }
 
     IEnumerator JumpAttack()
     {
         isAttacking = true;
         anim.SetTrigger("Jump Attack");
-        //Instantiate(aoeAttack, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), aoeAttack.transform.rotation);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         isAttacking = false;
         anim.ResetTrigger("Jump Attack");
     }
@@ -295,7 +222,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     {
         isAttacking = true;
         anim.SetTrigger("Shoot");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         isAttacking = false;
         anim.ResetTrigger("Shoot");
     }
@@ -303,16 +230,9 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     {
         isSpawning = true;
         anim.SetTrigger("Summon Minions");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         isSpawning = false;
         anim.ResetTrigger("Summon Minions");
-    }
-
-    IEnumerator AttackCooldown()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(Random.Range(1f, 2f));
-        canAttack = true;
     }
 
     public void createBullet()
@@ -330,7 +250,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         {
             anim.SetBool("Death", true);
             gameManager.instance.UpdateGameGoal(-1);
-            //Instantiate(teleporter, transform.position, transform.rotation);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
             gameManager.instance.musicScript.BossState(false);
@@ -338,7 +257,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         }
         else
         {
-            //animr.SetTrigger("Damaged");
             agent.SetDestination(gameManager.instance.player.transform.position);
             StartCoroutine(FlashHitColor());
         }
@@ -350,7 +268,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (currHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            //Instantiate(teleporter, transform.position, transform.rotation);
             anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
@@ -358,7 +275,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         }
         else
         {
-            //animr.SetTrigger("Damaged");
             agent.SetDestination(gameManager.instance.player.transform.position);
             StartCoroutine(FlashHitColor());
         }
@@ -372,7 +288,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         if (currHP <= 0)
         {
             gameManager.instance.UpdateGameGoal(-1);
-            //Instantiate(teleporter, transform.position, transform.rotation);
             anim.SetBool("Death", true);
             agent.enabled = false;
             GetComponent<CapsuleCollider>().enabled = false;
@@ -381,7 +296,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         }
         else
         {
-            //animr.SetTrigger("Damaged");
             agent.SetDestination(gameManager.instance.player.transform.position);
             StartCoroutine(FlashHitColor());
         }
@@ -398,12 +312,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         yield return new WaitForSeconds(0.1f);
         model.material.color = origColor;
     }
-    #endregion
-    #region Effects
-    //public void ApplyEffect(StatusEffectData data)
-    //{
-
-    //}
     #endregion
     public int GetCurrHP()
     {
