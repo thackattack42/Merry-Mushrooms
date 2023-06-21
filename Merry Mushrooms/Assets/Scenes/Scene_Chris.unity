@@ -1000,7 +1000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8983761485150228897, guid: 79841de769881984ca730f24ada9c036, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8983761485150228897, guid: 79841de769881984ca730f24ada9c036, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1723,7 +1723,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4459998283899344360, guid: c3e75b3d179d49b4eb71b4882c611b43, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4459998283899344360, guid: c3e75b3d179d49b4eb71b4882c611b43, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1771,7 +1771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4459998283899344367, guid: c3e75b3d179d49b4eb71b4882c611b43, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3e75b3d179d49b4eb71b4882c611b43, type: 3}
@@ -3332,7 +3332,7 @@ Transform:
   - {fileID: 2051344724}
   - {fileID: 962172264}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &929449791
 PrefabInstance:
@@ -3448,7 +3448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4688666811790996947, guid: de1142e5e8e54114a865dc70ee81f122, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1142e5e8e54114a865dc70ee81f122, type: 3}
@@ -5226,6 +5226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BowPickup-Ice 1
       objectReference: {fileID: 0}
+    - target: {fileID: 543490590627816055, guid: f9e13907afa1d1f45a34559723983ded, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919030627663296717, guid: f9e13907afa1d1f45a34559723983ded, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6237,6 +6241,10 @@ PrefabInstance:
     - target: {fileID: 5930104592122723581, guid: eb264e13179c13146b612a3cf9bb1015, type: 3}
       propertyPath: m_Name
       value: IceArrow_New Variant 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930104592122723581, guid: eb264e13179c13146b612a3cf9bb1015, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7831074531984936266, guid: eb264e13179c13146b612a3cf9bb1015, type: 3}
       propertyPath: m_RootOrder

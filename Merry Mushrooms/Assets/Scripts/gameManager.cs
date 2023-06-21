@@ -112,6 +112,7 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerHUD = player.GetComponent<PlayerHUD>();
         timeScaleOrig = 1;
+        buttons.LoadSettings();
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
             if (hasPlayed)
