@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             isCrouching = true;
             controller.height /= 2;
         }
-        else if (Input.GetButtonUp("Crouch") && !isSprinting && isDashing == 0)
+        else if ((Input.GetButtonUp("Crouch") || !Input.GetButton("Crouch")) && !isSprinting && isDashing == 0)
         {
             playerSpeed = origSpeed;
             isCrouching = false;
