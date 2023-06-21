@@ -280,7 +280,7 @@ public class buttonFunctions : MonoBehaviour
         int minimapTog = PlayerPrefs.GetInt("MiniMapRot");
         if (minimapTog == 0)
         {
-            MinimapRotTogg.isOn = false; 
+            MinimapRotTogg.isOn = false;
             minimapRotTottle(false);
         }
         else
