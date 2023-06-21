@@ -659,6 +659,8 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         transform.rotation = gameManager.instance.playerSpawnPos.transform.rotation;
         controller.enabled = true;
+        if (lv2StartingHP == 0)
+            lv2StartingHP = maxHP;
         HP = lv2StartingHP;
         MP = maxMP;
         gameManager.instance.playerHUD.updatePlayerHealth(0);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -101,6 +102,7 @@ public class buttonFunctions : MonoBehaviour
             LoadingBar.fillAmount = Mathf.Clamp01(op.progress / 0.9f);
             yield return null;
         }
+        yield return new WaitForSecondsRealtime(2);
         LoadingScreen.SetActive(false);
         gameManager.instance.playerScript.enabled = true;
         gameManager.instance.RefreshGameManager();
@@ -263,8 +265,26 @@ public class buttonFunctions : MonoBehaviour
             gameManager.instance.activeMenu = gameManager.instance.pauseMenu;
             gameManager.instance.activeMenu.SetActive(true);
         }
+        SaveSettings();
 
     }
+    public void SaveSettings()
+    {
+        float sfxVol;
+        float musicVol;
+        gameManager.instance.SFXSlider.GetFloat("SFXParam", out sfxVol);
+        gameManager.instance.SFXSlider.GetFloat("MusicParam", out musicVol);
+        PlayerPrefs.SetInt("MiniMapRot", gameManager.instance.playerHUD.minimapCamRot.enabled ? 1:0);
+        PlayerPrefs.SetFloat("SFXVol", sfxVol);
+        PlayerPrefs.SetFloat("MusicVol", musicVol);
+    }
+    public void LoadSettings()
+    {
+        minimapRotTottle(Convert.ToBoolean(PlayerPrefs.GetInt("MiniMapRot")));
+        SFXVol(PlayerPrefs.GetFloat("SFXVol"));
+        MusicVol(PlayerPrefs.GetFloat("MusicVol"));
+    }
+
     public void minimapRotTottle(bool toggle)
     {
         UIAudio.PlayOneShot(MenuButtonClick);
