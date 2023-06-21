@@ -120,8 +120,12 @@ public class gameManager : MonoBehaviour
             player.SetActive(false);
             gamePlayUI.SetActive(false);
             mainMenuUI.SetActive(true);
-            StartCoroutine(MainMenu());
-            
+            //StartCoroutine(MainMenu());
+            isPaused = true;
+            activeMenu = mainMenuButtons;
+            activeMenu.SetActive(true);
+            PauseState();
+
         }
         else
         {
@@ -141,7 +145,11 @@ public class gameManager : MonoBehaviour
 
             if (playerScript.playerWeapon == 0)
             {
-                StartCoroutine(StartSelection());
+                //StartCoroutine(StartSelection());
+                isPaused = !isPaused;
+                activeMenu = weaponSelectMenu;
+                activeMenu.SetActive(true);
+                PauseState();
             }
             playerScript.enabled = true;
             if (SceneManager.GetActiveScene().buildIndex != 1)
@@ -161,19 +169,13 @@ public class gameManager : MonoBehaviour
     IEnumerator StartSelection()
     {
         yield return new WaitForSeconds(0.1f);
-        isPaused = !isPaused;
-        activeMenu = weaponSelectMenu;
-        activeMenu.SetActive(true);
-        PauseState();
+        //moved to RefreshGameManager
 
     }
     IEnumerator MainMenu()
     {
-        yield return new WaitForSeconds(0.1f);
-        isPaused = true;
-        activeMenu = mainMenuButtons;
-        activeMenu.SetActive(true);
-        PauseState();
+        yield return new WaitForSeconds(0.01f);
+        //moved to RefreshGameManager
     }
 
     // Update is called once per frame
