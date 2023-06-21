@@ -173,9 +173,11 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
         if (gameManager.instance.activeMenu == null)
         {
-
+            if(MP < 100)
+            {
             MP = Mathf.MoveTowards(MP, maxMP, Time.deltaTime * 2);
             gameManager.instance.playerHUD.updatePlayerMana();
+            }
             OnPlayerCrouch();
             OnPlayerUncrouch();
             Movement();
