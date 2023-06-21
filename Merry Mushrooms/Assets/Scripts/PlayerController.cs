@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        controller.Move(playerVelocity + pushBack * Time.deltaTime);
 
         pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
     }
