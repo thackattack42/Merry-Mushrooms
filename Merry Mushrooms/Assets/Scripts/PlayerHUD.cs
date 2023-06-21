@@ -159,6 +159,8 @@ public class PlayerHUD : MonoBehaviour
         StopCoroutine(dashCooldownEnd());
         isDashing = false;
         dashIsOnCooldown = false;
+        dashCooldownTimer = gameManager.instance.playerScript.dashCoolDown - 0.3f;
+        gameManager.instance.dashCooldownFinish.enabled = false;
         gameManager.instance.dashCooldownSlider.fillAmount = 1f;
 
     }

@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     public PlayerController playerScript;
     public PlayerHUD playerHUD;
     [SerializeField] public GameObject playerSpawnPos;
+    public Transform playerPrefab;
    // public StaffPickup staffPick;
 
     [Header("-----UI Menus-----")]
@@ -116,15 +117,21 @@ public class gameManager : MonoBehaviour
             if (hasPlayed)
             {
                 UnpausedState();
+                StartCoroutine(ResetPlayer());
             }
-            player.SetActive(false);
+            else
+                player.SetActive(false);
             gamePlayUI.SetActive(false);
             mainMenuUI.SetActive(true);
             //StartCoroutine(MainMenu());
             isPaused = true;
             activeMenu = mainMenuButtons;
             activeMenu.SetActive(true);
-            PauseState();
+            if (!hasPlayed)
+            {
+                PauseState();
+                hasPlayed = false;
+            }
 
         }
         else
@@ -172,10 +179,19 @@ public class gameManager : MonoBehaviour
         PauseState();
 
     }
-    IEnumerator MainMenu()
+    IEnumerator ResetPlayer()
     {
+        Destroy(player);
         yield return new WaitForSeconds(0.01f);
-        //moved to RefreshGameManager
+
+        Instantiate(playerPrefab);
+        yield return new WaitForSeconds(0.01f);
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = player.GetComponent<PlayerController>();
+        playerHUD = player.GetComponent<PlayerHUD>();
+        player.SetActive(false);
+        PauseState();
     }
 
     // Update is called once per frame
@@ -226,7 +242,6 @@ public class gameManager : MonoBehaviour
         reticle.SetActive(true);
         playerScript.enabled = true;
     }
-
     public void GameOver()
     {
         PauseState();
