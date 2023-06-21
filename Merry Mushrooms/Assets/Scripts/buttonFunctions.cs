@@ -278,6 +278,11 @@ public class buttonFunctions : MonoBehaviour
         float sfxVol = PlayerPrefs.GetFloat("SFXVol");
         float musicVol = PlayerPrefs.GetFloat("MusicVol");
         int minimapTog = PlayerPrefs.GetInt("MiniMapRot");
+        if (sfxVol == 0)
+            sfxVol = .5f;
+        if (musicVol == 0)
+            musicVol = .5f;
+
         if (minimapTog == 0)
         {
             MinimapRotTogg.isOn = false;
