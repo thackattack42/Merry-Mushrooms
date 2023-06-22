@@ -16,9 +16,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     [Header("----- Boss Stats -----")]
     [SerializeField] public int maxHP;
     [SerializeField] public int currHP;
-    [SerializeField] int projectileDamage;
-    [SerializeField] int punchDamage;
-    [SerializeField] int AOEDamage;
     [SerializeField] public int numMinions;
     [SerializeField] public int maxMinions;
     [Range(5, 100)][SerializeField] public int playerFaceSpeed;
@@ -83,6 +80,7 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
             {
                 phase2 = true;
                 agent.stoppingDistance = 10;
+                stoppingDistOrig = agent.stoppingDistance;
             }
         }
     }
