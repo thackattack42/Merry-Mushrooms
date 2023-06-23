@@ -198,7 +198,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
             if (Input.GetKeyDown(KeyCode.E) && isDashing == 0 && !isCrouching)
             {
-
                 playerDash();
                 StartCoroutine(WaitForDash());
             }
@@ -206,20 +205,12 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
             if (Input.GetButton("Shoot") && !isShooting && !isReloading && staffList.Count > 0 && StaffEquipped)
             {
-
-
                 StartCoroutine(shoot());
-
             }
 
             if (Input.GetButtonDown("Shoot") && BowEquipped)
             {
-                
-               
-
-                
                 timer = 0;
-
             }
 
             if (Input.GetButton("Shoot") && BowEquipped)
@@ -232,19 +223,10 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 isPulling = true;
                 bowShot = true;
                 
-               
                 timer = Mathf.MoveTowards(timer, 3, Time.deltaTime);
-                // Debug.Log(timer);
-                Debug.Log(timer);
-
-
-
-                //timer = Time.time;
             }
             else if (Input.GetButtonUp("Shoot") && !isShooting && BowEquipped && bowShot/* || timer - Time.time == 4*/)
             {
-                //Debug.Log((int)(Time.time - timer));
-                //Debug.Log(Mathf.RoundToInt(Time.time - timer));
                 StartCoroutine(BowShoot());
                 StartCoroutine(BowCoolDown());
             }
@@ -267,7 +249,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
         isShooting = true;
         yield return new WaitForSeconds(1);
-        //Debug.Log("did thing");
         isShooting = false;
         bowShot = false;
         isPulling = false;
@@ -309,7 +290,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     IEnumerator Dash()
     {
         // Will make player dash
-        //playerSpeed *= dashSpeed;
         origPlayerVelocity = playerVelocity;
         playerVelocity = Camera.main.transform.forward * dashSpeed;
 
@@ -317,12 +297,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
         // How long the player will dash for
         yield return new WaitForSeconds(dashTime);
         playerVelocity = origPlayerVelocity;
-        //if (isSprinting)
-        //{
-        //    playerSpeed /= dashSpeed;
-        //}
-        //else
-        //    playerSpeed = origSpeed;
     }
 
     void playerDash()
@@ -366,8 +340,6 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
             playerSpeed = origSpeed;
             isCrouching = false;
 
-
-            //controller.height = Mathf.MoveTowards(controller.height, origHeight, 2);
             controller.height = origHeight;
         }
     }
@@ -832,23 +804,4 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
     {
         return swordMat;
     }
-
-
-    //#region Attacking Functions
-    //IEnumerator MeleeSlash()
-    //{
-    //    isAttacking = true;
-    //    animr.SetTrigger("Attacking");
-    //    yield return new WaitForSeconds(AttackRate);
-    //    isAttacking = false;
-    //}
-    //public void AttackingOn()
-    //{
-    //    PMeleeObj.enabled = true;
-    //}
-    //public void AttackingOff()
-    //{
-    //    PMeleeObj.enabled = false;
-    //}
-    //#endregion
 }
