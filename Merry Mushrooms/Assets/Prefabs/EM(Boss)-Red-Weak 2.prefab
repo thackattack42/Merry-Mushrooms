@@ -796,6 +796,7 @@ Transform:
   - {fileID: 5860586024650672329}
   - {fileID: 8989523518918857301}
   - {fileID: 8457354583851532357}
+  - {fileID: 4658677977558304762}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -842,12 +843,10 @@ MonoBehaviour:
   - {fileID: 8457354583851532357}
   maxHP: 250
   currHP: 49
-  projectileDamage: 0
-  punchDamage: 0
-  AOEDamage: 0
   numMinions: 0
   maxMinions: 3
   playerFaceSpeed: 100
+  attackAngle: 0
   viewCone: 90
   anim: {fileID: 3562615268006671694}
   animrTransSpeed: 3
@@ -857,15 +856,13 @@ MonoBehaviour:
   shootPos: {fileID: 1299082309150185037}
   headPos: {fileID: 3773302089871294980}
   bullet: {fileID: 5463603646565746171, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
+  bulletScript: {fileID: 0}
   aoeAttack: {fileID: 2925210535606371465, guid: f87734e2707e3174eaf6114feea42fb2, type: 3}
   playerInRange: 0
   isSpawning: 0
   playerDir: {x: 0, y: 0, z: 0}
   stoppingDistOrig: 0
   angleToPlayer: 30
-  teleporter: {fileID: 1538656381750801956, guid: 0f0aa7dfcccea3443afa4466d44c6017, type: 3}
-  minTime: 1
-  maxTime: 2
 --- !u!114 &3924570394698139491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2464,3 +2461,62 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 2.2000003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &8723926456886919425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4658677977558304762}
+  - component: {fileID: 7119926351825920666}
+  - component: {fileID: 3765195555866041229}
+  m_Layer: 0
+  m_Name: BossMusicAndUITrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4658677977558304762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723926456886919425}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3562615267999439584}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7119926351825920666
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723926456886919425}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 30
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3765195555866041229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723926456886919425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565e54a79842f7f46a2bc98aedbc3740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossUI: {fileID: 1200188946710516052}
