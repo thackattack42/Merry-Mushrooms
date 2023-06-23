@@ -614,6 +614,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     public void Spawn()
     {
+        if (GameObject.FindGameObjectWithTag("Boss Enemy") != null)
+        {
+            GameObject boss = GameObject.FindGameObjectWithTag("Boss Enemy");
+            BossUI bUI = boss.GetComponentInChildren<BossUI>();
+            GameObject bUIObject = bUI.gameObject;
+            bUIObject.SetActive(false);
+            gameManager.instance.musicScript.BossState(false);
+        }
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         transform.rotation = gameManager.instance.playerSpawnPos.transform.rotation;
@@ -627,6 +635,14 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
 
     public void SpawnOnNextLvl()
     {
+        if (GameObject.FindGameObjectWithTag("Boss Enemy") != null)
+        {
+            GameObject boss = GameObject.FindGameObjectWithTag("Boss Enemy");
+            BossUI bUI = boss.GetComponentInChildren<BossUI>();
+            GameObject bUIObject = bUI.gameObject;
+            bUIObject.SetActive(false);
+            gameManager.instance.musicScript.BossState(false);
+        }
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         transform.rotation = gameManager.instance.playerSpawnPos.transform.rotation;

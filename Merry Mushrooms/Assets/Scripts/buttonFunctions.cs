@@ -294,8 +294,13 @@ public class buttonFunctions : MonoBehaviour
             minimapRotTottle(true);
         }
         SFXVolSlider.value = sfxVol;
-        SFXVol(sfxVol);
         MusicVolSlider.value = musicVol;
+        StartCoroutine(SetAudio(sfxVol, musicVol));
+    }
+    IEnumerator SetAudio(float sfxVol, float musicVol)
+    {
+        yield return new WaitForSeconds(0.01f);
+        SFXVol(sfxVol);
         MusicVol(musicVol);
     }
 
@@ -319,8 +324,8 @@ public class buttonFunctions : MonoBehaviour
     }
     public void SFXVol(float val)
     {
-        PlayerPrefs.SetFloat("SFXVol", val);
         gameManager.instance.SFXSlider.SetFloat("SFXParam", Mathf.Log10(val) * 20);
+        PlayerPrefs.SetFloat("SFXVol", val);
     }
     public void SFXVolTest()
     {
@@ -328,7 +333,7 @@ public class buttonFunctions : MonoBehaviour
     }
     public void MusicVol(float val)
     {
-        PlayerPrefs.SetFloat("MusicVol", val);
         gameManager.instance.MusicSlider.SetFloat("MusicParam", Mathf.Log10(val) * 20);
+        PlayerPrefs.SetFloat("MusicVol", val);
     }
 }
