@@ -42,7 +42,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
     public Vector3 playerDir;
     public float stoppingDistOrig;
     public float angleToPlayer;
-    [SerializeField] public GameObject teleporter;
     Color origColor;
     float speed;
     float rand;

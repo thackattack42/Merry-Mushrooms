@@ -760,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3562615267999439584
 Transform:
   m_ObjectHideFlags: 0
@@ -837,8 +837,8 @@ MonoBehaviour:
   - {fileID: 5860586024650672329}
   - {fileID: 8989523518918857301}
   - {fileID: 8457354583851532357}
-  maxHP: 20
-  currHP: 49
+  maxHP: 100
+  currHP: 0
   numMinions: 0
   maxMinions: 3
   playerFaceSpeed: 30
@@ -859,7 +859,6 @@ MonoBehaviour:
   playerDir: {x: 0, y: 0, z: 0}
   stoppingDistOrig: 0
   angleToPlayer: 30
-  teleporter: {fileID: 1538656381750801956, guid: 0f0aa7dfcccea3443afa4466d44c6017, type: 3}
 --- !u!114 &3924570394698139491
 MonoBehaviour:
   m_ObjectHideFlags: 0
