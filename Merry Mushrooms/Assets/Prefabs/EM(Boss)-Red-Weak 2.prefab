@@ -750,7 +750,6 @@ GameObject:
   - component: {fileID: 3562615268006671694}
   - component: {fileID: 2839352755404009004}
   - component: {fileID: 3924570394698139491}
-  - component: {fileID: 2462001587764732774}
   - component: {fileID: 3562615267999301675}
   - component: {fileID: 2462001587764732775}
   - component: {fileID: 6518287847014281067}
@@ -834,9 +833,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn:
-  - {fileID: 5651947996100277254, guid: 4b3c261d0516a4f4cb4389a0a964f9c6, type: 3}
-  - {fileID: 4887033869842233575, guid: 4726b6b3cd0cdaa49abdd890060c14e7, type: 3}
-  - {fileID: 6815654208747896387, guid: ac0053b149818b14eb603620945cb6c6, type: 3}
+  - {fileID: 4688666811790996947, guid: 6c9fbf9420bbd0b43b9a6c6bf63fe0b0, type: 3}
+  - {fileID: 4459998283899344367, guid: b50ef707546b9d240ab15393425822f7, type: 3}
   spawnPos:
   - {fileID: 5860586024650672329}
   - {fileID: 8989523518918857301}
@@ -844,9 +842,9 @@ MonoBehaviour:
   maxHP: 250
   currHP: 49
   numMinions: 0
-  maxMinions: 3
-  playerFaceSpeed: 100
-  attackAngle: 0
+  maxMinions: 4
+  playerFaceSpeed: 30
+  attackAngle: 30
   viewCone: 90
   anim: {fileID: 3562615268006671694}
   animrTransSpeed: 3
@@ -856,7 +854,7 @@ MonoBehaviour:
   shootPos: {fileID: 1299082309150185037}
   headPos: {fileID: 3773302089871294980}
   bullet: {fileID: 5463603646565746171, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
-  bulletScript: {fileID: 0}
+  bulletScript: {fileID: 1918069476694107133, guid: 9890af69b4ca125438e6100f3486373b, type: 3}
   aoeAttack: {fileID: 2925210535606371465, guid: f87734e2707e3174eaf6114feea42fb2, type: 3}
   playerInRange: 0
   isSpawning: 0
@@ -876,19 +874,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockbackPower: 0
---- !u!114 &2462001587764732774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3562615267999270592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a57f7f50f74fce479b6bcb1102e8c2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rand: 0
 --- !u!195 &3562615267999301675
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -903,7 +888,7 @@ NavMeshAgent:
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 3
+  m_StoppingDistance: 2.8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -2505,7 +2490,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 30
+  m_Radius: 45
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3765195555866041229
 MonoBehaviour:

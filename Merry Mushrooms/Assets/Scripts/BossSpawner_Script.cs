@@ -37,6 +37,7 @@ public class BossSpawner_Script : MonoBehaviour
         {
             bossBarrierCollider.enabled = true;
             playerInRange = true;
+            gameManager.instance.playerSpawnPos.transform.position = other.transform.position;
         }
     }
     IEnumerator Spawn()
