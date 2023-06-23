@@ -59,7 +59,6 @@ public class Boss_Scpt : MonoBehaviour, IFireDamage, IEarthDamage, IIceDamage, I
         origColor = model.material.color;
         bulletScript.damage = 5;
         gameManager.instance.UpdateGameGoal(1);
-        gameManager.instance.musicScript.BossState(true);
     }
 
     // Update is called once per frame
