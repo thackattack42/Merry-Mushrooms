@@ -3498,8 +3498,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 8327772038628251597}
   aud: {fileID: 268423750}
-  playerSpeed: 6
-  jumpHeight: 3
+  playerSpeed: 5
+  jumpHeight: 0
   gravityValue: 7
   maxJumps: 1
   sprintSpeed: 2
@@ -3514,7 +3514,7 @@ MonoBehaviour:
   pushBackResolve: 3
   knockbackPower: 20
   dashSpeed: 1
-  dashCoolDown: 7
+  dashCoolDown: 5
   staffList:
   - {fileID: 11400000, guid: 5155ef93875f94c46a6cdc96aecbfde7, type: 2}
   staffModel: {fileID: 3469287836642206127}

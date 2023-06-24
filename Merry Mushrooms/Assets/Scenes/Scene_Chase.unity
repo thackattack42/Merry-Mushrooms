@@ -252,6 +252,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
+      propertyPath: jumpHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
+      propertyPath: playerSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327772038628251594, guid: d021e34254e59f5419d84c474828eff9, type: 3}
+      propertyPath: dashCoolDown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8327772038628251595, guid: d021e34254e59f5419d84c474828eff9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -489,6 +501,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1040786062894977635, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488009837257118261, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3843756342190807405, guid: c27032da3b5ef0b4d82e1995df77d14d, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -959,6 +979,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EM(Boss)-Red-Weak 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3562615267999270592, guid: 8d86a2bc813a1fb4ca445e35fb86c00e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562615267999301675, guid: 8d86a2bc813a1fb4ca445e35fb86c00e, type: 3}
+      propertyPath: m_Speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3562615267999439584, guid: 8d86a2bc813a1fb4ca445e35fb86c00e, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -1184,7 +1212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7840747658457442398, guid: a32c0505e93adea4eaadac9c3eeb714a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a32c0505e93adea4eaadac9c3eeb714a, type: 3}

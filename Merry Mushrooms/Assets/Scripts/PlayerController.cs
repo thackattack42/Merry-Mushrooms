@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour, IDamage, IEffectable, IPhysics
                 isPulling = true;
                 bowShot = true;
                 
-                timer = Mathf.MoveTowards(timer, 3, Time.deltaTime);
+                timer = Mathf.MoveTowards(timer, 2, Time.deltaTime);
             }
             else if (Input.GetButtonUp("Shoot") && !isShooting && BowEquipped && bowShot/* || timer - Time.time == 4*/)
             {
